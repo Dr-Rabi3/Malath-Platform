@@ -9,6 +9,7 @@ import Service from "./components/pages/Service";
 import Contact from "./components/pages/Contact";
 import Profile from "./components/pages/Profile";
 import ComingSoon from "./components/pages/ComingSoon";
+import { AuthProvider } from "./components/store/AuthContext";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} />;
+    </AuthProvider>
+  );
 }
 
 export default App;

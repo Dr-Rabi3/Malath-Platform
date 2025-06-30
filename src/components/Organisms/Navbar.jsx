@@ -2,11 +2,14 @@ import { Avatar } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../store/AuthContext";
 
 import earth from "../../assets/icons/earth.svg";
 import darkLogo from "../../assets/icons/dark-logo.svg";
 import logout from "../../assets/icons/logout.svg";
+import Button from "../atoms/Button";
+import login from '../../assets/icons/login.svg'
 
 const list = [
   {
@@ -29,13 +32,15 @@ const list = [
 ];
 
 export default function Navbar() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const location = useLocation();
   const [activePath, setActivePath] = useState(
     location.pathname.substring(1) || "home"
   );
-  // console.log(location);
+  console.log(user);
   // console.log(activePath);
   useEffect(() => {
     setActivePath(location.pathname.substring(1) || "home");
@@ -121,32 +126,41 @@ export default function Navbar() {
           {/* Notifications & profile */}
 
           <div className="absolute inset-y-0 space-x-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            <button className="flex justify-between items-center bg-neutral-1000 rounded-full p-1">
-              <img src={logout} alt="logout icon" className="w-5" />
-            </button>
+            {user.userId && (
+              <button className="flex justify-between items-center bg-neutral-1000 rounded-full p-1">
+                <img src={logout} alt="logout icon" className="w-5" />
+              </button>
+            )}
             <img src={earth} alt="icon" />
-
+            <Button className="bg-neutral-950 py-1 flex gap-2 font-semibold hover:bg-neutral-700"
+            onClick={() => navigate("/login")}>
+              <img src={login} alt="icon" className="w-4" /> Login
+            </Button>
             {/* Profile dropdown */}
-            <div className="relative ml-3">
-              <div
-                type="button"
-                className="relative flex rounded-full text-sm items-center gap-2"
-                id="user-menu-button"
-                aria-haspopup="true"
-              >
-                <span className="absolute -inset-1.5"></span>
-                <span className="sr-only">Open user menu</span>
+            {user.userId && (
+              <div className="relative ml-3">
+                <div
+                  type="button"
+                  className="relative flex rounded-full text-sm items-center gap-2"
+                  id="user-menu-button"
+                  aria-haspopup="true"
+                >
+                  <span className="absolute -inset-1.5"></span>
+                  <span className="sr-only">Open user menu</span>
 
-                <Link to="/profile">
-                <Avatar
-                  size={28}
-                  icon={<UserOutlined />}
-                  className="bg-brand-600"
-                />
-                </Link>
-                <div className="hidden sm:block">Mohamed abdalrazek</div>
+                  <Link to="/profile">
+                    <Avatar
+                      size={28}
+                      icon={<UserOutlined />}
+                      className="bg-brand-600"
+                    />
+                  </Link>
+                  <div className="hidden sm:block">
+                    {user?.firstName} {user?.lastName}
+                  </div>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
