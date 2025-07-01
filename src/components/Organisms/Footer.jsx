@@ -26,7 +26,7 @@ function Footer() {
               marketing, and investment solutions.
             </p>
             <p className="text-xs text-gray-500">
-              &copy; 2022. Company Name. All rights reserved.
+              © 2025. Malath. All rights reserved.
             </p>
 
             {/* <ul className="mt-8 flex gap-6">

@@ -102,7 +102,7 @@ export default function Navbar() {
                 src={darkLogo}
                 alt="Malath Company"
               />
-              <h2 className="text-neutral-1000 m-0">Malath</h2>
+              <h2 className="hidden sm:block text-neutral-1000 m-0">Malath</h2>
             </div>
             <div className="hidden sm:ml-6 sm:block">
               <div className="flex space-x-4 h-full justify-center items-center">
@@ -173,7 +173,7 @@ export default function Navbar() {
               return (
                 <Link
                   key={index}
-                  to={"#" + item.hash}
+                  to={item.link}
                   className={`block px-3 py-2 text-base font-semibold hover:text-brand-600 ${
                     item.hash == activePath ? "text-brand-600" : ""
                   }`}
