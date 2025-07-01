@@ -11,6 +11,8 @@ import Profile from "./components/pages/Profile";
 import ComingSoon from "./components/pages/ComingSoon";
 import { AuthProvider } from "./components/store/AuthContext";
 
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -26,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path: "blogs",
-        element: <ComingSoon />,
+        element: <Blogs />,
       },
       {
         path: "service",
@@ -54,9 +56,12 @@ const router = createBrowserRouter([
 
 function App() {
   return (
+    <div>
+
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
+    </div>
   );
 }
 

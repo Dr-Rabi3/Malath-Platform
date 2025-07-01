@@ -5,11 +5,13 @@ import Footer from "../Organisms/Footer";
 function RootLayout() {
   return (
     <>
-      <Navbar />
-      <div className="h-5"></div>
-      <Outlet />
-      <div className="h-5"></div>
-      <Footer/>
+      <div className="min-h-screen">
+        <Navbar />
+        <div className="h-5"></div>
+        <Outlet />
+        <div className="h-5"></div>
+      </div>
+      <Footer />
     </>
   );
 }
