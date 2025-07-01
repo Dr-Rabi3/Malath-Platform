@@ -46,7 +46,7 @@ const blogs = [
 
 function Blogs() {
   return (
-    <div className="container max-w-[1360px] m-auto space-y-[35px] mt-[20px] px-2 sm:px-4 md:px-8">
+    <div className="mt-[20px] px-2 sm:px-4 md:px-8">
       {blogs.map((blog) => (
         <div
           key={blog.id}

@@ -4,7 +4,7 @@ import MetaData from "../Organisms/MetaData.jsx";
 
 function Landing() {
   return (
-    <div className="container max-w-[1360px] m-auto space-y-[35px]">
+    <div >
       <Home id="#home" />
       <MetaData id="#who" />
     </div>

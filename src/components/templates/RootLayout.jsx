@@ -8,7 +8,9 @@ function RootLayout() {
       <div className="min-h-screen">
         <Navbar />
         <div className="h-5"></div>
-        <Outlet />
+        <div className="container max-w-[1360px] m-auto space-y-[35px]">
+          <Outlet />
+        </div>
         <div className="h-5"></div>
       </div>
       <Footer />

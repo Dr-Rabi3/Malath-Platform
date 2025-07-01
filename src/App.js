@@ -10,8 +10,7 @@ import Contact from "./components/pages/Contact";
 import Profile from "./components/pages/Profile";
 import ComingSoon from "./components/pages/ComingSoon";
 import { AuthProvider } from "./components/store/AuthContext";
-
-
+import AddService from "./components/pages/AddService";
 
 const router = createBrowserRouter([
   {
@@ -24,7 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "about",
-        element: <ComingSoon />,
+        element: <AboutUs />,
       },
       {
         path: "blogs",
@@ -32,14 +31,18 @@ const router = createBrowserRouter([
       },
       {
         path: "service",
-        element: <ComingSoon />,
+        element: <Service />,
       },
       {
         path: "contact",
-        element: <ComingSoon />,
+        element: <Contact />,
       },
       {
         path: "profile",
+        element: <ComingSoon />,
+      },
+      {
+        path: "add-service",
         element: <ComingSoon />,
       },
     ],
@@ -56,12 +59,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div>
-
     <AuthProvider>
       <RouterProvider router={router} />
     </AuthProvider>
-    </div>
   );
 }
 
