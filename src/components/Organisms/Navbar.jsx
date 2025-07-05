@@ -10,7 +10,7 @@ import logout from "../../assets/icons/logout.svg";
 import Button from "../atoms/Button";
 import login from "../../assets/icons/login.svg";
 import { useTranslation } from "react-i18next";
-import { Earth } from "../../assets/icons/earth";
+import { Earth } from "../../assets/icons/Earth.jsx";
 import { useAuth } from "../../store/AuthContext";
 
 export default function Navbar() {
