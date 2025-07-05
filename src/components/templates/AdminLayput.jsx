@@ -19,7 +19,7 @@ import darkLogo from "../../assets/icons/dark-logo.svg";
 import logout from "../../assets/icons/logout.svg";
 import dashboard from "../../assets/icons/dashboard.svg";
 
-import { Earth } from "../../assets/icons/earth";
+import { Earth } from "../../assets/icons/Earth.jsx";
 import { Service } from "../../assets/icons/Service";
 import { Edit } from "../../assets/icons/Edit";
 import { ElementPlus } from "../../assets/icons/ElementPlus";
