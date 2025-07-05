@@ -19,8 +19,9 @@ import darkLogo from "../../assets/icons/dark-logo.svg";
 import logout from "../../assets/icons/logout.svg";
 import dashboard from "../../assets/icons/dashboard.svg";
 import { useAuth } from "../../store/AuthContext";
+import { Earth } from "../../assets/icons/Earth.jsx";
 
-import { Earth } from "../../assets/icons/earth";
+
 
 const { Header, Sider, Content, Footer } = Layout;
 
