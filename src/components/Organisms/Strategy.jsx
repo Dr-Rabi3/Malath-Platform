@@ -9,7 +9,7 @@ function Strategy() {
       <Row
         gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}
         className="md:mt-20 flex-wrap"
-        align="middle"
+        // align="middle"
       >
         <Col xs={24} md={12} className="mb-6 md:mb-0">
           <ul className="flex flex-wrap gap-3 sm:gap-4">

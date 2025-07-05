@@ -1,0 +1,199 @@
+{
+  "setting": "Setting",
+  "form": {
+    "action": { "login": "Login", "register": "Sign up" },
+    "labels": {
+      "nameEn": "Name in english",
+      "nameAr": "Name in arabic",
+      "email": "Email",
+      "phone": "Mobile number",
+      "whatsapp": "WhatsApp number",
+      "password": "Password",
+      "confirmPassword": "Confirm Password"
+    },
+    "placeholders": {
+      "email": "example@gmail.com"
+    },
+    "tooltips": {
+      "name": "What do you want others to call you?"
+    },
+    "buttons": {
+      "submit": "Submit",
+      "login": "Login",
+      "signUp": "Sign up",
+      "register": "Register"
+    },
+    "links": {
+      "forgotPassword": "Forgot password",
+      "login": "Login",
+      "signUp": "Sign up"
+    },
+    "messages": {
+      "dontHaveAccount": "Don't have an account?",
+      "alreadyHaveAccount": "Already have an account?"
+    },
+    "validation": {
+      "nameRequired": "Please input your name!",
+      "emailRequired": "Please input your email!",
+      "emailInvalid": "Please enter a valid email address!",
+      "phoneRequired": "Please input your phone number!",
+      "phoneInvalid": "Please enter a valid phone number",
+      "whatsappRequired": "Please input your phone!",
+      "passwordRequired": "Please input your password!",
+      "confirmPasswordRequired": "Please confirm your password!",
+      "passwordMismatch": "The new password that you entered do not match!",
+      "passwordComplexity": "Password must be at least 8 characters long, and include both uppercase and lowercase letters."
+    },
+    "type": "Type",
+    "selectType": "Select a type",
+    "service": "Service",
+    "selectService": "Select a service",
+    "search": "Search",
+    "searchPlaceholder": "Substring from title"
+  },
+  "gender": {
+    "male": "Male",
+    "female": "Female",
+    "other": "Other"
+  },
+  "registration": {
+    "success": {
+      "title": "Registration Successful!",
+      "message": "Your account has been created successfully. You can now log in to access your account and start using our services.",
+      "loginButton": "Login Now",
+      "homeButton": "Go to Home",
+      "additionalInfo": "If you have any questions or need assistance, please don't hesitate to contact our support team."
+    }
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "services": "Our Services",
+    "about": "About us",
+    "contact": "Contact us"
+  },
+  "whoare": {
+    "heading": "Get to Know Malath",
+    "subheading": "Your Trusted Partner in Business, Marketing & Investment",
+    "description": "At Malath, we provide integrated outsourcing solutions for entrepreneurs, startups, and investors across Saudi Arabia and Egypt. We help our clients streamline operations, scale confidently, and focus on what matters most — growth and innovation."
+  },
+  "about": {
+    "visionTitle": "Our Vision",
+    "visionDescription": "To become the top destination for entrepreneurs and investors in the Arab world who seek professional, fully integrated remote business management solutions.",
+
+    "missionTitle": "Our Mission",
+    "missionDescription": "To deliver high-quality, reliable services in management, marketing, investment, and project oversight — through a dedicated team focused on every detail that leads to big success.",
+
+    "valuesTitle": "Our Core Values",
+    "valuesDescription": "At Malath, we are committed to a set of fundamental values that define how we serve and partner with our clients:",
+    "valuesList": [
+      "Confidentiality",
+      "Professionalism",
+      "Trust",
+      "Precision",
+      "Innovation"
+    ],
+    "supportMessage": "We are passionate about supporting entrepreneurs and businesses with",
+    "supportHighlight": "smart, reliable solutions to streamline operations and achieve sustainable growth.",
+    "seeMore": "See More"
+  },
+  "pros": {
+    "title": "Why Choose Malath?",
+    "points": [
+      "We have deep insights into both local and regional markets",
+      "We offer flexible, customizable solutions tailored to each business",
+      "We prioritize quality and speed in every project we handle",
+      "Our team brings diverse, cross-industry expertise",
+      "We believe our success begins with the success of our clients"
+    ]
+  },
+  "footer": {
+    "slogan": "Your most trusted & highly adaptable partner for business, marketing, and investment solutions.",
+    "copyright": "© 2025. Malath. All rights reserved.",
+    "services": "Services",
+    "main": "Main",
+    "blogs": "Blogs",
+    "about": "About Us",
+    "profile": "My Profile",
+    "contact": "Contact Us",
+    "address": "Address: 20 Al-Tayaran Street, First Floor, Apartment 2",
+    "email": "Email: MalathEgypt@.com",
+    "phone": "Phone: 0222604857",
+    "mobile": "Mobile: 01008375583, 01099134464"
+  },
+  "service_request": "Service Request",
+  "contact": {
+    "title": "Contact Us",
+    "description_line1": "Let's take your business to the next level.",
+    "description_line2": "Reach out to our team – we're here to support, advise, and grow with you.",
+    "address": "Address",
+    "email": "Email",
+    "phone": "Phone",
+    "mobile": "Mobile",
+    "tax": "Tax Certificate Number",
+    "email_label": "Email",
+    "message_label": "Message",
+    "send": "Send",
+    "sending": "Sending...",
+    "cancel": "Cancel",
+    "validation_error": "Please fill in all required fields.",
+    "auth_error": "Please login to send a message.",
+    "success_message": "Your message has been sent successfully!",
+    "error_message": "Failed to send message. Please try again."
+  },
+  "sidebar": {
+    "dashboard": "Dashboard",
+    "logout": "Logout"
+  },
+  "addService": {
+    "title": "Service Info",
+    "serviceTitle": "Title",
+    "titleRequired": "Please input service title!",
+    "selectType": "Select a type",
+    "selectService": "Select a service",
+    "typeRequired": "Please select service type!",
+    "serviceRequired": "Please select the service!",
+    "website": "Website",
+    "websitePlaceholder": "website",
+    "websiteRequired": "Please input link for website!",
+    "sendRequest": "Send Request",
+    "loginWarning": "You must login first!",
+    "types": {
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "characters": "characters"
+  },
+  "admin": {
+    "setting": {
+      "vision": "Vision",
+      "mission": "Mission",
+      "values": "Values",
+      "save": "Save"
+    }
+  },
+  "common": {
+    "back": "Back"
+  },
+  "service": {
+    "details": {
+      "title": "Service Details",
+      "id": "ID",
+      "status": "Status",
+      "status.accepted": "Accepted",
+      "basicInfo": "Basic Information",
+      "name": "Name",
+      "category": "Category",
+      "timestamp": "Submitted",
+      "serviceInfo": "Service Information",
+      "website": "Website",
+      "description": "Description",
+      "actions": {
+        "approve": "Approve",
+        "reject": "Reject",
+        "review": "Mark for Review"
+      }
+    }
+  }
+}

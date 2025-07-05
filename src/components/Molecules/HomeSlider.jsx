@@ -31,7 +31,7 @@ function HomeSlider({ className }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slideCount = slidesData.length;
   const intervalRef = useRef(null);
-
+  const lang = localStorage.getItem("lang") || "en";
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "ArrowLeft") changeSlide(-1);
@@ -78,7 +78,11 @@ function HomeSlider({ className }) {
               {slide.number}
               <span className="text-xl">/03</span>
             </div>
-            <div className="border-l pl-5 max-w-xl animate-fade-in-up text-white">
+            <div
+              className={`${
+                lang === "en" ? "border-l pl-5" : "border-r pr-5"
+              }  max-w-xl animate-fade-in-up text-white`}
+            >
               <h1 className="text-2xl font-extrabold mb-6 leading-tight">
                 {slide.title}
               </h1>
@@ -97,20 +101,32 @@ function HomeSlider({ className }) {
       ))}
 
       {/* Navigation */}
-      <div className="absolute bottom-6 right-6 flex gap-4 z-10">
+      <div
+        className={`absolute ${
+          lang === "en" ? "bottom-6 right-6" : "bottom-6 left-6"
+        } flex gap-4 z-10`}
+      >
         <button
           onClick={() => changeSlide(-1)}
           disabled={currentSlide === 0}
           className="bg-white w-10 h-10 rounded-full text-white flex items-center justify-center text-xl transition-transform hover:scale-110 disabled:opacity-50"
         >
-          <img src={leftArrow} alt="left arrow" className="text-white" />
+          <img
+            src={lang === "en" ? leftArrow : rightArrow}
+            alt="left arrow"
+            className="text-white"
+          />
         </button>
         <button
           onClick={() => changeSlide(1)}
           disabled={currentSlide === slideCount - 1}
           className="bg-white w-10 h-10 rounded-full text-white flex items-center justify-center text-xl transition-transform hover:scale-110 disabled:opacity-50"
         >
-          <img src={rightArrow} alt="right arrow" className="text-white" />
+          <img
+            src={lang === "en" ? rightArrow : leftArrow}
+            alt="right arrow"
+            className="text-white"
+          />
         </button>
       </div>
       {/* </div> */}

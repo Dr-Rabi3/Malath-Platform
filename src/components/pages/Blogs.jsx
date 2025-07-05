@@ -1,6 +1,6 @@
 import { Empty } from "antd";
 import { getDurationFromNow } from "../../utils/timeAge";
-
+import { DeleteOutlined } from "@ant-design/icons";
 const blogs = [
   {
     id: 1,
@@ -44,7 +44,7 @@ const blogs = [
   },
 ];
 
-function Blogs() {
+function Blogs({ isAdmin }) {
   return (
     <div className="mt-[20px] px-2 sm:px-4 md:px-8">
       {blogs.map((blog) => (
@@ -104,33 +104,71 @@ function Blogs() {
                   {blog.dislikes}
                 </span>
               </button>
+              {isAdmin && (
+                <>
+                  <span className="text-sm font-regular text-[#727272]">
+                    {getDurationFromNow(blog.createdAt)}
+                  </span>
+                  <svg
+                    width="21"
+                    height="22"
+                    viewBox="0 0 21 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19.2693 11C19.2693 15.777 15.3924 19.6539 10.6154 19.6539C5.8384 19.6539 1.96143 15.777 1.96143 11C1.96143 6.22298 5.8384 2.34601 10.6154 2.34601C15.3924 2.34601 19.2693 6.22298 19.2693 11Z"
+                      stroke="#727272"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M13.8257 13.752L11.143 12.151C10.6757 11.8741 10.2949 11.2077 10.2949 10.6625V7.11438"
+                      stroke="#727272"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </>
+              )}
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-sm font-regular text-[#727272]">
-                {getDurationFromNow(blog.createdAt)}
-              </span>
-              <svg
-                width="21"
-                height="22"
-                viewBox="0 0 21 22"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M19.2693 11C19.2693 15.777 15.3924 19.6539 10.6154 19.6539C5.8384 19.6539 1.96143 15.777 1.96143 11C1.96143 6.22298 5.8384 2.34601 10.6154 2.34601C15.3924 2.34601 19.2693 6.22298 19.2693 11Z"
-                  stroke="#727272"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-                <path
-                  d="M13.8257 13.752L11.143 12.151C10.6757 11.8741 10.2949 11.2077 10.2949 10.6625V7.11438"
-                  stroke="#727272"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              {isAdmin && (
+                <button className="text-red-600 border-b-2 border-red-600 w-fit">
+                  <DeleteOutlined /> Delete Blog
+                </button>
+              )}
+              {!isAdmin && (
+                <>
+                  <span className="text-sm font-regular text-[#727272]">
+                    {getDurationFromNow(blog.createdAt)}
+                  </span>
+                  <svg
+                    width="21"
+                    height="22"
+                    viewBox="0 0 21 22"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M19.2693 11C19.2693 15.777 15.3924 19.6539 10.6154 19.6539C5.8384 19.6539 1.96143 15.777 1.96143 11C1.96143 6.22298 5.8384 2.34601 10.6154 2.34601C15.3924 2.34601 19.2693 6.22298 19.2693 11Z"
+                      stroke="#727272"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M13.8257 13.752L11.143 12.151C10.6757 11.8741 10.2949 11.2077 10.2949 10.6625V7.11438"
+                      stroke="#727272"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </>
+              )}
             </div>
           </div>
         </div>

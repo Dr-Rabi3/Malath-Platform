@@ -14,8 +14,8 @@ function RegisterForm({ className }) {
         />
       </div>
       <From
-        action="Sign up"
-        types={["password", "email", "confirm-password", "name", "phone", "whatsapp"]}
+        action="register"
+        types={["password", "email", "confirm-password", "nameEn", "nameAr", "phone", "whatsapp"]}
       />
     </div>
   );

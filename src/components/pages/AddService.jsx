@@ -1,18 +1,14 @@
-import { Form, Input } from "antd";
-import { PhoneNumberUtil } from "google-libphonenumber";
+import { AutoComplete, Col, Form, Input, message, Row, Select } from "antd";
+import { useState } from "react";
+
 import Button from "../atoms/Button";
-import { Link } from "react-router-dom";
+import Editor from "../Organisms/Editor";
+import { useAuth } from "../../store/AuthContext";
+import { useTranslation } from "react-i18next";
 
-const phoneUtil = PhoneNumberUtil.getInstance();
+const { Option } = Select;
 
-const isPhoneValid = (phone) => {
-  try {
-    return phoneUtil.isValidNumber(phoneUtil.parseAndKeepRawInput(phone));
-  } catch (error) {
-    return false;
-  }
-};
-
+/* eslint-disable no-template-curly-in-string */
 const validateMessages = {
   required: "${label} is required!",
   types: {
@@ -23,26 +19,71 @@ const validateMessages = {
     range: "${label} must be between ${min} and ${max}",
   },
 };
+/* eslint-enable no-template-curly-in-string */
 
 function AddService() {
+  const { user } = useAuth();
+  const [form] = Form.useForm();
+  const [messageApi, contextHelper] = message.useMessage();
+  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+  const { t } = useTranslation();
+
+  const onWebsiteChange = (value) => {
+    if (!value) {
+      setAutoCompleteResult([]);
+    } else {
+      setAutoCompleteResult(
+        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
+      );
+    }
+  };
+  const websiteOptions = autoCompleteResult.map((website) => ({
+    label: website,
+    value: website,
+  }));
+  const onTypeChange = (value) => {
+    // switch (value) {
+    //   case "male":
+    //     form.setFieldsValue({ services: "Hi, man!" });
+    //     break;
+    //   case "female":
+    //     form.setFieldsValue({ services: "Hi, lady!" });
+    //     break;
+    //   case "other":
+    //     form.setFieldsValue({ services: "Hi there!" });
+    //     break;
+    //   default:
+    // }
+  };
+
   const onFinish = (values) => {
+    if (!user.token) {
+      messageApi.open({
+        type: "info",
+        content: t("addService.loginWarning"),
+      });
+      return null;
+    }
     console.log("Success:", values);
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+
   return (
-    <div className="bg-accent-25 shadow-custom-gray">
-      <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full px-2">
-        <div className="font-regular text-[20px] sm:text-[25px] text-neutral-950 font-secondary">
-          Service info
+    <>
+      {contextHelper}
+      <div className="bg-accent-25 shadow-custom-gray flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full p-12">
+        <div className="font-semibold text-[20px] sm:text-[25px] text-neutral-950 font-secondary">
+          {t("addService.title")}
         </div>
         <Form
+          form={form}
           layout="vertical"
           name="basic"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 20 }}
-          style={{ maxWidth: 500, width: "100%" }}
+          style={{ width: "100%" }}
           // initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -51,111 +92,119 @@ function AddService() {
           validateMessages={validateMessages}
         >
           <Form.Item
-            name="Name"
-            label="Name"
+            name="title"
+            label={t("addService.serviceTitle")}
             layout="vertical"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             style={{ minWidth: "100%" }}
-            tooltip="What do you want others to call you?"
             rules={[
               {
                 required: true,
-                message: "Please input your name!",
+                message: t("addService.titleRequired"),
                 whitespace: true,
               },
             ]}
           >
-            <Input />
+            <Input placeholder={t("addService.serviceTitle")} />
           </Form.Item>
+          <Row className="w-full" justify="space-between">
+            <Col span={11}>
+              <Form.Item
+                label={t("addService.selectType")}
+                layout="vertical"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                style={{ minWidth: "100%" }}
+                name="type"
+                rules={[
+                  {
+                    whitespace: true,
+                    required: true,
+                    message: t("addService.typeRequired"),
+                  },
+                ]}
+                className="w-full"
+              >
+                <Select
+                  placeholder={t("addService.selectType")}
+                  onChange={onTypeChange}
+                  allowClear
+                >
+                  <Option value="male">{t("addService.types.male")}</Option>
+                  <Option value="female">{t("addService.types.female")}</Option>
+                  <Option value="other">{t("addService.types.other")}</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+            <Col span={11}>
+              <Form.Item
+                label={t("addService.selectService")}
+                layout="vertical"
+                className="w-full"
+                labelCol={{ span: 24 }}
+                wrapperCol={{ span: 24 }}
+                style={{ minWidth: "100%" }}
+                name="services"
+                rules={[
+                  {
+                    required: true,
+                    message: t("addService.serviceRequired"),
+                    whitespace: true,
+                  },
+                ]}
+              >
+                <Select
+                  placeholder={t("addService.selectService")}
+                  // onChange={onTypeChange}
+                  allowClear
+                >
+                  <Option value="male">{t("addService.types.male")}</Option>
+                  <Option value="female">{t("addService.types.female")}</Option>
+                  <Option value="other">{t("addService.types.other")}</Option>
+                </Select>
+              </Form.Item>
+            </Col>
+          </Row>
+
           <Form.Item
-            label="Type"
+            label={t("addService.website")}
             layout="vertical"
+            className="w-full"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             style={{ minWidth: "100%" }}
-            name="type"
+            name="website"
             rules={[
               {
                 required: true,
-                type: "type",
+                message: t("addService.websiteRequired"),
+                whitespace: true,
               },
             ]}
-            className="w-full"
           >
-            <Input placeholder="example@gmail.com" className="w-full" />
+            <AutoComplete
+              options={websiteOptions}
+              onChange={onWebsiteChange}
+              placeholder={t("addService.websitePlaceholder")}
+            >
+              <Input />
+            </AutoComplete>
           </Form.Item>
-
           <Form.Item
-            label="Service"
-            layout="vertical"
-            className="w-full"
+            name="description"
+            label="Description"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
-            style={{ minWidth: "100%" }}
-            name="phone"
-            validateTrigger={["onBlur", "onSubmit"]}
+            className="w-full min-h-[1000px]"
             rules={[
-              { required: true, message: "Please input your phone number!" },
               {
-                validator: (_, value) => {
-                  if (!value) return Promise.resolve();
-                  const isValid = isPhoneValid(value);
-                  // console.log(value, isValid);
-                  // Basic validation - you can make this more sophisticated
-                  if (!isValid) {
-                    return Promise.reject(
-                      new Error("Please enter a valid phone number")
-                    );
-                  }
-                  return Promise.resolve();
-                },
+                required: true,
+                message: "Description is required",
               },
             ]}
           >
-            <Input.Password className="w-full" />
-          </Form.Item>
-
-          <Form.Item
-            label="Link"
-            layout="vertical"
-            className="w-full"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-            style={{ minWidth: "100%" }}
-            name="whatsapp"
-            validateTrigger={["onBlur", "onSubmit"]}
-            rules={[
-              { required: true, message: "Please input your phone!" },
-              {
-                validator: (_, value) => {
-                  if (!value) return Promise.resolve();
-                  const isValid = isPhoneValid(value);
-                  // console.log(value, isValid);
-                  // Basic validation - you can make this more sophisticated
-                  if (!isValid) {
-                    return Promise.reject(
-                      new Error("Please enter a valid phone number")
-                    );
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <Input.Password className="w-full" />
-          </Form.Item>
-          <Form.Item
-            label="Name"
-            layout="vertical"
-            className="w-full"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-            style={{ minWidth: "100%" }}
-            name="password"
-            rules={[{ required: true, message: "Please input your password!" }]}
-          >
-            <Input.Password className="w-full" />
+            <Editor />
           </Form.Item>
 
           <Form.Item
@@ -167,12 +216,12 @@ function AddService() {
               type="submit"
               className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-[30px] py-2 sm:py-2.5"
             >
-              Send Request
+              {t("addService.sendRequest")}
             </Button>
           </Form.Item>
         </Form>
       </div>
-    </div>
+    </>
   );
 }
 

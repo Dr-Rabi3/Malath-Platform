@@ -1,21 +1,23 @@
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function About() {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-accent-25 flex flex-col justify-center items-center gap-4 sm:gap-6 rounded-[20px] shadow-custom-gray text-center min-h-[250px] sm:min-h-[350px] md:min-h-[400px] px-2 sm:px-6 md:px-12 py-8">
       <div className="font-extrabold text-xl sm:text-2xl md:text-[35px] max-w-full md:max-w-[1200px] font-main md:leading-[2.5rem] lg:leading-[3rem]">
-        We are passionate about supporting entrepreneurs and businesses with
+        {t("about.supportMessage")}
         <span className="text-neutral-700/50 font-main">
           {" "}
-          smart, reliable solutions to streamline operations and achieve
-          sustainable growth.
+          {t("about.supportHighlight")}
         </span>
       </div>
       <Link
         to="/about"
         className="flex gap-2 bg-neutral-950 text-white w-fit py-2 sm:py-3 px-4 sm:px-5 justify-center items-center rounded-full text-base sm:text-lg"
       >
-        <p className="m-0">See More</p>
+        <p className="m-0">{t("about.seeMore")}</p>
         <svg
           width="20"
           height="20"

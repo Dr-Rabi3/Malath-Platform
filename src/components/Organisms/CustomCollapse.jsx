@@ -75,6 +75,7 @@ function CustomCollapse() {
         .ant-collapse-content-active {
           border: 1px solid #dbdade !important;
           border-radius: 0px 0px 10px 10px !important;
+          padding:10px;
         }
       `}</style>
       <Collapse

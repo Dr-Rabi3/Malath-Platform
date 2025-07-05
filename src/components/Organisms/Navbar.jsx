@@ -1,51 +1,55 @@
-import { Avatar } from "antd";
+import { Avatar, Tooltip } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "../store/AuthContext";
 
-import earth from "../../assets/icons/earth.svg";
+// import earth from "../../assets/icons/earth.jsx";
 import darkLogo from "../../assets/icons/dark-logo.svg";
 import logout from "../../assets/icons/logout.svg";
 import Button from "../atoms/Button";
-import login from '../../assets/icons/login.svg'
-
-const list = [
-  {
-    name: "Home",
-    link: "/",
-    hash: "home",
-  },
-  { name: "Blog", link: "/blogs", hash: "blogs" },
-  {
-    name: "Our Services",
-    link: "/service",
-    hash: "service",
-  },
-  {
-    name: "About us",
-    link: "/about",
-    hash: "about",
-  },
-  { name: "Contact us", link: "/contact", hash: "contact" },
-];
+import login from "../../assets/icons/login.svg";
+import { useTranslation } from "react-i18next";
+import { Earth } from "../../assets/icons/earth";
+import { useAuth } from "../../store/AuthContext";
 
 export default function Navbar() {
-  const { user } = useAuth();
+  const { user, logout: Logout } = useAuth();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+  const list = [
+    { name: t("nav.home"), link: "/", hash: "home" },
+    { name: t("nav.blog"), link: "/blogs", hash: "blogs" },
+    { name: t("nav.services"), link: "/service", hash: "service" },
+    { name: t("nav.about"), link: "/about", hash: "about" },
+    { name: t("nav.contact"), link: "/contact", hash: "contact" },
+  ];
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
   const location = useLocation();
   const [activePath, setActivePath] = useState(
     location.pathname.substring(1) || "home"
   );
-  console.log(user);
+  // console.log(user);
   // console.log(activePath);
   useEffect(() => {
     setActivePath(location.pathname.substring(1) || "home");
   }, [location.pathname]);
 
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng);
+    if (lng === "ar") {
+      document.documentElement.dir = "rtl";
+    } else {
+      document.documentElement.dir = "ltr";
+    }
+    // optionally, store user language
+    localStorage.setItem("lang", lng);
+  };
+
+  const handleLogout = () => {
+    Logout();
+  };
   return (
     <nav>
       <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -127,15 +131,43 @@ export default function Navbar() {
 
           <div className="absolute inset-y-0 space-x-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
             {user.userId && (
-              <button className="flex justify-between items-center bg-neutral-1000 rounded-full p-1">
+              <button
+                className="flex justify-between items-center bg-neutral-1000 rounded-full p-1"
+                onClick={handleLogout}
+              >
                 <img src={logout} alt="logout icon" className="w-5" />
               </button>
             )}
-            <img src={earth} alt="icon" />
-            <Button className="bg-neutral-950 py-1 flex gap-2 font-semibold hover:bg-neutral-700"
-            onClick={() => navigate("/login")}>
-              <img src={login} alt="icon" className="w-4" /> Login
-            </Button>
+            <Tooltip
+              title={`Translate to ${
+                localStorage.getItem("lang") === "en" ||
+                !localStorage.getItem("lang")
+                  ? "arabic"
+                  : "english"
+              }`}
+            >
+              <button
+                onClick={() =>
+                  localStorage.getItem("lang") === "en" ||
+                  !localStorage.getItem("lang")
+                    ? changeLanguage("ar")
+                    : changeLanguage("en")
+                }
+              >
+                {/* <img src={earth} alt="icon" /> */}
+                <Earth />
+              </button>
+            </Tooltip>
+
+            {!user.userId && (
+              <Button
+                className="bg-neutral-950 py-1 flex gap-2 font-semibold hover:bg-neutral-700"
+                onClick={() => navigate("/login")}
+              >
+                <img src={login} alt="icon" className="w-4" />{" "}
+                {t("form.action.login")}
+              </Button>
+            )}
             {/* Profile dropdown */}
             {user.userId && (
               <div className="relative ml-3">
@@ -156,7 +188,7 @@ export default function Navbar() {
                     />
                   </Link>
                   <div className="hidden sm:block">
-                    {user?.firstName} {user?.lastName}
+                    {user?.name}
                   </div>
                 </div>
               </div>

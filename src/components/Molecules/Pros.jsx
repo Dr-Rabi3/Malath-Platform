@@ -1,15 +1,12 @@
 import { Col, Row } from "antd";
 import photo from "../../assets/images/Rectangle 8.png";
+import { useTranslation } from "react-i18next";
 
-const pros = [
-  "We have deep insights into both local and regional markets",
-  "We offer flexible, customizable solutions tailored to each business",
-  "We prioritize quality and speed in every project we handle",
-  "Our team brings diverse, cross-industry expertise",
-  "We believe our success begins with the success of our clients",
-];
 
 function Pros() {
+  
+  const { t } = useTranslation();
+  const pros = t("pros.points", { returnObjects: true });
   return (
     <Row
       justify="space-between"
@@ -31,7 +28,8 @@ function Pros() {
       <Col xs={24} md={12} className="flex items-center">
         <div className="w-full space-y-8 md:space-y-[50px] px-2 md:px-8">
           <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl lg:text-[45px] font-main leading-tight">
-            Why Choose <span className="text-brand-600">Mala</span>th?
+            {t("pros.title")}
+            {/* <span className="text-brand-600">Mala</span>th. */}
           </h1>
           <ul className="flex flex-col gap-6 md:gap-10">
             {pros.map((item, index) => (
