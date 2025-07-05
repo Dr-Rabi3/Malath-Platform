@@ -196,7 +196,7 @@ function AddService() {
             label="Description"
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
-            className="w-full min-h-[1000px]"
+            className="w-full"
             rules={[
               {
                 required: true,
