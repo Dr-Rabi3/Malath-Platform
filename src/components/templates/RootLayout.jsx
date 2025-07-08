@@ -1,8 +1,20 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Navbar from "../Organisms/Navbar";
 import Footer from "../Organisms/Footer";
+import { useAuth } from "../../store/AuthContext";
+import { useEffect } from "react";
+import { Roles } from "../../utils/roles";
 
 function RootLayout() {
+  const { user} = useAuth();
+  const navigate = useNavigate();
+  useEffect(() => {
+    // console.log(user);
+    if (user.token) {
+      if (user.role === Roles.Admin) navigate("/admin");
+      else if (user.role === Roles.CusomerService) navigate("/support");
+    }
+  }, [user]);
   return (
     <>
       <div className="min-h-screen">

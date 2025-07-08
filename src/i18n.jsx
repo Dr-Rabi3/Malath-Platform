@@ -25,6 +25,6 @@ if (savedLang) {
   document.documentElement.dir = savedLang === "ar" ? "rtl" : "ltr";
 }
 
-console.log(en);
+// console.log(en);
 
 export default i18n;

@@ -1,5 +1,11 @@
 import { AutoComplete, Col, Form, Input, message, Row, Select } from "antd";
 import { useState } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  getAllCategories,
+  getAllServices,
+  requestService,
+} from "../../api/http";
 
 import Button from "../atoms/Button";
 import Editor from "../Organisms/Editor";
@@ -26,7 +32,51 @@ function AddService() {
   const [form] = Form.useForm();
   const [messageApi, contextHelper] = message.useMessage();
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+  const [selectedServiceType, setSelectedServiceType] = useState(null);
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+
+  // Fetch type services using React Query
+  const { data: servicesType, isLoading: servicesTypeLoading } = useQuery({
+    queryKey: ["servicesType"],
+    queryFn: () => getAllCategories(user?.token),
+    enabled: !!user?.token,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
+
+  // Fetch services using React Query
+  const { data: services, isLoading: servicesLoading } = useQuery({
+    queryKey: ["services"],
+    queryFn: () => getAllServices(user?.token),
+    enabled: !!user?.token,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
+
+  // Request service mutation
+  const requestServiceMutation = useMutation({
+    mutationFn: (requestData) => requestService(user?.token, requestData),
+    onSuccess: () => {
+      messageApi.success("Service request submitted successfully!");
+      form.resetFields();
+      setSelectedServiceType(null);
+      // Optionally invalidate and refetch user services if you have a query for them
+      // queryClient.invalidateQueries({ queryKey: ["userServices"] });
+    },
+    onError: (error) => {
+      messageApi.error(`Failed to submit service request: ${error.message}`);
+    },
+  });
+
+  // Filter services based on selected service type
+  const filteredServices = selectedServiceType
+    ? services?.filter((service) => service.categoryId === selectedServiceType)
+    : services;
 
   const onWebsiteChange = (value) => {
     if (!value) {
@@ -41,31 +91,43 @@ function AddService() {
     label: website,
     value: website,
   }));
+
   const onTypeChange = (value) => {
-    // switch (value) {
-    //   case "male":
-    //     form.setFieldsValue({ services: "Hi, man!" });
-    //     break;
-    //   case "female":
-    //     form.setFieldsValue({ services: "Hi, lady!" });
-    //     break;
-    //   case "other":
-    //     form.setFieldsValue({ services: "Hi there!" });
-    //     break;
-    //   default:
-    // }
+    setSelectedServiceType(value);
+    // Clear the services selection when type changes
+    form.setFieldsValue({ services: undefined });
+    // Trigger validation to clear any previous errors
+    form.validateFields(["services"]);
   };
 
+  const onServiceChange = (value) => {
+    // Trigger validation when service is selected
+    form.validateFields(["services"]);
+  };
+
+  // console.log(services);
+
   const onFinish = (values) => {
-    if (!user.token) {
+    if (!user?.token) {
       messageApi.open({
         type: "info",
         content: t("addService.loginWarning"),
       });
       return null;
     }
-    console.log("Success:", values);
+
+    // Transform form values to match API requirements
+    const requestData = {
+      title: values.title,
+      description: values.description,
+      userID: user.id, // Assuming user object has an id field
+      serviceID: values.services,
+      status: 0, // Default status for new requests
+    };
+
+    requestServiceMutation.mutate(requestData);
   };
+
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
@@ -119,7 +181,6 @@ function AddService() {
                 name="type"
                 rules={[
                   {
-                    whitespace: true,
                     required: true,
                     message: t("addService.typeRequired"),
                   },
@@ -127,13 +188,22 @@ function AddService() {
                 className="w-full"
               >
                 <Select
-                  placeholder={t("addService.selectType")}
+                  placeholder={t("addService.selectService")}
                   onChange={onTypeChange}
+                  loading={servicesTypeLoading}
                   allowClear
                 >
-                  <Option value="male">{t("addService.types.male")}</Option>
-                  <Option value="female">{t("addService.types.female")}</Option>
-                  <Option value="other">{t("addService.types.other")}</Option>
+                  {servicesType?.map((serviceType) => (
+                    <Option key={serviceType.id} value={serviceType.id}>
+                      {serviceType.name}
+                    </Option>
+                  ))}
+                  {(!servicesType || servicesType.length === 0) &&
+                    !servicesTypeLoading && (
+                      <Option value={null} disabled>
+                        No service types available
+                      </Option>
+                    )}
                 </Select>
               </Form.Item>
             </Col>
@@ -150,47 +220,38 @@ function AddService() {
                   {
                     required: true,
                     message: t("addService.serviceRequired"),
-                    whitespace: true,
                   },
                 ]}
               >
                 <Select
-                  placeholder={t("addService.selectService")}
-                  // onChange={onTypeChange}
+                  placeholder={
+                    selectedServiceType
+                      ? t("addService.selectService")
+                      : "Please select a service type first"
+                  }
+                  onChange={onServiceChange}
+                  loading={servicesLoading}
                   allowClear
+                  disabled={!selectedServiceType}
                 >
-                  <Option value="male">{t("addService.types.male")}</Option>
-                  <Option value="female">{t("addService.types.female")}</Option>
-                  <Option value="other">{t("addService.types.other")}</Option>
+                  {filteredServices?.map((service) => (
+                    <Option key={service.id} value={service.id}>
+                      {service.name}
+                    </Option>
+                  ))}
+                  {(!filteredServices || filteredServices.length === 0) &&
+                    !servicesLoading && (
+                      <Option value={null} disabled>
+                        {selectedServiceType
+                          ? "No services available for this type"
+                          : "Please select a service type first"}
+                      </Option>
+                    )}
                 </Select>
               </Form.Item>
             </Col>
           </Row>
 
-          <Form.Item
-            label={t("addService.website")}
-            layout="vertical"
-            className="w-full"
-            labelCol={{ span: 24 }}
-            wrapperCol={{ span: 24 }}
-            style={{ minWidth: "100%" }}
-            name="website"
-            rules={[
-              {
-                required: true,
-                message: t("addService.websiteRequired"),
-                whitespace: true,
-              },
-            ]}
-          >
-            <AutoComplete
-              options={websiteOptions}
-              onChange={onWebsiteChange}
-              placeholder={t("addService.websitePlaceholder")}
-            >
-              <Input />
-            </AutoComplete>
-          </Form.Item>
           <Form.Item
             name="description"
             label="Description"
@@ -215,8 +276,11 @@ function AddService() {
             <Button
               type="submit"
               className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-[30px] py-2 sm:py-2.5"
+              loading={requestServiceMutation.isPending}
             >
-              {t("addService.sendRequest")}
+              {requestServiceMutation.isPending
+                ? "Submitting..."
+                : t("addService.sendRequest")}
             </Button>
           </Form.Item>
         </Form>

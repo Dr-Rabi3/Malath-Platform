@@ -19,7 +19,7 @@ function CustomPhoneInput({
   return (
     <PhoneInput
       defaultCountry="eg"
-      value={defaultValue || ""}
+      value={defaultValue || value || ""}
       onChange={(phone) => onChange?.(phone)}
       placeholder={placeholder}
       inputComponent={Input}

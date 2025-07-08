@@ -10,6 +10,7 @@ function Contact() {
   const [formData, setFormData] = useState({
     email: "",
     message: "",
+    phone: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -34,10 +35,10 @@ function Contact() {
       return;
     }
 
-    if (!user?.token) {
-      setError(t("contact.auth_error"));
-      return;
-    }
+    // if (!user?.token) {
+    //   setError(t("contact.auth_error"));
+    //   return;
+    // }
 
     setLoading(true);
     setError("");
@@ -46,12 +47,12 @@ function Contact() {
     try {
       await submitContactForm(user.token, {
         email: formData.email,
-        phoneNumber: "", // Not required in current form
+        phoneNumber: formData.phone, // Use phone from form data
         message: formData.message,
       });
 
       setSuccess(t("contact.success_message"));
-      setFormData({ email: "", message: "" });
+      setFormData({ email: "", message: "", phone: "" }); // Reset phone as well
     } catch (err) {
       setError(err.message || t("contact.error_message"));
     } finally {
@@ -60,7 +61,7 @@ function Contact() {
   };
 
   const handleReset = () => {
-    setFormData({ email: "", message: "" });
+    setFormData({ email: "", message: "", phone: "" }); // Reset phone as well
     setError("");
     setSuccess("");
   };
@@ -125,6 +126,21 @@ function Contact() {
               value={formData.email}
               onChange={handleInputChange}
               placeholder="example@gmail.com"
+              className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
+              disabled={loading}
+            />
+          </div>
+
+          <div>
+            <label className="block mb-1 text-sm text-neutral-700">
+              {t("contact.phone")}
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              placeholder="01234567890"
               className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-600"
               disabled={loading}
             />

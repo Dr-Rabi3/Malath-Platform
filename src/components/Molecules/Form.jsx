@@ -7,6 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useCallback, useEffect } from "react";
 import { arrow } from "@floating-ui/react";
 import { useAuth } from "../../store/AuthContext";
+import { Roles } from "../../utils/roles";
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -93,7 +94,12 @@ function From({ types, action, createAccount }) {
           content: "Login successfully",
           type: "success",
         });
-        navigate("/home");
+        if (result.data.role === Roles.Admin)
+          navigate("/admin");
+        else if (result.data.role === Roles.CusomerService)
+          navigate("/support");
+        else 
+          navigate("/");
       } else {
         messageApi.open({
           key: "login",

@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const STATUS_STYLES = {
   Accepted: "bg-green-100 text-green-700",
-  Reviewing: "bg-purple-100 text-purple-700",
+  Pending: "bg-purple-100 text-purple-700",
   New: "bg-yellow-100 text-yellow-700",
   Rejected: "bg-red-100 text-red-700",
 };
@@ -89,7 +89,10 @@ const Card = ({
       <h3 className="font-semibold text-gray-800 mb-2">{title}</h3>
 
       {/* Description */}
-      <p className="text-sm text-gray-700 mb-4">{description}</p>
+      <div
+        className="text-sm text-gray-700 mb-4"
+        dangerouslySetInnerHTML={{ __html: description }}
+      />
 
       {/* Footer */}
       <div className="flex justify-between items-center text-xs text-gray-400">

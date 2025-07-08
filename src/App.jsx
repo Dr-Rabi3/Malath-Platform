@@ -1,4 +1,5 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
 import RegistrationSuccess from "./components/pages/RegistrationSuccess";
@@ -20,7 +21,10 @@ import Editor from "./components/Organisms/Editor";
 import { AuthProvider } from "./store/AuthContext";
 import AdminSetting from "./components/pages/AdminSetting";
 import ShowService from "./components/pages/ShowService";
+import AddUser from "./components/pages/AddUser";
+import NotFound from "./components/pages/NotFound";
 
+const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
     path: "/",
@@ -61,7 +65,7 @@ const router = createBrowserRouter([
     element: <SupportLayout />,
     children: [
       {
-        path: "dashboard",
+        index: true,
         element: <SupportDashboard />,
       },
       {
@@ -95,6 +99,10 @@ const router = createBrowserRouter([
         element: <ComingSoon />,
       },
       {
+        path: "add-user",
+        element: <AddUser />,
+      },
+      {
         path: "setting",
         element: <AdminSetting />,
       },
@@ -113,13 +121,19 @@ const router = createBrowserRouter([
     path: "/registration-success",
     element: <RegistrationSuccess />,
   },
+  {
+    path: "*",
+    element: <NotFound />,
+  },
 ]);
 
 function App() {
   return (
-    <AuthProvider>
-      <RouterProvider router={router} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }
 

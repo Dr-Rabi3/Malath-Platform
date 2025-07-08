@@ -2,10 +2,57 @@ import { useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import CustomCollapse from "../Organisms/CustomCollapse";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../store/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import { getAllServices } from "../../api/http";
 
 function Service() {
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const { user } = useAuth();
+
+  const {
+    data: services,
+    isLoading: servicesLoading,
+    error: servicesError,
+  } = useQuery({
+    queryKey: ["services"],
+    queryFn: () => getAllServices(user?.token),
+    enabled: !!user?.token,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
+
+  if (servicesLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px]">
+        {t("loading")}
+      </div>
+    );
+  }
+  if (servicesError) {
+    return (
+      <div className="flex justify-center items-center min-h-[200px] text-red-600">
+        {servicesError.message}
+      </div>
+    );
+  }
+
+  const groupedServices = services?.reduce((acc, service) => {
+    const { categoryId, categoryName } = service;
+    if (!acc[categoryId]) {
+      acc[categoryId] = {
+        categoryId,
+        categoryName,
+        services: [],
+      };
+    }
+    acc[categoryId].services.push(service);
+    return acc;
+  }, {});
+
 
   return (
     <div className="space-y-[20px]">
@@ -17,7 +64,7 @@ function Service() {
           {t("service_request")}
         </Button>
       </div>
-      <CustomCollapse />
+      <CustomCollapse services={Object.values(groupedServices || {})} />
     </div>
   );
 }

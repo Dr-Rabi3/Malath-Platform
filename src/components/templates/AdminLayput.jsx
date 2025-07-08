@@ -25,6 +25,7 @@ import { Edit } from "../../assets/icons/Edit";
 import { ElementPlus } from "../../assets/icons/ElementPlus";
 import { Setting } from "../../assets/icons/Setting";
 import { useAuth } from "../../store/AuthContext";
+import { AddUser } from "../../assets/icons/AddUser.jsx";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -40,8 +41,8 @@ const siderStyle = {
 };
 
 function AdminLayout() {
-  const { logout: Logout } = useAuth();
-  const [collapsed, setCollapsed] = useState(false);
+  const { logout: Logout, user } = useAuth();
+  const [collapsed, setCollapsed] = useState(true);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const [activeKey, setActiveKey] = useState("1");
@@ -53,7 +54,8 @@ function AdminLayout() {
     if (page === "service" || from === "service") setActiveKey("2");
     else if (page === "blog") setActiveKey("3");
     else if (page === "add-service") setActiveKey("4");
-    else if (page === "setting") setActiveKey("5");
+    else if (page === "add-user") setActiveKey("5");
+    else if (page === "setting") setActiveKey("6");
     else setActiveKey("1");
   }, [location, location.pathname, location.state]);
 
@@ -61,7 +63,7 @@ function AdminLayout() {
     Logout();
     navigate("/");
   };
-  
+
   // console.log(value);
   //             if (value.key === "3") {
   //               handleLogout();
@@ -102,12 +104,18 @@ function AdminLayout() {
     },
     {
       key: "5",
+      icon: <AddUser color="#ddd" className="w-5 p-0 !text-[#fff]/50" />,
+      label: "Add user",
+      onClick: () => navigate("/admin/add-user"),
+    },
+    {
+      key: "6",
       icon: <Setting className="w-5 p-0 text-[#fff]/50" />,
       label: t("setting"),
       onClick: () => navigate("/admin/setting"),
     },
     {
-      key: "6",
+      key: "7",
       icon: <Earth color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
       label: `Translate to ${
         localStorage.getItem("lang") === "en" || !localStorage.getItem("lang")
@@ -120,7 +128,7 @@ function AdminLayout() {
           : changeLanguage("ar"),
     },
     {
-      key: "7",
+      key: "8",
       icon: <img src={logout} alt="logout icon" className="w-5" />,
       label: t("sidebar.logout"),
       onClick: () => {
@@ -141,7 +149,6 @@ function AdminLayout() {
     localStorage.setItem("lang", lng);
   };
 
-  console.log(activeKey);
   return (
     <>
       <style>
@@ -233,7 +240,7 @@ function AdminLayout() {
                   />
                 </Link>
                 <div className="hidden sm:block bg-neutral-1000 text-white px-2 py-1 rounded-full">
-                  Malath Support
+                  {user.name}
                 </div>
               </div>
             </div>

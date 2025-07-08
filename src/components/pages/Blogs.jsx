@@ -1,52 +1,36 @@
-import { Empty } from "antd";
+import { Empty, Spin } from "antd";
 import { getDurationFromNow } from "../../utils/timeAge";
 import { DeleteOutlined } from "@ant-design/icons";
-const blogs = [
-  {
-    id: 1,
-    html: `
-         <div>
-        <h1 class="text-xl font-bold border-b border-[#6F6E6E]/50 pb-2">
-          Marketing That Drives Real Results
-        </h1>
-        <p class="text-base mb-4">
-          Here's a quick checklist for making sure your marketing isn't just
-          "busy work," but actually brings in results:
-        </p>
-        <ul class="text-base list-disc list-inside">
-          <li>
-            <span class="font-bold">Clear Messaging</span> – Can a new
-            visitor understand what you offer in 5 seconds?
-          </li>
-          <li>
-            <span class="font-bold">Strong Funnel</span> – Are you guiding
-            users from awareness → interest → action?
-          </li>
-          <li>
-            <span class="font-bold">Value First</span> – Are you offering
-            content or solutions before asking for the sale?
-          </li>
-          <li>
-            <span class="font-bold">Multi-Channel Presence</span> – Are you
-            showing up where your audience hangs out (e.g. Instagram, LinkedIn,
-            email)?
-          </li>
-          <li>
-            <span class="font-bold">Customer Feedback Loop</span> – Are you
-            learning from your existing customers to improve the experience?
-          </li>
-        </ul>
-      </div>
-    `,
-    createdAt: "2025-01-01",
-    likes: 12,
-    dislikes: 5,
-  },
-];
+import { getBlogs } from "../../api/admin";
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
+import { useAuth } from "../../store/AuthContext";
 
-function Blogs({ isAdmin }) {
+function Blogs({ isAdmin, loading, onDelete }) {
+  const { user } = useAuth();
+  const [pageIndex, setPageIndex] = useState(null);
+  const [pageSize, setPageSize] = useState(null);
+  const {
+    data: blogsData,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["blogs", pageIndex, pageSize],
+    queryFn: () => getBlogs(pageIndex, pageSize, user?.token),
+    keepPreviousData: true,
+  });
+  
+  const blogs = (blogsData?.data || blogsData?.items || [])
+    .slice()
+    .sort((a, b) => (b.id || 0) - (a.id || 0));
+
   return (
-    <div className="mt-[20px] px-2 sm:px-4 md:px-8">
+    <div className="mt-[20px] px-2 sm:px-4 md:px-8 space-y-5">
+      {loading && (
+        <div className="absolute inset-0 flex items-center justify-center bg-white/60 z-10">
+          <Spin size="large" />
+        </div>
+      )}
       {blogs.map((blog) => (
         <div
           key={blog.id}
@@ -54,10 +38,10 @@ function Blogs({ isAdmin }) {
         >
           <div
             className="prose max-w-none prose-sm "
-            dangerouslySetInnerHTML={{ __html: blog.html }}
+            dangerouslySetInnerHTML={{ __html: blog.content }}
           />
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-2">
-            <div className="flex items-center gap-4 sm:gap-5">
+            {/* <div className="flex items-center gap-4 sm:gap-5">
               <button className="text-base font-bold flex items-center gap-2">
                 <svg
                   width="21"
@@ -133,10 +117,13 @@ function Blogs({ isAdmin }) {
                   </svg>
                 </>
               )}
-            </div>
+            </div> */}
             <div className="flex items-center gap-2">
               {isAdmin && (
-                <button className="text-red-600 border-b-2 border-red-600 w-fit">
+                <button
+                  className="text-red-600 text-[12px] border-b-2 border-red-600 w-fit"
+                  onClick={() => onDelete && onDelete(blog.id)}
+                >
                   <DeleteOutlined /> Delete Blog
                 </button>
               )}
@@ -174,10 +161,10 @@ function Blogs({ isAdmin }) {
         </div>
       ))}
       {blogs.length === 0 && (
-        <div className="absolute inset-0 flex flex-col items-center justify-center w-full p-3 text-center">
+        <div className="inset-0 flex flex-col items-center justify-center w-full p-3 text-center">
           <Empty
             image={Empty.PRESENTED_IMAGE_SIMPLE}
-            imageStyle={{ scale: 3 }}
+            // imageStyle={{ scale: 3 }}
           />
           No data
         </div>

@@ -14,7 +14,7 @@ function LoginFrom({ className }) {
         />
       </div>
       <From
-        types={["email", "password", "forget-password"]}
+        types={["email", "password"]}
         action="login"
         createAccount={true}
       />

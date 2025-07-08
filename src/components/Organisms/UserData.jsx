@@ -25,13 +25,17 @@ const validateMessages = {
   },
 };
 
-function UserData() {
+function UserData({ userData, onSubmit, isSubmitting = false }) {
   const onFinish = (values) => {
     console.log("Success:", values);
+    if (onSubmit) {
+      onSubmit(values);
+    }
   };
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  console.log(userData);
   return (
     <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full px-2">
       <Form
@@ -40,12 +44,20 @@ function UserData() {
         labelCol={{ span: 4 }}
         wrapperCol={{ span: 20 }}
         style={{ width: "100%" }}
-        // initialValues={{ remember: true }}
+        initialValues={{
+          name: userData?.fullName || "",
+          email: userData?.email || "",
+          phone: userData?.mobileNumber || "",
+          whatsapp: userData?.whatsappNumber || "",
+          country: userData?.country || "",
+          city: userData?.city || "",
+        }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
         className="flex flex-col justify-center items-center w-full"
         validateMessages={validateMessages}
+        disabled={!userData}
       >
         <Row className="w-full" gutter={16}>
           <Col span={12}>
@@ -65,10 +77,7 @@ function UserData() {
                 },
               ]}
             >
-              <Input
-                // value={ }
-                defaultValue="mohamed abdalrazek"
-              />
+              <Input />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -87,11 +96,7 @@ function UserData() {
               ]}
               className="w-full "
             >
-              <Input
-                // value={}
-                defaultValue="example@gmail.com"
-                className="w-full"
-              />
+              <Input className="w-full" />
             </Form.Item>
           </Col>
         </Row>
@@ -124,7 +129,7 @@ function UserData() {
                 },
               ]}
             >
-              <CustomPhoneInput defaultValue={"1030666109"} />
+              <CustomPhoneInput />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -138,16 +143,11 @@ function UserData() {
               // tooltip="What do you want others to call you?"
               rules={[
                 {
-                  required: true,
-                  message: "Please input your country!",
                   whitespace: true,
                 },
               ]}
             >
-              <Input
-                // value={ }
-                defaultValue="Egypt"
-              />
+              <Input />
             </Form.Item>
           </Col>
         </Row>
@@ -180,7 +180,7 @@ function UserData() {
                 },
               ]}
             >
-              <CustomPhoneInput defaultValue={"1030666109"} />
+              <CustomPhoneInput />
             </Form.Item>
           </Col>
           <Col span={12}>
@@ -194,67 +194,11 @@ function UserData() {
               // tooltip="What do you want others to call you?"
               rules={[
                 {
-                  required: true,
-                  message: "Please input your city!",
                   whitespace: true,
                 },
               ]}
             >
-              <Input
-                // value={ }
-                defaultValue="Qena"
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row className="w-full" gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Password"
-              layout="vertical"
-              className="w-full"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              style={{ minWidth: "100%" }}
-              name="password"
-              rules={[
-                { required: true, message: "Please input your password!" },
-              ]}
-            >
-              <Input.Password className="w-full" defaultValue={"123456789"} />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              name="confirm"
-              label="Confirm Password"
-              layout="vertical"
-              className="w-full"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              style={{ minWidth: "100%" }}
-              dependencies={["password"]}
-              hasFeedback
-              rules={[
-                {
-                  required: true,
-                  message: "Please confirm your password!",
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error(
-                        "The new password that you entered do not match!"
-                      )
-                    );
-                  },
-                }),
-              ]}
-            >
-              <Input.Password defaultValue={"123456789"} />
+              <Input />
             </Form.Item>
           </Col>
         </Row>
@@ -267,8 +211,9 @@ function UserData() {
           <Button
             type="submit"
             className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-[30px] py-1 sm:py-1.5"
+            disabled={isSubmitting || !userData}
           >
-            Save
+            {isSubmitting ? "Saving..." : "Save"}
           </Button>
         </Form.Item>
       </Form>

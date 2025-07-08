@@ -5,52 +5,15 @@ const text = `
   <div>
     We provide expert consulting to help you launch, grow, or expand your
     business. This includes:
-    <ul class="list-disc ml-5">
+    <ul class="list-decimal ml-5">
       <li>Feasibility studies</li>
       <li>Market and competitor analysis</li>
       <li>Expansion strategies and startup support</li>
     </ul>
   </div>`;
-const getItems = (panelStyle) => [
-  {
-    key: "1",
-    label: "Business Development",
-    children: <div dangerouslySetInnerHTML={{ __html: text }} />,
-    style: panelStyle,
-  },
-  {
-    key: "2",
-    label: "Executive Support Services",
-    children: <div dangerouslySetInnerHTML={{ __html: text }} />,
-    style: panelStyle,
-  },
-  {
-    key: "3",
-    label: "Marketing Services",
-    children: <div dangerouslySetInnerHTML={{ __html: text }} />,
-    style: panelStyle,
-  },
-  {
-    key: "4",
-    label: "Project Supervision",
-    children: <div dangerouslySetInnerHTML={{ __html: text }} />,
-    style: panelStyle,
-  },
-  {
-    key: "5",
-    label: "Administrative & Financial Services",
-    children: <div dangerouslySetInnerHTML={{ __html: text }} />,
-    style: panelStyle,
-  },
-  {
-    key: "6",
-    label: "Real Estate Marketing",
-    children: <div dangerouslySetInnerHTML={{ __html: text }} />,
-    style: panelStyle,
-  },
-];
 
-function CustomCollapse() {
+  
+function CustomCollapse({ services }) {
   const { token } = theme.useToken();
   const panelStyle = {
     marginBottom: 10,
@@ -58,6 +21,30 @@ function CustomCollapse() {
     borderRadius: token.borderRadiusLG,
     border: "none",
   };
+  const items = services?.map((service) => {
+    return {
+      key: service.categoryId,
+      label: service.categoryName,
+      children: (
+        <ul className="list-decimal ml-5">
+          {service.services.map((item) => {
+            return (
+              <li key={item.id}>
+                {item.name}
+                <ul className="list-disc ml-5">
+                  {" "}
+                  <li> {item.description}</li>
+                </ul>
+              </li>
+            );
+          })}
+        </ul>
+      ),
+      style: panelStyle,
+    };
+  })
+  
+
   return (
     <>
       <style jsx global>{`
@@ -75,7 +62,7 @@ function CustomCollapse() {
         .ant-collapse-content-active {
           border: 1px solid #dbdade !important;
           border-radius: 0px 0px 10px 10px !important;
-          padding:10px;
+          padding: 10px;
         }
       `}</style>
       <Collapse
@@ -88,7 +75,7 @@ function CustomCollapse() {
         )}
         style={{ background: token.colorBgContainer }}
         expandIconPosition="end"
-        items={ getItems(panelStyle)}
+        items={items}
       />
     </>
   );

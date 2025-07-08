@@ -1,8 +1,17 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { registerUser, loginUser, refreshTokenAPI } from "@/api/auth.js";
+import { getFile, getUserById } from "../api/http";
 
 const AuthContext = createContext();
+
+const blobToBase64 = (blob) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onloadend = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(blob);
+  });
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({
@@ -11,8 +20,7 @@ export const AuthProvider = ({ children }) => {
     token: null,
     refreshToken: null,
     email: null,
-    firstName: null,
-    lastName: null,
+    name: null,
     profileImageUrl: null,
   });
   const [loading, setLoading] = useState(false);
@@ -230,15 +238,7 @@ export const AuthProvider = ({ children }) => {
     return () => clearInterval(interval);
   }, []);
 
-  const login = ({
-    userId,
-    role,
-    token,
-    refreshToken,
-    email,
-    name,
-    profileImageUrl,
-  }) => {
+  const login = async ({ userId, token, refreshToken }) => {
     Cookies.set("malath_token", token, {
       expires: 7,
       secure: true,
@@ -254,46 +254,64 @@ export const AuthProvider = ({ children }) => {
       secure: true,
       sameSite: "Strict",
     });
-    Cookies.set("malath_role", role, {
-      expires: 7,
-      secure: true,
-      sameSite: "Strict",
-    });
 
-    // Save user profile data in cookies
-    if (email) {
-      Cookies.set("malath_email", email, {
+    try {
+      const userData = await getUserById(token, userId);
+      Cookies.set("malath_email", userData.email, {
         expires: 7,
         secure: true,
         sameSite: "Strict",
       });
-    }
-    if (name) {
-      Cookies.set("malath_name", name, {
+      Cookies.set("malath_name", userData.fullName, {
         expires: 7,
         secure: true,
         sameSite: "Strict",
       });
-    }
-    if (profileImageUrl) {
-      Cookies.set("malath_profileImageUrl", profileImageUrl, {
+      Cookies.set("malath_role", userData.role, {
         expires: 7,
         secure: true,
         sameSite: "Strict",
       });
-    }
+      if (userData.profilePicture) {
+        try {
+          const imageBlob = await getFile(userData.profilePicture);
+          const base64 = await blobToBase64(imageBlob);
+          // console.log(base64, imageBlob, userData.profilePicture);
+          Cookies.set("malath_profileImageData", base64, {
+            expires: 7,
+            secure: true,
+            sameSite: "Strict",
+          });
+          setUser((prev) => ({
+            ...prev,
+            profileImageData: base64,
+          }));
+        } catch (e) {
+          console.error("Failed to fetch profile image", e);
+        }
+        Cookies.set("malath_profileImageUrl", userData.profilePicture, {
+          expires: 7,
+          secure: true,
+          sameSite: "Strict",
+        });
+      }
 
-    setUser((prevUser) => ({
-      ...prevUser,
-      userId,
-      role,
-      token,
-      refreshToken,
-      email: email || prevUser.email,
-      name: name || prevUser.name,
-      profileImageUrl: profileImageUrl || prevUser.profileImageUrl,
-    }));
-    console.warn("User logged in");
+      // Set all user data in context
+      setUser((prevUser) => ({
+        ...prevUser,
+        userId: userData.id,
+        role: userData.role,
+        token,
+        refreshToken,
+        email: userData.email,
+        name: userData.fullName,
+        profileImageUrl: userData.profilePicture,
+      }));
+      // console.log(userData);
+      console.warn("User logged in");
+    } catch (err) {
+      console.error("Failed to fetch user data after login", err);
+    }
   };
 
   const logout = () => {
@@ -302,8 +320,7 @@ export const AuthProvider = ({ children }) => {
     Cookies.remove("malath_userId");
     Cookies.remove("malath_role");
     Cookies.remove("malath_email");
-    Cookies.remove("malath_firstName");
-    Cookies.remove("malath_lastName");
+    Cookies.remove("malath_name");
     Cookies.remove("malath_profileImageUrl");
     setUser({
       userId: null,

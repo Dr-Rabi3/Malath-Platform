@@ -12,11 +12,15 @@ import login from "../../assets/icons/login.svg";
 import { useTranslation } from "react-i18next";
 import { Earth } from "../../assets/icons/Earth.jsx";
 import { useAuth } from "../../store/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import { getFile } from "../../api/http.js";
 
 export default function Navbar() {
   const { user, logout: Logout } = useAuth();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const [profileImageUrl, setProfileImageUrl] = useState(null);
+
   const list = [
     { name: t("nav.home"), link: "/", hash: "home" },
     { name: t("nav.blog"), link: "/blogs", hash: "blogs" },
@@ -31,10 +35,32 @@ export default function Navbar() {
     location.pathname.substring(1) || "home"
   );
   // console.log(user);
-  // console.log(activePath);
   useEffect(() => {
     setActivePath(location.pathname.substring(1) || "home");
   }, [location.pathname]);
+
+  const { data: profileImageBlob } = useQuery({
+    queryKey: ["profileImage", user?.profileImageUrl],
+    queryFn: () => getFile(user?.profileImageUrl),
+    enabled: !!user?.profileImageUrl,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: 10 * 60 * 1000, // 10 minutes
+  });
+
+  // Create image URL from blob when profile image is fetched
+  // console.log(user);
+  useEffect(() => {
+    if (profileImageBlob) {
+      const imageUrl = URL.createObjectURL(profileImageBlob);
+      setProfileImageUrl(imageUrl);
+
+      // Cleanup function to revoke the URL when component unmounts or image changes
+      return () => {
+        URL.revokeObjectURL(imageUrl);
+      };
+    }
+  }, [profileImageBlob]);
 
   const changeLanguage = (lng) => {
     i18n.changeLanguage(lng);
@@ -183,13 +209,12 @@ export default function Navbar() {
                   <Link to="/profile">
                     <Avatar
                       size={28}
+                      src={profileImageUrl}
                       icon={<UserOutlined />}
                       className="bg-brand-600"
                     />
                   </Link>
-                  <div className="hidden sm:block">
-                    {user?.name}
-                  </div>
+                  <div className="hidden sm:block">{user?.name}</div>
                 </div>
               </div>
             )}
