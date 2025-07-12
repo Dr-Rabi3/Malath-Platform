@@ -1,26 +1,26 @@
 import LoginFrom from "../Organisms/LoginFrom";
 import photo from "../../assets/images/Rectangle 23.png";
-// import { useEffect } from "react";
-// import { useAuth } from "../store/AuthContext";
-// import { useLocation, useNavigate } from "react-router-dom";
-// import { message } from "antd";
+import { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { message } from "antd";
+import { useAuth } from "../../store/AuthContext";
 
 function Login() {
-  // const user = useAuth();
-  // const [messageApi, contextHolder] = message.useMessage();
-  // const navigate = useNavigate();
-  // const location = useLocation();
-  // const { from, message: loginAlert } = location.state || {};
-  // useEffect(() => {
-  //   if (from) {
-  //     messageApi.open({ type: "warning", content: loginAlert });
-  //   }
-  //   if (user.token) {
-  //     if (user.role === "admin") navigate("/admin/dashboard");
-  //     else if (from) navigate(from);
-  //     else navigate("/user/dashboard");
-  //   }
-  // }, [user, from, loginAlert, navigate]);
+  const user = useAuth();
+  const [messageApi, contextHolder] = message.useMessage();
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { from, message: loginAlert } = location.state || {};
+  useEffect(() => {
+    if (from) {
+      messageApi.open({ type: "warning", content: loginAlert });
+    }
+    if (user.token) {
+      if (user.role === "admin") navigate("/admin/dashboard");
+      else if (from) navigate(from);
+      else navigate("/user/dashboard");
+    }
+  }, [user, from, loginAlert, navigate]);
   return (
     <>
       {/* {contextHolder} */}

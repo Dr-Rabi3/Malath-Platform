@@ -72,14 +72,20 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
       <Modal
         title={
           <div className="text-lg font-semibold text-gray-900 sm:text-xl">
-            {userToEdit ? "Edit User" : "Add User"}
+            {userToEdit
+              ? t("admin.addUserModal.editUser")
+              : t("admin.addUserModal.addUser")}
           </div>
         }
         open={visible}
         onCancel={onCancel}
         onOk={handleOk}
-        okText={userToEdit ? "Save" : "Add"}
-        cancelText="Cancel"
+        okText={
+          userToEdit
+            ? t("admin.addUserModal.save")
+            : t("admin.addUserModal.add")
+        }
+        cancelText={t("admin.addUserModal.cancel")}
         width="90%"
         style={{ maxWidth: "600px" }}
         className="responsive-modal"
@@ -108,33 +114,44 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
             <Form.Item
               label={
                 <span className="text-sm font-medium text-gray-700 sm:text-base">
-                  Name
+                  {t("admin.addUserModal.name")}
                 </span>
               }
               name="name"
-              rules={[{ required: true, message: "Please enter name" }]}
+              rules={[
+                {
+                  required: true,
+                  message: t("admin.addUserModal.validation.nameRequired"),
+                },
+              ]}
               className="sm:col-span-2"
             >
               <Input
-                placeholder="Enter full name"
+                placeholder={t("admin.addUserModal.enterName")}
                 className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
               />
             </Form.Item>
             <Form.Item
               label={
                 <span className="text-sm font-medium text-gray-700 sm:text-base">
-                  Email
+                  {t("admin.addUserModal.email")}
                 </span>
               }
               name="email"
               rules={[
-                { required: true, message: "Please enter email" },
-                { type: "email", message: "Please enter a valid email" },
+                {
+                  required: true,
+                  message: t("admin.addUserModal.validation.emailRequired"),
+                },
+                {
+                  type: "email",
+                  message: t("admin.addUserModal.validation.emailInvalid"),
+                },
               ]}
               className="sm:col-span-2"
             >
               <Input
-                placeholder="example@gmail.com"
+                placeholder={t("admin.addUserModal.enterEmail")}
                 className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
               />
             </Form.Item>
@@ -143,41 +160,56 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
             <Form.Item
               label={
                 <span className="text-sm font-medium text-gray-700 sm:text-base">
-                  Password
+                  {t("admin.addUserModal.password")}
                 </span>
               }
               name="password"
               rules={[
-                { required: !userToEdit, message: "Please enter password" },
-                { min: 6, message: "Password must be at least 6 characters" },
+                {
+                  required: !userToEdit,
+                  message: t("admin.addUserModal.validation.passwordRequired"),
+                },
+                {
+                  min: 6,
+                  message: t("admin.addUserModal.validation.passwordMinLength"),
+                },
               ]}
             >
               <Input.Password
-                placeholder="Enter password"
+                placeholder={t("admin.addUserModal.enterPassword")}
                 className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
               />
             </Form.Item>
             <Form.Item
               label={
                 <span className="text-sm font-medium text-gray-700 sm:text-base">
-                  Confirm Password
+                  {t("admin.addUserModal.confirmPassword")}
                 </span>
               }
               name="confirmPassword"
               rules={[
-                { required: !userToEdit, message: "Please confirm password" },
+                {
+                  required: !userToEdit,
+                  message: t(
+                    "admin.addUserModal.validation.confirmPasswordRequired"
+                  ),
+                },
                 ({ getFieldValue }) => ({
                   validator(_, value) {
                     if (!value || getFieldValue("password") === value) {
                       return Promise.resolve();
                     }
-                    return Promise.reject(new Error("Passwords do not match"));
+                    return Promise.reject(
+                      new Error(
+                        t("admin.addUserModal.validation.passwordsMismatch")
+                      )
+                    );
                   },
                 }),
               ]}
             >
               <Input.Password
-                placeholder="Confirm password"
+                placeholder={t("admin.addUserModal.confirmPasswordPlaceholder")}
                 className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
               />
             </Form.Item>
@@ -256,14 +288,19 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
           <Form.Item
             label={
               <span className="text-sm font-medium text-gray-700 sm:text-base">
-                Role
+                {t("admin.addUserModal.role")}
               </span>
             }
             name="rule"
-            rules={[{ required: !userToEdit, message: "Please select role" }]}
+            rules={[
+              {
+                required: !userToEdit,
+                message: t("admin.addUserModal.validation.roleRequired"),
+              },
+            ]}
           >
             <Select
-              placeholder="Select user role"
+              placeholder={t("admin.addUserModal.selectRole")}
               className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
               size="large"
             >
@@ -273,7 +310,7 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
                 </Option>
               ))}
               {(!roles || roles.length === 0) && (
-                <Option value={null}>no roles</Option>
+                <Option value={null}>{t("admin.addUserModal.noRoles")}</Option>
               )}
             </Select>
           </Form.Item>

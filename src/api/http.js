@@ -220,6 +220,42 @@ export const getAllCategories = async (token) => {
 };
 
 /**
+ * Create a new category
+ * @param {string} token - Authorization token
+ * @param {Object} categoryData - The category data
+ * @param {string} categoryData.nameEn - Name in English
+ * @param {string} categoryData.nameAr - Name in Arabic
+ * @returns {Promise<Object>} - The created category or API response
+ */
+export const createCategory = async (token, categoryData) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}api/Categories/Create`,
+      {
+        nameEn: categoryData.nameEn,
+        nameAr: categoryData.nameAr,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Category creation error";
+    console.error("Create category error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
  * Fetch all services from the API
  * @param {string} token - Authorization token
  * @returns {Promise<Array>} List of services
@@ -230,7 +266,7 @@ export const getAllServices = async (token) => {
     const response = await axios.get(`${API_BASE_URL}api/Services/all`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
         Accept: "application/json",
       },
       timeout: 10000, // 10-second timeout
@@ -250,6 +286,48 @@ export const getAllServices = async (token) => {
       "Error fetching services";
 
     console.error("Get services error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
+ * Create a new service
+ * @param {string} token - Authorization token
+ * @param {Object} serviceData - The service data
+ * @param {string} serviceData.nameEn - Name in English
+ * @param {string} serviceData.nameAr - Name in Arabic
+ * @param {string} serviceData.descriptionEn - Description in English
+ * @param {string} serviceData.descriptionAr - Description in Arabic
+ * @param {number} serviceData.categoryId - Category ID
+ * @returns {Promise<Object>} - The created service or API response
+ */
+export const createService = async (token, serviceData) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}api/Services/Create`,
+      {
+        nameEn: serviceData.nameEn,
+        nameAr: serviceData.nameAr,
+        descriptionEn: serviceData.descriptionEn,
+        descriptionAr: serviceData.descriptionAr,
+        categoryId: serviceData.categoryId,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000,
+      }
+    );
+    return response.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Service creation error";
+    console.error("Create service error:", errorMsg);
     throw new Error(errorMsg);
   }
 };
@@ -432,9 +510,14 @@ export const getServiceById = async (token, serviceId) => {
  * @returns {Promise<Array>} List of user service requests
  */
 
-export const getAllUserServiceRequests = async (token) => {
+export const getAllUserServiceRequests = async (
+  token,
+  pageIndex = 1,
+  pageSize = 10
+) => {
   try {
     const response = await axios.get(`${API_BASE_URL}api/UserService/GetAll`, {
+      params: { pageIndex, pageSize },
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -449,7 +532,15 @@ export const getAllUserServiceRequests = async (token) => {
       throw new Error(result.error?.description || "Failed to fetch requests");
     }
 
-    return result.data; // Array of { id, title, description, userID, serviceID, status }
+    // Extract pagination from x-pagination header if present
+    let pagination = null;
+    if (response.headers && response.headers["x-pagination"]) {
+      try {
+        pagination = JSON.parse(response.headers["x-pagination"]);
+      } catch {}
+    }
+
+    return { data: result.data, pagination };
   } catch (error) {
     const errorMsg =
       error.response?.data?.error?.description ||
@@ -549,6 +640,72 @@ export const updateUserServiceRequestStatus = async (
     console.error("Update user service request status error:", errorMsg);
     throw new Error(errorMsg);
   }
+};
+
+/**
+ * Resolve a user service request
+ * @param {string} token - Authorization token
+ * @param {number} requestId - The ID of the request to resolve
+ * @returns {Promise<Object>} API response
+ */
+export const resolveUserServiceRequest = async (token, requestId) => {
+  const response = await axios.put(
+    `${API_BASE_URL}api/UserService/ResolveRequest/${requestId}`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      timeout: 10000,
+    }
+  );
+  return response.data;
+};
+
+/**
+ * Contact a user service request
+ * @param {string} token - Authorization token
+ * @param {number} requestId - The ID of the request to contact
+ * @returns {Promise<Object>} API response
+ */
+export const contactUserServiceRequest = async (token, requestId) => {
+  const response = await axios.put(
+    `${API_BASE_URL}api/UserService/ContactRequest/${requestId}`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      timeout: 10000,
+    }
+  );
+  return response.data;
+};
+
+/**
+ * Reject a user service request
+ * @param {string} token - Authorization token
+ * @param {number} requestId - The ID of the request to reject
+ * @returns {Promise<Object>} API response
+ */
+export const rejectUserServiceRequest = async (token, requestId) => {
+  const response = await axios.put(
+    `${API_BASE_URL}api/UserService/RejectRequest/${requestId}`,
+    {},
+    {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        Accept: "application/json",
+      },
+      timeout: 10000,
+    }
+  );
+  return response.data;
 };
 
 /**
@@ -684,5 +841,73 @@ export const updateUser = async (token, userData) => {
   } catch (err) {
     console.error(`Update error: ${err.message}`);
     throw new Error(err.message);
+  }
+};
+
+/**
+ * Fetch the top 5 users with the most requested services
+ * @param {string} token - Authorization token
+ * @returns {Promise<Array>} List of top 5 users
+ */
+export const getTopFiveUsersRequestedServices = async (token) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}api/ApplicationUsers/GetTopFiveUsersRequestedServices`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+    const result = response.data;
+    if (!result.isSuccess) {
+      throw new Error(result.error?.description || "Failed to fetch top users");
+    }
+    return result.data; // List of top 5 users
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Error fetching top users";
+    console.error("Get top 5 users error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
+ * Fetch the top 5 requested services
+ * @param {string} token - Authorization token
+ * @returns {Promise<Array>} List of top 5 services
+ */
+export const getTopFiveRequestedServices = async (token) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}api/Services/GetTopFiveRequestedServices`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+    const result = response.data;
+    if (!result.isSuccess) {
+      throw new Error(
+        result.error?.description || "Failed to fetch top services"
+      );
+    }
+    return result.data; // List of top 5 services
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Error fetching top services";
+    console.error("Get top 5 services error:", errorMsg);
+    throw new Error(errorMsg);
   }
 };

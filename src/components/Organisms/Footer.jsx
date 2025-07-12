@@ -31,8 +31,6 @@ function Footer() {
             <div className="text-xs text-gray-500">
               <p className="text-xs text-gray-500">{t("footer.copyright")}</p>
             </div>
-
-          
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:col-span-2">
@@ -40,26 +38,29 @@ function Footer() {
               <p className="font-medium text-[#fff] text-[15px]">
                 {t("footer.services")}
               </p>
-              
+
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
-                  <Link to="#" className="text-[#D3D4DC] hover:opacity-75">
+                  <Link to="/" className="text-[#D3D4DC] hover:opacity-75">
                     {t("footer.main")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="text-[#D3D4DC] hover:opacity-75">
+                  <Link to="/blogs" className="text-[#D3D4DC] hover:opacity-75">
                     {t("footer.blogs")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="text-[#D3D4DC] hover:opacity-75">
+                  <Link to="/about" className="text-[#D3D4DC] hover:opacity-75">
                     {t("footer.about")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="#" className="text-[#D3D4DC] hover:opacity-75">
-                    {t("footer.profile")}
+                  <Link
+                    to="/service"
+                    className="text-[#D3D4DC] hover:opacity-75"
+                  >
+                    {t("nav.services")}
                   </Link>
                 </li>
               </ul>
@@ -70,7 +71,6 @@ function Footer() {
                 {t("footer.contact")}
               </p>
 
-              
               <ul className="mt-6 space-y-4 text-sm">
                 <li>
                   <Link

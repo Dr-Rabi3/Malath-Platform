@@ -1,14 +1,15 @@
 import Card from "../Organisms/Card";
-import { Col, Form, Input, Row, Select } from "antd";
-import { useState } from "react";
+import { Col, Form, Input, Pagination, Row, Select } from "antd";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import {
   getAllCategories,
   getAllServices,
   getAllUserServiceRequests,
+  getUserById,
 } from "../../api/http";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../store/AuthContext";
 
 const { Option } = Select;
@@ -31,8 +32,16 @@ function SupportDashboard() {
   const [form] = Form.useForm();
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
+  const isAdmin = location.pathname.includes("admin-service");
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
   const [selectedServiceType, setSelectedServiceType] = useState(null);
+  const [searchValue, setSearchValue] = useState("");
+  const [selectedServiceId, setSelectedServiceId] = useState(null);
+  const [requestsPage, setRequestsPage] = useState(1);
+  const [requestsPageSize, setRequestsPageSize] = useState(10);
+  const [users, setUsers] = useState({});
+  const [usersLoading, setUsersLoading] = useState(false);
 
   // Fetch type services using React Query
   const { data: servicesType, isLoading: servicesTypeLoading } = useQuery({
@@ -58,22 +67,54 @@ function SupportDashboard() {
 
   // Fetch all user service requests
   const {
-    data: serviceRequests,
+    data: serviceRequestsResponse,
     isLoading: requestsLoading,
     error: requestsError,
   } = useQuery({
-    queryKey: ["allUserServiceRequests"],
-    queryFn: () => getAllUserServiceRequests(user?.token),
+    queryKey: [
+      "allUserServiceRequests",
+      requestsPage,
+      requestsPageSize,
+      user?.token,
+    ],
+    queryFn: () =>
+      getAllUserServiceRequests(user?.token, requestsPage, requestsPageSize),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: 2 * 60 * 1000, // 2 minutes
   });
+  const serviceRequests = serviceRequestsResponse?.data || [];
+  const pagination = serviceRequestsResponse?.pagination || {};
+  const totalServiceRequests = pagination.TotalCount || 0;
+  const currentRequestsPage = pagination.CurrentPage || requestsPage;
+  const currentRequestsPageSize = pagination.PageSize || requestsPageSize;
+  // console.log(serviceRequestsResponse);
+  // Filter services based on selected service type and search input
+  const filteredServices = (services || [])
+    .filter(
+      (service) =>
+        !selectedServiceType || service.categoryId === selectedServiceType
+    )
+    .filter(
+      (service) =>
+        !searchValue ||
+        service.name.toLowerCase().includes(searchValue.toLowerCase())
+    );
 
-  // Filter services based on selected service type
-  const filteredServices = selectedServiceType
-    ? services?.filter((service) => service.categoryId === selectedServiceType)
-    : services;
+  // Filter service requests based on selected service and search input
+  const filteredServiceRequests = (serviceRequests || [])
+    .filter(
+      (request) => !selectedServiceId || request.serviceID === selectedServiceId
+    )
+    .filter(
+      (request) =>
+        !searchValue ||
+        (request.title &&
+          request.title.toLowerCase().includes(searchValue.toLowerCase())) ||
+        (request.description &&
+          request.description.toLowerCase().includes(searchValue.toLowerCase()))
+    );
 
   // Function to get service name by ID
   const getServiceNameById = (serviceId) => {
@@ -84,48 +125,48 @@ function SupportDashboard() {
 
   // Function to get status text and styling
   const getStatusInfo = (status) => {
+    console.log(status);
     switch (status) {
       case 0:
         return {
-          text: "Pending",
+          text: t("supportDashboard.status.pending"),
           className: "text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded",
         };
       case 1:
         return {
-          text: "Approved",
+          text: t("supportDashboard.status.contact"),
           className: "text-xs bg-green-100 text-green-700 px-2 py-1 rounded",
         };
       case 2:
         return {
-          text: "Rejected",
+          text: t("supportDashboard.status.resolve"),
+          className: "text-xs bg-green-100 text-green-700 px-2 py-1 rounded",
+        };
+      case 3:
+        return {
+          text: t("supportDashboard.status.rejected"),
           className: "text-xs bg-red-100 text-red-600 px-2 py-1 rounded",
         };
       default:
         return {
-          text: "Unknown",
+          text: t("supportDashboard.status.unknown"),
           className: "text-xs bg-gray-100 text-gray-600 px-2 py-1 rounded",
         };
     }
   };
 
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
-
   const onTypeChange = (value) => {
     setSelectedServiceType(value);
     // Clear the services selection when type changes
     form.setFieldsValue({ services: undefined });
+  };
+
+  const onServiceChange = (value) => {
+    setSelectedServiceId(value);
+  };
+
+  const onSearchChange = (e) => {
+    setSearchValue(e.target.value);
   };
 
   const onFinish = (values) => {
@@ -135,12 +176,41 @@ function SupportDashboard() {
     console.log("Failed:", errorInfo);
   };
 
-  if (requestsLoading) {
+  // Fetch user data for all unique userIDs in serviceRequests
+  useEffect(() => {
+    const fetchUsers = async () => {
+      if (!serviceRequests || serviceRequests.length === 0) return;
+      setUsersLoading(true);
+      const uniqueUserIds = [
+        ...new Set(serviceRequests.map((r) => r.userID).filter(Boolean)),
+      ];
+      // console.log(uniqueUserIds);
+      const userMap = {};
+      await Promise.all(
+        uniqueUserIds.map(async (userId) => {
+          // console.log(userId);
+          try {
+            const curUser = await getUserById(user?.token, userId);
+            // console.log(curUser);
+            userMap[userId] = curUser;
+          } catch (e) {
+            userMap[userId] = null;
+          }
+        })
+      );
+      setUsers(userMap);
+      setUsersLoading(false);
+    };
+    fetchUsers();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [serviceRequests]);
+  // console.log(users);
+  if (requestsLoading || usersLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-800 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading service requests...</p>
+          <p className="text-gray-600">{t("supportDashboard.loading")}</p>
         </div>
       </div>
     );
@@ -150,7 +220,9 @@ function SupportDashboard() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">Error loading service requests</p>
+          <p className="text-red-600 mb-4">
+            {t("supportDashboard.errorLoading")}
+          </p>
           <p className="text-gray-600 text-sm">{requestsError.message}</p>
         </div>
       </div>
@@ -195,7 +267,7 @@ function SupportDashboard() {
                   {(!servicesType || servicesType.length === 0) &&
                     !servicesTypeLoading && (
                       <Option value={null} disabled>
-                        No service types available
+                        {t("supportDashboard.noServiceTypes")}
                       </Option>
                     )}
                 </Select>
@@ -212,11 +284,12 @@ function SupportDashboard() {
                   placeholder={
                     selectedServiceType
                       ? t("form.selectService")
-                      : "Please select a service type first"
+                      : t("supportDashboard.selectServiceTypeFirst")
                   }
                   loading={servicesLoading}
                   allowClear
                   disabled={!selectedServiceType}
+                  onChange={onServiceChange}
                 >
                   {filteredServices?.map((service) => (
                     <Option key={service.id} value={service.id}>
@@ -227,8 +300,8 @@ function SupportDashboard() {
                     !servicesLoading && (
                       <Option value={null} disabled>
                         {selectedServiceType
-                          ? "No services available for this type"
-                          : "Please select a service type first"}
+                          ? t("supportDashboard.noServicesForType")
+                          : t("supportDashboard.selectServiceTypeFirst")}
                       </Option>
                     )}
                 </Select>
@@ -238,33 +311,43 @@ function SupportDashboard() {
 
           <Form.Item
             name="search"
-            label="Search"
+            label={t("supportDashboard.search")}
             layout="vertical"
             labelCol={{ span: 15 }}
             wrapperCol={{ span: 15 }}
             style={{ minWidth: "100%" }}
           >
-            <Input placeholder={t("form.searchPlaceholder")} />
+            <Input
+              placeholder={t("form.searchPlaceholder")}
+              value={searchValue}
+              onChange={onSearchChange}
+            />
           </Form.Item>
         </Form>
       </div>
       <div className="mx-auto">
-        {serviceRequests && serviceRequests.length > 0 ? (
-          serviceRequests.map((request) => {
+        {filteredServiceRequests && filteredServiceRequests.length > 0 ? (
+          filteredServiceRequests.map((request) => {
             const statusInfo = getStatusInfo(request.status);
+            const userObj = users[request.userID];
             return (
               <Card
                 key={request.id}
                 id={request.id}
                 status={statusInfo.text}
-                name="User" // You might want to fetch user details separately
+                user={userObj}
                 category={getServiceNameById(request.serviceID)}
-                title={request.title || "No title"}
-                description={request.description || "No description"}
-                createdAt={request.createdAt || "Unknown date"}
+                title={request.title || t("supportDashboard.noTitle")}
+                description={
+                  request.description || t("supportDashboard.noDescription")
+                }
+                createdAt={
+                  request.createdAt || t("supportDashboard.unknownDate")
+                }
+                isAdmin={isAdmin}
                 onClick={() =>
-                  navigate(`../service/${request.id}`, {
-                    state: { service: request },
+                  navigate(`/support/service/${request.id}`, {
+                    state: { service: request, userRequest: userObj, isAdmin },
                   })
                 }
               />
@@ -273,13 +356,25 @@ function SupportDashboard() {
         ) : (
           <div className="flex items-center justify-center min-h-[200px]">
             <div className="text-center">
-              <p className="text-gray-600">No service requests found</p>
+              <p className="text-gray-600">
+                {t("supportDashboard.noRequests")}
+              </p>
               <p className="text-gray-500 text-sm">
-                There are no service requests to display.
+                {t("supportDashboard.noRequestsHint")}
               </p>
             </div>
           </div>
         )}
+        <Pagination
+          className="flex justify-center"
+          current={currentRequestsPage}
+          pageSize={currentRequestsPageSize}
+          total={totalServiceRequests}
+          onChange={(page, size) => {
+            setRequestsPage(page);
+            setRequestsPageSize(size);
+          }}
+        />
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ function From({ types, action, createAccount }) {
   const getError = useCallback(
     (field) => {
       const fieldError = error?.errors?.[field];
-      console.log(field, fieldError, error);
+      // console.log(field, fieldError, error);
       if (!fieldError) return undefined;
       if (
         typeof fieldError === "object" &&

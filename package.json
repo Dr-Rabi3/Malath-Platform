@@ -4,8 +4,10 @@
   "private": true,
   "dependencies": {
     "@floating-ui/react": "^0.27.13",
+    "@microsoft/signalr": "^8.0.7",
     "@radix-ui/react-dialog": "^1.1.14",
     "@radix-ui/react-navigation-menu": "^1.2.13",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tailwindcss/typography": "^0.5.16",
     "@tanstack/react-query": "^5.81.5",
     "@testing-library/dom": "^10.4.0",
@@ -34,6 +36,8 @@
     "axios": "^1.10.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "embla-carousel-autoplay": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
     "google-libphonenumber": "^3.2.42",
     "i18next": "^25.3.0",
     "i18next-browser-languagedetector": "^8.2.0",
@@ -47,6 +51,7 @@
     "react-international-phone": "^4.5.0",
     "react-katex": "^3.1.0",
     "react-router-dom": "^7.6.3",
+    "recharts": "^2.15.4",
     "sanitize-html": "^2.17.0",
     "sass": "^1.62.1",
     "swiper": "^11.2.10",
@@ -90,5 +95,8 @@
     "tailwindcss": "^3.4.17",
     "tailwindcss-animate": "^1.0.7",
     "vite": "^4.5.3"
+  },
+  "overrides": {
+    "react-is": "^19.0.0-rc-69d4b800-20241021"
   }
 }

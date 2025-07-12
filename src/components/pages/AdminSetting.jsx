@@ -1,30 +1,62 @@
-import { Form } from "antd";
+import { Form, message, Spin } from "antd";
 import Editor from "../Organisms/Editor";
 import Button from "../atoms/Button";
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { getEntitySettings, updateEntitySettings } from "../../api/settings";
 
 function AdminSetting() {
   const { t } = useTranslation();
+  const [form] = Form.useForm();
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [settingData, setSettingData] = useState({
+    vision: "",
+    mission: "",
+    values: "",
+  });
+  // Fetch settings on mount
+  useEffect(() => {
+    setLoading(true);
+    getEntitySettings()
+      .then((data) => {
+        setSettingData(data);
+        form.setFieldsValue(data);
+      })
+      .catch(() => {
+        message.error("Failed to fetch settings");
+      })
+      .finally(() => setLoading(false));
+  }, [form]);
 
+  // Save handler
   const onFinish = useCallback(async (values) => {
-    console.log("Success:", values);
+    console.log(values);
+    setSaving(true);
+    try {
+      await updateEntitySettings(values);
+      message.success("Settings updated successfully!");
+    } catch (err) {
+      message.error("Failed to update settings");
+    } finally {
+      setSaving(false);
+    }
   }, []);
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
+
   return (
-    <>
-      <div>
+    <div>
+      {loading ? (
+        <Spin />
+      ) : (
         <Form
+          form={form}
           layout="vertical"
           name="basic"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 20 }}
           style={{ width: "100%" }}
-          // initialValues={{ remember: true }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}
+          // onFinishFailed={onFinishFailed}
           autoComplete="off"
           className="flex flex-col w-full space-y-5"
         >
@@ -41,10 +73,13 @@ function AdminSetting() {
                   wrapperCol={{ span: 24 }}
                   style={{ minWidth: "100%" }}
                 >
-                  <Editor />
+                  <Editor content={settingData.vision} field="vision" />
                 </Form.Item>
                 <Form.Item>
-                  <Button className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]">
+                  <Button
+                    type="submit"
+                    className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]"
+                  >
                     {t("admin.setting.save")}
                   </Button>
                 </Form.Item>
@@ -65,10 +100,13 @@ function AdminSetting() {
                   wrapperCol={{ span: 24 }}
                   style={{ minWidth: "100%" }}
                 >
-                  <Editor />
+                  <Editor content={settingData.mission} field="mission" />
                 </Form.Item>
                 <Form.Item>
-                  <Button className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]">
+                  <Button
+                    type="submit"
+                    className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]"
+                  >
                     {t("admin.setting.save")}
                   </Button>
                 </Form.Item>
@@ -89,10 +127,13 @@ function AdminSetting() {
                   wrapperCol={{ span: 24 }}
                   style={{ minWidth: "100%" }}
                 >
-                  <Editor />
+                  <Editor content={settingData.values} field="values" />
                 </Form.Item>
                 <Form.Item>
-                  <Button className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]">
+                  <Button
+                    type="submit"
+                    className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]"
+                  >
                     {t("admin.setting.save")}
                   </Button>
                 </Form.Item>
@@ -100,8 +141,8 @@ function AdminSetting() {
             )}
           </Form.List>
         </Form>
-      </div>
-    </>
+      )}
+    </div>
   );
 }
 

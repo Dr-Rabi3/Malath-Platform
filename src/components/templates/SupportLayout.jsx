@@ -116,7 +116,7 @@ function SupportLayout() {
                   ? changeLanguage("ar")
                   : changeLanguage("en");
               } else if (value.key === "1") {
-                navigate("/support/dashboard");
+                navigate("/support");
               }
             }}
             items={[

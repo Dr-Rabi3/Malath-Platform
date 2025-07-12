@@ -1,5 +1,69 @@
 {
   "setting": "الاعدادات",
+  "slider": "شريط التمرير",
+  "noData": "لا يوجد بيانات",
+  "please_login_first": "يجب تسجيل الدخول أولاً!",
+  "aboutUs": {
+    "whoWeAre": "من نحن",
+    "drivingSuccess": "نقود النجاح عبر جميع القطاعات",
+    "partnerText": "نتعاون مع الشركات الناشئة والمؤسسات الصغيرة والمتوسطة والمستثمرين لتبسيط العمليات، وتسريع النمو، وتحقيق قيمة حقيقية من خلال الخدمات المتكاملة والاستشارات.",
+    "ourMission": "مهمتنا"
+  },
+  "strategy": {
+    "title": "حيث تلتقي الاستراتيجية بالتنفيذ الذكي",
+    "generalBusinessConsulting": "الاستشارات العامة للأعمال",
+    "digitalMarketing": "التسويق الرقمي",
+    "realEstatePromotion": "ترويج العقارات",
+    "administrativeOutsourcing": "التعهيد الإداري",
+    "feasibilityStudies": "دراسات الجدوى",
+    "remoteExecutiveServices": "خدمات الإدارة التنفيذية عن بعد",
+    "empowerText": "تمكن ملاذ رواد الأعمال والشركات في السعودية ومصر من حلول مرنة وقابلة للتوسع للنمو بثقة."
+  },
+  "states": {
+    "projectsComplete": "مشروع مكتمل",
+    "yearsExperience": "سنوات خبرة",
+    "customers": "عميل"
+  },
+  "profile": {
+    "uploadPhoto": "تحميل صورة جديدة",
+    "dataTab": "البيانات",
+    "serviceTab": "الخدمات",
+    "loading": "جاري تحميل بيانات الملف الشخصي...",
+    "errorLoading": "حدث خطأ أثناء تحميل بيانات الملف الشخصي",
+    "userDataUnavailable": "بيانات المستخدم غير متوفرة. يرجى المحاولة مرة أخرى.",
+    "imageUploadErrorType": "يرجى اختيار ملف صورة",
+    "imageUploadErrorSize": "يجب أن يكون حجم الملف أقل من 5 ميجابايت",
+    "imageUploadSuccess": "تم تحميل صورة الملف الشخصي بنجاح!",
+    "imageUploadFail": "فشل في تحميل الصورة: {{error}}",
+    "profileUpdateSuccess": "تم تحديث الملف الشخصي بنجاح!",
+    "profileUpdateFail": "فشل في تحديث الملف الشخصي: {{error}}",
+    "updatingProfile": "جاري تحديث الملف الشخصي...",
+    "uploadingImage": "جاري تحميل الصورة..."
+  },
+  "userData": {
+    "name": "الاسم",
+    "email": "البريد الإلكتروني",
+    "mobile": "رقم الجوال",
+    "whatsapp": "رقم الواتساب",
+    "country": "الدولة",
+    "city": "المدينة",
+    "tooltipName": "ماذا تريد أن يناديك الآخرون؟",
+    "save": "حفظ",
+    "saving": "جاري الحفظ..."
+  },
+  "userServices": {
+    "loading": "جاري تحميل طلبات الخدمات...",
+    "errorLoading": "حدث خطأ أثناء تحميل طلبات الخدمات",
+    "noRequests": "لا توجد طلبات خدمات",
+    "noRequestsHint": "لم تقم بأي طلبات خدمات بعد.",
+    "serviceName": "اسم الخدمة",
+    "service": "الخدمة",
+    "status": "الحالة",
+    "pending": "قيد الانتظار",
+    "approved": "مقبول",
+    "rejected": "مرفوض",
+    "unknown": "غير معروف"
+  },
   "form": {
     "action": { "login": "تسجيل الدخول", "register": "انشاء حساب" },
     "labels": {
@@ -165,10 +229,109 @@
       "mission": "المهمة",
       "values": "القيم",
       "save": "حفظ"
+    },
+    "addService": {
+      "addServiceType": "إضافة نوع خدمة",
+      "addService": "إضافة خدمة",
+      "nameEn": "الاسم (الإنجليزية)",
+      "nameAr": "الاسم (العربية)",
+      "descriptionEn": "الوصف (الإنجليزية)",
+      "descriptionAr": "الوصف (العربية)",
+      "typeOfService": "نوع الخدمة",
+      "searchToSelect": "ابحث للاختيار",
+      "pleaseEnterNameEn": "يرجى إدخال الاسم بالإنجليزية",
+      "pleaseEnterNameAr": "يرجى إدخال الاسم بالعربية",
+      "pleaseEnterDescEn": "يرجى إدخال الوصف بالإنجليزية",
+      "pleaseEnterDescAr": "يرجى إدخال الوصف بالعربية",
+      "pleaseSelectType": "يرجى اختيار النوع",
+      "adding": "جاري الإضافة...",
+      "addServiceTypeButton": "إضافة نوع خدمة",
+      "addServiceButton": "إضافة خدمة"
+    },
+    "slider": {
+      "title": "إعدادات الشريط المتحرك",
+      "currentSlides": "الشرائح الحالية",
+      "noSlides": "لا توجد شرائح بعد.",
+      "addNewSlide": "إضافة شريحة جديدة",
+      "slideTitle": "العنوان",
+      "slideImage": "الصورة",
+      "slideDescription": "الوصف",
+      "enterSlideTitle": "أدخل عنوان الشريحة",
+      "upload": "رفع",
+      "addSlide": "إضافة شريحة",
+      "deleteSlide": "حذف",
+      "deleteConfirmTitle": "هل أنت متأكد من حذف هذه الشريحة؟",
+      "deleteConfirmYes": "نعم",
+      "deleteConfirmNo": "لا",
+      "slideNumber": "شريحة رقم {{number}}",
+      "imageSizeError": "يجب أن تكون الصورة {{width}}x{{height}} بكسل بالضبط.",
+      "invalidImageError": "ملف صورة غير صالح.",
+      "uploadImageError": "يرجى رفع صورة.",
+      "enterTitleError": "يرجى إدخال عنوان",
+      "uploadImageRequired": "يرجى رفع صورة",
+      "enterDescriptionError": "يرجى إدخال وصف",
+      "fetchSlidersError": "فشل في جلب الشرائح المتحركة",
+      "createSliderSuccess": "تم إنشاء الشريحة المتحركة!",
+      "createSliderError": "فشل في إنشاء الشريحة المتحركة",
+      "deleteSliderSuccess": "تم حذف الشريحة المتحركة!",
+      "deleteSliderError": "فشل في حذف الشريحة المتحركة"
+    },
+    "userTable": {
+      "title": "المستخدمون",
+      "addNewUser": "إضافة مستخدم جديد",
+      "loading": "جاري التحميل...",
+      "error": "خطأ: {{error}}",
+      "columns": {
+        "userName": "اسم المستخدم",
+        "rule": "الدور",
+        "number": "الرقم",
+        "email": "البريد الإلكتروني"
+      },
+      "mobile": {
+        "role": "الدور:",
+        "phone": "الهاتف:"
+      },
+      "actions": {
+        "editUser": "تعديل المستخدم",
+        "deleteUser": "حذف المستخدم"
+      },
+      "deleteConfirm": "هل أنت متأكد من حذف هذا المستخدم؟",
+      "fetchUserError": "فشل في جلب بيانات المستخدم",
+      "saveUserError": "فشل في حفظ المستخدم"
+    },
+    "addUserModal": {
+      "editUser": "تعديل المستخدم",
+      "addUser": "إضافة مستخدم",
+      "save": "حفظ",
+      "add": "إضافة",
+      "cancel": "إلغاء",
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "role": "الدور",
+      "enterName": "أدخل الاسم الكامل",
+      "enterEmail": "example@gmail.com",
+      "enterPassword": "أدخل كلمة المرور",
+      "confirmPasswordPlaceholder": "تأكيد كلمة المرور",
+      "selectRole": "اختر دور المستخدم",
+      "noRoles": "لا توجد أدوار",
+      "validation": {
+        "nameRequired": "يرجى إدخال الاسم",
+        "emailRequired": "يرجى إدخال البريد الإلكتروني",
+        "emailInvalid": "يرجى إدخال بريد إلكتروني صالح",
+        "passwordRequired": "يرجى إدخال كلمة المرور",
+        "passwordMinLength": "يجب أن تكون كلمة المرور 6 أحرف على الأقل",
+        "confirmPasswordRequired": "يرجى تأكيد كلمة المرور",
+        "passwordsMismatch": "كلمات المرور غير متطابقة",
+        "roleRequired": "يرجى اختيار الدور"
+      }
     }
   },
   "common": {
-    "back": "رجوع"
+    "back": "رجوع",
+    "loading": "جاري التحميل...",
+    "error": "خطأ: {{error}}"
   },
   "service": {
     "details": {
@@ -189,5 +352,90 @@
         "review": "وضع للمراجعة"
       }
     }
+  },
+  "supportDashboard": {
+    "loading": "جاري تحميل طلبات الخدمات...",
+    "errorLoading": "حدث خطأ أثناء تحميل طلبات الخدمات",
+    "noRequests": "لا توجد طلبات خدمات",
+    "noRequestsHint": "لا توجد طلبات خدمات للعرض.",
+    "search": "بحث",
+    "noServiceTypes": "لا توجد أنواع خدمات متاحة",
+    "noServicesForType": "لا توجد خدمات متاحة لهذا النوع",
+    "selectServiceTypeFirst": "يرجى اختيار نوع الخدمة أولاً",
+    "noTitle": "بدون عنوان",
+    "noDescription": "بدون وصف",
+    "unknownDate": "تاريخ غير معروف",
+    "status": {
+      "pending": "قيد الانتظار",
+      "contact": "تم التواصل",
+      "resolve": "تم الحل",
+      "rejected": "مرفوض",
+      "unknown": "غير معروف"
+    }
+  },
+  "card": {
+    "phone": "الهاتف",
+    "whatsapp": "واتساب",
+    "email": "البريد الإلكتروني"
+  },
+  "showService": {
+    "loading": "جاري تحميل طلب الخدمة...",
+    "errorLoading": "حدث خطأ أثناء تحميل طلب الخدمة",
+    "goBack": "رجوع",
+    "notFound": "طلب الخدمة غير موجود",
+    "noDescription": "لا يوجد وصف متاح",
+    "name": "الاسم",
+    "requestStatus": "حالة الطلب",
+    "phone": "الهاتف",
+    "email": "البريد الإلكتروني",
+    "link": "الرابط",
+    "phoneNumber": "رقم الهاتف",
+    "pending": "قيد الانتظار",
+    "contact": "تم التواصل",
+    "resolved": "تم الحل",
+    "rejected": "مرفوض"
+  },
+  "topServices": {
+    "title": "أفضل الخدمات",
+    "description": "أكثر الخدمات طلبًا هذا الشهر",
+    "total": "الإجمالي: {{count}} خدمة",
+    "lastUpdatedLabel": "آخر تحديث:",
+    "lastUpdatedValue": "الآن"
+  },
+  "topUsers": {
+    "title": "أفضل المستخدمين",
+    "description": "أكثر خمسة مستخدمين طلبًا",
+    "total": "الإجمالي: {{count}} مستخدم",
+    "lastUpdatedLabel": "آخر تحديث:",
+    "lastUpdatedValue": "الآن"
+  },
+  "adminDashboard": {
+    "category": "الفئة",
+    "serviceName": "اسم الخدمة",
+    "description": "الوصف",
+    "allServices": "جميع الخدمات",
+    "servicesFound": "{{count}} خدمة موجودة",
+    "showing": "عرض {{count}} من {{count}} خدمة",
+    "pagination": "{{from}}-{{to}} من أصل {{total}} خدمة",
+    "errorLoading": "حدث خطأ أثناء تحميل الخدمات. يرجى المحاولة مرة أخرى."
+  },
+  "adminBlog": {
+    "addNewBlog": "إضافة مدونة جديدة",
+    "addBlog": "إضافة مدونة",
+    "createSuccess": "تم إنشاء المدونة!",
+    "createError": "فشل في إنشاء المدونة: {{error}}",
+    "deleteSuccess": "تم حذف المدونة!",
+    "deleteError": "فشل في حذف المدونة: {{error}}",
+    "submitError": "فشل في الإرسال: {{error}}"
+  },
+  "blogs": {
+    "deleteTitle": "حذف المدونة",
+    "deleteDescription": "هل أنت متأكد من حذف هذه المدونة؟",
+    "yes": "نعم",
+    "no": "لا",
+    "deleteBlog": "حذف المدونة",
+    "readTime": "دقيقتان للقراءة",
+    "noBlogs": "لا توجد مدونات",
+    "pagination": "{{from}}-{{to}} من أصل {{total}} مدونة"
   }
 }

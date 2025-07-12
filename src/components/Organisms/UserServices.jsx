@@ -1,9 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { getUserServiceRequests, getAllServices } from "../../api/http";
 import { useAuth } from "../../store/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function UserServices() {
   const { user } = useAuth();
+  const { t } = useTranslation();
 
   // Fetch user service requests using React Query
   const {
@@ -54,13 +56,13 @@ function UserServices() {
   const getStatusText = (status) => {
     switch (status) {
       case 0:
-        return "Pending";
+        return t("userServices.pending");
       case 1:
-        return "Approved";
+        return t("userServices.approved");
       case 2:
-        return "Rejected";
+        return t("userServices.rejected");
       default:
-        return "Unknown";
+        return t("userServices.unknown");
     }
   };
 
@@ -69,7 +71,7 @@ function UserServices() {
       <div className="flex items-center justify-center min-h-[200px]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto mb-2"></div>
-          <p className="text-gray-600 text-sm">Loading service requests...</p>
+          <p className="text-gray-600 text-sm">{t("userServices.loading")}</p>
         </div>
       </div>
     );
@@ -79,7 +81,7 @@ function UserServices() {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
         <div className="text-center">
-          <p className="text-red-600 mb-2">Error loading service requests</p>
+          <p className="text-red-600 mb-2">{t("userServices.errorLoading")}</p>
           <p className="text-gray-600 text-sm">{error.message}</p>
         </div>
       </div>
@@ -90,9 +92,9 @@ function UserServices() {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
         <div className="text-center">
-          <p className="text-gray-600">No service requests found</p>
+          <p className="text-gray-600">{t("userServices.noRequests")}</p>
           <p className="text-gray-500 text-sm">
-            You haven't made any service requests yet.
+            {t("userServices.noRequestsHint")}
           </p>
         </div>
       </div>
@@ -105,10 +107,14 @@ function UserServices() {
         <thead>
           <tr className="border-b">
             <th className="py-2 px-4 font-medium text-gray-500">
-              Service Name
+              {t("userServices.serviceName")}
             </th>
-            <th className="py-2 px-4 font-medium text-gray-500">Service</th>
-            <th className="py-2 px-4 font-medium text-gray-500">Status</th>
+            <th className="py-2 px-4 font-medium text-gray-500">
+              {t("userServices.service")}
+            </th>
+            <th className="py-2 px-4 font-medium text-gray-500">
+              {t("userServices.status")}
+            </th>
           </tr>
         </thead>
         <tbody>

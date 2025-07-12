@@ -9,6 +9,7 @@ import UserServices from "../Organisms/UserServices";
 import { Avatar } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/AuthContext";
+import { useTranslation } from "react-i18next";
 
 function Profile() {
   const { user } = useAuth();
@@ -20,7 +21,8 @@ function Profile() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [messageApi, contextHolder] = message.useMessage();
-
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language;
   // Fetch user data using React Query
   const {
     data: userData,
@@ -63,14 +65,14 @@ function Profile() {
   const uploadMutation = useMutation({
     mutationFn: (file) => uploadFile(user?.token, file, "image"),
     onSuccess: (uploadedPath) => {
-      messageApi.success("Profile image uploaded successfully!");
+      messageApi.success(t("profile.imageUploadSuccess"));
       // Update user data with new profile image path
       queryClient.invalidateQueries({ queryKey: ["user", user?.userId] });
       setSelectedFile(null);
       setPreviewUrl(null);
     },
     onError: (error) => {
-      messageApi.error(`Failed to upload image: ${error.message}`);
+      messageApi.error(t("profile.imageUploadFail", { error: error.message }));
     },
   });
 
@@ -78,11 +80,13 @@ function Profile() {
   const updateUserMutation = useMutation({
     mutationFn: (userData) => updateUser(userData),
     onSuccess: () => {
-      messageApi.success("Profile updated successfully!");
+      messageApi.success(t("profile.profileUpdateSuccess"));
       queryClient.invalidateQueries({ queryKey: ["user", user?.userId] });
     },
     onError: (error) => {
-      messageApi.error(`Failed to update profile: ${error.message}`);
+      messageApi.error(
+        t("profile.profileUpdateFail", { error: error.message })
+      );
     },
   });
 
@@ -106,13 +110,13 @@ function Profile() {
     if (file) {
       // Validate file type
       if (!file.type.startsWith("image/")) {
-        messageApi.error("Please select an image file");
+        messageApi.error(t("profile.imageUploadErrorType"));
         return;
       }
 
       // Validate file size (max 5MB)
       if (file.size > 5 * 1024 * 1024) {
-        messageApi.error("File size must be less than 5MB");
+        messageApi.error(t("profile.imageUploadErrorSize"));
         return;
       }
 
@@ -135,7 +139,7 @@ function Profile() {
   // Handle form submission from UserData component
   const handleFormSubmit = async (formValues) => {
     if (!userData) {
-      messageApi.error("User data not available. Please try again.");
+      messageApi.error(t("profile.userDataUnavailable"));
       return;
     }
 
@@ -151,7 +155,7 @@ function Profile() {
 
       // If there's a new image selected, upload it first
       if (selectedFile) {
-        messageApi.loading("Uploading image...");
+        messageApi.loading(t("profile.uploadingImage"));
         const uploadedPath = await uploadFile(
           user?.token,
           selectedFile,
@@ -217,7 +221,7 @@ function Profile() {
       console.log("Update data:", updateData);
       console.log("Profile picture type:", typeof updateData.profilePicture);
 
-      messageApi.loading("Updating profile...");
+      messageApi.loading(t("profile.updatingProfile"));
       await updateUser(user?.token, updateData);
       messageApi.success("Profile updated successfully!");
 
@@ -245,7 +249,7 @@ function Profile() {
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
             <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-800 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading profile data...</p>
+            <p className="text-gray-600">{t("profile.loading")}</p>
           </div>
         </div>
       </div>
@@ -257,7 +261,7 @@ function Profile() {
       <div className="max-w-4xl mx-auto mt-10 p-6">
         <div className="flex items-center justify-center min-h-[400px]">
           <div className="text-center">
-            <p className="text-red-600 mb-4">Error loading profile data</p>
+            <p className="text-red-600 mb-4">{t("profile.errorLoading")}</p>
             <p className="text-gray-600 text-sm">{userError.message}</p>
           </div>
         </div>
@@ -270,7 +274,7 @@ function Profile() {
       {contextHolder}
       <div className="max-w-4xl mx-auto mt-10 p-6">
         {/* Profile Section */}
-        <div className="flex items-center space-x-2 mb-8">
+        <div className="flex items-center space-x-2 mb-8 gap-2">
           <Avatar
             size={60}
             src={getProfileImageSrc()}
@@ -288,7 +292,7 @@ function Profile() {
               htmlFor="image"
               className="border border-neutral-950 text-[14px] text-neutral-950 px-2 py-1 rounded hover:bg-neutral-700/10 cursor-pointer"
             >
-              Upload new photo
+              {t("profile.uploadPhoto")}
             </label>
           </div>
         </div>
@@ -302,7 +306,7 @@ function Profile() {
             }`}
             onClick={() => setActiveTab("data")}
           >
-            Data
+            {t("profile.dataTab")}
           </button>
           <button
             className={`w-1/2 text-center pb-2 transition-colors duration-300 ${
@@ -312,7 +316,7 @@ function Profile() {
             }`}
             onClick={() => setActiveTab("service")}
           >
-            Service
+            {t("profile.serviceTab")}
           </button>
           {/* Animated underline */}
           <span
@@ -321,7 +325,9 @@ function Profile() {
               width: "50%",
               background: activeTab === "data" ? "#1e40af" : "#ca8a04", // blue-800 or yellow-700
               transform:
-                activeTab === "data" ? "translateX(0%)" : "translateX(100%)",
+                activeTab === "data"
+                  ? `translateX(${lang === "ar" ? "100%" : "0%"})`
+                  : `translateX(${lang === "ar" ? "0%" : "100%"})`,
             }}
           />
         </div>

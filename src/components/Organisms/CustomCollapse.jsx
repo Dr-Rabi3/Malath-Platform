@@ -73,7 +73,7 @@ function CustomCollapse({ services }) {
         expandIcon={({ isActive }) => (
           <CaretRightOutlined rotate={isActive ? 90 : 0} />
         )}
-        style={{ background: token.colorBgContainer }}
+        style={{ background: "transparent" }}
         expandIconPosition="end"
         items={items}
       />

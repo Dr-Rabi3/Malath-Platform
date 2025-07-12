@@ -42,8 +42,8 @@ import "@/components/tiptap-node/image-node/image-node.scss";
 import "@/components/tiptap-node/list-node/list-node.scss";
 import { useTranslation } from "react-i18next";
 
-const limit = 5000;
- function SimpleEditor({ value, onChange }) {
+// const limit = 5000;
+function SimpleEditor({ value, onChange, readOnly, limited = 5000 }) {
   const { t } = useTranslation();
 
   const editor = useEditor({
@@ -80,7 +80,7 @@ const limit = 5000;
       Paragraph,
       Text,
       CharacterCount.configure({
-        limit,
+        limited,
       }),
       Mention.configure({
         HTMLAttributes: {
@@ -106,7 +106,7 @@ const limit = 5000;
     }, 100);
   };
   const percentage = editor
-    ? Math.round((100 / limit) * editor.storage.characterCount.characters())
+    ? Math.round((100 / limited) * editor.storage.characterCount.characters())
     : 0;
   return (
     <EditorContext.Provider value={{ editor }}>
@@ -116,55 +116,57 @@ const limit = 5000;
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="flex items-center justify-center gap-3 border-b-[1px] border-[#E1E1E2] px-2 py-1 flex-wrap">
-          <div className="tiptap-button-group" data-orientation="horizontal">
-            <UndoRedoButton action="undo" />
-            <UndoRedoButton action="redo" />
-          </div>
-          <Separator />
-          <div className="tiptap-button-group" data-orientation="horizontal">
-            <HeadingDropdownMenu
-              levels={[1, 2, 3, 4, 5, 6]}
-              onOpenChange={(value) => console.log(value)}
-            />
-          </div>
-          <Separator />
-          <div className="tiptap-button-group" data-orientation="horizontal">
-            <TextAlignButton align="left" />
-            <TextAlignButton align="center" />
-            <TextAlignButton align="right" />
-            <TextAlignButton align="justify" />
-          </div>
-          <Separator />
-          <div className="tiptap-button-group" data-orientation="horizontal">
-            <ListButton type="bulletList" />
-            <ListButton type="orderedList" />
-            <ListButton type="taskList" />
-          </div>
-          <Separator />
-          <div className="tiptap-button-group" data-orientation="horizontal">
-            <MarkButton type="bold" />
-            <MarkButton type="italic" />
-            <MarkButton type="strike" />
-            <MarkButton type="underline" />
-          </div>
-          <Separator />
-          <div className="tiptap-button-group" data-orientation="horizontal">
-            <LinkPopover />
-          </div>
-          {/* <div className="tiptap-button-group" data-orientation="horizontal">
+        {!readOnly && (
+          <div className="flex items-center justify-center gap-3 border-b-[1px] border-[#E1E1E2] px-2 py-1 flex-wrap">
+            <div className="tiptap-button-group" data-orientation="horizontal">
+              <UndoRedoButton action="undo" />
+              <UndoRedoButton action="redo" />
+            </div>
+            <Separator />
+            <div className="tiptap-button-group" data-orientation="horizontal">
+              <HeadingDropdownMenu
+                levels={[1, 2, 3, 4, 5, 6]}
+                onOpenChange={(value) => console.log(value)}
+              />
+            </div>
+            <Separator />
+            <div className="tiptap-button-group" data-orientation="horizontal">
+              <TextAlignButton align="left" />
+              <TextAlignButton align="center" />
+              <TextAlignButton align="right" />
+              <TextAlignButton align="justify" />
+            </div>
+            <Separator />
+            <div className="tiptap-button-group" data-orientation="horizontal">
+              <ListButton type="bulletList" />
+              <ListButton type="orderedList" />
+              <ListButton type="taskList" />
+            </div>
+            <Separator />
+            <div className="tiptap-button-group" data-orientation="horizontal">
+              <MarkButton type="bold" />
+              <MarkButton type="italic" />
+              <MarkButton type="strike" />
+              <MarkButton type="underline" />
+            </div>
+            <Separator />
+            <div className="tiptap-button-group" data-orientation="horizontal">
+              <LinkPopover />
+            </div>
+            {/* <div className="tiptap-button-group" data-orientation="horizontal">
             <ImageUploadButton text="Add" />
           </div> */}
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            type="button"
-            onClick={insertHorizontalRule}
-            className="p-1"
-          >
-            ─
-          </motion.button>
-        </div>
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              type="button"
+              onClick={insertHorizontalRule}
+              className="p-1"
+            >
+              ─
+            </motion.button>
+          </div>
+        )}
 
         {editor && (
           <EditorContent
@@ -173,10 +175,10 @@ const limit = 5000;
             placeholder="sdfs"
           />
         )}
-        {editor && (
+        {!readOnly && editor && (
           <div
             className={`character-count flex gap-2 justify-end m-2  ${
-              editor.storage.characterCount.characters() === limit
+              editor.storage.characterCount.characters() === limited
                 ? "character-count--warning"
                 : ""
             }`}
@@ -195,7 +197,7 @@ const limit = 5000;
               />
               <circle r="6" cx="10" cy="10" fill="white" />
             </svg>
-            {editor.storage.characterCount.characters()} / {limit}{" "}
+            {editor.storage.characterCount.characters()} / {limited}{" "}
             {t("addService.characters")}
           </div>
         )}

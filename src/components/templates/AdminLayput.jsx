@@ -26,6 +26,7 @@ import { ElementPlus } from "../../assets/icons/ElementPlus";
 import { Setting } from "../../assets/icons/Setting";
 import { useAuth } from "../../store/AuthContext";
 import { AddUser } from "../../assets/icons/AddUser.jsx";
+import { SliderIcon } from "../../assets/icons/SliderIcon.jsx";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -51,11 +52,12 @@ function AdminLayout() {
     const page = location.pathname.split("/").filter(Boolean).pop();
     const { from } = location.state || {};
     console.log(from);
-    if (page === "service" || from === "service") setActiveKey("2");
+    if (page === "admin-service" || from === "admin-service") setActiveKey("2");
     else if (page === "blog") setActiveKey("3");
     else if (page === "add-service") setActiveKey("4");
     else if (page === "add-user") setActiveKey("5");
     else if (page === "setting") setActiveKey("6");
+    else if (page === "slider") setActiveKey("7");
     else setActiveKey("1");
   }, [location, location.pathname, location.state]);
 
@@ -88,7 +90,7 @@ function AdminLayout() {
       key: "2",
       icon: <Service className="w-5 p-0 text-[#fff]/50" />,
       label: "Services",
-      onClick: () => navigate("/admin/service"),
+      onClick: () => navigate("/admin/admin-service"),
     },
     {
       key: "3",
@@ -116,6 +118,12 @@ function AdminLayout() {
     },
     {
       key: "7",
+      icon: <SliderIcon color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
+      label: t("slider"),
+      onClick: () => navigate("/admin/slider"),
+    },
+    {
+      key: "8",
       icon: <Earth color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
       label: `Translate to ${
         localStorage.getItem("lang") === "en" || !localStorage.getItem("lang")
@@ -128,7 +136,7 @@ function AdminLayout() {
           : changeLanguage("ar"),
     },
     {
-      key: "8",
+      key: "9",
       icon: <img src={logout} alt="logout icon" className="w-5" />,
       label: t("sidebar.logout"),
       onClick: () => {

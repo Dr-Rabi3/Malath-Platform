@@ -5,8 +5,10 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../store/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { getAllServices } from "../../api/http";
+import { message } from "antd";
 
 function Service() {
+  const [messageApi, contextHelper] = message.useMessage();
   const navigate = useNavigate();
   const { t } = useTranslation();
   const { user } = useAuth();
@@ -18,7 +20,7 @@ function Service() {
   } = useQuery({
     queryKey: ["services"],
     queryFn: () => getAllServices(user?.token),
-    enabled: !!user?.token,
+    // enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
     staleTime: Infinity,
@@ -53,19 +55,32 @@ function Service() {
     return acc;
   }, {});
 
+  // console.log(services);
 
   return (
-    <div className="space-y-[20px]">
-      <div className="flex justify-end">
-        <Button
-          className="bg-neutral-1000 hover:bg-neutral-950 font-main font-medium"
-          onClick={() => navigate("../add-service")}
-        >
-          {t("service_request")}
-        </Button>
+    <>
+      {contextHelper}
+      <div className="space-y-[20px]">
+        <div className="flex justify-end">
+          <Button
+            className="bg-neutral-1000 hover:bg-neutral-950 font-main font-medium"
+            onClick={() => {
+              if (!user?.token) {
+                messageApi.open({
+                  type: "warning",
+                  content: t("please_login_first") || "You must login first.",
+                });
+                return;
+              }
+              navigate("../add-service");
+            }}
+          >
+            {t("service_request")}
+          </Button>
+        </div>
+        <CustomCollapse services={Object.values(groupedServices || {})} />
       </div>
-      <CustomCollapse services={Object.values(groupedServices || {})} />
-    </div>
+    </>
   );
 }
 export default Service;

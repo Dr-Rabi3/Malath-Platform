@@ -3,6 +3,7 @@ import Button from "../atoms/Button";
 import { Link } from "react-router-dom";
 import CustomPhoneInput from "../atoms/CustomPhoneInput";
 import { PhoneNumberUtil } from "google-libphonenumber";
+import { useTranslation } from "react-i18next";
 
 const phoneUtil = PhoneNumberUtil.getInstance();
 
@@ -26,6 +27,7 @@ const validateMessages = {
 };
 
 function UserData({ userData, onSubmit, isSubmitting = false }) {
+  const { t } = useTranslation();
   const onFinish = (values) => {
     console.log("Success:", values);
     if (onSubmit) {
@@ -35,7 +37,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  console.log(userData);
+  // console.log(userData);
   return (
     <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full px-2">
       <Form
@@ -63,16 +65,16 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
           <Col span={12}>
             <Form.Item
               name="name"
-              label="Name"
+              label={t("userData.name")}
               layout="vertical"
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
               style={{ minWidth: "100%" }}
-              tooltip="What do you want others to call you?"
+              tooltip={t("userData.tooltipName")}
               rules={[
                 {
                   required: true,
-                  message: "Please input your name!",
+                  message: t("form.validation.nameRequired"),
                   whitespace: true,
                 },
               ]}
@@ -82,7 +84,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
           </Col>
           <Col span={12}>
             <Form.Item
-              label="Email"
+              label={t("userData.email")}
               layout="vertical"
               labelCol={{ span: 24 }}
               wrapperCol={{ span: 24 }}
@@ -92,6 +94,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
                 {
                   required: true,
                   type: "email",
+                  message: t("form.validation.emailInvalid"),
                 },
               ]}
               className="w-full "
@@ -103,7 +106,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
         <Row className="w-full" gutter={16}>
           <Col span={12}>
             <Form.Item
-              label="Mobile number"
+              label={t("userData.mobile")}
               layout="vertical"
               className="w-full"
               labelCol={{ span: 24 }}
@@ -112,7 +115,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
               name="phone"
               validateTrigger={["onBlur", "onSubmit"]}
               rules={[
-                { required: true, message: "Please input your phone number!" },
+                { required: true, message: t("form.validation.phoneRequired") },
                 {
                   validator: (_, value) => {
                     if (!value) return Promise.resolve();
@@ -121,7 +124,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
                     // Basic validation - you can make this more sophisticated
                     if (!isValid) {
                       return Promise.reject(
-                        new Error("Please enter a valid phone number")
+                        new Error(t("form.validation.phoneInvalid"))
                       );
                     }
                     return Promise.resolve();
@@ -134,27 +137,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
           </Col>
           <Col span={12}>
             <Form.Item
-              name="country"
-              label="Country"
-              layout="vertical"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              style={{ minWidth: "100%" }}
-              // tooltip="What do you want others to call you?"
-              rules={[
-                {
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row className="w-full" gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="WhatsApp number"
+              label={t("userData.whatsapp")}
               layout="vertical"
               className="w-full"
               labelCol={{ span: 24 }}
@@ -183,24 +166,6 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
               <CustomPhoneInput />
             </Form.Item>
           </Col>
-          <Col span={12}>
-            <Form.Item
-              name="city"
-              label="City"
-              layout="vertical"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              style={{ minWidth: "100%" }}
-              // tooltip="What do you want others to call you?"
-              rules={[
-                {
-                  whitespace: true,
-                },
-              ]}
-            >
-              <Input />
-            </Form.Item>
-          </Col>
         </Row>
 
         <Form.Item
@@ -213,7 +178,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
             className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-[30px] py-1 sm:py-1.5"
             disabled={isSubmitting || !userData}
           >
-            {isSubmitting ? "Saving..." : "Save"}
+            {isSubmitting ? t("userData.saving") : t("userData.save")}
           </Button>
         </Form.Item>
       </Form>

@@ -23,6 +23,10 @@ import AdminSetting from "./components/pages/AdminSetting";
 import ShowService from "./components/pages/ShowService";
 import AddUser from "./components/pages/AddUser";
 import NotFound from "./components/pages/NotFound";
+import AdminAddService from "./components/pages/AdminAddService";
+import AdminDashboard from "./components/pages/AdminDashboard";
+import Slider from "./components/pages/Slider";
+import { homeLoader } from "./components/Organisms/Home";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
@@ -33,6 +37,7 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
+        loader: homeLoader, // <-- add this
       },
       {
         path: "about",
@@ -80,11 +85,11 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ComingSoon />,
+        element: <AdminDashboard />,
       },
       {
-        path: "service",
-        element: <AdminService />,
+        path: "admin-service",
+        element: <SupportDashboard />,
       },
       {
         path: "service/:serviceId",
@@ -96,7 +101,7 @@ const router = createBrowserRouter([
       },
       {
         path: "add-service",
-        element: <ComingSoon />,
+        element: <AdminAddService />,
       },
       {
         path: "add-user",
@@ -105,6 +110,10 @@ const router = createBrowserRouter([
       {
         path: "setting",
         element: <AdminSetting />,
+      },
+      {
+        path: "slider",
+        element: <Slider />,
       },
     ],
   },

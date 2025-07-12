@@ -10,6 +10,7 @@ import { getAllUsers } from "../../api/http";
 import { deleteUser } from "../../api/admin";
 import { updateUser, addUserWithRole, getUserForUpdate } from "../../api/http";
 import { Roles } from "../../utils/roles";
+import { useTranslation } from "react-i18next";
 
 const UserTable = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -17,6 +18,7 @@ const UserTable = () => {
   const [editLoading, setEditLoading] = useState(false);
   const { user } = useAuth();
   const token = user?.token;
+  const { t } = useTranslation();
 
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
@@ -63,12 +65,12 @@ const UserTable = () => {
       setEditingUser(null);
     },
     onError: (error) => {
-      alert(error.message || "Failed to save user");
+      alert(error.message || t("admin.userTable.saveUserError"));
     },
   });
 
   const handleDelete = (userId) => {
-    if (window.confirm("Are you sure you want to delete this user?")) {
+    if (window.confirm(t("admin.userTable.deleteConfirm"))) {
       deleteMutation.mutate({ token, userId });
     }
   };
@@ -80,7 +82,7 @@ const UserTable = () => {
       setEditingUser(userData);
       setIsModalVisible(true);
     } catch (err) {
-      alert(err.message || "Failed to fetch user data");
+      alert(err.message || t("admin.userTable.fetchUserError"));
     } finally {
       setEditLoading(false);
     }
@@ -108,7 +110,7 @@ const UserTable = () => {
 
   const columns = [
     {
-      title: "User Name",
+      title: t("admin.userTable.columns.userName"),
       dataIndex: "fullName",
       responsive: ["md"],
       render: (text, record) => (
@@ -121,7 +123,7 @@ const UserTable = () => {
       ),
     },
     {
-      title: "Rule",
+      title: t("admin.userTable.columns.rule"),
       dataIndex: "role",
       responsive: ["lg"],
       render: (text) => (
@@ -131,12 +133,12 @@ const UserTable = () => {
       ),
     },
     {
-      title: "Number",
+      title: t("admin.userTable.columns.number"),
       dataIndex: "mobileNumber",
       responsive: ["xl"],
     },
     {
-      title: "Email",
+      title: t("admin.userTable.columns.email"),
       dataIndex: "email",
       responsive: ["md"],
       render: (text) => <span className="text-gray-600 break-all">{text}</span>,
@@ -156,7 +158,9 @@ const UserTable = () => {
                     onClick={() => handleEdit(record)}
                   >
                     <EditUser />
-                    <span className="text-sm">Edit user</span>
+                    <span className="text-sm">
+                      {t("admin.userTable.actions.editUser")}
+                    </span>
                   </button>
                 ),
               },
@@ -168,7 +172,9 @@ const UserTable = () => {
                     onClick={() => handleDelete(record.id)}
                   >
                     <DeleteUser />
-                    <span className="text-sm">Delete user</span>
+                    <span className="text-sm">
+                      {t("admin.userTable.actions.deleteUser")}
+                    </span>
                   </button>
                 ),
               },
@@ -187,18 +193,21 @@ const UserTable = () => {
 
   const data = users || [];
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div>{t("admin.userTable.loading")}</div>;
+  if (isError)
+    return <div>{t("admin.userTable.error", { error: error.message })}</div>;
   // console.log(data);
   return (
     <div className="w-full">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-        <h2 className="text-xl font-bold text-gray-900">Users</h2>
+        <h2 className="text-xl font-bold text-gray-900">
+          {t("admin.userTable.title")}
+        </h2>
         <Button
           className="!bg-[#E6F3FF] !text-[#000] !text-[15px] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8] w-full sm:w-auto"
           onClick={() => setIsModalVisible(true)}
         >
-          Add New User
+          {t("admin.userTable.addNewUser")}
         </Button>
       </div>
 
@@ -225,7 +234,9 @@ const UserTable = () => {
                           onClick={() => handleEdit(item)}
                         >
                           <EditUser />
-                          <span className="text-sm">Edit user</span>
+                          <span className="text-sm">
+                            {t("admin.userTable.actions.editUser")}
+                          </span>
                         </button>
                       ),
                     },
@@ -237,7 +248,9 @@ const UserTable = () => {
                           onClick={() => handleDelete(item.id)}
                         >
                           <DeleteUser />
-                          <span className="text-sm">Delete user</span>
+                          <span className="text-sm">
+                            {t("admin.userTable.actions.deleteUser")}
+                          </span>
                         </button>
                       ),
                     },
@@ -253,13 +266,17 @@ const UserTable = () => {
             </div>
             <div className="grid grid-cols-2 gap-2 text-sm">
               <div>
-                <span className="text-gray-500">Role:</span>
+                <span className="text-gray-500">
+                  {t("admin.userTable.mobile.role")}
+                </span>
                 <span className="ml-1 capitalize px-2 py-1 bg-gray-100 rounded-full text-xs">
                   {item.role}
                 </span>
               </div>
               <div>
-                <span className="text-gray-500">Phone:</span>
+                <span className="text-gray-500">
+                  {t("admin.userTable.mobile.phone")}
+                </span>
                 <span className="ml-1">{item.mobileNumber}</span>
               </div>
             </div>

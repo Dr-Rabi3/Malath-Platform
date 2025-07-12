@@ -10,16 +10,17 @@ const fieldVariants = {
   visible: { opacity: 1, x: 0, transition: { duration: 0.3 } },
 };
 
-function Editor({content = ""}) {
+function Editor({ content = "", readOnly, field, limited }) {
   return (
     <motion.div className="space-y-2 w-full h-full" variants={fieldVariants}>
       <Form.Item noStyle shouldUpdate>
         {({ getFieldValue, setFieldsValue }) => (
           <SimpleEditor
-            value={getFieldValue("description") || content}
+            limited={limited}
+            readOnly={readOnly}
+            value={getFieldValue(field || "description") || content}
             onChange={(value) => {
-              // console.log(value);
-              setFieldsValue({ description: value });
+              setFieldsValue({ [field || "description"]: value });
             }}
           />
         )}

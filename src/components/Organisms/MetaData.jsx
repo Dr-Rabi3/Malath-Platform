@@ -1,12 +1,32 @@
-import { Col, Row } from "antd";
+import { Col, message, Row } from "antd";
 import WhoAre from "../Molecules/WhoAre";
 import About from "../Molecules/About";
 import Pros from "../Molecules/Pros";
 import { useTranslation } from "react-i18next";
+import { useEffect, useState } from "react";
+import { getEntitySettings } from "../../api/settings";
 
 function MetaData({ ...props }) {
   const { t } = useTranslation();
+  const [loading, setLoading] = useState(true);
   const values = t("about.valuesList", { returnObjects: true });
+  const [settingData, setSettingData] = useState({
+    vision: "",
+    mission: "",
+    values: "",
+  });
+  useEffect(() => {
+    setLoading(true);
+    getEntitySettings()
+      .then((data) => {
+        setSettingData(data);
+      })
+      .catch(() => {
+        message.error("Failed to fetch settings");
+      })
+      .finally(() => setLoading(false));
+  }, []);
+  // console.log(settingData);
   return (
     <div {...props} className="space-y-[35px]">
       <WhoAre />
@@ -20,8 +40,11 @@ function MetaData({ ...props }) {
             <h1 className="text-neutral-950 font-semibold text-lg sm:text-xl md:text-[20px] font-main">
               {t("about.visionTitle")}
             </h1>
-            <h3 className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main">
-              {t("about.visionDescription")}
+            <h3
+              className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main"
+              dangerouslySetInnerHTML={{ __html: settingData?.vision }}
+            >
+              {/* {settingData?.vision} */}
             </h3>
           </div>
         </Col>
@@ -30,9 +53,10 @@ function MetaData({ ...props }) {
             <h1 className="text-neutral-950 font-semibold text-lg sm:text-xl md:text-[20px] font-main">
               {t("about.missionTitle")}
             </h1>
-            <h3 className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main">
-              {t("about.missionDescription")}
-            </h3>
+            <h3
+              className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main"
+              dangerouslySetInnerHTML={{ __html: settingData?.mission }}
+            ></h3>
           </div>
         </Col>
         <Col xs={24} md={8} className="flex justify-center">
@@ -40,34 +64,10 @@ function MetaData({ ...props }) {
             <h1 className="text-neutral-950 font-semibold text-lg sm:text-xl md:text-[20px] font-main">
               {t("about.valuesTitle")}
             </h1>
-            <h3 className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main">
-              {t("about.valuesDescription")}
-            </h3>
-            <ul className="flex gap-2 sm:gap-3 flex-wrap text-brand-700 mt-2">
-              {values.map((val, idx) => (
-                <li
-                  key={idx}
-                  className="bg-brand-700/20 p-1 rounded-md text-xs sm:text-[13px] font-main"
-                >
-                  {val}
-                </li>
-              ))}
-              {/* <li className="bg-brand-700/20 p-1 rounded-md text-xs sm:text-[13px] font-main">
-                Confidentiality
-              </li>
-              <li className="bg-brand-700/20 p-1 rounded-md text-xs sm:text-[13px] font-main">
-                Professionalism
-              </li>
-              <li className="bg-brand-700/20 p-1 rounded-md text-xs sm:text-[13px] font-main">
-                Trust
-              </li>
-              <li className="bg-brand-700/20 p-1 rounded-md text-xs sm:text-[13px] font-main">
-                Precision
-              </li>
-              <li className="bg-brand-700/20 p-1 rounded-md text-xs sm:text-[13px] font-main">
-                Innovation
-              </li> */}
-            </ul>
+            <h3
+              className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main"
+              dangerouslySetInnerHTML={{ __html: settingData?.values }}
+            ></h3>
           </div>
         </Col>
       </Row>

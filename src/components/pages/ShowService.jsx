@@ -4,15 +4,22 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import Button from "../atoms/Button";
 import photo from "../../assets/images/1560a64114a9372e.jpg";
 import { getDurationFromNow } from "../../utils/timeAge";
-import { Select, message } from "antd";
+import { Select, message, Avatar } from "antd";
 import Editor from "../Organisms/Editor";
 import {
   getUserServiceRequestById,
   getAllServices,
   getAllCategories,
   updateUserServiceRequestStatus,
+  resolveUserServiceRequest,
+  contactUserServiceRequest,
+  rejectUserServiceRequest,
 } from "../../api/http";
 import { useAuth } from "../../store/AuthContext";
+import { useEffect, useState } from "react";
+import { UserOutlined } from "@ant-design/icons";
+import { getFile } from "../../api/http";
+import axios from "axios";
 
 function ShowService() {
   const { serviceId } = useParams();
@@ -20,10 +27,9 @@ function ShowService() {
   const location = useLocation();
   const { t } = useTranslation();
   const { user } = useAuth();
-  const { service, isAdmin = false } = location.state || {};
+  const { service, isAdmin = false, userRequest } = location.state || {};
   const queryClient = useQueryClient();
-
-  // Use service from location state if available, otherwise fetch from API
+  const [avatarUrl, setAvatarUrl] = useState("");
   const {
     data: serviceRequest,
     isLoading: requestLoading,
@@ -38,6 +44,36 @@ function ShowService() {
 
   // Use service from state if available, otherwise use fetched data
   const currentService = service || serviceRequest;
+  const [localStatus, setLocalStatus] = useState(currentService?.status ?? 0);
+
+  useEffect(() => {
+    let isMounted = true;
+    const fetchAvatar = async () => {
+      if (user?.profilePicture) {
+        try {
+          const blob = await getFile(user.profilePicture);
+          const url = URL.createObjectURL(blob);
+          if (isMounted) setAvatarUrl(url);
+        } catch {
+          if (isMounted) setAvatarUrl(null);
+        }
+      } else {
+        setAvatarUrl(null);
+      }
+    };
+    fetchAvatar();
+    return () => {
+      isMounted = false;
+    };
+  }, [user?.profilePicture]);
+
+  useEffect(() => {
+    if (currentService?.status !== undefined) {
+      setLocalStatus(currentService.status);
+    }
+  }, [currentService?.status]);
+
+  // Use service from location state if available, otherwise fetch from API
 
   // Fetch services for service name lookup
   const { data: services } = useQuery({
@@ -75,6 +111,38 @@ function ShowService() {
       message.error(error.message || "Failed to update status");
     },
   });
+
+  // Mutation handlers for status changes
+  const resolveRequest = useMutation({
+    mutationFn: async (id) => {
+      await resolveUserServiceRequest(user?.token, id);
+    },
+  });
+  const contactRequest = useMutation({
+    mutationFn: async (id) => {
+      await contactUserServiceRequest(user?.token, id);
+    },
+  });
+  const rejectRequest = useMutation({
+    mutationFn: async (id) => {
+      await rejectUserServiceRequest(user?.token, id);
+    },
+  });
+
+  // Handler for status change
+  const handleStatusChange = async (value) => {
+    if (!currentService?.id) return;
+    if (value === 1) {
+      await contactRequest.mutateAsync(currentService.id);
+    } else if (value === 2) {
+      await resolveRequest.mutateAsync(currentService.id);
+    } else if (value === 3) {
+      await rejectRequest.mutateAsync(currentService.id);
+    }
+    // Refetch the service request and all requests after update
+    queryClient.invalidateQueries(["serviceRequest", currentService.id]);
+    queryClient.invalidateQueries(["allUserServiceRequests"]);
+  };
 
   // Helper functions
   const getServiceNameById = (serviceId) => {
@@ -117,23 +185,15 @@ function ShowService() {
 
   const getStatusNumber = (statusValue) => {
     switch (statusValue) {
-      case "review":
+      case "Pending":
         return 0;
-      case "accepted":
+      case "Accepted":
         return 1;
-      case "reject":
+      case "Reject":
         return 2;
       default:
         return 0;
     }
-  };
-
-  const handleStatusChange = (value) => {
-    const statusNumber = getStatusNumber(value);
-    updateStatusMutation.mutate({
-      requestId: serviceId,
-      status: statusNumber,
-    });
   };
 
   // Loading state (only show if we're fetching and don't have service in state)
@@ -142,7 +202,7 @@ function ShowService() {
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-800 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading service request...</p>
+          <p className="text-gray-600">{t("showService.loading")}</p>
         </div>
       </div>
     );
@@ -153,10 +213,10 @@ function ShowService() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-red-600 mb-4">Error loading service request</p>
+          <p className="text-red-600 mb-4">{t("showService.errorLoading")}</p>
           <p className="text-gray-600 text-sm">{requestError.message}</p>
           <Button onClick={() => navigate(-1)} className="mt-4">
-            Go Back
+            {t("showService.goBack")}
           </Button>
         </div>
       </div>
@@ -168,57 +228,31 @@ function ShowService() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
-          <p className="text-gray-600 mb-4">Service request not found</p>
+          <p className="text-gray-600 mb-4">{t("showService.notFound")}</p>
           <Button onClick={() => navigate(-1)} className="mt-4">
-            Go Back
+            {t("showService.goBack")}
           </Button>
         </div>
       </div>
     );
   }
 
+  console.log(userRequest);
   return (
     <div className="bg-accent-25 p-2 sm:p-4 pb-8 sm:pb-16 shadow-custom-gray rounded-lg sm:rounded-2xl">
       <div className="mx-auto">
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 border-b-2 border-[#6F6E6E]/30 pb-2 mb-4 sm:mb-6">
           <div className="flex items-center gap-2">
-            <img
-              src={photo}
-              alt=""
-              className="rounded-full w-8 h-8 sm:w-10 sm:h-10 object-cover"
+            <Avatar
+              size={40}
+              src={avatarUrl}
+              icon={<UserOutlined />}
+              className="bg-brand-600"
             />
             <h1 className="text-sm sm:text-base font-semibold">
-              {currentService.userName || "User"}
+              {userRequest?.fullName}
             </h1>
-          </div>
-          <div className="flex gap-2 items-center justify-center">
-            <span className="text-xs sm:text-sm font-regular text-[#727272]">
-              {getDurationFromNow(currentService.createdAt)}
-            </span>
-            <svg
-              width="18"
-              height="19"
-              className="sm:w-[21px] sm:h-[22px]"
-              viewBox="0 0 21 22"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M19.2693 11C19.2693 15.777 15.3924 19.6539 10.6154 19.6539C5.8384 19.6539 1.96143 15.777 1.96143 11C1.96143 6.22298 5.8384 2.34601 10.6154 2.34601C15.3924 2.34601 19.2693 6.22298 19.2693 11Z"
-                stroke="#727272"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-              <path
-                d="M13.8257 13.752L11.143 12.151C10.6757 11.8741 10.2949 11.2077 10.2949 10.6625V7.11438"
-                stroke="#727272"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
           </div>
         </div>
 
@@ -226,49 +260,62 @@ function ShowService() {
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-[30px]">
           <div className="flex-1 rounded-lg shadow-md h-full ">
             <Editor
-              content={currentService.description || "No description available"}
+              content={
+                currentService.description || t("showService.noDescription")
+              }
+              readOnly={true}
             />
           </div>
           <div className="space-y-4 sm:space-y-5 w-full lg:max-w-[300px]">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
-              <h1 className="text-sm sm:text-base font-medium">
-                Request Status:
-              </h1>
-              <Select
-                value={getStatusValue(currentService.status)}
-                style={{ width: "100%", maxWidth: "120px" }}
-                className="w-full sm:w-auto"
-                onChange={handleStatusChange}
-                disabled={!isAdmin || updateStatusMutation.isPending}
-                loading={updateStatusMutation.isPending}
-                options={[
-                  { value: "review", label: "Review" },
-                  { value: "accepted", label: "Accepted" },
-                  { value: "reject", label: "Rejected" },
-                ]}
-              />
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
-              <h1 className="text-sm sm:text-base font-medium">Type:</h1>
-              <p className="m-0 text-sm sm:text-base">
-                {getCategoryNameById(currentService.categoryId)}
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row sm:items-center gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
-              <h1 className="text-sm sm:text-base font-medium">Service:</h1>
-              <p className="m-0 text-sm sm:text-base">
-                {getServiceNameById(currentService.serviceID)}
-              </p>
-            </div>
             <div className="flex flex-col sm:flex-row sm:items-start gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
-              <h1 className="text-sm sm:text-base font-medium">Name:</h1>
+              <h1 className="text-sm sm:text-base font-medium">
+                {t("showService.name")}:
+              </h1>
               <p className="m-0 text-sm sm:text-base break-words">
                 {currentService.title || "No title"}
               </p>
             </div>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
+              <h1 className="text-sm sm:text-base font-medium">
+                {t("showService.requestStatus")}:
+              </h1>
+              <Select
+                value={localStatus}
+                onChange={(value) => {
+                  setLocalStatus(value);
+                  handleStatusChange(value);
+                }}
+                loading={updateStatusMutation.isPending}
+                disabled={isAdmin}
+                options={[
+                  { value: 0, label: t("showService.pending") },
+                  { value: 1, label: t("showService.contact") },
+                  { value: 2, label: t("showService.resolved") },
+                  { value: 3, label: t("showService.rejected") },
+                ]}
+              />
+            </div>
+
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
+              <h1 className="m-0 text-sm sm:text-base font-medium">
+                {t("showService.phone")}:
+              </h1>
+              <p className="m-0 text-sm sm:text-base">
+                {userRequest?.mobileNumber}
+              </p>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
+              <h1 className="m-0 text-sm sm:text-base font-medium">
+                {t("showService.email")}:
+              </h1>
+              <p className="m-0 text-sm sm:text-base">{userRequest?.email}</p>
+            </div>
+
             {currentService.link && (
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
-                <h1 className="text-sm sm:text-base font-medium">Link:</h1>
+                <h1 className="text-sm sm:text-base font-medium">
+                  {t("showService.link")}:
+                </h1>
                 <p className="m-0 text-sm sm:text-base break-all">
                   {currentService.link}
                 </p>
@@ -277,7 +324,7 @@ function ShowService() {
             {currentService.phoneNumber && (
               <div className="flex flex-col sm:flex-row sm:items-center gap-2 m-0 border-b-2 border-gray-300 h-fit pb-2">
                 <h1 className="text-sm sm:text-base font-medium">
-                  Phone number:
+                  {t("showService.phoneNumber")}:
                 </h1>
                 <p className="m-0 text-sm sm:text-base">
                   {currentService.phoneNumber}

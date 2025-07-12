@@ -6,8 +6,10 @@ import { useCallback, useState, useRef } from "react";
 import { useAuth } from "../../store/AuthContext";
 import { createBlog, getBlogs, deleteBlog } from "../../api/admin";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useTranslation } from "react-i18next";
 
 function AdminBlog() {
+  const { t } = useTranslation();
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const [form] = Form.useForm();
@@ -16,12 +18,17 @@ function AdminBlog() {
   const createBlogMutation = useMutation({
     mutationFn: (values) => createBlog(user?.token, values),
     onSuccess: () => {
-      message.success("Blog created!");
+      message.success(t("adminBlog.createSuccess", "Blog created!"));
       form.resetFields();
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
     },
     onError: (err) => {
-      message.error("Failed to create blog: " + err.message);
+      message.error(
+        t("adminBlog.createError", {
+          error: err.message,
+          defaultValue: "Failed to create blog: {{error}}",
+        })
+      );
     },
   });
 
@@ -29,11 +36,16 @@ function AdminBlog() {
   const deleteBlogMutation = useMutation({
     mutationFn: (blogId) => deleteBlog(user?.token, blogId),
     onSuccess: () => {
-      message.success("Blog deleted!");
+      message.success(t("adminBlog.deleteSuccess", "Blog deleted!"));
       queryClient.invalidateQueries({ queryKey: ["blogs"] });
     },
     onError: (err) => {
-      message.error("Failed to delete blog: " + err.message);
+      message.error(
+        t("adminBlog.deleteError", {
+          error: err.message,
+          defaultValue: "Failed to delete blog: {{error}}",
+        })
+      );
     },
   });
 
@@ -54,7 +66,12 @@ function AdminBlog() {
   );
 
   const onFinishFailed = (errorInfo) => {
-    message.error("Failed to submit: " + errorInfo);
+    message.error(
+      t("adminBlog.submitError", {
+        error: errorInfo,
+        defaultValue: "Failed to submit: {{error}}",
+      })
+    );
   };
 
   return (
@@ -78,14 +95,14 @@ function AdminBlog() {
         >
           <div className="flex justify-between">
             <h1 className="font-main text-[18px] font-semibold">
-              Add new blog
+              {t("adminBlog.addNewBlog", "Add new blog")}
             </h1>
             <Button
               type="submit"
               className="!bg-[#E6F3FF] !text-[#000] !font-medium !shadow-custom-gray !rounded-md !hover:bg-[#c7e1f8]"
               loading={createBlogMutation.isLoading}
             >
-              Add Blog
+              {t("adminBlog.addBlog", "Add Blog")}
             </Button>
           </div>
         </Form.Item>
@@ -97,10 +114,7 @@ function AdminBlog() {
           <Editor />
         </Form.Item>
       </Form>
-      <Blogs
-        isAdmin={true}
-        onDelete={handleDelete}
-      />
+      <Blogs isAdmin={true} onDelete={handleDelete} />
     </>
   );
 }
