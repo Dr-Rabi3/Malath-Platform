@@ -156,64 +156,72 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
               />
             </Form.Item>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-            <Form.Item
-              label={
-                <span className="text-sm font-medium text-gray-700 sm:text-base">
-                  {t("admin.addUserModal.password")}
-                </span>
-              }
-              name="password"
-              rules={[
-                {
-                  required: !userToEdit,
-                  message: t("admin.addUserModal.validation.passwordRequired"),
-                },
-                {
-                  min: 6,
-                  message: t("admin.addUserModal.validation.passwordMinLength"),
-                },
-              ]}
-            >
-              <Input.Password
-                placeholder={t("admin.addUserModal.enterPassword")}
-                className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
-              />
-            </Form.Item>
-            <Form.Item
-              label={
-                <span className="text-sm font-medium text-gray-700 sm:text-base">
-                  {t("admin.addUserModal.confirmPassword")}
-                </span>
-              }
-              name="confirmPassword"
-              rules={[
-                {
-                  required: !userToEdit,
-                  message: t(
-                    "admin.addUserModal.validation.confirmPasswordRequired"
-                  ),
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error(
-                        t("admin.addUserModal.validation.passwordsMismatch")
-                      )
-                    );
+          {!userToEdit && (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <Form.Item
+                label={
+                  <span className="text-sm font-medium text-gray-700 sm:text-base">
+                    {t("admin.addUserModal.password")}
+                  </span>
+                }
+                name="password"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "admin.addUserModal.validation.passwordRequired"
+                    ),
                   },
-                }),
-              ]}
-            >
-              <Input.Password
-                placeholder={t("admin.addUserModal.confirmPasswordPlaceholder")}
-                className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
-              />
-            </Form.Item>
-          </div>
+                  {
+                    min: 6,
+                    message: t(
+                      "admin.addUserModal.validation.passwordMinLength"
+                    ),
+                  },
+                ]}
+              >
+                <Input.Password
+                  placeholder={t("admin.addUserModal.enterPassword")}
+                  className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
+                />
+              </Form.Item>
+              <Form.Item
+                label={
+                  <span className="text-sm font-medium text-gray-700 sm:text-base">
+                    {t("admin.addUserModal.confirmPassword")}
+                  </span>
+                }
+                name="confirmPassword"
+                rules={[
+                  {
+                    required: true,
+                    message: t(
+                      "admin.addUserModal.validation.confirmPasswordRequired"
+                    ),
+                  },
+                  ({ getFieldValue }) => ({
+                    validator(_, value) {
+                      if (!value || getFieldValue("password") === value) {
+                        return Promise.resolve();
+                      }
+                      return Promise.reject(
+                        new Error(
+                          t("admin.addUserModal.validation.passwordsMismatch")
+                        )
+                      );
+                    },
+                  }),
+                ]}
+              >
+                <Input.Password
+                  placeholder={t(
+                    "admin.addUserModal.confirmPasswordPlaceholder"
+                  )}
+                  className="!rounded-lg !border-gray-300 focus:!border-blue-500 focus:!ring-blue-500"
+                />
+              </Form.Item>
+            </div>
+          )}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             <Form.Item
               label={

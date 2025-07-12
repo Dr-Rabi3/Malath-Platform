@@ -6,6 +6,7 @@ import { message } from "antd";
 
 import UserData from "../Organisms/UserData";
 import UserServices from "../Organisms/UserServices";
+import ChangePasswordModal from "../Organisms/ChangePasswordModal";
 import { Avatar } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../store/AuthContext";
@@ -18,6 +19,7 @@ function Profile() {
   const [previewUrl, setPreviewUrl] = useState(null);
   const [profileImageUrl, setProfileImageUrl] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [passwordModalVisible, setPasswordModalVisible] = useState(false);
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   const [messageApi, contextHolder] = message.useMessage();
@@ -294,6 +296,12 @@ function Profile() {
             >
               {t("profile.uploadPhoto")}
             </label>
+            <button
+              onClick={() => setPasswordModalVisible(true)}
+              className="border border-blue-600 text-[14px] text-blue-600 px-2 py-1 rounded hover:bg-blue-600 hover:text-white transition-colors duration-200"
+            >
+              {t("profile.changePassword")}
+            </button>
           </div>
         </div>
         {/* Tabs */}
@@ -346,6 +354,13 @@ function Profile() {
           </TabContent>
         </div>
       </div>
+
+      {/* Change Password Modal */}
+      <ChangePasswordModal
+        visible={passwordModalVisible}
+        onCancel={() => setPasswordModalVisible(false)}
+        loading={false}
+      />
     </>
   );
 }

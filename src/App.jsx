@@ -14,6 +14,7 @@ import ComingSoon from "./components/pages/ComingSoon";
 import AddService from "./components/pages/AddService";
 import SupportLayout from "./components/templates/SupportLayout";
 import SupportDashboard from "./components/pages/SupportDashboard";
+import SupportSettings from "./components/pages/SupportSettings";
 import AdminLayout from "./components/templates/AdminLayput";
 import AdminService from "./components/pages/AdminService";
 import AdminBlog from "./components/pages/AdminBlog";
@@ -72,6 +73,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <SupportDashboard />,
+      },
+      {
+        path: "settings",
+        element: <SupportSettings />,
       },
       {
         path: "service/:serviceId",

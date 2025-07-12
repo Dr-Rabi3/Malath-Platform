@@ -911,3 +911,187 @@ export const getTopFiveRequestedServices = async (token) => {
     throw new Error(errorMsg);
   }
 };
+
+/**
+ * Change user password
+ * @param {string} token - Authorization token
+ * @param {Object} passwordData - Password change data
+ * @param {string} passwordData.oldPassword - Current password (optional for admin)
+ * @param {string} passwordData.newPassword - New password
+ * @param {string} passwordData.userId - User ID (optional for admin password change)
+ * @returns {Promise<Object>} API response
+ */
+export const changePassword = async (token, passwordData) => {
+  try {
+    const requestData = {
+      newPassword: passwordData.newPassword,
+      confirmPassword: passwordData.newPassword,
+    };
+
+    // Add oldPassword if provided (for user's own password change)
+    if (passwordData.oldPassword) {
+      requestData.oldPassword = passwordData.oldPassword;
+    }
+
+    // Add userId if provided (for admin password change)
+    if (passwordData.userId) {
+      requestData.userId = passwordData.userId;
+    }
+
+    const response = await axios.post(
+      `${API_BASE_URL}api/ApplicationUsers/ResetPassword`,
+      requestData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(result.error?.description || "Failed to change password");
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Change password error";
+
+    console.error("Change password error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
+ * Reset user password by support
+ * @param {string} token - Authorization token
+ * @param {Object} resetData - Reset password data
+ * @param {string} resetData.email - User's email address
+ * @param {string} resetData.phone - User's phone number
+ * @returns {Promise<Object>} API response with new password
+ */
+export const resetPasswordBySupport = async (token, resetData) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}api/ApplicationUsers/ResetPasswordBySupport?emailOrPhone=${
+        resetData.email || resetData.phone
+      }`,
+      {
+        params: {
+          emailOrPhone: resetData.email || resetData.phone,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(result.error?.description || "Failed to reset password");
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Reset password error";
+
+    console.error("Reset password error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
+ * Mark notifications as read
+ * @param {string} token - Authorization token
+ * @param {Array<string>} notificationIds - Array of notification IDs to mark as read
+ * @returns {Promise<Object>} API response
+ */
+export const markNotificationAsRead = async (token, notificationIds) => {
+  try {
+    const response = await axios.post(
+      `${API_BASE_URL}api/Notifications/MarkAsRead`,
+      {
+        notificationIds: notificationIds,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(
+        result.error?.description || "Failed to mark notifications as read"
+      );
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Mark notifications as read error";
+
+    console.error("Mark notifications as read error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
+ * Get all notifications
+ * @param {string} token - Authorization token
+ * @returns {Promise<Array>} List of notifications
+ */
+export const getAllNotifications = async (token) => {
+  try {
+    const response = await axios.get(
+      `${API_BASE_URL}api/Notifications/GetAllNotifications`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(
+        result.error?.description || "Failed to fetch notifications"
+      );
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Get notifications error";
+
+    console.error("Get notifications error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};

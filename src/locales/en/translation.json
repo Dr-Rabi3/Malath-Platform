@@ -26,6 +26,7 @@
   },
   "profile": {
     "uploadPhoto": "Upload new photo",
+    "changePassword": "Change Password",
     "dataTab": "Data",
     "serviceTab": "Service",
     "loading": "Loading profile data...",
@@ -38,7 +39,24 @@
     "profileUpdateSuccess": "Profile updated successfully!",
     "profileUpdateFail": "Failed to update profile: {{error}}",
     "updatingProfile": "Updating profile...",
-    "uploadingImage": "Uploading image..."
+    "uploadingImage": "Uploading image...",
+    "passwordChangeSuccess": "Password changed successfully!",
+    "passwordChangeFail": "Failed to change password: {{error}}",
+    "oldPassword": "Current Password",
+    "newPassword": "New Password",
+    "confirmNewPassword": "Confirm New Password",
+    "enterOldPassword": "Enter your current password",
+    "enterNewPassword": "Enter your new password",
+    "confirmNewPasswordPlaceholder": "Confirm your new password",
+    "save": "Save",
+    "cancel": "Cancel",
+    "validation": {
+      "oldPasswordRequired": "Please enter your current password",
+      "newPasswordRequired": "Please enter your new password",
+      "confirmPasswordRequired": "Please confirm your new password",
+      "passwordMinLength": "Password must be at least 6 characters",
+      "passwordsMismatch": "Passwords do not match"
+    }
   },
   "userData": {
     "name": "Name",
@@ -207,7 +225,67 @@
   },
   "sidebar": {
     "dashboard": "Dashboard",
+    "settings": "Settings",
     "logout": "Logout"
+  },
+  "notifications": {
+    "title": "Notifications",
+    "loading": "Loading notifications...",
+    "errorLoading": "Error loading notifications",
+    "noNotifications": "No notifications",
+    "noTitle": "No title",
+    "noMessage": "No message",
+    "unknownDate": "Unknown date",
+    "markedAsRead": "Notification marked as read",
+    "allMarkedAsRead": "All notifications marked as read",
+    "markAllAsRead": "Mark all as read",
+    "noUnreadNotifications": "No unread notifications to mark",
+    "errorMarkingAsRead": "Error marking notification as read",
+    "errorMarkingAllAsRead": "Error marking all notifications as read",
+    "newNotification": "New notification received",
+    "connectionError": "Failed to connect to real-time notifications",
+    "serviceId": "Service ID",
+    "receiverId": "Receiver ID"
+  },
+  "supportSettings": {
+    "title": "User Settings",
+    "description": "Manage user accounts and change passwords",
+    "loading": "Loading users...",
+    "errorLoading": "Error loading users",
+    "resetPassword": "Reset Password",
+    "passwordResetSuccess": "Password reset successfully!",
+    "passwordResetFail": "Failed to reset password: {{error}}",
+    "passwordCopied": "Password copied to clipboard!",
+    "copyFailed": "Failed to copy password",
+    "table": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone",
+      "role": "Role",
+      "actions": "Actions",
+      "noName": "No Name",
+      "noRole": "No Role",
+      "showing": "Showing",
+      "of": "of",
+      "users": "users"
+    },
+    "modal": {
+      "title": "Reset Password for {{name}}",
+      "email": "Email",
+      "phone": "Phone",
+      "enterEmail": "Enter email address",
+      "enterPhone": "Enter phone number",
+      "reset": "Reset Password",
+      "cancel": "Cancel",
+      "passwordGenerated": "Password Generated Successfully",
+      "copy": "Copy",
+      "passwordNote": "The new password has been generated. Please copy it and share it securely with the user.",
+      "validation": {
+        "emailRequired": "Please enter email address",
+        "emailInvalid": "Please enter a valid email address",
+        "phoneRequired": "Please enter phone number"
+      }
+    }
   },
   "addService": {
     "title": "Service Info",

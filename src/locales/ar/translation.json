@@ -26,6 +26,7 @@
   },
   "profile": {
     "uploadPhoto": "تحميل صورة جديدة",
+    "changePassword": "تغيير كلمة المرور",
     "dataTab": "البيانات",
     "serviceTab": "الخدمات",
     "loading": "جاري تحميل بيانات الملف الشخصي...",
@@ -38,7 +39,24 @@
     "profileUpdateSuccess": "تم تحديث الملف الشخصي بنجاح!",
     "profileUpdateFail": "فشل في تحديث الملف الشخصي: {{error}}",
     "updatingProfile": "جاري تحديث الملف الشخصي...",
-    "uploadingImage": "جاري تحميل الصورة..."
+    "uploadingImage": "جاري تحميل الصورة...",
+    "passwordChangeSuccess": "تم تغيير كلمة المرور بنجاح!",
+    "passwordChangeFail": "فشل في تغيير كلمة المرور: {{error}}",
+    "oldPassword": "كلمة المرور الحالية",
+    "newPassword": "كلمة المرور الجديدة",
+    "confirmNewPassword": "تأكيد كلمة المرور الجديدة",
+    "enterOldPassword": "أدخل كلمة المرور الحالية",
+    "enterNewPassword": "أدخل كلمة المرور الجديدة",
+    "confirmNewPasswordPlaceholder": "تأكيد كلمة المرور الجديدة",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "validation": {
+      "oldPasswordRequired": "يرجى إدخال كلمة المرور الحالية",
+      "newPasswordRequired": "يرجى إدخال كلمة المرور الجديدة",
+      "confirmPasswordRequired": "يرجى تأكيد كلمة المرور الجديدة",
+      "passwordMinLength": "يجب أن تتكون كلمة المرور من 6 أحرف على الأقل",
+      "passwordsMismatch": "كلمات المرور غير متطابقة"
+    }
   },
   "userData": {
     "name": "الاسم",
@@ -201,7 +219,67 @@
   },
   "sidebar": {
     "dashboard": "لوحة التحكم",
+    "settings": "الإعدادات",
     "logout": "تسجيل الخروج"
+  },
+  "notifications": {
+    "title": "الإشعارات",
+    "loading": "جاري تحميل الإشعارات...",
+    "errorLoading": "حدث خطأ أثناء تحميل الإشعارات",
+    "noNotifications": "لا توجد إشعارات",
+    "noTitle": "لا يوجد عنوان",
+    "noMessage": "لا توجد رسالة",
+    "unknownDate": "تاريخ غير معروف",
+    "markedAsRead": "تم تحديد الإشعار كمقروء",
+    "allMarkedAsRead": "تم تحديد جميع الإشعارات كمقروءة",
+    "markAllAsRead": "تحديد الكل كمقروء",
+    "noUnreadNotifications": "لا توجد إشعارات غير مقروءة لتحديدها",
+    "errorMarkingAsRead": "خطأ في تحديد الإشعار كمقروء",
+    "errorMarkingAllAsRead": "خطأ في تحديد جميع الإشعارات كمقروءة",
+    "newNotification": "تم استلام إشعار جديد",
+    "connectionError": "فشل في الاتصال بالإشعارات المباشرة",
+    "serviceId": "معرف الخدمة",
+    "receiverId": "معرف المستلم"
+  },
+  "supportSettings": {
+    "title": "إعدادات المستخدمين",
+    "description": "إدارة حسابات المستخدمين وتغيير كلمات المرور",
+    "loading": "جاري تحميل المستخدمين...",
+    "errorLoading": "حدث خطأ أثناء تحميل المستخدمين",
+    "resetPassword": "إعادة تعيين كلمة المرور",
+    "passwordResetSuccess": "تم إعادة تعيين كلمة المرور بنجاح!",
+    "passwordResetFail": "فشل في إعادة تعيين كلمة المرور: {{error}}",
+    "passwordCopied": "تم نسخ كلمة المرور إلى الحافظة!",
+    "copyFailed": "فشل في نسخ كلمة المرور",
+    "table": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "role": "الدور",
+      "actions": "الإجراءات",
+      "noName": "لا يوجد اسم",
+      "noRole": "لا يوجد دور",
+      "showing": "عرض",
+      "of": "من",
+      "users": "مستخدم"
+    },
+    "modal": {
+      "title": "إعادة تعيين كلمة المرور لـ {{name}}",
+      "email": "البريد الإلكتروني",
+      "phone": "الهاتف",
+      "enterEmail": "أدخل عنوان البريد الإلكتروني",
+      "enterPhone": "أدخل رقم الهاتف",
+      "reset": "إعادة تعيين كلمة المرور",
+      "cancel": "إلغاء",
+      "passwordGenerated": "تم إنشاء كلمة المرور بنجاح",
+      "copy": "نسخ",
+      "passwordNote": "تم إنشاء كلمة المرور الجديدة. يرجى نسخها ومشاركتها بأمان مع المستخدم.",
+      "validation": {
+        "emailRequired": "يرجى إدخال عنوان البريد الإلكتروني",
+        "emailInvalid": "يرجى إدخال عنوان بريد إلكتروني صالح",
+        "phoneRequired": "يرجى إدخال رقم الهاتف"
+      }
+    }
   },
   "addService": {
     "title": "معلومات الخدمة",

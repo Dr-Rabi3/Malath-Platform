@@ -20,8 +20,8 @@ import logout from "../../assets/icons/logout.svg";
 import dashboard from "../../assets/icons/dashboard.svg";
 import { useAuth } from "../../store/AuthContext";
 import { Earth } from "../../assets/icons/Earth.jsx";
-
-
+import NotificationDropdown from "../Organisms/NotificationDropdown";
+import { useNotification } from "../../hooks/useNotification";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -41,6 +41,10 @@ function SupportLayout() {
   const [collapsed, setCollapsed] = useState(false);
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
+  // Initialize real-time notifications
+  const { contextHolder: notificationContextHolder } = useNotification();
+
   const handleLogout = () => {
     Logout();
     navigate("/");
@@ -58,6 +62,7 @@ function SupportLayout() {
   };
   return (
     <>
+      {notificationContextHolder}
       <style>
         {`
         .ant-layout-sider-collapsed {
@@ -107,16 +112,18 @@ function SupportLayout() {
             style={{ background: "#211A4D" }}
             defaultSelectedKeys={["1"]}
             onSelect={(value) => {
-              if (value.key === "3") {
+              if (value.key === "4") {
                 handleLogout();
                 return null;
-              } else if (value.key === "2") {
+              } else if (value.key === "3") {
                 localStorage.getItem("lang") === "en" ||
                 !localStorage.getItem("lang")
                   ? changeLanguage("ar")
                   : changeLanguage("en");
               } else if (value.key === "1") {
                 navigate("/support");
+              } else if (value.key === "2") {
+                navigate("/support/settings");
               }
             }}
             items={[
@@ -129,6 +136,11 @@ function SupportLayout() {
               },
               {
                 key: "2",
+                icon: <SettingOutlined />,
+                label: t("sidebar.settings"),
+              },
+              {
+                key: "3",
                 icon: <Earth color="#ddd" className="w-5 text-[#fff]/50" />,
                 label: `Translate to ${
                   localStorage.getItem("lang") === "en" ||
@@ -138,7 +150,7 @@ function SupportLayout() {
                 }`,
               },
               {
-                key: "3",
+                key: "4",
                 icon: <img src={logout} alt="logout icon" className="w-5" />,
                 label: t("sidebar.logout"),
               },
@@ -160,6 +172,7 @@ function SupportLayout() {
               </h2>
             </div>
             <div className="flex gap-5 justify-center items-center">
+              <NotificationDropdown />
               <button
                 className="m-auto flex justify-between items-center bg-neutral-1000 rounded-full p-1"
                 onClick={handleLogout}

@@ -243,6 +243,75 @@
   }
 }
 
+/* Notification dropdown styles */
+.notification-dropdown {
+  min-width: 350px !important;
+  max-width: 400px !important;
+}
+
+.notification-dropdown .ant-dropdown-menu {
+  padding: 0 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+}
+
+.notification-dropdown .ant-dropdown-menu-item {
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+
+.notification-dropdown .ant-dropdown-menu-item:hover {
+  background-color: transparent !important;
+}
+
+.notification-dropdown .ant-list-item {
+  padding: 12px 16px !important;
+  border-bottom: 1px solid #f0f0f0 !important;
+}
+
+.notification-dropdown .ant-list-item:last-child {
+  border-bottom: none !important;
+}
+
+.notification-dropdown .ant-list-item:hover {
+  background-color: #f8fafc !important;
+}
+
+.notification-dropdown .ant-avatar {
+  background-color: #3b82f6 !important;
+}
+
+.notification-dropdown .ant-badge-count {
+  background-color: #ef4444 !important;
+  color: white !important;
+  font-size: 10px !important;
+  font-weight: 600 !important;
+  min-width: 16px !important;
+  height: 16px !important;
+  line-height: 16px !important;
+  border-radius: 8px !important;
+}
+
+/* Mobile responsive for notifications */
+@media (max-width: 768px) {
+  .notification-dropdown {
+    min-width: 280px !important;
+    max-width: 320px !important;
+  }
+  
+  .notification-dropdown .ant-list-item {
+    padding: 8px 12px !important;
+  }
+  
+  .notification-dropdown .ant-list-item-meta-title {
+    font-size: 13px !important;
+  }
+  
+  .notification-dropdown .ant-list-item-meta-description {
+    font-size: 11px !important;
+  }
+}
+
 @media (max-width: 480px) {
   .responsive-table .ant-table-thead > tr > th {
     padding: 6px 8px;

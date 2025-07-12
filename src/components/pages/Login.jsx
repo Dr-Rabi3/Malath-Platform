@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import { useAuth } from "../../store/AuthContext";
+import { Roles } from "../../utils/roles";
 
 function Login() {
   const user = useAuth();
@@ -16,9 +17,10 @@ function Login() {
       messageApi.open({ type: "warning", content: loginAlert });
     }
     if (user.token) {
-      if (user.role === "admin") navigate("/admin/dashboard");
-      else if (from) navigate(from);
-      else navigate("/user/dashboard");
+      if (from) navigate(from);
+      else if (user.role === Roles.Admin) navigate("/admin/dashboard");
+      else if (user.role === Roles.CusomerService) navigate("/admin/dashboard");
+      else navigate("/");
     }
   }, [user, from, loginAlert, navigate]);
   return (

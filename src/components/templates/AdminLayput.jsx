@@ -27,6 +27,8 @@ import { Setting } from "../../assets/icons/Setting";
 import { useAuth } from "../../store/AuthContext";
 import { AddUser } from "../../assets/icons/AddUser.jsx";
 import { SliderIcon } from "../../assets/icons/SliderIcon.jsx";
+import NotificationDropdown from "../Organisms/NotificationDropdown";
+import { useNotification } from "../../hooks/useNotification";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -48,6 +50,10 @@ function AdminLayout() {
   const navigate = useNavigate();
   const [activeKey, setActiveKey] = useState("1");
   const location = useLocation();
+
+  // Initialize real-time notifications
+  const { contextHolder: notificationContextHolder } = useNotification();
+
   useEffect(() => {
     const page = location.pathname.split("/").filter(Boolean).pop();
     const { from } = location.state || {};
@@ -159,6 +165,7 @@ function AdminLayout() {
 
   return (
     <>
+      {notificationContextHolder}
       <style>
         {`
         .ant-layout-sider-collapsed {
@@ -225,6 +232,7 @@ function AdminLayout() {
               </h2>
             </div>
             <div className="flex gap-5 justify-center items-center">
+              <NotificationDropdown />
               <button
                 className="m-auto flex justify-between items-center bg-neutral-1000 rounded-full p-1"
                 onClick={handleLogout}

@@ -14,12 +14,17 @@ import { Earth } from "../../assets/icons/Earth.jsx";
 import { useAuth } from "../../store/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { getFile } from "../../api/http.js";
+import NotificationDropdown from "./NotificationDropdown";
+import { useNotification } from "../../hooks/useNotification";
 
 export default function Navbar() {
   const { user, logout: Logout } = useAuth();
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const [profileImageUrl, setProfileImageUrl] = useState(null);
+
+  // Initialize real-time notifications
+  const { contextHolder: notificationContextHolder } = useNotification();
 
   const list = [
     { name: t("nav.home"), link: "/", hash: "home" },
@@ -77,171 +82,177 @@ export default function Navbar() {
     Logout();
   };
   return (
-    <nav>
-      <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-        <div className="relative flex h-16 items-center justify-between pt-5">
-          {/* Mobile menu button */}
-          <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
-            <button
-              type="button"
-              className="relative inline-flex items-center justify-center rounded-md p-2 text-neutral-950"
-              aria-controls="mobile-menu"
-              aria-expanded={mobileMenuOpen}
-              onClick={toggleMobileMenu}
-            >
-              <span className="absolute -inset-0.5"></span>
-              <span className="sr-only">Open main menu</span>
-
-              {/* Icon when menu is closed */}
-              <svg
-                className={`${mobileMenuOpen ? "hidden" : "block"} size-6`}
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                />
-              </svg>
-
-              {/* Icon when menu is open */}
-              <svg
-                className={`${mobileMenuOpen ? "block" : "hidden"} size-6`}
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M6 18 18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-
-          {/* Logo + desktop menu */}
-          <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-            <div className="flex shrink-0 items-center">
-              <img
-                className="w-10 w-auto"
-                src={darkLogo}
-                alt="Malath Company"
-              />
-              <h2 className="hidden sm:block text-neutral-1000 m-0">Malath</h2>
-            </div>
-            <div className="hidden sm:ml-6 sm:block">
-              <div className="flex space-x-4 h-full justify-center items-center">
-                {list.map((item, index) => {
-                  return (
-                    <Link
-                      key={index}
-                      to={item.link}
-                      className={`hover:text-brand-600 rounded-md px-3 py-2 text-[16px] font-semibold ${
-                        item.hash == activePath ? "text-brand-600" : ""
-                      }`}
-                    >
-                      {item.name}
-                    </Link>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-
-          {/* Notifications & profile */}
-
-          <div className="absolute inset-y-0 space-x-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {user.userId && (
+    <>
+      {notificationContextHolder}
+      <nav>
+        <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+          <div className="relative flex h-16 items-center justify-between pt-5">
+            {/* Mobile menu button */}
+            <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
-                className="flex justify-between items-center bg-neutral-1000 rounded-full p-1"
-                onClick={handleLogout}
+                type="button"
+                className="relative inline-flex items-center justify-center rounded-md p-2 text-neutral-950"
+                aria-controls="mobile-menu"
+                aria-expanded={mobileMenuOpen}
+                onClick={toggleMobileMenu}
               >
-                <img src={logout} alt="logout icon" className="w-5" />
-              </button>
-            )}
-            <Tooltip
-              title={`Translate to ${
-                localStorage.getItem("lang") === "en" ||
-                !localStorage.getItem("lang")
-                  ? "arabic"
-                  : "english"
-              }`}
-            >
-              <button
-                onClick={() =>
-                  localStorage.getItem("lang") === "en" ||
-                  !localStorage.getItem("lang")
-                    ? changeLanguage("ar")
-                    : changeLanguage("en")
-                }
-              >
-                {/* <img src={earth} alt="icon" /> */}
-                <Earth />
-              </button>
-            </Tooltip>
+                <span className="absolute -inset-0.5"></span>
+                <span className="sr-only">Open main menu</span>
 
-            {!user.userId && (
-              <Button
-                className="bg-neutral-950 py-1 flex gap-2 font-semibold hover:bg-neutral-700"
-                onClick={() => navigate("/login")}
-              >
-                <img src={login} alt="icon" className="w-4" />{" "}
-                {t("form.action.login")}
-              </Button>
-            )}
-            {/* Profile dropdown */}
-            {user.userId && (
-              <div className="relative ml-3">
-                <div
-                  type="button"
-                  className="relative flex rounded-full text-sm items-center gap-2"
-                  id="user-menu-button"
-                  aria-haspopup="true"
+                {/* Icon when menu is closed */}
+                <svg
+                  className={`${mobileMenuOpen ? "hidden" : "block"} size-6`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
                 >
-                  <span className="absolute -inset-1.5"></span>
-                  <span className="sr-only">Open user menu</span>
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                  />
+                </svg>
 
-                  <Link to="/profile">
-                    <Avatar
-                      size={28}
-                      src={profileImageUrl}
-                      icon={<UserOutlined />}
-                      className="bg-brand-600"
-                    />
-                  </Link>
-                  <div className="hidden sm:block">{user?.name}</div>
+                {/* Icon when menu is open */}
+                <svg
+                  className={`${mobileMenuOpen ? "block" : "hidden"} size-6`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M6 18 18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+
+            {/* Logo + desktop menu */}
+            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex shrink-0 items-center">
+                <img
+                  className="w-10 w-auto"
+                  src={darkLogo}
+                  alt="Malath Company"
+                />
+                <h2 className="hidden sm:block text-neutral-1000 m-0">
+                  Malath
+                </h2>
+              </div>
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-4 h-full justify-center items-center">
+                  {list.map((item, index) => {
+                    return (
+                      <Link
+                        key={index}
+                        to={item.link}
+                        className={`hover:text-brand-600 rounded-md px-3 py-2 text-[16px] font-semibold ${
+                          item.hash == activePath ? "text-brand-600" : ""
+                        }`}
+                      >
+                        {item.name}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
-            )}
-          </div>
-        </div>
-      </div>
+            </div>
 
-      {/* Mobile menu */}
-      {mobileMenuOpen && (
-        <div className="sm:hidden" id="mobile-menu">
-          <div className="bg-accent-25 px-2 pt-2 pb-3">
-            {list.map((item, index) => {
-              return (
-                <Link
-                  key={index}
-                  to={item.link}
-                  className={`block px-3 py-2 text-base font-semibold hover:text-brand-600 ${
-                    item.hash == activePath ? "text-brand-600" : ""
-                  }`}
+            {/* Notifications & profile */}
+
+            <div className="absolute inset-y-0 space-x-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+              {user.userId && <NotificationDropdown />}
+              {user.userId && (
+                <button
+                  className="flex justify-between items-center bg-neutral-1000 rounded-full p-1"
+                  onClick={handleLogout}
                 >
-                  {item.name}
-                </Link>
-              );
-            })}
+                  <img src={logout} alt="logout icon" className="w-5" />
+                </button>
+              )}
+              <Tooltip
+                title={`Translate to ${
+                  localStorage.getItem("lang") === "en" ||
+                  !localStorage.getItem("lang")
+                    ? "arabic"
+                    : "english"
+                }`}
+              >
+                <button
+                  onClick={() =>
+                    localStorage.getItem("lang") === "en" ||
+                    !localStorage.getItem("lang")
+                      ? changeLanguage("ar")
+                      : changeLanguage("en")
+                  }
+                >
+                  {/* <img src={earth} alt="icon" /> */}
+                  <Earth />
+                </button>
+              </Tooltip>
+
+              {!user.userId && (
+                <Button
+                  className="bg-neutral-950 py-1 flex gap-2 font-semibold hover:bg-neutral-700"
+                  onClick={() => navigate("/login")}
+                >
+                  <img src={login} alt="icon" className="w-4" />{" "}
+                  {t("form.action.login")}
+                </Button>
+              )}
+              {/* Profile dropdown */}
+              {user.userId && (
+                <div className="relative ml-3">
+                  <div
+                    type="button"
+                    className="relative flex rounded-full text-sm items-center gap-2"
+                    id="user-menu-button"
+                    aria-haspopup="true"
+                  >
+                    <span className="absolute -inset-1.5"></span>
+                    <span className="sr-only">Open user menu</span>
+
+                    <Link to="/profile">
+                      <Avatar
+                        size={28}
+                        src={profileImageUrl}
+                        icon={<UserOutlined />}
+                        className="bg-brand-600"
+                      />
+                    </Link>
+                    <div className="hidden sm:block">{user?.name}</div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      )}
-    </nav>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="sm:hidden" id="mobile-menu">
+            <div className="bg-accent-25 px-2 pt-2 pb-3">
+              {list.map((item, index) => {
+                return (
+                  <Link
+                    key={index}
+                    to={item.link}
+                    className={`block px-3 py-2 text-base font-semibold hover:text-brand-600 ${
+                      item.hash == activePath ? "text-brand-600" : ""
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        )}
+      </nav>
+    </>
   );
 }
