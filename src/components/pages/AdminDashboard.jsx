@@ -90,18 +90,18 @@ const columns = [
     );
   }
 
-  if (servicesError || categoriesError) {
-    return (
-      <div className="flex items-center justify-center h-64">
-        <div className="text-lg text-red-600">
-          {t(
-            "adminDashboard.errorLoading",
-            "Error loading services. Please try again."
-          )}
-        </div>
-      </div>
-    );
-  }
+  // if (servicesError || categoriesError) {
+  //   return (
+  //     <div className="flex items-center justify-center h-64">
+  //       <div className="text-lg text-red-600">
+  //         {t(
+  //           "adminDashboard.errorLoading",
+  //           "Error loading services. Please try again."
+  //         )}
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen">

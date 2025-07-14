@@ -220,7 +220,11 @@
   "sidebar": {
     "dashboard": "لوحة التحكم",
     "settings": "الإعدادات",
-    "logout": "تسجيل الخروج"
+    "logout": "تسجيل الخروج",
+    "services": "الخدمات",
+    "blogs": "المدونات",
+    "addService": "إضافة خدمة",
+    "addUser": "إضافة مستخدم"
   },
   "notifications": {
     "title": "الإشعارات",
