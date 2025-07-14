@@ -89,43 +89,43 @@ function AdminLayout() {
     {
       key: "1",
       icon: <img src={dashboard} alt="dashboard icon" className="w-5" />,
-      label: t("sidebar.dashboard"),
+      label: t("sidebar.dashboard", "Dashboard"),
       onClick: () => navigate("/admin"),
     },
     {
       key: "2",
       icon: <Service className="w-5 p-0 text-[#fff]/50" />,
-      label: "Services",
+      label: t("sidebar.services", "Services"),
       onClick: () => navigate("/admin/admin-service"),
     },
     {
       key: "3",
       icon: <Edit className="w-5 p-0 text-[#fff]/50" />,
-      label: "Blogs",
+      label: t("sidebar.blogs", "Blogs"),
       onClick: () => navigate("/admin/blog"),
     },
     {
       key: "4",
       icon: <ElementPlus className="w-5 p-0 text-[#fff]/50" />,
-      label: "Add service",
+      label: t("sidebar.addService", "Add service"),
       onClick: () => navigate("/admin/add-service"),
     },
     {
       key: "5",
       icon: <AddUser color="#ddd" className="w-5 p-0 !text-[#fff]/50" />,
-      label: "Add user",
+      label: t("sidebar.addUser", "Add user"),
       onClick: () => navigate("/admin/add-user"),
     },
     {
       key: "6",
       icon: <Setting className="w-5 p-0 text-[#fff]/50" />,
-      label: t("setting"),
+      label: t("setting", "Setting"),
       onClick: () => navigate("/admin/setting"),
     },
     {
       key: "7",
       icon: <SliderIcon color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
-      label: t("slider"),
+      label: t("slider", "Slider"),
       onClick: () => navigate("/admin/slider"),
     },
     {
@@ -144,7 +144,7 @@ function AdminLayout() {
     {
       key: "9",
       icon: <img src={logout} alt="logout icon" className="w-5" />,
-      label: t("sidebar.logout"),
+      label: t("sidebar.logout", "Logout"),
       onClick: () => {
         Logout();
         navigate("/");

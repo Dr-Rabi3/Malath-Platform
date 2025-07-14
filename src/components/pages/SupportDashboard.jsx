@@ -216,18 +216,18 @@ function SupportDashboard() {
     );
   }
 
-  if (requestsError) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <p className="text-red-600 mb-4">
-            {t("supportDashboard.errorLoading")}
-          </p>
-          <p className="text-gray-600 text-sm">{requestsError.message}</p>
-        </div>
-      </div>
-    );
-  }
+  // if (requestsError) {
+  //   return (
+  //     <div className="min-h-screen flex items-center justify-center">
+  //       <div className="text-center">
+  //         <p className="text-red-600 mb-4">
+  //           {t("supportDashboard.errorLoading")}
+  //         </p>
+  //         <p className="text-gray-600 text-sm">{requestsError.message}</p>
+  //       </div>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="min-h-screen">

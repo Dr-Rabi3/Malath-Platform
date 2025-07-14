@@ -115,13 +115,13 @@ function AdminAddService() {
       </div>
     );
   }
-  if (servicesError || categoriesError) {
-    return (
-      <div className="flex justify-center items-center min-h-[200px] text-red-600">
-        {servicesError?.message || categoriesError?.message}
-      </div>
-    );
-  }
+  // if (servicesError || categoriesError) {
+  //   return (
+  //     <div className="flex justify-center items-center min-h-[200px] text-red-600">
+  //       {servicesError?.message || categoriesError?.message}
+  //     </div>
+  //   );
+  // }
 
   // Group services by category using fetched categories
   const groupedServices = (categories || []).map((cat) => ({
@@ -363,7 +363,13 @@ function AdminAddService() {
             {t("admin.addService.addServiceButton")}
           </Button>
         </div>
-        <CustomCollapse services={groupedServices} />
+        {groupedServices.length === 0 ? (
+          <div className="flex justify-center items-center min-h-[200px] text-gray-500">
+            {t("admin.addService.notFound", "No services found.")}
+          </div>
+        ) : (
+          <CustomCollapse services={groupedServices} />
+        )}
       </div>
     </>
   );
