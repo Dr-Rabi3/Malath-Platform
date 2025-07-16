@@ -200,8 +200,13 @@
     "contact": "Contact Us",
     "address": "Address: 20 Al-Tayaran Street, First Floor, Apartment 2",
     "email": "Email: MalathEgypt@.com",
-    "phone": "Phone: 0222604857",
-    "mobile": "Mobile: 01008375583, 01099134464"
+    "phone": "Phone: +966549909990",
+    "mobile": "Mobile: +966549909990",
+    "social": "Social Media",
+    "facebook": "Facebook",
+    "instagram": "Instagram",
+    "tiktok": "TikTok",
+    "soon": "Will add soon"
   },
   "service_request": "Service Request",
   "contact": {
@@ -312,7 +317,22 @@
       "vision": "Vision",
       "mission": "Mission",
       "values": "Values",
-      "save": "Save"
+      "save": "Save",
+      "englishVision": "Vision in English",
+      "arabicVision": "Vision in Arabic",
+      "englishMission": "Mission in English",
+      "arabicMission": "Mission in Arabic",
+      "englishValues": "Values in English",
+      "arabicValues": "Values in Arabic",
+      "englishVisionRequired": "Please enter vision in English",
+      "arabicVisionRequired": "Please enter vision in Arabic",
+      "englishMissionRequired": "Please enter mission in English",
+      "arabicMissionRequired": "Please enter mission in Arabic",
+      "englishValuesRequired": "Please enter values in English",
+      "arabicValuesRequired": "Please enter values in Arabic",
+      "updateSuccess": "Settings updated successfully!",
+      "updateError": "Failed to update settings",
+      "fetchError": "Failed to fetch settings"
     },
     "addService": {
       "addServiceType": "Add Service Type",
@@ -510,7 +530,12 @@
     "createError": "Failed to create blog: {{error}}",
     "deleteSuccess": "Blog deleted!",
     "deleteError": "Failed to delete blog: {{error}}",
-    "submitError": "Failed to submit: {{error}}"
+    "submitError": "Failed to submit: {{error}}",
+    "englishContent": "Content in English",
+    "arabicContent": "Content in Arabic",
+    "englishContentRequired": "Please enter content in English",
+    "arabicContentRequired": "Please enter content in Arabic",
+    "contentRequired": "Content is required"
   },
   "blogs": {
     "deleteTitle": "Delete the blog",

@@ -57,13 +57,13 @@ function AdminLayout() {
   useEffect(() => {
     const page = location.pathname.split("/").filter(Boolean).pop();
     const { from } = location.state || {};
-    console.log(from);
-    if (page === "admin-service" || from === "admin-service") setActiveKey("2");
-    else if (page === "blog") setActiveKey("3");
-    else if (page === "add-service") setActiveKey("4");
-    else if (page === "add-user") setActiveKey("5");
-    else if (page === "setting") setActiveKey("6");
-    else if (page === "slider") setActiveKey("7");
+    if (location.pathname.includes("admin-service") || from === "admin-service")
+      setActiveKey("2");
+    else if (location.pathname.includes("blog")) setActiveKey("3");
+    else if (location.pathname.includes("add-service")) setActiveKey("4");
+    else if (location.pathname.includes("add-user")) setActiveKey("5");
+    else if (location.pathname.includes("setting")) setActiveKey("6");
+    else if (location.pathname.includes("slider")) setActiveKey("7");
     else setActiveKey("1");
   }, [location, location.pathname, location.state]);
 

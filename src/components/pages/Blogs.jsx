@@ -7,6 +7,7 @@ import { useState } from "react";
 import { useAuth } from "../../store/AuthContext";
 import { useTranslation } from "react-i18next";
 import Editor from "../Organisms/Editor";
+import i18n from "../../i18n";
 
 function Blogs({ isAdmin, loading, onDelete }) {
   const { user } = useAuth();
@@ -17,8 +18,8 @@ function Blogs({ isAdmin, loading, onDelete }) {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["blogs", pageIndex, pageSize],
-    queryFn: () => getBlogs(pageIndex, pageSize, user?.token),
+    queryKey: ["blogs", pageIndex, pageSize, i18n.language],
+    queryFn: () => getBlogs(pageIndex, pageSize, user?.token, i18n.language),
     keepPreviousData: true,
   });
 
@@ -94,7 +95,11 @@ function Blogs({ isAdmin, loading, onDelete }) {
           {/* Blog Content */}
           <div className="p-6">
             <div className="prose prose-sm max-w-none">
-              <Editor content={blog.content} readOnly={true} field="content" />
+              <Editor 
+                content={(i18n.language === "ar" ? blog.contentAr : blog.contentEn) || blog.content} 
+                readOnly={true} 
+                field="content" 
+              />
             </div>
           </div>
 

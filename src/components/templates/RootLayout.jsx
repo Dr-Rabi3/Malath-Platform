@@ -1,4 +1,4 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useFetcher, useNavigate, useNavigation } from "react-router-dom";
 import Navbar from "../Organisms/Navbar";
 import Footer from "../Organisms/Footer";
 import { useAuth } from "../../store/AuthContext";
@@ -8,6 +8,10 @@ import { Roles } from "../../utils/roles";
 function RootLayout() {
   const { user} = useAuth();
   const navigate = useNavigate();
+ const navigation = useNavigation();
+ const isNavigating = Boolean(navigation.location);
+  const fetcher = useFetcher();
+  console.log(fetcher, navigation);
   useEffect(() => {
     // console.log(user);
     if (user.token) {

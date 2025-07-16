@@ -5,6 +5,13 @@ import phone from "../../assets/icons/phone.svg";
 import mobile from "../../assets/icons/mobile.svg";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faSquareFacebook,
+  faInstagram,
+  faTiktok,
+} from "@fortawesome/free-brands-svg-icons";
+import { Tooltip } from "antd";
 
 function Footer() {
   const { t } = useTranslation();
@@ -77,32 +84,83 @@ function Footer() {
                     to="#"
                     className="text-[#D3D4DC] flex items-center gap-3"
                   >
-                    <img src={location} alt="" /> <p>{t("footer.address")}</p>
+                    <img src={location} alt="" />{" "}
+                    <p className="m-0">{t("footer.address")}</p>
                   </Link>
+                </li>
+                <li>
+                  <a
+                    href="mailto:khedaib@malathegypt.com"
+                    className="m-0 text-[#D3D4DC] flex items-center gap-3 hover:text-brand-600 transition-colors duration-200"
+                  >
+                    <img src={email} alt="" />{" "}
+                    <p className="m-0">{t("footer.email")}</p>
+                  </a>
                 </li>
                 <li>
                   <Link
                     to="#"
                     className="text-[#D3D4DC] flex items-center gap-3"
                   >
-                    <img src={email} alt="" /> <p>{t("footer.email")}</p>
+                    <img src={phone} alt="" />{" "}
+                    <p className="m-0"> {t("footer.phone")}</p>
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="#"
-                    className="text-[#D3D4DC] flex items-center gap-3"
+                  <a
+                    href="https://wa.me/966549909990"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#D3D4DC] flex items-center gap-3 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <img src={phone} alt="" /> <p>{t("footer.phone")}</p>
-                  </Link>
+                    <img src={mobile} alt="" />{" "}
+                    <p className="m-0">{t("footer.mobile")}</p>
+                  </a>
+                </li>
+              </ul>
+            </div>
+            {/* Social Media Column */}
+            <div>
+              <p className="font-medium text-[#fff] text-[15px]">
+                {t("footer.social")}
+              </p>
+              <ul className="mt-6 flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0 text-sm">
+                <li>
+                  <a
+                    href="https://www.facebook.com/Malath.Marketing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
+                  >
+                    <FontAwesomeIcon icon={faSquareFacebook} size="lg" />{" "}
+                    <span>{t("footer.facebook")}</span>
+                  </a>
                 </li>
                 <li>
-                  <Link
-                    to="#"
-                    className="text-[#D3D4DC] flex items-center gap-3"
+                  <a
+                    href="https://www.instagram.com/malath.sa.eg/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <img src={mobile} alt="" /> <p>{t("footer.mobile")}</p>
-                  </Link>
+                    <FontAwesomeIcon icon={faInstagram} size="lg" />{" "}
+                    <span>{t("footer.instagram")}</span>
+                  </a>
+                </li>
+                <li>
+                  <Tooltip title={t("footer.soon")}>
+                    {/* <a
+                      href="https://tiktok.com"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
+                    > */}
+                    <p className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200">
+                      <FontAwesomeIcon icon={faTiktok} size="lg" />{" "}
+                      <span>{t("footer.tiktok")}</span>
+                    </p>
+                    {/* </a> */}
+                  </Tooltip>
                 </li>
               </ul>
             </div>

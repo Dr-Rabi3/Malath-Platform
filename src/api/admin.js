@@ -14,7 +14,10 @@ export const createBlog = async (token, blogData) => {
     // console.log(token, blogData);
     const response = await axios.post(
       `${API_BASE_URL}api/Blogs/create`,
-      { content: blogData.description },
+      {
+        contentEn: blogData.contentEn,
+        contentAr: blogData.contentAr,
+      },
       {
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +45,7 @@ export const createBlog = async (token, blogData) => {
  * @param {string} [token] - Authorization token (if required)
  * @returns {Promise<Object>} - The paginated blogs response with pagination info
  */
-export const getBlogs = async (pageIndex, pageSize, token) => {
+export const getBlogs = async (pageIndex, pageSize, token, language = "en") => {
   try {
     console.log("API Request - pageIndex:", pageIndex, "pageSize:", pageSize);
 
@@ -51,6 +54,7 @@ export const getBlogs = async (pageIndex, pageSize, token) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
+        "Accept-Language": language,
       },
       params: {
         pageIndex,

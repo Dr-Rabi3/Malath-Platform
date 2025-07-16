@@ -1,8 +1,6 @@
 import { ImagesSlider } from "../atoms/images-slider.tsx";
 import HomeSlider from "../Molecules/HomeSlider.jsx";
 import HomeInfo from "../Molecules/HomeInfo.jsx";
-import { getAllSliders } from "../../api/admin";
-import { getFile } from "../../api/http";
 import { Spin } from "antd";
 import Autoplay from "embla-carousel-autoplay";
 import {
@@ -12,44 +10,20 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useLoaderData } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-export async function homeLoader() {
-  const res = await getAllSliders();
-
-  if (res.isSuccess && Array.isArray(res.data)) {
-    const slidesWithImages = await Promise.all(
-      res.data.map(async (slide, idx) => {
-        let imageUrl = slide.imageUrl;
-        let imageBlobUrl = "";
-        try {
-          if (imageUrl) {
-            const blob = await getFile(imageUrl);
-            imageBlobUrl = URL.createObjectURL(blob);
-          }
-        } catch (e) {
-          imageBlobUrl = "";
-        }
-        return {
-          number: String(idx + 1).padStart(2, "0"),
-          title: slide.title || "",
-          description: slide.description || "",
-          image: imageBlobUrl,
-        };
-      })
-    );
-    return slidesWithImages;
-  }
-  return [];
-}
-
-function Home({ ...props }) {
-  const slides = useLoaderData();
+function Home({ slides, isLoading, error, ...props }) {
   const { i18n } = useTranslation();
   const lang = i18n.language;
-  if (!slides) {
-    return <Spin />;
+
+  if (error) {
+    return (
+      <div className="text-red-500">Error loading slides: {error.message}</div>
+    );
+  }
+
+  if (!slides || slides.length === 0) {
+    return <div className="text-gray-500">No slides available</div>;
   }
   return (
     <div className="rounded-md" {...props}>

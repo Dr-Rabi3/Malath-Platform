@@ -188,13 +188,14 @@ export const getRoles = async (token) => {
  * @returns {Promise<Array>} List of categories
  */
 
-export const getAllCategories = async (token) => {
+export const getAllCategories = async (token, language = "en") => {
   try {
     const response = await axios.get(`${API_BASE_URL}api/Categories/GetAll`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
         Accept: "application/json",
+        "Accept-Language": language,
       },
       timeout: 10000, // 10-second timeout
     });
@@ -261,13 +262,14 @@ export const createCategory = async (token, categoryData) => {
  * @returns {Promise<Array>} List of services
  */
 
-export const getAllServices = async (token) => {
+export const getAllServices = async (token, language = "en") => {
   try {
     const response = await axios.get(`${API_BASE_URL}api/Services/all`, {
       headers: {
         "Content-Type": "application/json",
         // Authorization: `Bearer ${token}`,
         Accept: "application/json",
+        "Accept-Language": language,
       },
       timeout: 10000, // 10-second timeout
     });
@@ -429,7 +431,11 @@ export const getUserById = async (token, id) => {
  * @returns {Promise<Array>} List of service requests
  */
 
-export const getUserServiceRequests = async (token, userId) => {
+export const getUserServiceRequests = async (
+  token,
+  userId,
+  language = "en"
+) => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}api/UserService/GetAllByUserId/${userId}`,
@@ -438,6 +444,7 @@ export const getUserServiceRequests = async (token, userId) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
+          "Accept-Language": language,
         },
         timeout: 10000, // 10-second timeout
       }
@@ -513,7 +520,8 @@ export const getServiceById = async (token, serviceId) => {
 export const getAllUserServiceRequests = async (
   token,
   pageIndex = 1,
-  pageSize = 10
+  pageSize = 10,
+  language = "en"
 ) => {
   try {
     const response = await axios.get(`${API_BASE_URL}api/UserService/GetAll`, {
@@ -522,6 +530,7 @@ export const getAllUserServiceRequests = async (
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
         Accept: "application/json",
+        "Accept-Language": language,
       },
       timeout: 10000,
     });
@@ -559,7 +568,11 @@ export const getAllUserServiceRequests = async (
  * @returns {Promise<Object>} User service request details
  */
 
-export const getUserServiceRequestById = async (token, requestId) => {
+export const getUserServiceRequestById = async (
+  token,
+  requestId,
+  language = "en"
+) => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}api/UserService/GetById/${requestId}`,
@@ -568,6 +581,7 @@ export const getUserServiceRequestById = async (token, requestId) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
+          "Accept-Language": language,
         },
         timeout: 10000, // 10-second timeout
       }
@@ -604,7 +618,8 @@ export const getUserServiceRequestById = async (token, requestId) => {
 export const updateUserServiceRequestStatus = async (
   token,
   requestId,
-  status
+  status,
+  language = "en"
 ) => {
   try {
     const response = await axios.put(
@@ -617,6 +632,7 @@ export const updateUserServiceRequestStatus = async (
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
+          "Accept-Language": language,
         },
         timeout: 10000, // 10-second timeout
       }
@@ -1062,7 +1078,7 @@ export const markNotificationAsRead = async (token, notificationIds) => {
  * @param {string} token - Authorization token
  * @returns {Promise<Array>} List of notifications
  */
-export const getAllNotifications = async (token) => {
+export const getAllNotifications = async (token, language = "en") => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}api/Notifications/GetAllNotifications`,
@@ -1071,6 +1087,7 @@ export const getAllNotifications = async (token) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
+          "Accept-Language": language,
         },
         timeout: 10000, // 10-second timeout
       }

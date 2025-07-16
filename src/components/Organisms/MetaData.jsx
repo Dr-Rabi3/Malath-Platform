@@ -7,25 +7,29 @@ import { useEffect, useState } from "react";
 import { getEntitySettings } from "../../api/settings";
 
 function MetaData({ ...props }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [loading, setLoading] = useState(true);
   const values = t("about.valuesList", { returnObjects: true });
   const [settingData, setSettingData] = useState({
-    vision: "",
-    mission: "",
-    values: "",
+    visionEn: "",
+    visionAr: "",
+    missionEn: "",
+    missionAr: "",
+    valuesEn: "",
+    valuesAr: "",
   });
   useEffect(() => {
     setLoading(true);
-    getEntitySettings()
+    getEntitySettings(i18n.language)
       .then((data) => {
+        console.log(data);
         setSettingData(data);
       })
       .catch(() => {
         message.error("Failed to fetch settings");
       })
       .finally(() => setLoading(false));
-  }, []);
+  }, [i18n.language]);
   // console.log(settingData);
   return (
     <div {...props} className="space-y-[35px]">
@@ -42,9 +46,14 @@ function MetaData({ ...props }) {
             </h1>
             <h3
               className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main"
-              dangerouslySetInnerHTML={{ __html: settingData?.vision }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  i18n.language === "ar"
+                    ? settingData?.visionAr
+                    : settingData?.visionEn,
+              }}
             >
-              {/* {settingData?.vision} */}
+              {/* {i18n.language === "ar" ? settingData?.visionAr : settingData?.visionEn} */}
             </h3>
           </div>
         </Col>
@@ -55,7 +64,12 @@ function MetaData({ ...props }) {
             </h1>
             <h3
               className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main"
-              dangerouslySetInnerHTML={{ __html: settingData?.mission }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  i18n.language === "ar"
+                    ? settingData?.missionAr
+                    : settingData?.missionEn,
+              }}
             ></h3>
           </div>
         </Col>
@@ -66,7 +80,12 @@ function MetaData({ ...props }) {
             </h1>
             <h3
               className="text-brand-700 font-light text-base sm:text-lg md:text-[18px] font-main"
-              dangerouslySetInnerHTML={{ __html: settingData?.values }}
+              dangerouslySetInnerHTML={{
+                __html:
+                  i18n.language === "ar"
+                    ? settingData?.valuesAr
+                    : settingData?.valuesEn,
+              }}
             ></h3>
           </div>
         </Col>

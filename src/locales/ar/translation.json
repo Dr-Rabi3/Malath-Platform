@@ -194,8 +194,13 @@
     "contact": "تواصل معنا",
     "address": "العنوان: 20 شارع الطيران، الدور الأول، شقة 2",
     "email": "البريد الإلكتروني: MalathEgypt@.com",
-    "phone": "الهاتف: 0222604857",
-    "mobile": "الجوال: 01008375583، 01099134464"
+    "phone": "الهاتف: +966549909990",
+    "mobile": "الجوال: +966549909990 ",
+    "social": "وسائل التواصل الاجتماعي",
+    "facebook": "فيسبوك",
+    "instagram": "انستجرام",
+    "tiktok": "تيك توك",
+    "soon": "سيضاف قريباً"
   },
   "service_request": "طلب خدمة",
   "contact": {
@@ -310,7 +315,22 @@
       "vision": "الرؤية",
       "mission": "المهمة",
       "values": "القيم",
-      "save": "حفظ"
+      "save": "حفظ",
+      "englishVision": "الرؤية باللغة الإنجليزية",
+      "arabicVision": "الرؤية باللغة العربية",
+      "englishMission": "المهمة باللغة الإنجليزية",
+      "arabicMission": "المهمة باللغة العربية",
+      "englishValues": "القيم باللغة الإنجليزية",
+      "arabicValues": "القيم باللغة العربية",
+      "englishVisionRequired": "يرجى إدخال الرؤية باللغة الإنجليزية",
+      "arabicVisionRequired": "يرجى إدخال الرؤية باللغة العربية",
+      "englishMissionRequired": "يرجى إدخال المهمة باللغة الإنجليزية",
+      "arabicMissionRequired": "يرجى إدخال المهمة باللغة العربية",
+      "englishValuesRequired": "يرجى إدخال القيم باللغة الإنجليزية",
+      "arabicValuesRequired": "يرجى إدخال القيم باللغة العربية",
+      "updateSuccess": "تم تحديث الإعدادات بنجاح!",
+      "updateError": "فشل في تحديث الإعدادات",
+      "fetchError": "فشل في جلب الإعدادات"
     },
     "addService": {
       "addServiceType": "إضافة نوع خدمة",
@@ -508,7 +528,12 @@
     "createError": "فشل في إنشاء المدونة: {{error}}",
     "deleteSuccess": "تم حذف المدونة!",
     "deleteError": "فشل في حذف المدونة: {{error}}",
-    "submitError": "فشل في الإرسال: {{error}}"
+    "submitError": "فشل في الإرسال: {{error}}",
+    "englishContent": "المحتوى باللغة الإنجليزية",
+    "arabicContent": "المحتوى باللغة العربية",
+    "englishContentRequired": "يرجى إدخال المحتوى باللغة الإنجليزية",
+    "arabicContentRequired": "يرجى إدخال المحتوى باللغة العربية",
+    "contentRequired": "المحتوى مطلوب"
   },
   "blogs": {
     "deleteTitle": "حذف المدونة",

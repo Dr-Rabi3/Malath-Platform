@@ -106,13 +106,44 @@ function AdminBlog() {
             </Button>
           </div>
         </Form.Item>
-        <Form.Item
-          name="description"
-          labelCol={{ span: 24 }}
-          wrapperCol={{ span: 24 }}
-        >
-          <Editor />
-        </Form.Item>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <Form.Item
+            name="contentEn"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+            label={t("adminBlog.englishContent", "Content in English")}
+            rules={[
+              {
+                required: true,
+                message: t(
+                  "adminBlog.englishContentRequired",
+                  "Please enter content in English"
+                ),
+                whitespace: true,
+              },
+            ]}
+          >
+            <Editor field="contentEn" />
+          </Form.Item>
+          <Form.Item
+            name="contentAr"
+            label={t("adminBlog.arabicContent", "Content in Arabic")}
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+            rules={[
+              {
+                required: true,
+                message: t(
+                  "adminBlog.arabicContentRequired",
+                  "Please enter content in Arabic"
+                ),
+                whitespace: true,
+              },
+            ]}
+          >
+            <Editor field="contentAr" />
+          </Form.Item>
+        </div>
       </Form>
       <Blogs isAdmin={true} onDelete={handleDelete} />
     </>

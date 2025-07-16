@@ -346,7 +346,7 @@ function SupportDashboard() {
                 }
                 isAdmin={isAdmin}
                 onClick={() =>
-                  navigate(`/support/service/${request.id}`, {
+                  navigate(`service/${request.id}`, {
                     state: { service: request, userRequest: userObj, isAdmin },
                   })
                 }

@@ -1,4 +1,8 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useFetcher,
+} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Login from "./components/pages/Login";
 import Register from "./components/pages/Register";
@@ -27,8 +31,6 @@ import NotFound from "./components/pages/NotFound";
 import AdminAddService from "./components/pages/AdminAddService";
 import AdminDashboard from "./components/pages/AdminDashboard";
 import Slider from "./components/pages/Slider";
-import { homeLoader } from "./components/Organisms/Home";
-
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -38,7 +40,6 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Landing />,
-        loader: homeLoader, // <-- add this
       },
       {
         path: "about",
@@ -97,7 +98,7 @@ const router = createBrowserRouter([
         element: <SupportDashboard />,
       },
       {
-        path: "service/:serviceId",
+        path: "admin-service/service/:serviceId",
         element: <ShowService />,
       },
       {

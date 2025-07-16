@@ -3,7 +3,7 @@ import axios from "axios";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 // Fetch entity settings
-export const getEntitySettings = async () => {
+export const getEntitySettings = async (language = "en") => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}api/WebPages/GetEntitySettings`,
@@ -11,6 +11,7 @@ export const getEntitySettings = async () => {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
+          "Accept-Language": language,
         },
         timeout: 10000,
       }
