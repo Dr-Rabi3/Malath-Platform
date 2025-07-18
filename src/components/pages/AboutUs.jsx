@@ -9,17 +9,17 @@ function AboutUs() {
   const { t, i18n } = useTranslation();
   const lang = i18n.language;
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [mission, setMission] = useState("");
+  const [settings, setSettings] = useState({});
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchMission() {
       setLoading(true);
       try {
-        const settings = await getEntitySettings();
-        setMission(settings.mission || "");
+        const data = await getEntitySettings();
+        setSettings(data || {});
       } catch (err) {
-        setMission("");
+        setSettings({});
       }
       setLoading(false);
     }
@@ -72,7 +72,14 @@ function AboutUs() {
             {loading ? (
               <Spin />
             ) : (
-              <p dangerouslySetInnerHTML={{ __html: mission }} />
+              <p
+                dangerouslySetInnerHTML={{
+                  __html:
+                    lang === "ar"
+                      ? settings.missionAr || ""
+                      : settings.missionEn || "",
+                }}
+              />
             )}
             <div className="flex justify-between items-center mt-4">
               <h1 className="text-brand-200 text-base sm:text-lg">

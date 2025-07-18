@@ -189,6 +189,10 @@
       "We believe our success begins with the success of our clients"
     ]
   },
+  "prosHero": {
+    "title": "Why Choose Malath?",
+    "subtitle": "Experience strategic growth with Malath where expert minds turn complex business needs into smart, seamless solutions."
+  },
   "footer": {
     "slogan": "Your most trusted & highly adaptable partner for business, marketing, and investment solutions.",
     "copyright": "© 2025. Malath. All rights reserved.",
@@ -546,5 +550,9 @@
     "readTime": "2 min read",
     "noBlogs": "No blogs found",
     "pagination": "{{from}}-{{to}} of {{total}} blogs"
+  },
+  "servicePage": {
+    "ourServices": "Our Services",
+    "transformBrand": "Transform your brand with our innovative digital solutions that captivate and engage your audience."
   }
 }

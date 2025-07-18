@@ -6,9 +6,9 @@ function About() {
 
   return (
     <div className="bg-accent-25 flex flex-col justify-center items-center gap-4 sm:gap-6 rounded-[20px] shadow-custom-gray text-center min-h-[250px] sm:min-h-[350px] md:min-h-[400px] px-2 sm:px-6 md:px-12 py-8">
-      <div className="font-extrabold text-xl sm:text-2xl md:text-[35px] max-w-full md:max-w-[1200px] font-main md:leading-[2.5rem] lg:leading-[3rem]">
+      <div className="font-extrabold text-[#5B5A5E] text-xl sm:text-2xl md:text-[35px] max-w-full md:max-w-[1200px] font-main md:leading-[2.5rem] lg:leading-[3rem]">
         {t("about.supportMessage")}
-        <span className="text-neutral-700/50 font-main">
+        <span className="text-neutral-950 font-main">
           {" "}
           {t("about.supportHighlight")}
         </span>

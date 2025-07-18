@@ -182,10 +182,10 @@ export const createSlider = async (token, sliderData) => {
     const response = await axios.post(
       `${API_BASE_URL}api/Sliders/Create`,
       {
-        titleEn: sliderData.title,
-        titleAr: sliderData.title,
-        descriptionEn: sliderData.description,
-        descriptionAr: sliderData.description,
+        titleEn: sliderData.titleEn,
+        titleAr: sliderData.titleAr,
+        descriptionEn: sliderData.descriptionEn,
+        descriptionAr: sliderData.descriptionAr,
         imageUrl: imageUrl.url,
         order: +sliderData.order,
       },

@@ -257,7 +257,7 @@ function AdminAddService() {
           </Form.Item>
           <Form.Item
             label={t("admin.addService.descriptionEn")}
-            name="descEn"
+            name="descriptionEn"
             rules={[
               {
                 required: true,
@@ -274,7 +274,7 @@ function AdminAddService() {
           </Form.Item>
           <Form.Item
             label={t("admin.addService.descriptionAr")}
-            name="descAr"
+            name="descriptionAr"
             rules={[
               {
                 required: true,

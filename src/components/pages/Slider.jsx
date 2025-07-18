@@ -113,7 +113,6 @@ const Slider = () => {
   const onFinish = async (values) => {
     setUploading(true);
     const file = values.image[0]?.originFileObj;
-    console.log(file);
     if (!file) {
       messageApi.error(t("admin.slider.uploadImageError"));
       setUploading(false);
@@ -121,8 +120,10 @@ const Slider = () => {
     }
     try {
       await createSlider(user.token, {
-        title: values.title,
-        description: values.description,
+        titleEn: values.titleEn,
+        titleAr: values.titleAr,
+        descriptionEn: values.descriptionEn,
+        descriptionAr: values.descriptionAr,
         imageFile: file,
         order: slides.length + 1,
       });
@@ -220,13 +221,33 @@ const Slider = () => {
             style={{ maxWidth: 400 }}
           >
             <Form.Item
-              name="title"
-              label={t("admin.slider.slideTitle")}
+              name="titleEn"
+              label={t("admin.slider.slideTitle") + " (English)"}
               rules={[
-                { required: true, message: t("admin.slider.enterTitleError") },
+                {
+                  required: true,
+                  message: t("admin.slider.enterTitleError") + " (English)",
+                },
               ]}
             >
-              <Input placeholder={t("admin.slider.enterSlideTitle")} />
+              <Input
+                placeholder={t("admin.slider.enterSlideTitle") + " (English)"}
+              />
+            </Form.Item>
+            <Form.Item
+              name="titleAr"
+              label={t("admin.slider.slideTitle") + " (Arabic)"}
+              rules={[
+                {
+                  required: true,
+                  message: t("admin.slider.enterTitleError") + " (Arabic)",
+                },
+              ]}
+            >
+              <Input
+                placeholder={t("admin.slider.enterSlideTitle") + " (Arabic)"}
+                dir="rtl"
+              />
             </Form.Item>
             <Form.Item
               name="image"
@@ -260,16 +281,30 @@ const Slider = () => {
               </Upload>
             </Form.Item>
             <Form.Item
-              name="description"
-              label={t("admin.slider.slideDescription")}
+              name="descriptionEn"
+              label={t("admin.slider.slideDescription") + " (English)"}
               rules={[
                 {
                   required: true,
-                  message: t("admin.slider.enterDescriptionError"),
+                  message:
+                    t("admin.slider.enterDescriptionError") + " (English)",
                 },
               ]}
             >
-              <Editor field="description" limited={1000} />
+              <Editor field="descriptionEn" limited={1000} />
+            </Form.Item>
+            <Form.Item
+              name="descriptionAr"
+              label={t("admin.slider.slideDescription") + " (Arabic)"}
+              rules={[
+                {
+                  required: true,
+                  message:
+                    t("admin.slider.enterDescriptionError") + " (Arabic)",
+                },
+              ]}
+            >
+              <Editor field="descriptionAr" limited={1000} />
             </Form.Item>
             <Form.Item>
               <Button
