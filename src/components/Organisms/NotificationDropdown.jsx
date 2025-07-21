@@ -27,6 +27,7 @@ function NotificationDropdown() {
     staleTime: 10000, // 10 seconds
   });
 
+  console.log(allNotifications);
   // Filter notifications for current user
   const userNotifications =
     allNotifications?.filter(
@@ -41,21 +42,33 @@ function NotificationDropdown() {
   // Handle notification click
   const handleNotificationClick = async (notification) => {
     try {
-      // Mark notification as read if it's not already read
+      console.log(notification);
       if (!notification.isRead) {
+        messageApi.open({
+          key: "mark",
+          type: "loading",
+          label: t("common.loading"),
+        });
         await markNotificationAsRead(user?.token, [notification.id]);
-
         // Invalidate and refetch notifications to update the UI
         await queryClient.invalidateQueries(["notifications"]);
 
-        messageApi.success(t("notifications.markedAsRead"));
+        messageApi.open({
+          key: "mark",
+          type: "success",
+          label: t("notifications.markedAsRead"),
+        });
       }
 
       // You can add additional logic here to navigate to related content
       console.log("Notification clicked:", notification);
     } catch (error) {
       console.error("Error marking notification as read:", error);
-      messageApi.error(t("notifications.errorMarkingAsRead"));
+      messageApi.open({
+        key: "mark",
+        type: "error",
+        label: t("notifications.errorMarkingAsRead"),
+      });
     }
   };
 
@@ -75,17 +88,29 @@ function NotificationDropdown() {
       const unreadNotificationIds = unreadNotifications.map(
         (notification) => notification.id
       );
-
+      messageApi.open({
+        key: "markAll",
+        type: "loading",
+        label: t("common.loading"),
+      });
       // Mark all unread notifications as read in a single API call
       await markNotificationAsRead(user?.token, unreadNotificationIds);
 
       // Invalidate and refetch notifications to update the UI
       await queryClient.invalidateQueries(["notifications"]);
 
-      messageApi.success(t("notifications.allMarkedAsRead"));
+      messageApi.open({
+        key: "markAll",
+        type: "success",
+        label: t("notifications.allMarkedAsRead"),
+      });
     } catch (error) {
       console.error("Error marking all notifications as read:", error);
-      messageApi.error(t("notifications.errorMarkingAllAsRead"));
+      messageApi.open({
+        key: "markAll",
+        type: "error",
+        label: t("notifications.errorMarkingAllAsRead"),
+      });
     }
   };
 

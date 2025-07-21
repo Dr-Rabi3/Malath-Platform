@@ -152,9 +152,13 @@ export const deleteUser = async (token, userId) => {
  * Fetch all sliders
  * @returns {Promise<Object>} - The sliders response
  */
-export const getAllSliders = async () => {
+export const getAllSliders = async (language = "en") => {
   try {
+    console.log(language)
     const response = await axios.get(`${API_BASE_URL}api/Sliders/all`, {
+      headers: {
+        "Accept-Language": language,
+      },
       timeout: 10000,
     });
     return response.data;

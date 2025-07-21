@@ -8,6 +8,7 @@ import { getEntitySettings } from "../../api/settings";
 import visionIcon from "../../assets/icons/vision.svg";
 import missionIcon from "../../assets/icons/mission.svg";
 import valuesIcon from "../../assets/icons/values.svg";
+import FrequentQs from "../Molecules/FrequantQs";
 
 const { Meta } = Card;
 
@@ -89,13 +90,17 @@ function MetaData({ ...props }) {
                 <Card
                   loading={loading}
                   className="w-full max-w-[350px] h-full"
-                  style={{
+                  styles={{
                     minHeight: "280px",
                     borderWidth: "1px",
                     borderColor: "#9A743C",
                   }}
                   cover={
-                    <div className="flex justify-center pt-3 pl-3 pb-2">
+                    <div
+                      className={`flex justify-center pt-3 ${
+                        i18n.language === "en" ? "pl-3" : "pr-3"
+                      } pb-2`}
+                    >
                       <div
                         className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
                         style={{
@@ -161,8 +166,9 @@ function MetaData({ ...props }) {
       </div>
 
       {/* Additional components */}
-      <About />
       <Pros />
+      <About />
+      <FrequentQs />
     </div>
   );
 }

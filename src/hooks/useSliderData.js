@@ -4,8 +4,9 @@ import { getFile } from "../api/http";
 
 export const useSliderData = () => {
   return useMutation({
-    mutationFn: async () => {
-      const res = await getAllSliders();
+    mutationFn: async ({ lang }) => {
+      // console.log(lang);
+      const res = await getAllSliders(lang);
 
       if (res.isSuccess && Array.isArray(res.data)) {
         const slidesWithImages = await Promise.all(

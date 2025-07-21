@@ -1,14 +1,16 @@
 import * as signalR from "@microsoft/signalr";
 
-const connection = new signalR.HubConnectionBuilder()
-  .withUrl("/notificationhub", {
-    accessTokenFactory: () => {
-      // Return your token here if you’re using JWT Auth
-      return localStorage.getItem("access_token") || "";
-    },
-  })
-  .withAutomaticReconnect()
-  .configureLogging(signalR.LogLevel.Information)
-  .build();
+let connection = null;
+
+export function createConnection(token) {
+  connection = new signalR.HubConnectionBuilder()
+    .withUrl(`${import.meta.env.VITE_API_BASE_URL}notificationhub`, {
+      accessTokenFactory: () => token,
+    })
+    .withAutomaticReconnect()
+    .configureLogging(signalR.LogLevel.Information)
+    .build();
+  return connection;
+}
 
 export default connection;

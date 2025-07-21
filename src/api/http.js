@@ -1038,16 +1038,15 @@ export const resetPasswordBySupport = async (token, resetData) => {
  */
 export const markNotificationAsRead = async (token, notificationIds) => {
   try {
-    const response = await axios.post(
+    // console.log(notificationIds);
+    const response = await axios.put(
       `${API_BASE_URL}api/Notifications/MarkAsRead`,
-      {
-        notificationIds: notificationIds,
-      },
+      notificationIds,
       {
         headers: {
-          "Content-Type": "application/json",
+          // "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
-          Accept: "application/json",
+          // Accept: "application/json",
         },
         timeout: 10000, // 10-second timeout
       }

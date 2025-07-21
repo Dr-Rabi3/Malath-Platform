@@ -4,6 +4,7 @@ import { message } from "antd";
 import connection from "../api/signalrConnection";
 import { useAuth } from "../store/AuthContext";
 import { useTranslation } from "react-i18next";
+import { createConnection } from "../api/signalrConnection";
 
 export const useNotification = () => {
   const queryClient = useQueryClient();
@@ -17,18 +18,20 @@ export const useNotification = () => {
       return;
     }
 
+    const connection = createConnection(user.token);
+
     connection
       .start()
       .then(() => {
         console.log("Connected to SignalR hub");
 
         // Listen for notifications
-        connection.on("notify", (notificationData) => {
+        connection.on("notify", (message) => {
           try {
+            // const notificationData = JSON.parse(message);
+            console.log("Notification received:", data);
             const notification =
-              typeof notificationData === "string"
-                ? JSON.parse(notificationData)
-                : notificationData;
+              typeof message === "string" ? JSON.parse(message) : message;
 
             console.log("Notification received:", notification);
 

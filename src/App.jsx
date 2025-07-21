@@ -31,6 +31,7 @@ import NotFound from "./components/pages/NotFound";
 import AdminAddService from "./components/pages/AdminAddService";
 import AdminDashboard from "./components/pages/AdminDashboard";
 import Slider from "./components/pages/Slider";
+import AddQuestion from "./components/pages/AddQuestion";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -120,6 +121,10 @@ const router = createBrowserRouter([
       {
         path: "slider",
         element: <Slider />,
+      },
+      {
+        path: "add-question",
+        element: <AddQuestion />,
       },
     ],
   },

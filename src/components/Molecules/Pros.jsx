@@ -23,10 +23,10 @@ function Pros() {
           />
         </div>
         <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
-          <h1 className="font-barlow font-semibold text-[50px]">
+          <h1 className="font-barlow font-semibold text-[50px] text-center">
             {t("prosHero.title")}
           </h1>
-          <div className="font-barlow font-regular text-[20px]">
+          <div className="font-barlow font-regular text-[20px] text-center">
             {t("prosHero.subtitle")}
           </div>
         </div>
@@ -53,16 +53,17 @@ function Pros() {
               >
                 <img src={why1} className="w-[30px] sm:w-[30px] h-auto" />
               </div>
-              <div>Business Expertise</div>
+              <div>{t("pros.cards.0", "Business Expertise")}</div>
             </div>
           }
         >
           <Meta
             description={
               <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
-                Our team brings deep knowledge of regional and international
-                markets. We combine strategic thinking with real-world
-                experience to deliver practical, high-impact business solutions.
+                {t(
+                  "pros.cardsDesc.0",
+                  "Our team brings deep knowledge of regional and international markets. We combine strategic thinking with real-world experience to deliver practical, high-impact business solutions."
+                )}
               </div>
             }
           />
@@ -88,16 +89,17 @@ function Pros() {
               >
                 <img src={why2} className="w-[30px] sm:w-[30px] h-auto" />
               </div>
-              <div>Client-Focused Mindset</div>
+              <div>{t("pros.cards.1", "Client-Focused Mindset")}</div>
             </div>
           }
         >
           <Meta
             description={
               <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
-                We tailor our services around your goals. Whether you're an
-                entrepreneur, SME, or investor, your success is our top priority
-                — and we treat your business like our own.
+                {t(
+                  "pros.cardsDesc.1",
+                  "We tailor our services around your goals. Whether you're an entrepreneur, SME, or investor, your success is our top priority — and we treat your business like our own."
+                )}
               </div>
             }
           />
@@ -123,16 +125,17 @@ function Pros() {
               >
                 <img src={why3} className="w-[30px] sm:w-[30px] h-auto" />
               </div>
-              <div>Results That Matter</div>
+              <div>{t("pros.cards.2", "Results That Matter")}</div>
             </div>
           }
         >
           <Meta
             description={
               <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
-                We don’t just offer services — we deliver outcomes. From
-                feasibility studies to marketing campaigns, everything we do is
-                designed to create measurable value and drive growth.
+                {t(
+                  "pros.cardsDesc.2",
+                  "We don’t just offer services — we deliver outcomes. From feasibility studies to marketing campaigns, everything we do is designed to create measurable value and drive growth."
+                )}
               </div>
             }
           />
@@ -158,16 +161,17 @@ function Pros() {
               >
                 <img src={why4} className="w-[30px] sm:w-[30px] h-auto" />
               </div>
-              <div>Long-Term Partnership</div>
+              <div>{t("pros.cards.3", "Long-Term Partnership")}</div>
             </div>
           }
         >
           <Meta
             description={
               <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
-                At Malath, we believe in building strong, lasting relationships.
-                We stay with you beyond the launch — offering continuous
-                support, insight, and scalability as your business evolves.
+                {t(
+                  "pros.cardsDesc.3",
+                  "At Malath, we believe in building strong, lasting relationships. We stay with you beyond the launch — offering continuous support, insight, and scalability as your business evolves."
+                )}
               </div>
             }
           />

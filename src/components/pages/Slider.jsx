@@ -21,8 +21,8 @@ function getBase64(file) {
   });
 }
 
-const REQUIRED_WIDTH = 1200;
-const REQUIRED_HEIGHT = 600;
+const REQUIRED_WIDTH = 1360;
+const REQUIRED_HEIGHT = 669;
 
 const Slider = () => {
   const [messageApi, contextHelper] = message.useMessage();
@@ -34,14 +34,14 @@ const Slider = () => {
 
   const [form] = Form.useForm();
   const { user } = useAuth();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   // Fetch slides from backend on mount
   useEffect(() => {
     const fetchSlides = async () => {
       setLoading(true);
       try {
-        const res = await getAllSliders();
+        const res = await getAllSliders(i18n.language);
         if (res.isSuccess && Array.isArray(res.data)) {
           // Fetch images as blobs and convert to object URLs
           const slidesWithImages = await Promise.all(

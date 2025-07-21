@@ -22,7 +22,7 @@ function Home(props) {
   const lang = i18n.language;
   useEffect(() => {
     // Trigger the mutation when component mounts
-    sliderMutation.mutate();
+    sliderMutation.mutate({ lang });
   }, []);
 
   // Show loading spinner while data is being fetched
@@ -80,11 +80,11 @@ function Home(props) {
             );
           })}
           {slides.length === 0 && (
-          <div className="w-full min-h-[600px] flex flex-col gap-3">
-            <Skeleton className="h-[100%] w-full rounded-xl" />
-            <Skeleton className="h-[30px] w-[40%] rounded-xl" />
-            <Skeleton className="h-[40px] w-full rounded-xl" />
-          </div>
+            <div className="w-full min-h-[600px] flex flex-col gap-3">
+              <Skeleton className="h-[100%] w-full rounded-xl" />
+              <Skeleton className="h-[30px] w-[40%] rounded-xl" />
+              <Skeleton className="h-[40px] w-full rounded-xl" />
+            </div>
           )}
         </CarouselContent>
       </Carousel>

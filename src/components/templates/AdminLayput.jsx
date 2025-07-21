@@ -4,6 +4,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
+  QuestionCircleOutlined,
   SettingOutlined,
   UploadOutlined,
   UserOutlined,
@@ -29,6 +30,7 @@ import { AddUser } from "../../assets/icons/AddUser.jsx";
 import { SliderIcon } from "../../assets/icons/SliderIcon.jsx";
 import NotificationDropdown from "../Organisms/NotificationDropdown";
 import { useNotification } from "../../hooks/useNotification";
+import { AddQuestionIcon } from "../../assets/icons/AddQuestionIcon.jsx";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -64,6 +66,7 @@ function AdminLayout() {
     else if (location.pathname.includes("add-user")) setActiveKey("5");
     else if (location.pathname.includes("setting")) setActiveKey("6");
     else if (location.pathname.includes("slider")) setActiveKey("7");
+    else if (location.pathname.includes("add-question")) setActiveKey("8");
     else setActiveKey("1");
   }, [location, location.pathname, location.state]);
 
@@ -130,19 +133,30 @@ function AdminLayout() {
     },
     {
       key: "8",
+      icon: <AddQuestionIcon color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
+      label: "Add questions",
+      onClick: () => navigate("/admin/add-question"),
+    },
+    {
+      key: "9",
       icon: <Earth color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
       label: `Translate to ${
         localStorage.getItem("lang") === "en" || !localStorage.getItem("lang")
           ? "arabic"
           : "english"
       }`,
-      onClick: () =>
-        localStorage.getItem("lang") == "ar"
-          ? changeLanguage("en")
-          : changeLanguage("ar"),
+      onClick: () => {
+        if (localStorage.getItem("lang") == "ar") {
+          changeLanguage("en");
+        } else {
+          changeLanguage("ar");
+        }
+        window.location.reload();
+      },
     },
+
     {
-      key: "9",
+      key: "10",
       icon: <img src={logout} alt="logout icon" className="w-5" />,
       label: t("sidebar.logout", "Logout"),
       onClick: () => {
@@ -181,6 +195,12 @@ function AdminLayout() {
           background: #3B307D !important;
           box-shadow: 0px 0px 8px 2px #2525258f !important;
           }
+        .ant-menu-item-selected > svg{
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
         [data-menu-id$="-${items.length}"].ant-menu-item{
           position: absolute !important;
           bottom:0px !important;
