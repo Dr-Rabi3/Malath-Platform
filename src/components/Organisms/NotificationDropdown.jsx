@@ -179,7 +179,7 @@ function NotificationDropdown({ link }) {
                           className={`text-sm ${
                             !notification.isRead ? "font-semibold" : ""
                           }`}
-                          onClick={() => navigate("/admin/admin-service")}
+                          onClick={() => navigate(link)}
                         >
                           {notification.title || t("notifications.noTitle")}
                         </span>
