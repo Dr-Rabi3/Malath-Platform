@@ -5,14 +5,15 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getAllNotifications, markNotificationAsRead } from "../../api/http";
 import { useAuth } from "../../store/AuthContext";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-function NotificationDropdown() {
+function NotificationDropdown({ link }) {
   const { user } = useAuth();
   const { t } = useTranslation();
   const [messageApi, contextHolder] = message.useMessage();
   const [open, setOpen] = useState(false);
   const queryClient = useQueryClient();
-
+  const navigate = useNavigate();
   // Fetch notifications
   const {
     data: allNotifications,
@@ -178,6 +179,7 @@ function NotificationDropdown() {
                           className={`text-sm ${
                             !notification.isRead ? "font-semibold" : ""
                           }`}
+                          onClick={() => navigate("/admin/admin-service")}
                         >
                           {notification.title || t("notifications.noTitle")}
                         </span>

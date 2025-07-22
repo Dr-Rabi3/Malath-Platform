@@ -135,7 +135,9 @@ function Profile() {
   const handleUpload = () => {
     if (selectedFile) {
       uploadMutation.mutate(selectedFile);
+      return uploadMutation.data;
     }
+    return null;
   };
 
   // Handle form submission from UserData component
@@ -158,11 +160,7 @@ function Profile() {
       // If there's a new image selected, upload it first
       if (selectedFile) {
         messageApi.loading(t("profile.uploadingImage"));
-        const uploadedPath = await uploadFile(
-          user?.token,
-          selectedFile,
-          "image"
-        );
+        const uploadedPath = handleUpload(); // await uploadFile(user?.token,selectedFile,"image");
         console.log("Uploaded image path:", uploadedPath, typeof uploadedPath);
 
         // Ensure we have a string URL, not an object

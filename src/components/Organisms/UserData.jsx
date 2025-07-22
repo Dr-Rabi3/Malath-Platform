@@ -37,7 +37,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
-  // console.log(userData);
+  console.log(userData);
   return (
     <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full px-2">
       <Form
@@ -146,7 +146,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
               name="whatsapp"
               validateTrigger={["onBlur", "onSubmit"]}
               rules={[
-                { required: true, message: "Please input your phone!" },
+                { required: true, message: t("form.validation.phoneRequired") },
                 {
                   validator: (_, value) => {
                     if (!value) return Promise.resolve();
@@ -155,7 +155,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
                     // Basic validation - you can make this more sophisticated
                     if (!isValid) {
                       return Promise.reject(
-                        new Error("Please enter a valid phone number")
+                        new Error(t("form.validation.phoneInvalid"))
                       );
                     }
                     return Promise.resolve();

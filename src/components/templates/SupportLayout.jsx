@@ -22,6 +22,7 @@ import { useAuth } from "../../store/AuthContext";
 import { Earth } from "../../assets/icons/Earth.jsx";
 import NotificationDropdown from "../Organisms/NotificationDropdown";
 import { useNotification } from "../../hooks/useNotification";
+import ScrollToTop from "../atoms/ScrollToTop.jsx";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -62,6 +63,7 @@ function SupportLayout() {
   };
   return (
     <>
+      <ScrollToTop />
       {notificationContextHolder}
       <style>
         {`
@@ -120,6 +122,7 @@ function SupportLayout() {
                 !localStorage.getItem("lang")
                   ? changeLanguage("ar")
                   : changeLanguage("en");
+                window.location.reload();
               } else if (value.key === "1") {
                 navigate("/support");
               } else if (value.key === "2") {

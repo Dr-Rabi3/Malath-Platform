@@ -31,6 +31,7 @@ import { SliderIcon } from "../../assets/icons/SliderIcon.jsx";
 import NotificationDropdown from "../Organisms/NotificationDropdown";
 import { useNotification } from "../../hooks/useNotification";
 import { AddQuestionIcon } from "../../assets/icons/AddQuestionIcon.jsx";
+import ScrollToTop from "../atoms/ScrollToTop.jsx";
 
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -134,7 +135,7 @@ function AdminLayout() {
     {
       key: "8",
       icon: <AddQuestionIcon color="#ddd" className="w-5 p-0 text-[#fff]/50" />,
-      label: "Add questions",
+      label: t("addQuestions"),
       onClick: () => navigate("/admin/add-question"),
     },
     {
@@ -179,6 +180,7 @@ function AdminLayout() {
 
   return (
     <>
+      <ScrollToTop />
       {notificationContextHolder}
       <style>
         {`
@@ -240,7 +242,7 @@ function AdminLayout() {
         <Layout>
           <Header
             style={{
-              padding: "0 15px 0px 0px",
+              padding: "0 15px 0px 15px",
               backgroundColor: "#FBFBF3",
             }}
             className="shadow-custom-gray flex justify-between"

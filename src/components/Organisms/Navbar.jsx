@@ -183,12 +183,14 @@ export default function Navbar() {
                 }`}
               >
                 <button
-                  onClick={() =>
+                  onClick={() => {
                     localStorage.getItem("lang") === "en" ||
                     !localStorage.getItem("lang")
                       ? changeLanguage("ar")
-                      : changeLanguage("en")
-                  }
+                      : changeLanguage("en");
+                    window.location.reload();
+                  }}
+                  className="mx-2"
                 >
                   {/* <img src={earth} alt="icon" /> */}
                   <Earth />
