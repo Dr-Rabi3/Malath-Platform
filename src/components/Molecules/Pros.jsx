@@ -5,6 +5,7 @@ import why1 from "../../assets/icons/why1.svg";
 import why2 from "../../assets/icons/why2.svg";
 import why3 from "../../assets/icons/why3.svg";
 import why4 from "../../assets/icons/why4.svg";
+import serviceBg from "../../assets/images/background.jpg";
 const { Meta } = Card;
 
 function Pros() {
@@ -14,12 +15,17 @@ function Pros() {
     <div>
       <div className="relative h-[360px] overflow-hidden">
         <div className="absolute h-full w-full z-[-1]">
-          <Silk
+          {/* <Silk
             speed={5}
             scale={1}
             color="#3B307D"
             noiseIntensity={2.5}
             rotation={0}
+          /> */}
+          <img
+            src={serviceBg}
+            alt=""
+            className="absolute h-full w-full z-[-1] object-cover"
           />
         </div>
         <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">

@@ -4,6 +4,7 @@ import { Collapse } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
+import serviceBg from "../../assets/images/background.jpg";
 
 const { Panel } = Collapse;
 
@@ -113,12 +114,17 @@ function FrequentQs() {
     <div>
       <div className="relative h-[360px] overflow-hidden">
         <div className="absolute h-full w-full z-[-1]">
-          <Silk
+          {/* <Silk
             speed={5}
             scale={1}
             color="#3B307D"
             noiseIntensity={2.5}
             rotation={0}
+          /> */}
+          <img
+            src={serviceBg}
+            alt=""
+            className="absolute h-full w-full z-[-1] object-cover"
           />
         </div>
         <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">

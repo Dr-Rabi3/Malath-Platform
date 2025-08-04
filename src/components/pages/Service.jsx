@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getAllServices } from "../../api/http";
 import { message } from "antd";
 import Silk from "../ui/Silk";
-
+import serviceBg from "../../assets/images/background.jpg";
 function Service() {
   const [messageApi, contextHelper] = message.useMessage();
   const navigate = useNavigate();
@@ -63,12 +63,17 @@ function Service() {
       {contextHelper}
       <div className="relative h-[360px] rounded-3xl overflow-hidden">
         <div className="absolute h-full w-full z-[-1]">
-          <Silk
+          {/* <Silk
             speed={5}
             scale={1}
             color="#3f377b"
             noiseIntensity={2.5}
             rotation={0}
+          /> */}
+          <img
+            src={serviceBg}
+            alt=""
+            className="absolute h-full w-full z-[-1] object-cover"
           />
         </div>
         <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">

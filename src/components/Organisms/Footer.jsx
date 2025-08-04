@@ -124,7 +124,7 @@ function Footer() {
               <p className="font-medium text-[#fff] text-[15px]">
                 {t("footer.social")}
               </p>
-              <ul className="mt-6 flex flex-col sm:flex-row sm:space-x-6 space-y-4 sm:space-y-0 text-sm">
+              <ul className="mt-6 flex flex-col sm:flex-row sm:gap-6 gap-4 text-sm">
                 <li>
                   <a
                     href="https://www.facebook.com/Malath.Marketing"
