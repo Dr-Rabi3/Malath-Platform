@@ -37,7 +37,7 @@ function Pros() {
           </div>
         </div>
       </div>
-      <div className="bg-accent-25 flex flex-wrap">
+      <div className=" flex flex-wrap gap-2 mt-2 rounded-[20px]">
         <Card
           className="bg-accent-25"
           style={{
@@ -45,7 +45,7 @@ function Pros() {
             padding: 50,
             borderWidth: 2,
             borderColor: "#e6e4ff",
-            borderRadius: 0,
+            borderRadius: 20,
             flexGrow: 1,
           }}
           cover={
@@ -81,7 +81,7 @@ function Pros() {
             padding: 50,
             borderWidth: 2,
             borderColor: "#e6e4ff",
-            borderRadius: 0,
+            borderRadius: 20,
             flexGrow: 1,
           }}
           cover={
@@ -118,7 +118,7 @@ function Pros() {
             borderWidth: 2,
             borderColor: "#e6e4ff",
             flexGrow: 1,
-            borderRadius: 0,
+            borderRadius: 20,
           }}
           cover={
             <div className="!flex !text-neutral-950 items-center text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
@@ -153,7 +153,7 @@ function Pros() {
             padding: 50,
             borderWidth: 2,
             borderColor: "#e6e4ff",
-            borderRadius: 0,
+            borderRadius: 20,
             flexGrow: 1,
           }}
           cover={

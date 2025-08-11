@@ -56,31 +56,21 @@ function FrequentQs() {
     return (
       <div
         key={faq.id}
-        className="flex border border-gray-200 items-start p-4 w-full"
+        className="bg-white rounded-lg flex items-start w-full"
+        style={{ boxShadow: "1px 2px 4px 1px #ebe8e8dd" }}
       >
-        <div className="!flex !text-neutral-950 items-center text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
-          <div
-            className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
-            style={{
-              background:
-                "linear-gradient(rgba(236, 229, 218, 0.2) 20%, rgba(36, 36, 36, 0.05) 56%, rgba(236, 229, 218, 0.2) 86%)",
-            }}
-          >
-            {String(index + 1).padStart(2, "0")}
-          </div>
-        </div>
-        <div className="flex-1 px-4 py-3 text-left">
+        <div className="flex-1 px-5 text-left">
           <div
             onClick={() => handleToggle(faq.id)}
             className="flex justify-between items-center cursor-pointer"
           >
-            <h3 className="min-h-[50px] flex items-center font-medium font-barlow text-neutral-950 text-[18px]">
+            <h3 className="min-h-[50px] flex items-center font-medium font-barlow text-black text-[18px]">
               {faq.question}
             </h3>
             {isActive ? (
               <CloseOutlined className="text-[#000]" />
             ) : (
-              <PlusOutlined className="text-[#B59774]" />
+              <PlusOutlined className="text-[#000]" />
             )}
           </div>
 
@@ -96,7 +86,7 @@ function FrequentQs() {
                 className="overflow-hidden"
               >
                 <p
-                  className={`mt-2 text-neutral-700 text-[16px] leading-relaxed ${
+                  className={`mt-2 text-[#646A69] text-[16px] leading-relaxed ${
                     i18n.language === "en" ? "text-left" : "text-right"
                   }`}
                 >
@@ -139,8 +129,8 @@ function FrequentQs() {
           </div>
         </div>
       </div>
-      <div className="bg-accent-25 flex flex-wrap">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 my-[50px]">
+      <div className="flex flex-wrap">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 my-[50px] gap-2">
           <div className="w-full">
             {faqs
               .slice(0, faqs.length / 2)

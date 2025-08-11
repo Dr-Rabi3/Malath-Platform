@@ -17,6 +17,7 @@ module.exports = {
           25: "#FBFBF3",
           DEFAULT: "hsl(var(--accent))",
           foreground: "hsl(var(--accent-foreground))",
+          50: "#F7F8E6",
         },
         neutral: {
           700: "#4A3E98",

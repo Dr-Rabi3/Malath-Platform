@@ -10,7 +10,7 @@ function RegisterForm({ className }) {
         <img
           src={darkLogo}
           alt="dark logo"
-          className="h-[100px] sm:h-[140px] md:h-[180px]"
+          className="h-[20px] sm:h-[80px] md:h-[100px]"
         />
       </div>
       <From

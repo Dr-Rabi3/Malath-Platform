@@ -160,8 +160,10 @@
     "description": "At Malath, we provide integrated outsourcing solutions for entrepreneurs, startups, and investors across Saudi Arabia and Egypt. We help our clients streamline operations, scale confidently, and focus on what matters most — growth and innovation."
   },
   "about": {
-    "visionTitle": "Our Vision",
+    "title": "Join to Malath Service",
+    "getInTouch": "Get in touch",
     "visionDescription": "To become the top destination for entrepreneurs and investors in the Arab world who seek professional, fully integrated remote business management solutions.",
+    "visionTitle": "Our Vision",
 
     "missionTitle": "Our Mission",
     "missionDescription": "To deliver high-quality, reliable services in management, marketing, investment, and project oversight — through a dedicated team focused on every detail that leads to big success.",
