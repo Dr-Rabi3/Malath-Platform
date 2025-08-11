@@ -2,11 +2,11 @@ import { Card, Row, Col } from "antd";
 import { useTranslation } from "react-i18next";
 
 function CustomCollapse({ services }) {
-  const { t } = useTranslation();
+  const { t, i18n} = useTranslation();
   console.log(services);
   return (
     <div className="w-full">
-      <Row gutter={[32, 32]} className="w-full">
+      <Row gutter={[33, 33]} className="w-full justify-between">
         {services?.map((service, index) => {
           // Calculate column size based on total number of services
           let colSize = 8; // Default for 3+ cards
@@ -43,7 +43,7 @@ function CustomCollapse({ services }) {
                   {service.services.map((item) => (
                     <li key={item.id} className="flex flex-col items-start">
                       <div className="flex">
-                        <span className="w-2 h-2 bg-gray-400 rounded-full mt-2 mr-3 flex-shrink-0"></span>
+                        <span className={`w-2 h-2 bg-gray-400 rounded-full mt-2 ${i18n.language === "ar" ? "ml-3" : "mr-3"} flex-shrink-0`}></span>
                         <span className="text-gray-600 text-base">
                           {item.name}
                         </span>

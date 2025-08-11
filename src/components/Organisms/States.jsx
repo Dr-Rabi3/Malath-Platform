@@ -95,16 +95,13 @@ function States() {
                 </svg>
                 <div>
                   <div className="text-xl lg:text-3xl font-medium text-white mb-2">
-                    3500 Project
+                    {t("states.projectCount")}
                   </div>
                 </div>
               </div>
 
               <div className="text-white text-base lg:text-lg leading-relaxed">
-                Our commitment to sustainability shines through as we proudly
-                announce the generation of 5,000 megawatt-hours of renewable
-                energy, contributing to a greener and more environmentally
-                friendly future.
+                {t("states.sustainabilityCommitment")}
               </div>
             </div>
           </div>
@@ -139,7 +136,7 @@ function States() {
                     1000+
                   </div>
                   <div className="text-sm text-yellow-100/80">
-                    Customers Served
+                    {t("states.customersServed")}
                   </div>
                 </div>
               </div>
@@ -167,7 +164,7 @@ function States() {
                 <div>
                   <div className="text-3xl font-bold text-yellow-100">5+</div>
                   <div className="text-sm text-yellow-100/80">
-                    Years Experience
+                    {t("states.yearsExperienceText")}
                   </div>
                 </div>
               </div>

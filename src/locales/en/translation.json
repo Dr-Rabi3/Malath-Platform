@@ -7,7 +7,10 @@
     "whoWeAre": "Who We Are",
     "drivingSuccess": "Driving Success Across Every Sector",
     "partnerText": "We partner with startups, SMEs, and investors to simplify operations, streamline growth, and unlock real value through integrated services and consulting.",
-    "ourMission": "Our Mission"
+    "ourMission": "Our Mission",
+    "card1": "Malath is a leading business outsourcing and consulting company, dedicated to empowering entrepreneurs, startups, and investors across Saudi Arabia and Egypt.",
+    "card2": "We specialize in delivering integrated services in business development, marketing, real estate promotion, and executive operations — all designed to help our clients run smoother, grow faster, and focus on what matters.",
+    "card3": "We don't just provide services — we become a trusted extension of your team. At Malath, we believe that real success starts with smart structure, deep market insight, and consistent support."
   },
   "strategy": {
     "title": "Where Strategy Meets Smart Execution",
@@ -22,7 +25,11 @@
   "states": {
     "projectsComplete": "Projects complete",
     "yearsExperience": "Years Experience",
-    "customers": "Customers"
+    "customers": "Customers",
+    "projectCount": "3500 Project",
+    "sustainabilityCommitment": "Our commitment to sustainability shines through as we proudly announce the generation of 5,000 megawatt-hours of renewable energy, contributing to a greener and more environmentally friendly future.",
+    "customersServed": "Customers Served",
+    "yearsExperienceText": "Years Experience"
   },
   "profile": {
     "uploadPhoto": "Upload new photo",
@@ -180,6 +187,10 @@
     "supportMessage": "We are passionate about supporting entrepreneurs and businesses with",
     "supportHighlight": "smart, reliable solutions to streamline operations and achieve sustainable growth.",
     "seeMore": "See More"
+  },
+  "metaData": {
+    "ourImpact": "Our Impact",
+    "impactDescription": "At Malath, we measure success by the real-world value we create for our clients. From startups to seasoned investors, our services have empowered businesses across diverse industries to operate smarter, grow faster, and achieve more."
   },
   "pros": {
     "title": "Why Choose Malath?",

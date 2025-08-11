@@ -64,28 +64,21 @@ function AboutUs() {
         {/* Left Card */}
         <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
           <p className="text-neutral-700 text-base leading-relaxed">
-            Malath is a leading business outsourcing and consulting company,
-            dedicated to empowering entrepreneurs, startups, and investors
-            across Saudi Arabia and Egypt.
+            {t("aboutUs.card1")}
           </p>
         </div>
 
         {/* Middle Card */}
         <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
           <p className="text-neutral-700 text-base leading-relaxed">
-            We specialize in delivering integrated services in business
-            development, marketing, real estate promotion, and executive
-            operations — all designed to help our clients run smoother, grow
-            faster, and focus on what matters.
+            {t("aboutUs.card2")}
           </p>
         </div>
 
         {/* Right Card */}
         <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
           <p className="text-neutral-700 text-base leading-relaxed">
-            We don't just provide services — we become a trusted extension of
-            your team. At Malath, we believe that real success starts with smart
-            structure, deep market insight, and consistent support.
+            {t("aboutUs.card3")}
           </p>
         </div>
       </div>

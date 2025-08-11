@@ -64,9 +64,8 @@ function MetaData({ ...props }) {
     },
     {
       icon: impactIcon,
-      content:
-        "At Malath, we measure success by the real-world value we create for our clients. From startups to seasoned investors, our services have empowered businesses across diverse industries to operate smarter, grow faster, and achieve more.",
-      titleKey: "Our Impact",
+      content: t("metaData.impactDescription"),
+      titleKey: t("metaData.ourImpact"),
       alt: "impact icon",
     },
   ];
