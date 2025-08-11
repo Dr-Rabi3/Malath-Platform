@@ -46,47 +46,47 @@ function AboutUs() {
     }
   };
   return (
-    <div className="mt-[20px] space-y-[50px] px-2 sm:px-4 md:px-8">
+    <div className="mt-[20px] space-y-[50px] px-2 sm:px-4 md:px-8 mb-20">
       <Strategy />
       <States />
-      <div className="flex flex-col lg:flex-row gap-8 lg:gap-[50px]">
-        <div>
-          <h1
-            className={`text-lg sm:text-xl md:text-2xl lg:text-[24px] text-neutral-950 font-main relative before:absolute before:bg-brand-600 before:w-7 ${
-              lang === "ar"
-                ? "before:left-[calc(100%+15px)] mr-4 sm:mr-10"
-                : "before:right-[calc(100%+15px)] ml-4 sm:ml-10"
-            } before:top-1/2 before:translate-y-[-50%] before:h-[2px]`}
-          >
-            {t("aboutUs.whoWeAre")}
-          </h1>
-          <h3 className="text-neutral-700 font-main text-sm sm:text-base my-[20px]">
-            {t("aboutUs.drivingSuccess")}
-          </h3>
-          <h3 className="text-neutral-700 font-main text-sm sm:text-base">
-            {t("aboutUs.partnerText")}
-          </h3>
+      {/* Header Section */}
+      <div className="text-center mb-12">
+        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-neutral-950 mb-4">
+          {t("aboutUs.whoWeAre")}
+        </h1>
+        <h3 className="text-xl sm:text-2xl text-neutral-700 font-medium">
+          {t("aboutUs.drivingSuccess")}
+        </h3>
+      </div>
+
+      {/* Three Column Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+        {/* Left Card */}
+        <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
+          <p className="text-neutral-700 text-base leading-relaxed">
+            Malath is a leading business outsourcing and consulting company,
+            dedicated to empowering entrepreneurs, startups, and investors
+            across Saudi Arabia and Egypt.
+          </p>
         </div>
-        <div className="bg-neutral-1000 py-5 rounded-2xl mt-6 lg:mt-0 w-full max-w-xl">
-          <div className="border-l-[4px] border-brand-200 text-white px-4 sm:px-6 h-full flex flex-col justify-between gap-2">
-            {loading ? (
-              <Spin />
-            ) : (
-              <p
-                dangerouslySetInnerHTML={{
-                  __html:
-                    lang === "ar"
-                      ? settings.missionAr || ""
-                      : settings.missionEn || "",
-                }}
-              />
-            )}
-            <div className="flex justify-between items-center mt-4">
-              <h1 className="text-brand-200 text-base sm:text-lg">
-                {t("aboutUs.ourMission")}
-              </h1>
-            </div>
-          </div>
+
+        {/* Middle Card */}
+        <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
+          <p className="text-neutral-700 text-base leading-relaxed">
+            We specialize in delivering integrated services in business
+            development, marketing, real estate promotion, and executive
+            operations — all designed to help our clients run smoother, grow
+            faster, and focus on what matters.
+          </p>
+        </div>
+
+        {/* Right Card */}
+        <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
+          <p className="text-neutral-700 text-base leading-relaxed">
+            We don't just provide services — we become a trusted extension of
+            your team. At Malath, we believe that real success starts with smart
+            structure, deep market insight, and consistent support.
+          </p>
         </div>
       </div>
     </div>

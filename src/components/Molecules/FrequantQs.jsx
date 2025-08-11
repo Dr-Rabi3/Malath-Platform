@@ -56,7 +56,7 @@ function FrequentQs() {
     return (
       <div
         key={faq.id}
-        className="bg-white rounded-lg flex items-start w-full"
+        className="bg-accent-25 rounded-lg flex items-start w-full"
         style={{ boxShadow: "1px 2px 4px 1px #ebe8e8dd" }}
       >
         <div className="flex-1 px-5 text-left">
