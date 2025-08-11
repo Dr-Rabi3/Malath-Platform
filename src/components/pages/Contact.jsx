@@ -78,8 +78,9 @@ function Contact() {
       <div className="w-full flex flex-col md:flex-row gap-8 px-6">
         <div className="flex-1 space-y-6">
           <p className="text-[16px] leading-relaxed text-neutral-950">
-            {t("contact.description_line1")} <br />
-            {t("contact.description_line2")}
+            {t("contact.description_line1")}
+            {/* <br />
+            {t("contact.description_line2")} */}
           </p>
 
           <div className="space-y-2 text-sm">
