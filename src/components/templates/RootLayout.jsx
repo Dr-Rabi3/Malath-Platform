@@ -1,6 +1,7 @@
 import {
   Outlet,
   useFetcher,
+  useLocation,
   useNavigate,
   useNavigation,
 } from "react-router-dom";
@@ -16,6 +17,8 @@ function RootLayout() {
   const { user } = useAuth();
   const navigate = useNavigate();
   const navigation = useNavigation();
+  const location = useLocation();
+  console.log(location);
   const isNavigating = Boolean(navigation.location);
   const fetcher = useFetcher();
   console.log(fetcher, navigation);
@@ -26,13 +29,14 @@ function RootLayout() {
       else if (user.role === Roles.CusomerService) navigate("/support");
     }
   }, [user]);
+
   return (
     <>
       <ScrollToTop />
       <div className="min-h-screen">
         <Navbar />
         <div className="h-5"></div>
-        <Home id="#home" />
+        {location.pathname === "/" && <Home id="#home" />}
         <div className="container max-w-[1360px] m-auto mt-[35px] space-y-[35px]">
           <Outlet />
         </div>
