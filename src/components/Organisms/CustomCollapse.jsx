@@ -31,7 +31,7 @@ function CustomCollapse({ services }) {
             }}
           >
             <Card
-              className="w-full h-full bg-white border-[1px] border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
+              className="w-full h-full bg-white border-[1px] border-gray-400 rounded-lg shadow-sm hover:shadow-md transition-all duration-300"
               bodyStyle={{
                 padding: "24px",
               }}

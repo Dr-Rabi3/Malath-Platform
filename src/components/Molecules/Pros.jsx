@@ -44,7 +44,7 @@ function Pros() {
             width: 500,
             padding: 50,
             borderWidth: 2,
-            borderColor: "#e6e4ff",
+            borderColor: "#d6d6d6",
             borderRadius: 20,
             flexGrow: 1,
           }}
@@ -80,7 +80,7 @@ function Pros() {
             width: 500,
             padding: 50,
             borderWidth: 2,
-            borderColor: "#e6e4ff",
+            borderColor: "#d6d6d6",
             borderRadius: 20,
             flexGrow: 1,
           }}
@@ -116,7 +116,7 @@ function Pros() {
             width: 500,
             padding: 50,
             borderWidth: 2,
-            borderColor: "#e6e4ff",
+            borderColor: "#d6d6d6",
             flexGrow: 1,
             borderRadius: 20,
           }}
@@ -152,7 +152,7 @@ function Pros() {
             width: 500,
             padding: 50,
             borderWidth: 2,
-            borderColor: "#e6e4ff",
+            borderColor: "#d6d6d6",
             borderRadius: 20,
             flexGrow: 1,
           }}

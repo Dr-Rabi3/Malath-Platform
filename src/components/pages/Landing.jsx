@@ -5,14 +5,12 @@ import MetaData from "../Organisms/MetaData.jsx";
 import { useSliderData } from "../../hooks/useSliderData";
 
 function Landing() {
-
   return (
-    <div className="space-y-[20px]">
-      <Home
-        id="#home"
-      />
-      <MetaData id="#who" />
-    </div>
+    <>
+      <div className="space-y-[20px]">
+        <MetaData id="#who" />
+      </div>
+    </>
   );
 }
 

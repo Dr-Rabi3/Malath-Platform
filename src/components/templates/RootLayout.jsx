@@ -10,6 +10,7 @@ import { useAuth } from "../../store/AuthContext";
 import { useEffect } from "react";
 import { Roles } from "../../utils/roles";
 import ScrollToTop from "../atoms/ScrollToTop";
+import Home from "../Organisms/Home";
 
 function RootLayout() {
   const { user } = useAuth();
@@ -31,7 +32,8 @@ function RootLayout() {
       <div className="min-h-screen">
         <Navbar />
         <div className="h-5"></div>
-        <div className="container max-w-[1360px] m-auto space-y-[35px]">
+        <Home id="#home" />
+        <div className="container max-w-[1360px] m-auto mt-[35px] space-y-[35px]">
           <Outlet />
         </div>
         <div className="h-5"></div>

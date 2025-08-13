@@ -10,6 +10,8 @@ import {
   faSquareFacebook,
   faInstagram,
   faTiktok,
+  faLinkedin,
+  faLinkedinIn,
 } from "@fortawesome/free-brands-svg-icons";
 import { Tooltip } from "antd";
 
@@ -145,6 +147,17 @@ function Footer() {
                   >
                     <FontAwesomeIcon icon={faInstagram} size="lg" />{" "}
                     <span>{t("footer.instagram")}</span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://www.linkedin.com/company/%D9%85%D9%84%D8%A7%D8%B0-malath/about/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
+                  >
+                    <FontAwesomeIcon icon={faLinkedinIn} size="lg" />{" "}
+                    <span>{t("footer.linkedin")}</span>
                   </a>
                 </li>
                 <li>

@@ -97,7 +97,7 @@ function MetaData({ ...props }) {
               >
                 <Card
                   loading={loading}
-                  className="w-full h-full bg-white border border-gray-100 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:bg-gradient-to-br hover:from-white hover:to-accent-25 transition-all duration-500 ease-in-out transform group cursor-pointer overflow-hidden"
+                  className="w-full h-full bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:bg-gradient-to-br hover:from-white hover:to-accent-25 transition-all duration-500 ease-in-out transform group cursor-pointer overflow-hidden"
                   cover={
                     <div
                       className={`pt-6 pb-4 px-6 bg-gradient-to-r from-accent-50 to-accent-100 ${

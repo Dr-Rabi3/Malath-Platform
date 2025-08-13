@@ -254,7 +254,7 @@ function AdminLayout() {
               </h2>
             </div>
             <div className="flex gap-5 justify-center items-center">
-              <NotificationDropdown link="/admin/admin-service"/>
+              <NotificationDropdown link="/admin/admin-service" />
               <button
                 className="m-auto flex justify-between items-center bg-neutral-1000 rounded-full p-1"
                 onClick={handleLogout}

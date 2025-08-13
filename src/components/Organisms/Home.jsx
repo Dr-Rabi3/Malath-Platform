@@ -69,9 +69,9 @@ function Home(props) {
                   <img
                     src={s.image}
                     alt=""
-                    className="absolute z-[-1] w-full h-[600px] object-cover rounded-[20px]"
+                    className="absolute z-[-1] w-full h-[600px] object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/30 rounded-[20px] z-0" />
+                  <div className="absolute inset-0 bg-black/30 z-0" />
                   <div className="absolute bottom-0 left-0 md:bottom-2 md:left-2">
                     <HomeSlider slide={s} totalCount={slides.length} />
                   </div>
