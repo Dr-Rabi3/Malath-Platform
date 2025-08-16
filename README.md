@@ -14,6 +14,18 @@ A modern, feature-rich React application for the Malath Platform, built with Vit
 - **Charts & Analytics**: Data visualization with Recharts
 - **Modern UI**: Shadcn/ui components with custom theming
 
+## ⚙️ Technically
+
+Atomic Component Architecture: Structured UI components into reusable layers (atoms, molecules, organisms) for scalable development.
+
+Advanced Rich-Text Editor: Built upon TipTap with custom extensions.
+
+Real-Time Bi-Directionality: Leveraged SignalR for socket-based, live updates between client and server.
+
+Seamless Internationalization: i18next setup with persistent user preferences, browser detection, and RTL layout adaptation.
+
+Routing & Data Strategy: Divided public, user, support, and admin flows with protected route handling; used React Query for efficient state synchronization and caching.
+
 ## 🛠️ Tech Stack
 
 ### Core Technologies
