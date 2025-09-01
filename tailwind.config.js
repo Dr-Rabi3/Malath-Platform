@@ -8,9 +8,10 @@ module.exports = {
         "custom-gray": " 0px 0px 10px 1px #d8d8d887",
       },
       fontFamily: {
-        main: ['Noto Sans Georgian"', "sans-serif"],
-        secondary: ['Roboto Slab"', "serif"],
-        barlow: ['"Barlow"', "sans-serif"],
+        main: ["DG Baysan", "sans-serif"],
+        secondary: ["DG Baysan", "sans-serif"],
+        barlow: ["DG Baysan", "sans-serif"],
+        bigVesta: ["BigVesta Arabic", "sans-serif"],
       },
       colors: {
         accent: {
@@ -20,9 +21,9 @@ module.exports = {
           50: "#F7F8E6",
         },
         neutral: {
-          700: "#4A3E98",
-          950: "#3B307D",
-          1000: "#130F2F",
+          700: "#666666",
+          950: "#4D4D4D",
+          1000: "#000000",
         },
         success: {
           100: "#DCFCE7",

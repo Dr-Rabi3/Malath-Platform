@@ -5,7 +5,7 @@ function Strategy() {
   const { t } = useTranslation();
   return (
     <div className="px-2 sm:px-6 md:px-12">
-      <h1 className="text-xl sm:text-2xl md:text-[35px] text-neutral-950 font-semibold font-main mb-6">
+      <h1 className="text-xl sm:text-2xl md:text-[35px] text-neutral-1000 font-regular font-main mb-6">
         {t("strategy.title")}
       </h1>
       <Row
@@ -44,7 +44,7 @@ function Strategy() {
           <div className="h-full w-[2px] bg-brand-500/50"></div>
         </Col> */}
         <Col xs={24} md={10} className="mt-6 md:mt-0">
-          <div className="font-main text-base sm:text-lg md:text-[20px] text-neutral-950 font-medium">
+          <div className="font-main text-base sm:text-lg md:text-[20px] text-neutral-950 font-regular">
             {t("strategy.empowerText")}
           </div>
         </Col>

@@ -180,7 +180,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[#191538] h-[60px]"></div>
+      <div className="bg-[#1D1D1D] h-[60px]"></div>
     </footer>
   );
 }

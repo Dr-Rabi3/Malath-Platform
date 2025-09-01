@@ -9,8 +9,8 @@ function States() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Large Left Card - Main Content */}
           <div className="lg:col-span-2">
-            <div className="bg-neutral-950 rounded-2xl p-8 lg:p-12 text-white h-full">
-              <div className="flex items-center gap-4 mb-6">
+            <div className="bg-[#E4BE7F] rounded-2xl p-8 lg:p-12 text-white h-full">
+              <div className="flex flex-col gap-4 mb-6">
                 <svg
                   width="48"
                   height="48"
@@ -109,7 +109,7 @@ function States() {
           {/* Right Column - Stacked Small Cards */}
           <div className="lg:col-span-1 flex flex-col gap-5 justify-between">
             {/* Card 1 - Customers */}
-            <div className="bg-neutral-950 rounded-2xl p-6 text-white">
+            <div className="bg-[#E4BE7F] rounded-2xl p-6 text-white flex-1 flex">
               <div className="flex items-center gap-4">
                 <svg
                   width="48"
@@ -132,10 +132,10 @@ function States() {
                   />
                 </svg>
                 <div>
-                  <div className="text-3xl font-bold text-yellow-100">
+                  <div className="text-3xl font-bold">
                     1000+
                   </div>
-                  <div className="text-sm text-yellow-100/80">
+                  <div className="text-sm">
                     {t("states.customersServed")}
                   </div>
                 </div>
@@ -143,7 +143,7 @@ function States() {
             </div>
 
             {/* Card 2 - Experience */}
-            <div className="bg-neutral-950 rounded-2xl p-6 text-white">
+            <div className="bg-[#E4BE7F] rounded-2xl p-6 text-white flex-1 flex">
               <div className="flex items-center gap-4">
                 <svg
                   width="48"
@@ -162,8 +162,8 @@ function States() {
                   />
                 </svg>
                 <div>
-                  <div className="text-3xl font-bold text-yellow-100">5+</div>
-                  <div className="text-sm text-yellow-100/80">
+                  <div className="text-3xl font-bold">5+</div>
+                  <div className="text-sm">
                     {t("states.yearsExperienceText")}
                   </div>
                 </div>

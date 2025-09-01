@@ -5,7 +5,7 @@ import why1 from "../../assets/icons/why1.svg";
 import why2 from "../../assets/icons/why2.svg";
 import why3 from "../../assets/icons/why3.svg";
 import why4 from "../../assets/icons/why4.svg";
-import serviceBg from "../../assets/images/background.jpg";
+import serviceBg from "../../assets/images/background.png";
 const { Meta } = Card;
 
 function Pros() {
@@ -14,21 +14,14 @@ function Pros() {
   return (
     <div>
       <div className="relative h-[360px] overflow-hidden">
-        <div className="absolute h-full w-full z-[-1]">
-          {/* <Silk
-            speed={5}
-            scale={1}
-            color="#3B307D"
-            noiseIntensity={2.5}
-            rotation={0}
-          /> */}
+        <div className="absolute h-full w-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
             alt=""
-            className="absolute h-full w-full z-[-1] object-cover"
+            className="absolute h-full z-[-1] transparent-bg opacity-25"
           />
         </div>
-        <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
+        <div className="z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
           <h1 className="font-barlow font-semibold text-[50px] text-center">
             {t("prosHero.title")}
           </h1>
@@ -39,11 +32,10 @@ function Pros() {
       </div>
       <div className=" flex flex-wrap gap-2 mt-2 rounded-[20px]">
         <Card
-          className="bg-accent-25"
           style={{
             width: 500,
             padding: 50,
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: "#d6d6d6",
             borderRadius: 20,
             flexGrow: 1,
@@ -75,11 +67,10 @@ function Pros() {
           />
         </Card>
         <Card
-          className="bg-accent-25"
           style={{
             width: 500,
             padding: 50,
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: "#d6d6d6",
             borderRadius: 20,
             flexGrow: 1,
@@ -111,11 +102,10 @@ function Pros() {
           />
         </Card>
         <Card
-          className="bg-accent-25"
           style={{
             width: 500,
             padding: 50,
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: "#d6d6d6",
             flexGrow: 1,
             borderRadius: 20,
@@ -147,11 +137,10 @@ function Pros() {
           />
         </Card>
         <Card
-          className="bg-accent-25"
           style={{
             width: 500,
             padding: 50,
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: "#d6d6d6",
             borderRadius: 20,
             flexGrow: 1,

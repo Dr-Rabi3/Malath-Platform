@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './assets/styles/index.css';
+import './assets/styles/fonts.css';
 import 'antd/dist/reset.css'; // for AntD v5+
 import App from './App';
 import './i18n'; // make sure the path is correct

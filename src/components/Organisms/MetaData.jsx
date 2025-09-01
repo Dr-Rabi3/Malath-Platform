@@ -97,22 +97,22 @@ function MetaData({ ...props }) {
               >
                 <Card
                   loading={loading}
-                  className="w-full h-full bg-white border border-gray-200 rounded-xl shadow-lg hover:shadow-2xl hover:scale-[1.02] hover:bg-gradient-to-br hover:from-white hover:to-accent-25 transition-all duration-500 ease-in-out transform group cursor-pointer overflow-hidden"
+                  className="w-full h-full border-0"
                   cover={
                     <div
-                      className={`pt-6 pb-4 px-6 bg-gradient-to-r from-accent-50 to-accent-100 ${
+                      className={`pt-6 pb-4 px-6${
                         i18n.language === "en" ? "pl-6" : "pr-6"
                       }`}
                     >
                       <div className="flex gap-3 items-center">
-                        <div className="p-3 bg-white rounded-full shadow-md group-hover:shadow-lg group-hover:scale-[1.02] transition-all duration-300">
+                        <div className="p-3 rounded-full">
                           <img
                             src={card.icon}
                             alt={card.alt}
-                            className="w-[32px] sm:w-[40px] h-auto group-hover:rotate-12 transition-transform duration-300"
+                            className="w-[32px] sm:w-[40px] h-auto"
                           />
                         </div>
-                        <div className="font-semibold text-xl font-main text-neutral-800 group-hover:text-accent-700 transition-colors duration-300">
+                        <div className="font-semibold text-xl font-main text-neutral-800">
                           {t(card.titleKey)}
                         </div>
                       </div>
@@ -120,23 +120,18 @@ function MetaData({ ...props }) {
                   }
                   bodyStyle={{
                     padding: "24px",
-                    background:
-                      "linear-gradient(135deg, #ffffff 0%, #fafafa 100%)",
                   }}
                 >
                   <Meta
                     description={
                       <div
-                        className="text-neutral-600 font-regular text-sm sm:text-base font-main leading-relaxed flex-1 group-hover:text-neutral-700 transition-colors duration-300"
+                        className="text-neutral-600 font-regular text-sm sm:text-base font-main leading-relaxed flex-1"
                         dangerouslySetInnerHTML={{
                           __html: card.content,
                         }}
                       ></div>
                     }
                   />
-                  <div className="mt-4 pt-4 border-t border-gray-100">
-                    <div className="w-0 group-hover:w-full h-1 bg-gradient-to-r from-accent-400 to-accent-600 rounded-full transition-all duration-500 ease-out"></div>
-                  </div>
                 </Card>
               </Col>
             ))}

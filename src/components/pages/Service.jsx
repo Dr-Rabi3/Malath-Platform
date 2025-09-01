@@ -6,8 +6,6 @@ import { useAuth } from "../../store/AuthContext";
 import { useQuery } from "@tanstack/react-query";
 import { getAllServices } from "../../api/http";
 import { message } from "antd";
-import Silk from "../ui/Silk";
-import serviceBg from "../../assets/images/background.jpg";
 function Service() {
   const [messageApi, contextHelper] = message.useMessage();
   const navigate = useNavigate();
@@ -61,36 +59,10 @@ function Service() {
   return (
     <>
       {contextHelper}
-      <div className="relative h-[360px] rounded-3xl overflow-hidden">
-        <div className="absolute h-full w-full z-[-1]">
-          {/* <Silk
-            speed={5}
-            scale={1}
-            color="#3f377b"
-            noiseIntensity={2.5}
-            rotation={0}
-          /> */}
-          <img
-            src={serviceBg}
-            alt=""
-            className="absolute h-full w-full z-[-1] object-cover"
-          />
-        </div>
-        <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
-          <h1 className="font-barlow font-semibold text-[50px]">
-            {t("servicePage.ourServices", "Our Services")}
-          </h1>
-          <div className="font-barlow font-regular text-[20px]">
-            {t(
-              "servicePage.transformBrand",
-              "Transform your brand with our innovative digital solutions that captivate and engage your audience."
-            )}
-          </div>
-        </div>
-      </div>
+      
       <div className="space-y-[20px]">
         <div className="flex justify-end">
-          <Button
+          {/* <Button
             className="bg-neutral-1000 hover:bg-neutral-950 font-main font-medium"
             onClick={() => {
               if (!user?.token) {
@@ -104,7 +76,7 @@ function Service() {
             }}
           >
             {t("service_request")}
-          </Button>
+          </Button> */}
         </div>
         <CustomCollapse services={Object.values(groupedServices || {})} />
       </div>

@@ -4,7 +4,7 @@ import { Collapse } from "antd";
 import { PlusOutlined, CloseOutlined } from "@ant-design/icons";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslation } from "react-i18next";
-import serviceBg from "../../assets/images/background.jpg";
+import serviceBg from "../../assets/images/background.png";
 
 const { Panel } = Collapse;
 
@@ -56,10 +56,10 @@ function FrequentQs() {
     return (
       <div
         key={faq.id}
-        className="bg-accent-25 rounded-lg flex items-start w-full border border-gray-300"
-        style={{ boxShadow: "1px 2px 4px 1px #ebe8e8dd" }}
+        className="rounded-lg flex items-start w-full border-[0.5px] border-gray-300"
+        style={{ boxShadow: "0px 0px 5px 1px rgba(238, 238, 238, 0.87)" }}
       >
-        <div className="flex-1 px-5 text-left">
+        <div className="flex-1 px-5">
           <div
             onClick={() => handleToggle(faq.id)}
             className="flex justify-between items-center cursor-pointer"
@@ -86,9 +86,7 @@ function FrequentQs() {
                 className="overflow-hidden"
               >
                 <p
-                  className={`mt-2 text-[#646A69] text-[16px] leading-relaxed ${
-                    i18n.language === "en" ? "text-left" : "text-right"
-                  }`}
+                  className={`mt-2 text-[#646A69] text-[16px] leading-relaxed `}
                 >
                   {faq.answer}
                 </p>
@@ -103,21 +101,14 @@ function FrequentQs() {
   return (
     <div>
       <div className="relative h-[360px] overflow-hidden">
-        <div className="absolute h-full w-full z-[-1]">
-          {/* <Silk
-            speed={5}
-            scale={1}
-            color="#3B307D"
-            noiseIntensity={2.5}
-            rotation={0}
-          /> */}
+        <div className="absolute h-full w-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
             alt=""
-            className="absolute h-full w-full z-[-1] object-cover"
+            className="absolute h-full z-[-1] transparent-bg opacity-25"
           />
         </div>
-        <div className="text-white z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
+        <div className="z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
           <h1 className="font-barlow font-semibold text-[50px] text-center">
             {t("faq.title", "Frequently Asked Questions")}
           </h1>
