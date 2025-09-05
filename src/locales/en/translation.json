@@ -380,7 +380,11 @@
       "pleaseSelectType": "Please select a type",
       "adding": "Adding...",
       "addServiceTypeButton": "Add Service Type",
-      "addServiceButton": "Add Service"
+      "addServiceButton": "Add Service",
+
+      "photoUrl": "Photo URL",
+      "pleaseEnterPhotoUrl": "Please enter a valid photo URL",
+      "uploadPhoto": "Upload Photo"
     },
     "slider": {
       "title": "Slider Settings",
@@ -485,7 +489,11 @@
         "reject": "Reject",
         "review": "Mark for Review"
       }
-    }
+    },
+    "bg1": "Real Estate Marketing",
+    "bg2": "Business Development",
+    "bg3": "Executive Support Services",
+    "bg4": "Marketing Services"
   },
   "supportDashboard": {
     "loading": "Loading service requests...",

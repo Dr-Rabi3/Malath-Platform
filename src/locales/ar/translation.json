@@ -374,7 +374,11 @@
       "pleaseSelectType": "يرجى اختيار النوع",
       "adding": "جاري الإضافة...",
       "addServiceTypeButton": "إضافة نوع خدمة",
-      "addServiceButton": "إضافة خدمة"
+      "addServiceButton": "إضافة خدمة",
+
+      "photoUrl": "رابط الصورة",
+      "pleaseEnterPhotoUrl": "الرجاء إدخال رابط صورة صالح",
+      "uploadPhoto": "رفع صورة"
     },
     "slider": {
       "title": "إعدادات الشريط المتحرك",
@@ -479,7 +483,11 @@
         "reject": "رفض",
         "review": "وضع للمراجعة"
       }
-    }
+    },
+    "bg1":"تسويق العقارات",
+    "bg2":"تطوير الأعمال",
+    "bg3":"خدمات الدعم التنفيذي",
+    "bg4":"خدمات التسويق"
   },
   "supportDashboard": {
     "loading": "جاري تحميل طلبات الخدمات...",

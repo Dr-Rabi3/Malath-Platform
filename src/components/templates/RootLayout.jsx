@@ -61,22 +61,22 @@ function RootLayout() {
                 )}
               </div>
             </div>
-            <ul className="bg-[#363636] w-full justify-between flex flex-wrap text-white text-[15px] md:text-[25px] px-5 py-5">
+            <ul className="bg-[#363636] w-full justify-between flex flex-wrap text-white text-[15px] md:text-[20px] px-5 py-5">
               <li className="flex items-center gap-5">
                 <img src={serviceIcon} alt="icon" />
-                Real Estate Marketing
+                {t("service.bg1")}
               </li>
               <li className="flex items-center gap-5">
                 <img src={serviceIcon} alt="icon" />
-                Business Development
+                {t("service.bg2")}
               </li>
               <li className="flex items-center gap-5">
                 <img src={serviceIcon} alt="icon" />
-                Executive Support Services
+                {t("service.bg3")}
               </li>
               <li className="flex items-center gap-5">
                 <img src={serviceIcon} alt="icon" />
-                Marketing Services
+                {t("service.bg4")}
               </li>
             </ul>
           </div>

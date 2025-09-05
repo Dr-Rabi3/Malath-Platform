@@ -1,12 +1,12 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllServices } from "../../api/http";
+import { getAllServices, uploadFile } from "../../api/http";
 import CustomCollapse from "../Organisms/CustomCollapse";
 import { useAuth } from "../../store/AuthContext";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import Button from "../atoms/Button";
 import { useState } from "react";
-import { Modal, Select, Form, Input } from "antd";
+import { Modal, Select, Form, Input, Upload } from "antd";
 import { createCategory } from "../../api/http";
 import { getAllCategories } from "../../api/http";
 import { createService } from "../../api/http";
@@ -26,6 +26,7 @@ function AdminAddService() {
   const [serviceNameAr, setServiceNameAr] = useState("");
   const [serviceDescEn, setServiceDescEn] = useState("");
   const [serviceDescAr, setServiceDescAr] = useState("");
+  const [categoryFile, setCategoryFile] = useState(null);
   const [serviceCategoryId, setServiceCategoryId] = useState(null);
   const [serviceLoading, setServiceLoading] = useState(false);
   const [serviceError, setServiceError] = useState("");
@@ -38,13 +39,23 @@ function AdminAddService() {
     setCategoryLoading(true);
     setCategoryError("");
     try {
+      let uploadedFilePath = null;
+      if (categoryFile) {
+        uploadedFilePath = await uploadFile(
+          user?.token,
+          categoryFile,
+          "Categories"
+        );
+      }
       await createCategory(user?.token, {
         nameEn: categoryNameEn,
         nameAr: categoryNameAr,
+        photoUrl: uploadedFilePath, // ✅ send file path
       });
       setOpenResponsive(false);
       setCategoryNameEn("");
       setCategoryNameAr("");
+      setCategoryFile(null);
       categoryForm.resetFields();
       queryClient.refetchQueries(["categories"]);
     } catch (err) {
@@ -127,6 +138,7 @@ function AdminAddService() {
   const groupedServices = (categories || []).map((cat) => ({
     categoryId: cat.id,
     categoryName: cat.name,
+    categoryPhoto:cat.photoUrl,
     services: (services || []).filter((srv) => srv.categoryId === cat.id),
   }));
 
@@ -187,6 +199,43 @@ function AdminAddService() {
               dir="rtl"
             />
           </Form.Item>
+
+          <Form.Item
+            label={t("admin.addService.photoUrl")}
+            name="photoUrl"
+            rules={[
+              {
+                required: true,
+                message: t("admin.addService.pleaseEnterPhotoUrl"),
+              },
+            ]}
+          >
+            <Upload
+              listType="picture-card"
+              maxCount={1}
+              accept="image/*"
+              beforeUpload={() => false} // prevent auto-upload
+              onChange={(info) => {
+                if (info.fileList.length > 0) {
+                  const file = info.fileList[0].originFileObj;
+                  setCategoryFile(file);
+                } else {
+                  setCategoryFile(null);
+                }
+              }}
+            >
+              {categoryFile ? null : t("admin.addService.uploadPhoto")}
+            </Upload>
+
+            {categoryFile && (
+              <img
+                src={URL.createObjectURL(categoryFile)}
+                alt="Category Preview"
+                className="w-32 h-32 object-cover rounded-md border mt-2"
+              />
+            )}
+          </Form.Item>
+
           {categoryError && <div className="text-red-600">{categoryError}</div>}
           <Button
             type="submit"

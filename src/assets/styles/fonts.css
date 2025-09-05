@@ -1,57 +1,57 @@
 /* DG Baysan font family */
 @font-face {
   font-family: "DG Baysan";
-  src: url("/assets/fonts/english/DG Baysan Regular.ttf") format("truetype");
-  font-weight: normal;
+  src: url("/fonts/english/DG-Baysan-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 @font-face {
   font-family: "DG Baysan";
-  src: url("/assets/fonts/english/DG Baysan Bold.ttf") format("truetype");
-  font-weight: bold;
+  src: url("/fonts/english/DG-Baysan-Bold.ttf") format("truetype");
+  font-weight: 700;
 }
 @font-face {
   font-family: "DG Baysan";
-  src: url("/assets/fonts/english/DG Baysan Light.ttf") format("truetype");
+  src: url("/fonts/english/DG-Baysan-Light.ttf") format("truetype");
   font-weight: 300;
 }
 @font-face {
   font-family: "DG Baysan";
-  src: url("/assets/fonts/english/DG Baysan Semibold.ttf") format("truetype");
+  src: url("/fonts/english/DG-Baysan-Semibold.ttf") format("truetype");
   font-weight: 600;
 }
 
 /* GE Hili */
 @font-face {
   font-family: "GE Hili";
-  src: url("/assets/fonts/english/GE Hili Book.otf") format("opentype");
-  font-weight: normal;
+  src: url("/fonts/english/GE-Hili-Book.otf") format("opentype");
+  font-weight: 400;
 }
 @font-face {
   font-family: "GE Hili";
-  src: url("/assets/fonts/english/GE Hili Light.otf") format("opentype");
+  src: url("/fonts/english/GE-Hili-Light.otf") format("opentype");
   font-weight: 300;
 }
 
 /* Cangste */
 @font-face {
   font-family: "Cangste";
-  src: url("/assets/fonts/english/Cangste.otf") format("opentype");
+  src: url("/fonts/english/Cangste.otf") format("opentype");
 }
 
 /* HAMBH */
 @font-face {
   font-family: "HAMBH";
-  src: url("/assets/fonts/english/HAMBH.TTF") format("truetype");
+  src: url("/fonts/english/HAMBH.TTF") format("truetype");
 }
 
 /* Arabic BigVesta */
 @font-face {
   font-family: "BigVesta Arabic";
-  src: url("/assets/fonts/arabic/BigVesta Arabic Regular.ttf") format("truetype");
-  font-weight: normal;
+  src: url("/fonts/arabic/BigVesta-Arabic-Regular.ttf") format("truetype");
+  font-weight: 400;
 }
 @font-face {
   font-family: "BigVesta Arabic";
-  src: url("/assets/fonts/arabic/BigVesta-Arabic-Bold.ttf") format("truetype");
-  font-weight: bold;
+  src: url("/fonts/arabic/BigVesta-Arabic-Bold.ttf") format("truetype");
+  font-weight: 700;
 }

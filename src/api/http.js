@@ -230,11 +230,13 @@ export const getAllCategories = async (token, language = "en") => {
  */
 export const createCategory = async (token, categoryData) => {
   try {
+    console.log(categoryData);
     const response = await axios.post(
       `${API_BASE_URL}api/Categories/Create`,
       {
         nameEn: categoryData.nameEn,
         nameAr: categoryData.nameAr,
+        photoUrl: categoryData.photoUrl.url,
       },
       {
         headers: {

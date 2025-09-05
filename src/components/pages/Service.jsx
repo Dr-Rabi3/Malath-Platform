@@ -4,7 +4,7 @@ import CustomCollapse from "../Organisms/CustomCollapse";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../store/AuthContext";
 import { useQuery } from "@tanstack/react-query";
-import { getAllServices } from "../../api/http";
+import { getAllCategories, getAllServices } from "../../api/http";
 import { message } from "antd";
 function Service() {
   const [messageApi, contextHelper] = message.useMessage();
@@ -26,6 +26,20 @@ function Service() {
     cacheTime: Infinity,
   });
 
+  const {
+    data: categories,
+    isLoading: categoriesLoading,
+    error: categoriesError,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: () => getAllCategories(user?.token),
+    // enabled: !!user?.token,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    staleTime: Infinity,
+    cacheTime: Infinity,
+  });
+
   if (servicesLoading) {
     return (
       <div className="flex justify-center items-center min-h-[200px]">
@@ -33,6 +47,7 @@ function Service() {
       </div>
     );
   }
+
   if (servicesError) {
     return (
       <div className="flex justify-center items-center min-h-[200px] text-red-600">
@@ -41,25 +56,18 @@ function Service() {
     );
   }
 
-  const groupedServices = services?.reduce((acc, service) => {
-    const { categoryId, categoryName } = service;
-    if (!acc[categoryId]) {
-      acc[categoryId] = {
-        categoryId,
-        categoryName,
-        services: [],
-      };
-    }
-    acc[categoryId].services.push(service);
-    return acc;
-  }, {});
+  const groupedServices = (categories || []).map((cat) => ({
+    categoryId: cat.id,
+    categoryName: cat.name,
+    categoryPhoto: cat.photoUrl,
+    services: (services || []).filter((srv) => srv.categoryId === cat.id),
+  }));
 
-  // console.log(services);
-
+  console.log(groupedServices, categories, services);
   return (
     <>
       {contextHelper}
-      
+
       <div className="space-y-[20px]">
         <div className="flex justify-end">
           {/* <Button
@@ -78,7 +86,7 @@ function Service() {
             {t("service_request")}
           </Button> */}
         </div>
-        <CustomCollapse services={Object.values(groupedServices || {})} />
+        <CustomCollapse services={groupedServices || []} />
       </div>
     </>
   );
