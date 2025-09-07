@@ -74,8 +74,8 @@ function About() {
       <div className="w-full lg:w-auto order-3 lg:order-3 self-stretch lg:self-auto">
         <Link
           to="/about"
-          className="flex gap-2 bg-[#363636] text-white w-full lg:w-fit py-3 sm:py-3 lg:py-3 px-4 sm:px-5 lg:px-5 justify-center items-center rounded-full text-sm sm:text-base lg:text-lg font-medium hover:bg-neutral-800 transition-colors duration-200"
-        >
+          className="flex gap-2 bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] text-white w-full lg:w-fit py-3 sm:py-3 lg:py-3 px-4 sm:px-5 lg:px-5 justify-center items-center rounded-full text-sm sm:text-base lg:text-lg font-medium hover:bg-neutral-800 transition-colors duration-200"
+        > 
           <p className="m-0 text-sm sm:text-base lg:text-lg">
             {t("about.getInTouch")}
           </p>

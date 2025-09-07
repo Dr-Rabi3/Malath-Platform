@@ -94,7 +94,7 @@ function Contact() {
             <p className="bg-brand-500/20 text-brand-700 rounded-2xl px-2 py-2 w-fit">
               📞 {t("contact.phone")}: 0222604857
             </p>
-            <p className="bg-brand-500/20 text-brand-700 rounded-2xl px-2 py-2 w-fit">
+            <p className="bg-brand-1D1D1D500/20 text-brand-700 rounded-2xl px-2 py-2 w-fit">
               📱 {t("contact.mobile")}: 01008375583 - 01099134464
             </p>
             <p className="bg-brand-500/20 text-brand-700 rounded-2xl px-2 py-2 w-fit">
@@ -165,7 +165,7 @@ function Contact() {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#18103F] hover:bg-[#1e144d] disabled:bg-gray-400 text-white px-6 py-2 rounded-md text-sm flex items-center gap-2"
+              className="bg-[#1D1D1D] hover:bg-[#1D1D1D] disabled:bg-gray-400 text-white px-6 py-2 rounded-md text-sm flex items-center gap-2"
             >
               {loading && (
                 <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

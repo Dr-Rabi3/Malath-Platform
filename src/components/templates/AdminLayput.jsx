@@ -194,7 +194,7 @@ function AdminLayout() {
           position: relative !important;
         }
         .ant-menu-item-selected {
-          background: #3B307D !important;
+          background: #4D4D4D !important;
           box-shadow: 0px 0px 8px 2px #2525258f !important;
           }
         .ant-menu-item-selected > svg{
@@ -215,7 +215,7 @@ function AdminLayout() {
           trigger={null}
           collapsible
           collapsed={collapsed}
-          className="bg-[#211A4D]"
+          className="bg-[#1D1D1D]"
         >
           <div className="demo-logo-vertical" />
           <Button
@@ -232,9 +232,9 @@ function AdminLayout() {
           />
           <Menu
             theme="dark"
-            className="bg-[#211A4D]"
+            className="bg-[#1D1D1D]"
             mode="inline"
-            style={{ background: "#211A4D" }}
+            style={{ background: "#1D1D1D" }}
             selectedKeys={[activeKey]}
             items={items}
           />
@@ -292,7 +292,7 @@ function AdminLayout() {
             <Outlet />
           </Content>
           <Footer
-            className="bg-[#211A4D] text-white flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0 md:space-x-0 px-4 py-6 md:py-2"
+            className="bg-[#1D1D1D] text-white flex flex-col md:flex-row md:justify-between md:items-center space-y-4 md:space-y-0 md:space-x-0 px-4 py-6 md:py-2"
             style={{ padding: undefined }}
           >
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 w-full md:w-auto">
