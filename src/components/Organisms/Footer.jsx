@@ -23,51 +23,66 @@ function Footer() {
       className="bg-neutral-1000"
       style={{ borderRadius: " 60px 60px 0px 0px" }}
     >
-      <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-16 sm:px-6 lg:space-y-16 lg:px-8">
+      <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-10 sm:py-12 md:py-16 sm:px-6 lg:space-y-16 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <div>
-            <div className="text-white flex items-center">
-              <img src={lightLogo} alt="logo" className="w-[80px]" />
-              <h1 className="font-bold text-[22px]">
+            <div className="text-white flex items-center gap-3">
+              <img
+                src={lightLogo}
+                alt="logo"
+                className="w-[64px] sm:w-[72px] lg:w-[80px] h-auto"
+              />
+              <h1 className="font-bold text-[18px] sm:text-[20px] lg:text-[22px]">
                 <span className="text-brand-600">Mala</span>th
               </h1>
             </div>
 
-            <p className="mt-4 max-w-xs text-[#D3D4DC]">
+            <p className="mt-3 sm:mt-4 max-w-md text-[#D3D4DC] text-sm sm:text-[15px]">
               {" "}
               {t("footer.slogan")}
             </p>
-            <div className="text-xs text-gray-500">
-              <p className="text-xs text-gray-500">{t("footer.copyright")}</p>
+            <div className="text-[11px] sm:text-xs text-gray-500 mt-2">
+              <p className="text-[11px] sm:text-xs text-gray-500">
+                {t("footer.copyright")}
+              </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:col-span-2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:col-span-2 gap-6">
             <div>
-              <p className="font-medium text-[#fff] text-[15px]">
+              <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.services")}
               </p>
 
-              <ul className="mt-6 space-y-4 text-sm">
+              <ul className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 text-sm">
                 <li>
-                  <Link to="/" className="text-[#D3D4DC] hover:opacity-75">
+                  <Link
+                    to="/"
+                    className="text-[#D3D4DC] hover:text-brand-600 transition-colors"
+                  >
                     {t("footer.main")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/blogs" className="text-[#D3D4DC] hover:opacity-75">
+                  <Link
+                    to="/blogs"
+                    className="text-[#D3D4DC] hover:text-brand-600 transition-colors"
+                  >
                     {t("footer.blogs")}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/about" className="text-[#D3D4DC] hover:opacity-75">
+                  <Link
+                    to="/about"
+                    className="text-[#D3D4DC] hover:text-brand-600 transition-colors"
+                  >
                     {t("footer.about")}
                   </Link>
                 </li>
                 <li>
                   <Link
                     to="/service"
-                    className="text-[#D3D4DC] hover:opacity-75"
+                    className="text-[#D3D4DC] hover:text-brand-600 transition-colors"
                   >
                     {t("nav.services")}
                   </Link>
@@ -76,36 +91,47 @@ function Footer() {
             </div>
 
             <div>
-              <p className="font-medium text-[#fff] text-[15px]">
+              <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.contact")}
               </p>
 
-              <ul className="mt-6 space-y-4 text-sm">
+              <ul className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 text-sm">
                 <li>
                   <Link
                     to="#"
-                    className="text-[#D3D4DC] flex items-center gap-3"
+                    className="text-[#D3D4DC] flex items-center gap-2 sm:gap-3"
                   >
-                    <img src={location} alt="" />{" "}
-                    <p className="m-0">{t("footer.address")}</p>
+                    <img
+                      src={location}
+                      alt=""
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                    />{" "}
+                    <p className="m-0 text-sm sm:text-[15px]">
+                      {t("footer.address")}
+                    </p>
                   </Link>
                 </li>
                 <li>
                   <a
                     href="mailto:khedaib@malathegypt.com"
-                    className="m-0 text-[#D3D4DC] flex items-center gap-3 hover:text-brand-600 transition-colors duration-200"
+                    className="m-0 text-[#D3D4DC] flex items-center gap-2 sm:gap-3 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <img src={email} alt="" />{" "}
-                    <p className="m-0">{t("footer.email")}</p>
+                    <img src={email} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />{" "}
+                    <p className="m-0 text-sm sm:text-[15px]">
+                      {t("footer.email")}
+                    </p>
                   </a>
                 </li>
                 <li>
                   <Link
                     to="#"
-                    className="text-[#D3D4DC] flex items-center gap-3"
+                    className="text-[#D3D4DC] flex items-center gap-2 sm:gap-3"
                   >
-                    <img src={phone} alt="" />{" "}
-                    <p className="m-0"> {t("footer.phone")}</p>
+                    <img src={phone} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />{" "}
+                    <p className="m-0 text-sm sm:text-[15px]">
+                      {" "}
+                      {t("footer.phone")}
+                    </p>
                   </Link>
                 </li>
                 <li>
@@ -113,20 +139,26 @@ function Footer() {
                     href="https://wa.me/966549909990"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#D3D4DC] flex items-center gap-3 hover:text-brand-600 transition-colors duration-200"
+                    className="text-[#D3D4DC] flex items-center gap-2 sm:gap-3 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <img src={mobile} alt="" />{" "}
-                    <p className="m-0">{t("footer.mobile")}</p>
+                    <img
+                      src={mobile}
+                      alt=""
+                      className="w-4 h-4 sm:w-5 sm:h-5"
+                    />{" "}
+                    <p className="m-0 text-sm sm:text-[15px]">
+                      {t("footer.mobile")}
+                    </p>
                   </a>
                 </li>
               </ul>
             </div>
             {/* Social Media Column */}
             <div>
-              <p className="font-medium text-[#fff] text-[15px]">
+              <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.social")}
               </p>
-              <ul className="mt-6 flex flex-col sm:flex-row sm:gap-6 gap-4 text-sm">
+              <ul className="mt-4 sm:mt-6 flex flex-col sm:flex-row sm:gap-6 gap-4 text-sm">
                 <li>
                   <a
                     href="https://www.facebook.com/Malath.Marketing"
@@ -180,7 +212,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="bg-[#1D1D1D] h-[60px]"></div>
+      <div className="bg-[#1D1D1D] h-[48px] sm:h-[56px] md:h-[60px]"></div>
     </footer>
   );
 }

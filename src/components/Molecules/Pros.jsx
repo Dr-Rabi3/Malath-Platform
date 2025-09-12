@@ -13,35 +13,30 @@ function Pros() {
   const pros = t("pros.points", { returnObjects: true });
   return (
     <div>
-      <div className="relative h-[360px] overflow-hidden">
-        <div className="absolute h-full w-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
+      <div className="relative overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+        <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
             alt=""
-            className="absolute h-full z-[-1] transparent-bg opacity-25"
+            className="absolute inset-0 w-full h-full object-cover z-[-1] transparent-bg opacity-25"
           />
         </div>
-        <div className="z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
-          <h1 className="font-barlow font-semibold text-[50px] text-center">
+        <div className="z-[10] p-4 sm:p-6 w-full min-h-[260px] sm:min-h-[320px] md:min-h-[360px] flex flex-col justify-center items-center text-center select-none">
+          <h1 className="font-barlow font-semibold text-2xl sm:text-4xl md:text-5xl">
             {t("prosHero.title")}
           </h1>
-          <div className="font-barlow font-regular text-[20px] text-center">
+          <div className="font-barlow font-regular text-sm sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
             {t("prosHero.subtitle")}
           </div>
         </div>
       </div>
-      <div className=" flex flex-wrap gap-2 mt-2 rounded-[20px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mt-4 md:mt-6">
         <Card
-          style={{
-            width: 500,
-            padding: 50,
-            borderWidth: 1,
-            borderColor: "#d6d6d6",
-            borderRadius: 20,
-            flexGrow: 1,
-          }}
+          className="w-full"
+          styles={{ body: { padding: 24 } }}
+          style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 20 }}
           cover={
-            <div className="!flex !text-neutral-950 items-center text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
+            <div className="!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
               <div
                 className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
                 style={{
@@ -49,7 +44,7 @@ function Pros() {
                     "linear-gradient(rgba(236, 229, 218, 0.2) 20%, rgba(36, 36, 36, 0.05) 56%, rgba(236, 229, 218, 0.2) 86%)",
                 }}
               >
-                <img src={why1} className="w-[30px] sm:w-[30px] h-auto" />
+                <img src={why1} className="w-[26px] sm:w-[30px] h-auto" />
               </div>
               <div>{t("pros.cards.0", "Business Expertise")}</div>
             </div>
@@ -57,7 +52,7 @@ function Pros() {
         >
           <Meta
             description={
-              <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
+              <div className="!text-neutral-950 text-sm sm:text-base md:text-[18px] font-regular font-barlow">
                 {t(
                   "pros.cardsDesc.0",
                   "Our team brings deep knowledge of regional and international markets. We combine strategic thinking with real-world experience to deliver practical, high-impact business solutions."
@@ -67,16 +62,11 @@ function Pros() {
           />
         </Card>
         <Card
-          style={{
-            width: 500,
-            padding: 50,
-            borderWidth: 1,
-            borderColor: "#d6d6d6",
-            borderRadius: 20,
-            flexGrow: 1,
-          }}
+          className="w-full"
+          styles={{ body: { padding: 24 } }}
+          style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 20 }}
           cover={
-            <div className="!flex !text-neutral-950 items-center text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
+            <div className="!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
               <div
                 className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
                 style={{
@@ -84,7 +74,7 @@ function Pros() {
                     "linear-gradient(rgba(236, 229, 218, 0.2) 20%, rgba(36, 36, 36, 0.05) 56%, rgba(236, 229, 218, 0.2) 86%)",
                 }}
               >
-                <img src={why2} className="w-[30px] sm:w-[30px] h-auto" />
+                <img src={why2} className="w-[26px] sm:w-[30px] h-auto" />
               </div>
               <div>{t("pros.cards.1", "Client-Focused Mindset")}</div>
             </div>
@@ -92,7 +82,7 @@ function Pros() {
         >
           <Meta
             description={
-              <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
+              <div className="!text-neutral-950 text-sm sm:text-base md:text-[18px] font-regular font-barlow">
                 {t(
                   "pros.cardsDesc.1",
                   "We tailor our services around your goals. Whether you're an entrepreneur, SME, or investor, your success is our top priority — and we treat your business like our own."
@@ -102,16 +92,11 @@ function Pros() {
           />
         </Card>
         <Card
-          style={{
-            width: 500,
-            padding: 50,
-            borderWidth: 1,
-            borderColor: "#d6d6d6",
-            flexGrow: 1,
-            borderRadius: 20,
-          }}
+          className="w-full"
+          styles={{ body: { padding: 24 } }}
+          style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 20 }}
           cover={
-            <div className="!flex !text-neutral-950 items-center text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
+            <div className="!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
               <div
                 className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
                 style={{
@@ -119,7 +104,7 @@ function Pros() {
                     "linear-gradient(rgba(236, 229, 218, 0.2) 20%, rgba(36, 36, 36, 0.05) 56%, rgba(236, 229, 218, 0.2) 86%)",
                 }}
               >
-                <img src={why3} className="w-[30px] sm:w-[30px] h-auto" />
+                <img src={why3} className="w-[26px] sm:w-[30px] h-auto" />
               </div>
               <div>{t("pros.cards.2", "Results That Matter")}</div>
             </div>
@@ -127,7 +112,7 @@ function Pros() {
         >
           <Meta
             description={
-              <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
+              <div className="!text-neutral-950 text-sm sm:text-base md:text-[18px] font-regular font-barlow">
                 {t(
                   "pros.cardsDesc.2",
                   "We don’t just offer services — we deliver outcomes. From feasibility studies to marketing campaigns, everything we do is designed to create measurable value and drive growth."
@@ -137,16 +122,11 @@ function Pros() {
           />
         </Card>
         <Card
-          style={{
-            width: 500,
-            padding: 50,
-            borderWidth: 1,
-            borderColor: "#d6d6d6",
-            borderRadius: 20,
-            flexGrow: 1,
-          }}
+          className="w-full"
+          styles={{ body: { padding: 24 } }}
+          style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 20 }}
           cover={
-            <div className="!flex !text-neutral-950 items-center text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
+            <div className="!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pl-3 pb-2">
               <div
                 className="w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
                 style={{
@@ -154,7 +134,7 @@ function Pros() {
                     "linear-gradient(rgba(236, 229, 218, 0.2) 20%, rgba(36, 36, 36, 0.05) 56%, rgba(236, 229, 218, 0.2) 86%)",
                 }}
               >
-                <img src={why4} className="w-[30px] sm:w-[30px] h-auto" />
+                <img src={why4} className="w-[26px] sm:w-[30px] h-auto" />
               </div>
               <div>{t("pros.cards.3", "Long-Term Partnership")}</div>
             </div>
@@ -162,7 +142,7 @@ function Pros() {
         >
           <Meta
             description={
-              <div className="!text-neutral-950 text-[18px] font-regular font-barlow">
+              <div className="!text-neutral-950 text-sm sm:text-base md:text-[18px] font-regular font-barlow">
                 {t(
                   "pros.cardsDesc.3",
                   "At Malath, we believe in building strong, lasting relationships. We stay with you beyond the launch — offering continuous support, insight, and scalability as your business evolves."

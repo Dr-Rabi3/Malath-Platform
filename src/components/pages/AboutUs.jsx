@@ -46,38 +46,42 @@ function AboutUs() {
     }
   };
   return (
-    <div className="mt-[20px] space-y-[50px] px-2 sm:px-4 md:px-8 mb-20">
-      <Strategy />
-      <States />
+    <div className="mt-5 sm:mt-6 lg:mt-8 space-y-10 sm:space-y-12 md:space-y-14 px-3 sm:px-4 md:px-6 lg:px-8 mb-16 sm:mb-20">
+      <div className="max-w-7xl mx-auto w-full">
+        <Strategy />
+      </div>
+      <div className="max-w-7xl mx-auto w-full">
+        <States />
+      </div>
       {/* Header Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-3xl sm:text-4xl lg:text-5xl font-medium text-neutral-950 mb-4">
+      <div className="max-w-7xl mx-auto text-center mb-8 sm:mb-10 lg:mb-12 px-2">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-medium text-neutral-950 mb-2 sm:mb-4">
           {t("aboutUs.whoWeAre")}
         </h1>
-        <h3 className="text-xl sm:text-2xl text-neutral-700 font-medium">
+        <h3 className="text-lg sm:text-2xl text-neutral-700 font-medium max-w-3xl mx-auto">
           {t("aboutUs.drivingSuccess")}
         </h3>
       </div>
 
       {/* Three Column Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mx-auto">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
         {/* Left Card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
-          <p className="text-neutral-700 text-base leading-relaxed">
+        <div className="bg-white rounded-xl shadow-lg p-5 sm:p-6 lg:p-8 border border-gray-100">
+          <p className="text-neutral-700 text-base sm:text-[17px] leading-relaxed">
             {t("aboutUs.card1")}
           </p>
         </div>
 
         {/* Middle Card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
-          <p className="text-neutral-700 text-base leading-relaxed">
+        <div className="bg-white rounded-xl shadow-lg p-5 sm:p-6 lg:p-8 border border-gray-100">
+          <p className="text-neutral-700 text-base sm:text-[17px] leading-relaxed">
             {t("aboutUs.card2")}
           </p>
         </div>
 
         {/* Right Card */}
-        <div className="bg-white rounded-xl shadow-lg p-6 lg:p-8 border border-gray-100">
-          <p className="text-neutral-700 text-base leading-relaxed">
+        <div className="bg-white rounded-xl shadow-lg p-5 sm:p-6 lg:p-8 border border-gray-100">
+          <p className="text-neutral-700 text-base sm:text-[17px] leading-relaxed">
             {t("aboutUs.card3")}
           </p>
         </div>

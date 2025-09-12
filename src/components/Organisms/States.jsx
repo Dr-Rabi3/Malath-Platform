@@ -5,15 +5,15 @@ function States() {
 
   return (
     <div className="relative bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {/* Large Left Card - Main Content */}
           <div className="lg:col-span-2">
-            <div className="bg-[#E4BE7F] rounded-2xl p-8 lg:p-12 text-white h-full">
-              <div className="flex flex-col gap-4 mb-6">
+            <div className="bg-[#E4BE7F] rounded-2xl p-6 sm:p-8 lg:p-12 text-white h-full">
+              <div className="flex flex-col gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <svg
-                  width="48"
-                  height="48"
+                  width="40"
+                  height="40"
                   viewBox="0 0 48 48"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -94,26 +94,26 @@ function States() {
                   />
                 </svg>
                 <div>
-                  <div className="text-xl lg:text-3xl font-medium text-white mb-2">
+                  <div className="text-lg sm:text-xl lg:text-3xl font-medium text-white mb-1 sm:mb-2">
                     {t("states.projectCount")}
                   </div>
                 </div>
               </div>
 
-              <div className="text-white text-base lg:text-lg leading-relaxed">
+              <div className="text-white text-sm sm:text-base lg:text-lg leading-relaxed">
                 {t("states.sustainabilityCommitment")}
               </div>
             </div>
           </div>
 
           {/* Right Column - Stacked Small Cards */}
-          <div className="lg:col-span-1 flex flex-col gap-5 justify-between">
+          <div className="lg:col-span-1 flex flex-col gap-4 sm:gap-5 justify-between">
             {/* Card 1 - Customers */}
-            <div className="bg-[#E4BE7F] rounded-2xl p-6 text-white flex-1 flex">
-              <div className="flex items-center gap-4">
+            <div className="bg-[#E4BE7F] rounded-2xl p-5 sm:p-6 text-white flex-1 flex">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <svg
-                  width="48"
-                  height="48"
+                  width="40"
+                  height="40"
                   viewBox="0 0 48 48"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -132,10 +132,8 @@ function States() {
                   />
                 </svg>
                 <div>
-                  <div className="text-3xl font-bold">
-                    1000+
-                  </div>
-                  <div className="text-sm">
+                  <div className="text-2xl sm:text-3xl font-bold">1000+</div>
+                  <div className="text-xs sm:text-sm">
                     {t("states.customersServed")}
                   </div>
                 </div>
@@ -143,11 +141,11 @@ function States() {
             </div>
 
             {/* Card 2 - Experience */}
-            <div className="bg-[#E4BE7F] rounded-2xl p-6 text-white flex-1 flex">
-              <div className="flex items-center gap-4">
+            <div className="bg-[#E4BE7F] rounded-2xl p-5 sm:p-6 text-white flex-1 flex">
+              <div className="flex items-center gap-3 sm:gap-4">
                 <svg
-                  width="48"
-                  height="48"
+                  width="40"
+                  height="40"
                   viewBox="0 0 48 48"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -162,8 +160,8 @@ function States() {
                   />
                 </svg>
                 <div>
-                  <div className="text-3xl font-bold">5+</div>
-                  <div className="text-sm">
+                  <div className="text-2xl sm:text-3xl font-bold">5+</div>
+                  <div className="text-xs sm:text-sm">
                     {t("states.yearsExperienceText")}
                   </div>
                 </div>

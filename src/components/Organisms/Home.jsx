@@ -65,14 +65,14 @@ function Home(props) {
           {slides.map((s, index) => {
             return (
               <CarouselItem key={index} className="">
-                <div className="relative w-full min-h-[600px]">
+                <div className="relative w-full min-h-[600px] sm:min-h-[420px] md:min-h-[600px]">
                   <img
                     src={s.image}
                     alt=""
-                    className="absolute z-[-1] w-full h-[600px] object-cover"
+                    className="absolute inset-0 z-[-1] w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-black/30 z-0" />
-                  <div className="absolute bottom-0 left-0 md:bottom-2 md:left-2">
+                  <div className="absolute bottom-2 left-2 right-2 sm:left-3 sm:right-auto md:bottom-4 md:left-4">
                     <HomeSlider slide={s} totalCount={slides.length} />
                   </div>
                 </div>
@@ -80,10 +80,10 @@ function Home(props) {
             );
           })}
           {slides.length === 0 && (
-            <div className="w-full min-h-[600px] flex flex-col gap-3">
-              <Skeleton className="h-[100%] w-full rounded-xl" />
-              <Skeleton className="h-[30px] w-[40%] rounded-xl" />
-              <Skeleton className="h-[40px] w-full rounded-xl" />
+            <div className="w-full min-h-[280px] sm:min-h-[420px] md:min-h-[600px] flex flex-col gap-3 p-3 sm:p-4">
+              <Skeleton className="h-full w-full rounded-xl" />
+              <Skeleton className="h-[24px] sm:h-[28px] md:h-[30px] w-[60%] sm:w-[50%] md:w-[40%] rounded-xl" />
+              <Skeleton className="h-[36px] sm:h-[40px] w-full rounded-xl" />
             </div>
           )}
         </CarouselContent>

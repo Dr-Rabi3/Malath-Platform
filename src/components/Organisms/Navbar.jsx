@@ -84,14 +84,14 @@ export default function Navbar() {
   return (
     <>
       {notificationContextHolder}
-      <nav>
+      <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md supports-[backdrop-filter]:bg-white/60">
         <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-          <div className="relative flex h-16 items-center justify-between pt-5">
+          <div className="relative flex min-h-16 items-center justify-between py-3 sm:py-4">
             {/* Mobile menu button */}
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
                 type="button"
-                className="relative inline-flex items-center justify-center rounded-md p-2 text-neutral-950"
+                className="relative inline-flex items-center justify-center rounded-md p-3 text-neutral-950"
                 aria-controls="mobile-menu"
                 aria-expanded={mobileMenuOpen}
                 onClick={toggleMobileMenu}
@@ -99,20 +99,27 @@ export default function Navbar() {
                 <span className="absolute -inset-0.5"></span>
                 <span className="sr-only">Open main menu</span>
 
-                {/* Icon when menu is closed */}
-                <svg
-                  className={`${mobileMenuOpen ? "hidden" : "block"} size-6`}
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                {/* Button content when menu is closed: show logo */}
+                <div className="flex items-center gap-2">
+                  <img
+                    className="w-10 h-auto block sm:hidden"
+                    src={darkLogo}
+                    alt="Malath Company"
                   />
-                </svg>
+                  <svg
+                    className={`${mobileMenuOpen ? "hidden" : "block"} size-6`}
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                    />
+                  </svg>
+                </div>
 
                 {/* Icon when menu is open */}
                 <svg
@@ -135,7 +142,7 @@ export default function Navbar() {
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex shrink-0 items-center">
                 <img
-                  className="w-10 w-auto"
+                  className="w-10 h-auto hidden sm:block"
                   src={darkLogo}
                   alt="Malath Company"
                 />
@@ -144,13 +151,13 @@ export default function Navbar() {
                 </h2>
               </div>
               <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4 h-full justify-center items-center">
+                <div className="flex space-x-2 md:space-x-4 h-full justify-center items-center">
                   {list.map((item, index) => {
                     return (
                       <Link
                         key={index}
                         to={item.link}
-                        className={`hover:text-brand-600 rounded-md px-3 py-2 text-[16px] font-semibold ${
+                        className={`hover:text-brand-600 rounded-md px-2 md:px-3 py-2 text-[14px] sm:text-[15px] md:text-[16px] font-semibold whitespace-nowrap ${
                           item.hash == activePath ? "text-brand-600" : ""
                         }`}
                       >
@@ -164,14 +171,14 @@ export default function Navbar() {
 
             {/* Notifications & profile */}
 
-            <div className="absolute inset-y-0 space-x-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div className="absolute inset-y-0 gap-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               {user.userId && <NotificationDropdown />}
               {user.userId && (
                 <button
-                  className="flex justify-between items-center bg-neutral-1000 rounded-full p-1"
+                  className="flex justify-between items-center bg-neutral-1000 rounded-full p-1 sm:p-1.5"
                   onClick={handleLogout}
                 >
-                  <img src={logout} alt="logout icon" className="w-5" />
+                  <img src={logout} alt="logout icon" className="w-5 sm:w-6" />
                 </button>
               )}
               <Tooltip
@@ -190,7 +197,7 @@ export default function Navbar() {
                       : changeLanguage("en");
                     window.location.reload();
                   }}
-                  className="mx-2"
+                  className="mx-2 p-1.5 rounded-md hover:bg-black/5 hidden sm:inline-flex"
                 >
                   {/* <img src={earth} alt="icon" /> */}
                   <Earth />
@@ -208,7 +215,7 @@ export default function Navbar() {
               )}
               {/* Profile dropdown */}
               {user.userId && (
-                <div className="relative ml-3">
+                <div className="relative ml-2 sm:ml-3">
                   <div
                     type="button"
                     className="relative flex rounded-full text-sm items-center gap-2"
@@ -243,7 +250,7 @@ export default function Navbar() {
                   <Link
                     key={index}
                     to={item.link}
-                    className={`block px-3 py-2 text-base font-semibold hover:text-brand-600 ${
+                    className={`block px-3 py-3 text-[15px] font-semibold hover:text-brand-600 ${
                       item.hash == activePath ? "text-brand-600" : ""
                     }`}
                   >
@@ -251,6 +258,23 @@ export default function Navbar() {
                   </Link>
                 );
               })}
+              <button
+                onClick={() => {
+                  const next =
+                    localStorage.getItem("lang") === "en" ||
+                    !localStorage.getItem("lang")
+                      ? "ar"
+                      : "en";
+                  changeLanguage(next);
+                  window.location.reload();
+                }}
+                className="mt-1 w-full text-left block px-3 py-3 text-[15px] font-semibold hover:text-brand-600"
+              >
+                {localStorage.getItem("lang") === "en" ||
+                !localStorage.getItem("lang")
+                  ? "العربية"
+                  : "English"}
+              </button>
             </div>
           </div>
         )}

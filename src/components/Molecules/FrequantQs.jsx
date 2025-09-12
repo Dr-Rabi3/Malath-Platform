@@ -56,21 +56,21 @@ function FrequentQs() {
     return (
       <div
         key={faq.id}
-        className="rounded-lg flex items-start w-full border-[0.5px] border-gray-300"
+        className="rounded-lg w-full border-[0.5px] border-gray-300"
         style={{ boxShadow: "0px 0px 5px 1px rgba(238, 238, 238, 0.87)" }}
       >
-        <div className="flex-1 px-5">
+        <div className="flex-1 px-3 sm:px-4 md:px-5 py-3 sm:py-4">
           <div
             onClick={() => handleToggle(faq.id)}
-            className="flex justify-between items-center cursor-pointer"
+            className="flex justify-between items-center cursor-pointer gap-3 sm:gap-4 flex-wrap"
           >
-            <h3 className="min-h-[50px] flex items-center font-medium font-barlow text-black text-[18px]">
+            <h3 className="flex-1 flex items-center font-medium font-barlow text-black text-base sm:text-lg md:text-xl leading-snug break-words py-2 sm:py-3">
               {faq.question}
             </h3>
             {isActive ? (
-              <CloseOutlined className="text-[#000]" />
+              <CloseOutlined className="text-[#000] text-xl sm:text-2xl" />
             ) : (
-              <PlusOutlined className="text-[#000]" />
+              <PlusOutlined className="text-[#000] text-xl sm:text-2xl" />
             )}
           </div>
 
@@ -86,7 +86,7 @@ function FrequentQs() {
                 className="overflow-hidden"
               >
                 <p
-                  className={`mt-2 text-[#646A69] text-[16px] leading-relaxed `}
+                  className={`mt-2 text-[#646A69] text-sm sm:text-base leading-relaxed`}
                 >
                   {faq.answer}
                 </p>
@@ -100,19 +100,19 @@ function FrequentQs() {
 
   return (
     <div>
-      <div className="relative h-[360px] overflow-hidden">
-        <div className="absolute h-full w-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
+      <div className="relative overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+        <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
             alt=""
-            className="absolute h-full z-[-1] transparent-bg opacity-25"
+            className="absolute inset-0 w-full h-full object-cover z-[-1] transparent-bg opacity-25"
           />
         </div>
-        <div className="z-[10] p-2 w-full h-full flex flex-col justify-center items-center select-none">
-          <h1 className="font-barlow font-semibold text-[50px] text-center">
+        <div className="z-[10] p-4 sm:p-6 w-full min-h-[260px] sm:min-h-[320px] md:min-h-[360px] flex flex-col justify-center items-center text-center select-none">
+          <h1 className="font-barlow font-semibold text-2xl sm:text-4xl md:text-5xl">
             {t("faq.title", "Frequently Asked Questions")}
           </h1>
-          <div className="font-barlow font-regular text-[20px] text-center">
+          <div className="font-barlow font-regular text-sm sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
             {t(
               "faq.subtitle",
               "Still you have any questions? Contact our Team via hello@squareup.com"
@@ -121,7 +121,7 @@ function FrequentQs() {
         </div>
       </div>
       <div className="flex flex-wrap">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 my-[50px] gap-2">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 my-8 sm:my-12 gap-3 sm:gap-4 md:gap-6 px-4 sm:px-6">
           <div className="w-full">
             {faqs
               .slice(0, faqs.length / 2)

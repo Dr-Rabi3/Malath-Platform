@@ -42,44 +42,62 @@ function RootLayout() {
         <div className="h-5"></div>
         {location.pathname === "/" && <Home id="#home" />}
         {location.pathname === "/service" && (
-          <div className="relative min-h-[360px] overflow-hidden">
-            <div className="absolute h-[360px] w-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
-              <img
-                src={serviceBg}
-                alt=""
-                className="absolute h-full z-[-1] transparent-bg opacity-25"
-              />
-            </div>
-            <div className="z-[10] p-2 w-full h-[360px] flex flex-col justify-center items-center select-none">
-              <h1 className="font-barlow font-semibold text-[50px]">
-                {t("servicePage.ourServices", "Our Services")}
-              </h1>
-              <div className="font-barlow font-regular text-[20px]">
-                {t(
-                  "servicePage.transformBrand",
-                  "Transform your brand with our innovative digital solutions that captivate and engage your audience."
-                )}
+          <>
+            <div className="relative overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+              <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
+                <img
+                  src={serviceBg}
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover z-[-1] transparent-bg opacity-25"
+                />
+              </div>
+              <div className="z-[10] p-4 sm:p-6 w-full min-h-[260px] sm:min-h-[320px] md:min-h-[360px] flex flex-col justify-center items-center text-center select-none">
+                <h1 className="font-barlow font-semibold text-2xl sm:text-4xl md:text-5xl">
+                  {t("servicePage.ourServices", "Our Services")}
+                </h1>
+                <div className="font-barlow font-regular text-sm sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
+                  {t(
+                    "servicePage.transformBrand",
+                    "Transform your brand with our innovative digital solutions that captivate and engage your audience."
+                  )}
+                </div>
               </div>
             </div>
-            <ul className="bg-[#363636] w-full justify-between flex flex-wrap text-white text-[15px] md:text-[20px] px-5 py-5">
-              <li className="flex items-center gap-5">
-                <img src={serviceIcon} alt="icon" />
+            <ul className="bg-[#363636] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-white text-sm md:text-base px-4 sm:px-6 py-4">
+              <li className="flex items-center justify-center sm:justify-start gap-3 md:gap-4">
+                <img
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  src={serviceIcon}
+                  alt="icon"
+                />
                 {t("service.bg1")}
               </li>
-              <li className="flex items-center gap-5">
-                <img src={serviceIcon} alt="icon" />
+              <li className="flex items-center justify-center sm:justify-start gap-3 md:gap-4">
+                <img
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  src={serviceIcon}
+                  alt="icon"
+                />
                 {t("service.bg2")}
               </li>
-              <li className="flex items-center gap-5">
-                <img src={serviceIcon} alt="icon" />
+              <li className="flex items-center justify-center sm:justify-start gap-3 md:gap-4">
+                <img
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  src={serviceIcon}
+                  alt="icon"
+                />
                 {t("service.bg3")}
               </li>
-              <li className="flex items-center gap-5">
-                <img src={serviceIcon} alt="icon" />
+              <li className="flex items-center justify-center sm:justify-start gap-3 md:gap-4">
+                <img
+                  className="w-5 h-5 md:w-6 md:h-6"
+                  src={serviceIcon}
+                  alt="icon"
+                />
                 {t("service.bg4")}
               </li>
             </ul>
-          </div>
+          </>
         )}
         <div className="container max-w-[1360px] m-auto mt-[35px] space-y-[35px]">
           <Outlet />
