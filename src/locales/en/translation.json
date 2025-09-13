@@ -26,7 +26,7 @@
     "projectsComplete": "Projects complete",
     "yearsExperience": "Years Experience",
     "customers": "Customers",
-    "projectCount": "3500 Project",
+    "projectCount": "Project",
     "sustainabilityCommitment": "Our commitment to sustainability shines through as we proudly announce the generation of 5,000 megawatt-hours of renewable energy, contributing to a greener and more environmentally friendly future.",
     "customersServed": "Customers Served",
     "yearsExperienceText": "Years Experience"
@@ -241,7 +241,7 @@
   "service_request": "Make a request",
   "contact": {
     "title": "Contact Us",
-    "description_line1": "Fill in your information and we'll shortly reach out to you.",
+    "description_line1": "We are here to help you make a first move to greener choice.",
     "description_line2": "Reach out to our team – we're here to support, advise, and grow with you.",
     "address": "Address",
     "email": "Email",
@@ -250,13 +250,14 @@
     "tax": "Tax Certificate Number",
     "email_label": "Email",
     "message_label": "Message",
-    "send": "Send",
-    "sending": "Sending...",
+    "send": "Submit",
+    "sending": "Submitting...",
     "cancel": "Cancel",
     "validation_error": "Please fill in all required fields.",
     "auth_error": "Please login to send a message.",
     "success_message": "Your message has been sent successfully!",
-    "error_message": "Failed to send message. Please try again."
+    "error_message": "Failed to send message. Please try again.",
+    "fullName": "Full Name"
   },
   "sidebar": {
     "dashboard": "Dashboard",
@@ -588,6 +589,10 @@
   "servicePage": {
     "ourServices": "Our Services",
     "transformBrand": "Transform your brand with our innovative digital solutions that captivate and engage your audience."
+  },
+  "login": {
+    "heroText1": "Need proven professional business solutions in your field?",
+    "heroText2": "will provide you with the support you need to grow and thrive"
   },
   "addQuestions": "Add questions"
 }

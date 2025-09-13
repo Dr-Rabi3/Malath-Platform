@@ -46,19 +46,21 @@ function AboutUs() {
     }
   };
   return (
-    <div className="mt-5 sm:mt-6 lg:mt-8 space-y-10 sm:space-y-12 md:space-y-14 px-3 sm:px-4 md:px-6 lg:px-8 mb-16 sm:mb-20">
-      <div className="max-w-7xl mx-auto w-full">
-        <Strategy />
-      </div>
-      <div className="max-w-7xl mx-auto w-full">
-        <States />
+    <div className="space-y-10 sm:space-y-12 md:space-y-14 mb-16 sm:mb-20">
+      <div className="w-full bg-gradient-to-r from-[#C19E6B] to-[#CEC4B7] rounded-2xl px-6 sm:px-8 lg:px-12 flex py-[6rem]">
+        <div className="">
+          <Strategy />
+        </div>
+        <div className="min-w-[400px]">
+          <States />
+        </div>
       </div>
       {/* Header Section */}
       <div className="max-w-7xl mx-auto text-center mb-8 sm:mb-10 lg:mb-12 px-2">
-        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-medium text-neutral-950 mb-2 sm:mb-4">
+        <h1 className="text-2xl sm:text-4xl lg:text-5xl font-thin mb-2 sm:mb-4">
           {t("aboutUs.whoWeAre")}
         </h1>
-        <h3 className="text-lg sm:text-2xl text-neutral-700 font-medium max-w-3xl mx-auto">
+        <h3 className="text-lg sm:text-2xl text-neutral-700 font-thin max-w-3xl mx-auto">
           {t("aboutUs.drivingSuccess")}
         </h3>
       </div>

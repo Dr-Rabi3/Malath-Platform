@@ -99,7 +99,7 @@ function RootLayout() {
             </ul>
           </>
         )}
-        <div className="container max-w-[1360px] m-auto mt-[35px] space-y-[35px]">
+        <div className="container max-w-[1360px] m-auto space-y-[35px]">
           <Outlet />
         </div>
         <div className="h-5"></div>
