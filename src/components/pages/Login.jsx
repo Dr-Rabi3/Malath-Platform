@@ -38,7 +38,7 @@ function Login() {
               className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto hidden md:block self-center"
             />
             <div
-              className="absolute bg-white/30 backdrop-blur-[1px] w-[80%] h-[80%] top-[50%] left-[50%] rounded-[20px] text-white text-[25px] flex justify-center items-center flex-col font-thin space-y-5 px-8"
+              className="absolute bg-[#E0D4C2]/30 backdrop-blur-[1px] w-[80%] h-[80%] top-[50%] left-[50%] rounded-[20px] text-white text-[25px] flex justify-center items-center flex-col font-thin space-y-5 px-8"
               style={{ transform: "translate(-50%, -50%)" }}
             >
               <div style={{ textShadow: "2px 2px 4px rgba(0,0,0,0.3)" }}>
