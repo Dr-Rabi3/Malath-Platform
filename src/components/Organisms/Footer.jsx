@@ -23,8 +23,8 @@ function Footer() {
       className="bg-neutral-1000"
       style={{ borderRadius: " 60px 60px 0px 0px" }}
     >
-      <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-10 sm:py-12 md:py-16 sm:px-6 lg:space-y-16 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+      <div className="mx-auto max-w-[1350px] space-y-8 px-4 py-10 sm:py-12 md:py-16">
+        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
           <div>
             <div className="text-white flex items-center gap-3">
               <img
@@ -48,7 +48,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:col-span-2 gap-6">
+          <div className="flex-1 flex justify-center gap-8 flex-wrap">
             <div>
               <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.services")}
