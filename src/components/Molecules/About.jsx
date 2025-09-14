@@ -10,9 +10,9 @@ function About() {
     <div className="relative flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6 rounded-[20px] px-4 sm:px-6 lg:px-8 py-5 sm:py-6 lg:py-8 min-h-[200px] sm:min-h-[220px] lg:min-h-[180px]">
       {/* Main content */}
       <div className="text-start w-full lg:max-w-[800px] font-main order-1 lg:order-1">
-        <h1 className="font-barlow text-neutral-1000 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-regular leading-tight mb-2 sm:mb-3">
+        {/* <h1 className="font-barlow text-neutral-1000 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-regular leading-tight mb-2 sm:mb-3">
           {t("about.title")}
-        </h1>
+        </h1> */}
         <p className="text-sm sm:text-base font-regular leading-[1.5] text-neutral-700">
           {t("about.supportMessage")}
           {t("about.supportHighlight")}

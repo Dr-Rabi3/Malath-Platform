@@ -193,7 +193,7 @@ export const getAllCategories = async (token, language = "en") => {
     const response = await axios.get(`${API_BASE_URL}api/Categories/GetAll`, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        // Authorization: `Bearer ${token}`,
         Accept: "application/json",
         "Accept-Language": language,
       },

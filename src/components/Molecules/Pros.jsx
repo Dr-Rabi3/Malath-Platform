@@ -38,7 +38,7 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
+                className="rounded-[20px] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200"
               >
                 <img src={why1} className="w-[20px] h-auto" />
               </div>
@@ -64,7 +64,7 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
+                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]"
               >
                 <img src={why2} className="w-[25px] h-auto" />
               </div>
@@ -90,7 +90,7 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md" 
+                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]" 
               >
                 <img src={why3} className="w-[20px] h-auto" />
               </div>
@@ -116,7 +116,7 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-md"
+                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]"
               >
                 <img src={why4} className="w-[18px] sm:w-[25px] h-auto" />
               </div>

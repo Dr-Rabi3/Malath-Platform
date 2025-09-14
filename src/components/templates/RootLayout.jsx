@@ -63,7 +63,7 @@ function RootLayout() {
                 </div>
               </div>
             </div>
-            <ul className="bg-[#363636] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-white text-sm md:text-base px-4 sm:px-6 py-4">
+            <ul className="bg-[#363636] w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-white place-items-center text-sm md:text-base px-4 sm:px-6 py-4">
               <li className="flex items-center justify-center sm:justify-start gap-3 md:gap-4">
                 <img
                   className="w-5 h-5 md:w-6 md:h-6"
