@@ -48,6 +48,7 @@ function SimpleEditor({ value, onChange, readOnly, limited = 5000 }) {
 
   const editor = useEditor({
     immediatelyRender: false,
+    editable: !readOnly, // 👈 This disables editing when readOnly is true
     extensions: [
       StarterKit,
       Heading.configure({ levels: [1, 2, 3, 4, 5, 6] }),
