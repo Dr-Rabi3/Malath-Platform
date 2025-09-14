@@ -31,7 +31,7 @@ function Login() {
       <div className="min-h-screen flex items-center justify-center p-2 sm:p-4">
         <div className="container max-w-[1100px] bg-accent-25 flex flex-col md:flex-row p-4 md:p-10 justify-between shadow-md gap-5 md:gap-10 w-full">
           <LoginFrom className="w-full" />
-          <div className="relative w-full">
+          <div className="relative w-full hidden md:block">
             <img
               src={photo}
               alt="login photo"
