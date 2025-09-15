@@ -68,7 +68,7 @@ function Service() {
     <>
       {contextHelper}
 
-      <div className="space-y-[20px]">
+      <div className="space-y-[20px] mb-[50px]">
         <div className="flex justify-end">
           {/* <Button
             className="bg-neutral-1000 hover:bg-neutral-950 font-main font-medium"
