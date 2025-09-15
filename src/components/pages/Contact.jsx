@@ -10,6 +10,7 @@ function Contact() {
     email: "",
     message: "",
     phone: "",
+    fullName: "",
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -51,7 +52,7 @@ function Contact() {
       });
 
       setSuccess(t("contact.success_message"));
-      setFormData({ email: "", message: "", phone: "" }); // Reset phone as well
+      setFormData({ email: "", message: "", phone: "", fullName: "" }); // Reset all fields
     } catch (err) {
       setError(err.message || t("contact.error_message"));
     } finally {
@@ -60,16 +61,16 @@ function Contact() {
   };
 
   const handleReset = () => {
-    setFormData({ email: "", message: "", phone: "" }); // Reset phone as well
+    setFormData({ email: "", message: "", phone: "", fullName: "" }); // Reset all fields
     setError("");
     setSuccess("");
   };
 
   return (
-    <div className="font-main px-6 flex gap-8 rounded-[20px] justify-between">
+    <div className="font-main px-4 sm:px-6 flex flex-col lg:flex-row gap-6 lg:gap-8 rounded-[20px] justify-between">
       {/* Left Section */}
-      <div className="flex-1">
-        <div className="flex flex-col gap-16 max-w-[500px]">
+      <div className="flex-1 order-2 lg:order-1">
+        <div className="flex flex-col gap-10 sm:gap-12 max-w-xl w-full">
           <div className="space-y-6">
             <h1 className="text-2xl sm:text-4xl md:text-5xl !font-thin text-neutral-1000 font-main">
               {t("contact.title")}
@@ -111,8 +112,8 @@ function Contact() {
                 {t("contact.fullName")}
               </label>
               <input
-                type="tel"
-                name="phone"
+                type="text"
+                name="fullName"
                 value={formData.fullName}
                 onChange={handleInputChange}
                 placeholder="John Doe"
@@ -158,23 +159,27 @@ function Contact() {
           </form>
         </div>
       </div>
-      <div className="relative rounded-[20px] overflow-hidden">
-        <img src={contactus} alt="contactus" className=" w-full h-full" />
-        <div className="flex flex-wrap gap-x-3 text-sm absolute bottom-5 left-5">
-          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit">
+      <div className="relative rounded-[20px] overflow-hidden order-1 lg:order-2 w-full lg:w-1/3 min-h-[240px] sm:min-h-[320px] lg:min-h-[480px]">
+        <img
+          src={contactus}
+          alt="contactus"
+          className="w-full h-full object-cover"
+        />
+        <div className="flex flex-wrap gap-2 sm:gap-x-3 text-xs sm:text-sm absolute bottom-4 left-4 right-4">
+          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit max-w-full">
             📍 {t("contact.address")}: 20 Al-Tayaran Street, 1st Floor,
             Apartment 2
           </p>
-          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit">
+          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit max-w-full">
             📧 {t("contact.email")}: MalathEgypt@.com
           </p>
-          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit">
+          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit max-w-full">
             📞 {t("contact.phone")}: 0222604857
           </p>
-          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit">
+          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit max-w-full">
             📱 {t("contact.mobile")}: 01008375583 - 01099134464
           </p>
-          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit">
+          <p className="bg-[#E0D4C2] text-[#9A743C] font-thin rounded-2xl px-2 py-2 w-fit max-w-full">
             🧾 {t("contact.tax")}: 6820
           </p>
         </div>

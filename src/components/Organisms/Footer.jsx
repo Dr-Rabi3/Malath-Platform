@@ -24,7 +24,7 @@ function Footer() {
       style={{ borderRadius: " 60px 60px 0px 0px" }}
     >
       <div className="mx-auto max-w-[1350px] space-y-8 px-4 py-10 sm:py-12 md:py-16">
-        <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-10 lg:gap-12">
           <div>
             <div className="text-white flex items-center gap-3">
               <img
@@ -48,7 +48,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="flex-1 flex justify-center gap-8 flex-wrap">
+          <div className="w-full lg:flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
             <div>
               <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.services")}
@@ -106,7 +106,7 @@ function Footer() {
                       alt=""
                       className="w-4 h-4 sm:w-5 sm:h-5"
                     />{" "}
-                    <p className="m-0 text-sm sm:text-[15px]">
+                    <p className="m-0 text-sm sm:text-[15px] break-words">
                       {t("footer.address")}
                     </p>
                   </Link>
@@ -117,7 +117,7 @@ function Footer() {
                     className="m-0 text-[#D3D4DC] flex items-center gap-2 sm:gap-3 hover:text-brand-600 transition-colors duration-200"
                   >
                     <img src={email} alt="" className="w-4 h-4 sm:w-5 sm:h-5" />{" "}
-                    <p className="m-0 text-sm sm:text-[15px]">
+                    <p className="m-0 text-sm sm:text-[15px] break-all">
                       {t("footer.email")}
                     </p>
                   </a>
@@ -158,7 +158,7 @@ function Footer() {
               <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.social")}
               </p>
-              <ul className="mt-4 sm:mt-6 flex flex-col sm:flex-row sm:gap-6 gap-4 text-sm">
+              <ul className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-sm">
                 <li>
                   <a
                     href="https://www.facebook.com/Malath.Marketing"

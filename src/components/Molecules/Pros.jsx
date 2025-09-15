@@ -11,6 +11,8 @@ const { Meta } = Card;
 function Pros() {
   const { t, i18n } = useTranslation();
   const pros = t("pros.points", { returnObjects: true });
+  const lang = i18n.language.includes("en") ? "en" : "ar";
+  console.log(lang);
   return (
     <div>
       <div className="relative overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
@@ -36,7 +38,7 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
+            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
                 className="rounded-[20px] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200"
               >
@@ -62,7 +64,7 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
+            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
                 className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]"
               >
@@ -88,7 +90,7 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
+            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
                 className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]" 
               >
@@ -114,7 +116,7 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${i18n.language === "en" ? "pl-3" : "pr-3"}`}>
+            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
                 className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]"
               >
