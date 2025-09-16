@@ -40,9 +40,9 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="rounded-[20px] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200"
+                className="rounded-full bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200"
               >
-                <img src={why1} className="w-[20px] h-auto" />
+                <img src={why1} className="w-[18px] h-auto" />
               </div>
               <div>{t("pros.cards.0", "Business Expertise")}</div>
             </div>
@@ -66,9 +66,9 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]"
+                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full"
               >
-                <img src={why2} className="w-[25px] h-auto" />
+                <img src={why2} className="w-[23px] h-auto" />
               </div>
               <div>{t("pros.cards.1", "Client-Focused Mindset")}</div>
             </div>
@@ -92,9 +92,9 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]" 
+                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full" 
               >
-                <img src={why3} className="w-[20px] h-auto" />
+                <img src={why3} className="w-[16px] h-auto" />
               </div>
               <div>{t("pros.cards.2", "Results That Matter")}</div>
             </div>
@@ -118,9 +118,9 @@ function Pros() {
           cover={
             <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
               <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] flex justify-center items-center border border-gray-200 rounded-[20px]"
+                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full"
               >
-                <img src={why4} className="w-[18px] sm:w-[25px] h-auto" />
+                <img src={why4} className="w-[12px] sm:w-[23px] h-auto" />
               </div>
               <div>{t("pros.cards.3", "Long-Term Partnership")}</div>
             </div>
