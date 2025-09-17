@@ -385,7 +385,27 @@
 
       "photoUrl": "Photo URL",
       "pleaseEnterPhotoUrl": "Please enter a valid photo URL",
-      "uploadPhoto": "Upload Photo"
+      "uploadPhoto": "Upload Photo",
+      "deleteItem": "Delete Item",
+      "selectDeleteType": "Select Type to Delete",
+      "selectTypeToDelete": "Select what you want to delete",
+      "category": "Category",
+      "service": "Service",
+      "selectCategory": "Select Category",
+      "selectService": "Select Service",
+      "searchToSelectCategory": "Search to select category",
+      "searchToSelectService": "Search to select service",
+      "pleaseSelectDeleteType": "Please select what you want to delete",
+      "pleaseSelectCategory": "Please select a category",
+      "pleaseSelectService": "Please select a service",
+      "deleting": "Deleting...",
+      "deleteButton": "Delete",
+      "confirmDelete": "Confirm Delete",
+      "confirmDeleteTitle": "Are you sure you want to delete this item?",
+      "confirmDeleteMessage": "This action will permanently delete the {{type}} '{{name}}'. This action cannot be undone.",
+      "yesDelete": "Yes, Delete",
+      "cancel": "Cancel",
+      "error": "Error"
     },
     "slider": {
       "title": "Slider Settings",

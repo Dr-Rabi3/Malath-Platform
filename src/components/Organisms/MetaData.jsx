@@ -98,10 +98,15 @@ function MetaData({ ...props }) {
                 <Card
                   loading={loading}
                   className="w-full h-full border-0"
+                  style={{
+                    borderWidth: 1,
+                    borderColor: "#d6d6d6",
+                    borderRadius: 10,
+                  }}
                   cover={
                     <div
-                      className={`pt-6 pb-4 px-6${
-                        i18n.language === "en" ? "pl-6" : "pr-6"
+                      className={` pt-3 pb-2 px-6${
+                        i18n.language === "en" ? "pl-3" : "pr-3"
                       }`}
                     >
                       <div className="flex gap-3 items-center">

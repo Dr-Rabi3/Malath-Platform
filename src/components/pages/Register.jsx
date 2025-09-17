@@ -6,14 +6,14 @@ function Register() {
   const { t } = useTranslation();
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-2 sm:p-4">
-      <div className="container max-w-[1100px] bg-accent-25 flex flex-col md:flex-row p-4 md:p-10 justify-between items-center shadow-md gap-5 md:gap-10 w-full">
+    <div className="min-h-screen flex items-center justify-center p-2 !my-5">
+      <div className="container max-w-[900px] bg-accent-25 flex flex-col md:flex-row p-4 justify-between items-center shadow-md gap-5 md:gap-10 w-full">
         <RegisterForm className="w-full" />
         <div className="relative w-full h-full hidden md:block">
           <img
             src={photo}
             alt="register photo"
-            className="w-full max-w-xs md:max-w-md lg:max-w-lg h-auto self-center"
+            className="w-full max-w-xs md:max-w-md lg:max-w-lg max-h-[600px] self-center"
           />
           <div
             className="absolute bg-[#E0D4C2]/30 backdrop-blur-[1px] w-[80%] h-[80%] top-[50%] left-[50%] rounded-[20px] text-white text-[25px] flex justify-center items-center flex-col font-thin space-y-5 px-8"

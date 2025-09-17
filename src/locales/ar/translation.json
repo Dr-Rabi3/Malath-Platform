@@ -379,7 +379,27 @@
 
       "photoUrl": "رابط الصورة",
       "pleaseEnterPhotoUrl": "الرجاء إدخال رابط صورة صالح",
-      "uploadPhoto": "رفع صورة"
+      "uploadPhoto": "رفع صورة",
+      "deleteItem": "حذف عنصر",
+      "selectDeleteType": "اختر النوع المراد حذفه",
+      "selectTypeToDelete": "اختر ما تريد حذفه",
+      "category": "الفئة",
+      "service": "الخدمة",
+      "selectCategory": "اختر الفئة",
+      "selectService": "اختر الخدمة",
+      "searchToSelectCategory": "ابحث لاختيار الفئة",
+      "searchToSelectService": "ابحث لاختيار الخدمة",
+      "pleaseSelectDeleteType": "يرجى اختيار ما تريد حذفه",
+      "pleaseSelectCategory": "يرجى اختيار فئة",
+      "pleaseSelectService": "يرجى اختيار خدمة",
+      "deleting": "جاري الحذف...",
+      "deleteButton": "حذف",
+      "confirmDelete": "تأكيد الحذف",
+      "confirmDeleteTitle": "هل أنت متأكد من حذف هذا العنصر؟",
+      "confirmDeleteMessage": "سيؤدي هذا الإجراء إلى حذف {{type}} '{{name}}' نهائياً. لا يمكن التراجع عن هذا الإجراء.",
+      "yesDelete": "نعم، احذف",
+      "cancel": "إلغاء",
+      "error": "خطأ"
     },
     "slider": {
       "title": "إعدادات الشريط المتحرك",

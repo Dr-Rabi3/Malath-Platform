@@ -15,7 +15,7 @@ function Pros() {
   console.log(lang);
   return (
     <div>
-      <div className="relative overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+      <div className="relative w-screen right-[-16px] sm:right-0 sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
         <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
@@ -24,10 +24,10 @@ function Pros() {
           />
         </div>
         <div className="z-[10] p-4 sm:p-6 w-full min-h-[260px] sm:min-h-[320px] md:min-h-[360px] flex flex-col justify-center items-center text-center select-none">
-          <h1 className="font-barlow font-semibold text-2xl sm:text-4xl md:text-5xl">
+          <h1 className="font-barlow font-semibold text-3xl sm:text-4xl md:text-5xl">
             {t("prosHero.title")}
           </h1>
-          <div className="font-barlow font-regular text-sm sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
+          <div className="font-barlow font-regular text-md sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
             {t("prosHero.subtitle")}
           </div>
         </div>
@@ -38,10 +38,12 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
-              <div
-                className="rounded-full bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200"
-              >
+            <div
+              className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${
+                lang === "en" ? "pl-3" : "pr-3"
+              }`}
+            >
+              <div className="rounded-full bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200">
                 <img src={why1} className="w-[18px] h-auto" />
               </div>
               <div>{t("pros.cards.0", "Business Expertise")}</div>
@@ -64,10 +66,12 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
-              <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full"
-              >
+            <div
+              className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${
+                lang === "en" ? "pl-3" : "pr-3"
+              }`}
+            >
+              <div className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full">
                 <img src={why2} className="w-[23px] h-auto" />
               </div>
               <div>{t("pros.cards.1", "Client-Focused Mindset")}</div>
@@ -90,10 +94,12 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
-              <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full" 
-              >
+            <div
+              className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${
+                lang === "en" ? "pl-3" : "pr-3"
+              }`}
+            >
+              <div className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full">
                 <img src={why3} className="w-[16px] h-auto" />
               </div>
               <div>{t("pros.cards.2", "Results That Matter")}</div>
@@ -116,10 +122,12 @@ function Pros() {
           styles={{ body: { padding: 24 } }}
           style={{ borderWidth: 1, borderColor: "#d6d6d6", borderRadius: 10 }}
           cover={
-            <div className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${lang === "en" ? "pl-3" : "pr-3"}`}>
-              <div
-                className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full"
-              >
+            <div
+              className={`!flex !text-neutral-950 items-center text-xl sm:text-2xl md:text-[26px] font-medium font-barlow gap-3 pt-3 pb-2 ${
+                lang === "en" ? "pl-3" : "pr-3"
+              }`}
+            >
+              <div className="bg-gradient-to-r from-[#BA9258] to-[#C9BFB1] w-[40px] h-[40px] sm:w-[50px] sm:h-[50px] flex justify-center items-center border border-gray-200 rounded-full">
                 <img src={why4} className="w-[12px] sm:w-[23px] h-auto" />
               </div>
               <div>{t("pros.cards.3", "Long-Term Partnership")}</div>

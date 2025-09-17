@@ -1075,6 +1075,82 @@ export const markNotificationAsRead = async (token, notificationIds) => {
 };
 
 /**
+ * Delete a category by ID
+ * @param {string} token - Authorization token
+ * @param {number} categoryId - Category ID to delete
+ * @returns {Promise<Object>} API response
+ */
+export const deleteCategory = async (token, categoryId) => {
+  try {
+    const response = await axios.delete(
+      `${API_BASE_URL}api/Categories/Delete/${categoryId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(result.error?.description || "Failed to delete category");
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Delete category error";
+
+    console.error("Delete category error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
+ * Delete a service by ID
+ * @param {string} token - Authorization token
+ * @param {number} serviceId - Service ID to delete
+ * @returns {Promise<Object>} API response
+ */
+export const deleteService = async (token, serviceId) => {
+  try {
+    const response = await axios.delete(
+      `${API_BASE_URL}api/Services/${serviceId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(result.error?.description || "Failed to delete service");
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Delete service error";
+
+    console.error("Delete service error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
  * Get all notifications
  * @param {string} token - Authorization token
  * @returns {Promise<Array>} List of notifications

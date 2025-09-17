@@ -100,7 +100,7 @@ function FrequentQs() {
 
   return (
     <div>
-      <div className="relative overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+      <div className="relative w-screen right-[-16px] sm:right-0 sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
         <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
@@ -109,10 +109,10 @@ function FrequentQs() {
           />
         </div>
         <div className="z-[10] p-4 sm:p-6 w-full min-h-[260px] sm:min-h-[320px] md:min-h-[360px] flex flex-col justify-center items-center text-center select-none">
-          <h1 className="font-barlow font-semibold text-2xl sm:text-4xl md:text-5xl">
+          <h1 className="font-barlow font-semibold text-3xl sm:text-4xl md:text-5xl">
             {t("faq.title", "Frequently Asked Questions")}
           </h1>
-          <div className="font-barlow font-regular text-sm sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
+          <div className="font-barlow font-regular text-md sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
             {t(
               "faq.subtitle",
               "Still you have any questions? Contact our Team via hello@squareup.com"

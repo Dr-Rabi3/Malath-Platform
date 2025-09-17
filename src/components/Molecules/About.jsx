@@ -14,7 +14,7 @@ function About() {
           {t("about.title")}
         </h1> */}
         <p className="text-sm sm:text-base font-regular leading-[1.5] text-neutral-700">
-          {t("about.supportMessage")}
+          {t("about.supportMessage")} {" "}
           {t("about.supportHighlight")}
         </p>
       </div>
