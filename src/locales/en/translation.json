@@ -594,6 +594,14 @@
     "arabicContent": "Content in Arabic",
     "englishContentRequired": "Please enter content in English",
     "arabicContentRequired": "Please enter content in Arabic",
+    "images": "Images",
+    "uploadImage": "Upload Image",
+    "maxImages": "Max 4 images",
+    "maxImagesReached": "Maximum 4 images allowed",
+    "imageUploadSuccess": "Image uploaded successfully",
+    "imageUploadError": "Failed to upload image",
+    "uploadedImages": "Uploaded Images",
+    "uploading": "Uploading...",
     "contentRequired": "Content is required"
   },
   "blogs": {
@@ -604,7 +612,9 @@
     "deleteBlog": "Delete Blog",
     "readTime": "2 min read",
     "noBlogs": "No blogs found",
-    "pagination": "{{from}}-{{to}} of {{total}} blogs"
+    "pagination": "{{from}}-{{to}} of {{total}} blogs",
+    "morePhotos": "more",
+    "imagePreview": "Image Preview"
   },
   "servicePage": {
     "ourServices": "Our Services",

@@ -588,6 +588,14 @@
     "arabicContent": "المحتوى باللغة العربية",
     "englishContentRequired": "يرجى إدخال المحتوى باللغة الإنجليزية",
     "arabicContentRequired": "يرجى إدخال المحتوى باللغة العربية",
+    "images": "الصور",
+    "uploadImage": "تحميل صورة",
+    "maxImages": "حد أقصى 4 صور",
+    "maxImagesReached": "تم الوصول للحد الأقصى من الصور (4 صور)",
+    "imageUploadSuccess": "تم تحميل الصورة بنجاح",
+    "imageUploadError": "فشل في تحميل الصورة",
+    "uploadedImages": "الصور المحملة",
+    "uploading": "جاري التحميل...",
     "contentRequired": "المحتوى مطلوب"
   },
   "blogs": {
@@ -598,7 +606,9 @@
     "deleteBlog": "حذف المدونة",
     "readTime": "دقيقتان للقراءة",
     "noBlogs": "لا توجد مدونات",
-    "pagination": "{{from}}-{{to}} من أصل {{total}} مدونة"
+    "pagination": "{{from}}-{{to}} من أصل {{total}} مدونة",
+    "morePhotos": "المزيد",
+    "imagePreview": "معاينة الصورة"
   },
   "servicePage": {
     "ourServices": "خدماتنا",

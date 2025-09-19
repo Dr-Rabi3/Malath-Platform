@@ -17,6 +17,7 @@ export const createBlog = async (token, blogData) => {
       {
         contentEn: blogData.contentEn,
         contentAr: blogData.contentAr,
+        photos: blogData.photos || [], // Add photos array
       },
       {
         headers: {
@@ -154,7 +155,7 @@ export const deleteUser = async (token, userId) => {
  */
 export const getAllSliders = async (language = "en") => {
   try {
-    console.log(language)
+    console.log(language);
     const response = await axios.get(`${API_BASE_URL}api/Sliders/all`, {
       headers: {
         "Accept-Language": language,

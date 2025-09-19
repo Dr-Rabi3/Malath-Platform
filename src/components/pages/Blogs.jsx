@@ -1,9 +1,10 @@
-import { Empty, Spin, Modal, Popconfirm, Pagination } from "antd";
+import { Empty, Spin, Modal, Popconfirm, Pagination, Image } from "antd";
 import { getDurationFromNow } from "../../utils/timeAge";
-import { DeleteOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
 import { getBlogs } from "../../api/admin";
+import { getFile } from "../../api/http";
 import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "../../store/AuthContext";
 import { useTranslation } from "react-i18next";
 import Editor from "../Organisms/Editor";
@@ -13,6 +14,9 @@ function Blogs({ isAdmin, loading, onDelete }) {
   const { user } = useAuth();
   const [pageIndex, setPageIndex] = useState(1);
   const [pageSize, setPageSize] = useState(10);
+  const [photoUrls, setPhotoUrls] = useState({}); // Store photo URLs for each blog
+  const [previewVisible, setPreviewVisible] = useState(false);
+  const [previewImage, setPreviewImage] = useState("");
   const {
     data: blogsData,
     isLoading,
@@ -43,9 +47,150 @@ function Blogs({ isAdmin, loading, onDelete }) {
   const pageSizeFromAPI = blogsData?.pagination?.PageSize || pageSize;
   const { t } = useTranslation();
 
+  // Load photo URLs for blogs
+  const loadPhotoUrls = async (blogs) => {
+    const newPhotoUrls = { ...photoUrls };
+
+    for (const blog of blogs) {
+      if (blog.photos && blog.photos.length > 0 && !newPhotoUrls[blog.id]) {
+        try {
+          const blogPhotoUrls = [];
+          for (const photoPath of blog.photos) {
+            try {
+              const blob = await getFile(photoPath);
+              const url = URL.createObjectURL(blob);
+              blogPhotoUrls.push(url);
+            } catch (error) {
+              console.error(`Error loading photo ${photoPath}:`, error);
+              // Fallback to direct API URL
+              const fallbackUrl = `${
+                import.meta.env.VITE_API_BASE_URL
+              }api/General/download?filePath=${photoPath}`;
+              blogPhotoUrls.push(fallbackUrl);
+            }
+          }
+          newPhotoUrls[blog.id] = blogPhotoUrls;
+        } catch (error) {
+          console.error(`Error loading photos for blog ${blog.id}:`, error);
+        }
+      }
+    }
+
+    if (Object.keys(newPhotoUrls).length > Object.keys(photoUrls).length) {
+      setPhotoUrls(newPhotoUrls);
+    }
+  };
+
+  // Load photos when blogs data changes
+  useEffect(() => {
+    if (blogs && blogs.length > 0) {
+      loadPhotoUrls(blogs);
+    }
+  }, [blogs]);
+
+  // Cleanup blob URLs on unmount
+  useEffect(() => {
+    return () => {
+      Object.values(photoUrls).forEach((blogPhotos) => {
+        blogPhotos.forEach((url) => {
+          if (url.startsWith("blob:")) {
+            URL.revokeObjectURL(url);
+          }
+        });
+      });
+    };
+  }, []);
+
   const handlePageChange = (page, size) => {
     setPageIndex(page);
     setPageSize(size);
+  };
+
+  // Photo Gallery Component
+  const PhotoGallery = ({ photos, blogId }) => {
+    if (!photos || photos.length === 0) return null;
+
+    const handlePreview = (url) => {
+      setPreviewImage(url);
+      setPreviewVisible(true);
+    };
+
+    // All photos have the same dimensions - 2x2 grid with equal sizing
+    const PhotoItem = ({ photo, alt, className = "" }) => (
+      <Image
+        src={photo}
+        alt={alt}
+        className={`!w-full h-16 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity ${className}`}
+        preview={false}
+        onClick={() => handlePreview(photo)}
+        placeholder={
+          <div className="w-full h-16 bg-gray-200 rounded-lg flex items-center justify-center">
+            <Spin size="small" />
+          </div>
+        }
+      />
+    );
+
+    if (photos.length === 1) {
+      return (
+        <div className="grid grid-cols-2 gap-1 h-32">
+          <PhotoItem
+            photo={photos[0]}
+            alt="Blog photo"
+            className="col-span-2"
+          />
+        </div>
+      );
+    }
+
+    if (photos.length === 2) {
+      return (
+        <div className="grid grid-cols-2 gap-1 h-32">
+          <PhotoItem photo={photos[0]} alt="Blog photo 1" />
+          <PhotoItem photo={photos[1]} alt="Blog photo 2" />
+        </div>
+      );
+    }
+
+    if (photos.length === 3) {
+      return (
+        <div className="grid grid-cols-2 gap-1 h-32">
+          <PhotoItem photo={photos[0]} alt="Blog photo 1" />
+          <PhotoItem photo={photos[1]} alt="Blog photo 2" />
+          <PhotoItem
+            photo={photos[2]}
+            alt="Blog photo 3"
+            className="col-span-2"
+          />
+        </div>
+      );
+    }
+
+    // 4 or more photos - show first 4 in 2x2 grid
+    return (
+      <div className="grid grid-cols-2 gap-1 h-32">
+        {photos.slice(0, 4).map((photo, index) => (
+          <PhotoItem
+            key={index}
+            photo={photo}
+            alt={`Blog photo ${index + 1}`}
+          />
+        ))}
+        {photos.length > 4 && (
+          <div
+            className="relative h-16 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 transition-colors flex items-center justify-center col-span-2"
+            onClick={() => handlePreview(photos[4])}
+          >
+            <div className="text-center">
+              <EyeOutlined className="text-lg text-gray-600 mb-1" />
+              <div className="text-xs font-medium text-gray-600">
+                +{photos.length - 4} {t("blogs.morePhotos", "more")}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -94,12 +239,28 @@ function Blogs({ isAdmin, loading, onDelete }) {
 
           {/* Blog Content */}
           <div className="p-6">
-            <div className="prose prose-sm max-w-none">
-              <Editor 
-                content={(i18n.language === "ar" ? blog.contentAr : blog.contentEn) || blog.content} 
-                readOnly={true} 
-                field="content" 
-              />
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* Photos Section - Left Side */}
+              {photoUrls[blog.id] && (
+                <div className="lg:w-80 w-full flex-shrink-0">
+                  <PhotoGallery photos={photoUrls[blog.id]} blogId={blog.id} />
+                </div>
+              )}
+
+              {/* Content Section - Right Side */}
+              <div className="flex-1 min-w-0">
+                <div className="prose prose-sm max-w-none">
+                  <Editor
+                    content={
+                      (i18n.language === "ar"
+                        ? blog.contentAr
+                        : blog.contentEn) || blog.content
+                    }
+                    readOnly={true}
+                    field="content"
+                  />
+                </div>
+              </div>
             </div>
           </div>
 
@@ -173,6 +334,26 @@ function Blogs({ isAdmin, loading, onDelete }) {
           />
         </div>
       )}
+
+      {/* Image Preview Modal */}
+      <Modal
+        open={previewVisible}
+        title={t("blogs.imagePreview", "Image Preview")}
+        footer={null}
+        onCancel={() => setPreviewVisible(false)}
+        width="90vw"
+        style={{ maxWidth: "800px" }}
+        centered
+      >
+        <div className="text-center">
+          <Image
+            src={previewImage}
+            alt="Preview"
+            className="max-w-full max-h-[70vh] object-contain"
+            preview={false}
+          />
+        </div>
+      </Modal>
     </div>
   );
 }
