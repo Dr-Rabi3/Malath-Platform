@@ -99,7 +99,7 @@ function AdminLayout() {
     {
       key: "2",
       icon: <Service className="w-5 p-0 text-[#fff]/50" />,
-      label: t("sidebar.services", "Services"),
+      label: t("sidebar.services", "Requests"),
       onClick: () => navigate("/admin/admin-service"),
     },
     {
@@ -200,8 +200,11 @@ function AdminLayout() {
         .ant-menu-item-selected > svg{
           position: absolute;
           top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
+          // left: 25px;
+          transform: translateY(-50%);
+        }
+        .ant-menu-item-selected > span {
+          margin-left: 30px !important;
         }
         [data-menu-id$="-${items.length}"].ant-menu-item{
           position: absolute !important;

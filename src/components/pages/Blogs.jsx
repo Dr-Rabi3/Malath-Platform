@@ -265,7 +265,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
           </div>
 
           {/* Blog Footer */}
-          {!isAdmin && (
+          {/* {!isAdmin && (
             <div className="px-6 py-3 bg-gray-50 border-t border-gray-100">
               <div className="flex items-center justify-between text-sm text-gray-500">
                 <span>{getDurationFromNow(blog.createdAt)}</span>
@@ -297,7 +297,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       ))}
 
