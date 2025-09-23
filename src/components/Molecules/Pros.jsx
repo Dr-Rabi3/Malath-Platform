@@ -12,7 +12,6 @@ function Pros() {
   const { t, i18n } = useTranslation();
   const pros = t("pros.points", { returnObjects: true });
   const lang = i18n.language.includes("en") ? "en" : "ar";
-  console.log(lang);
   return (
     <div>
       <div className="relative w-screen right-[-16px] sm:right-0 sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">

@@ -14,7 +14,7 @@ export const useNotification = () => {
 
   useEffect(() => {
     if (!user?.token) {
-      console.log("No user token, skipping SignalR connection");
+      console.warn("No user token, skipping SignalR connection");
       return;
     }
 

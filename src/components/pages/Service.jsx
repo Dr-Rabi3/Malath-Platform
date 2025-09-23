@@ -63,7 +63,7 @@ function Service() {
     services: (services || []).filter((srv) => srv.categoryId === cat.id),
   }));
 
-  console.log(groupedServices, categories, services);
+  // console.log(groupedServices, categories, services);
   return (
     <>
       {contextHelper}

@@ -152,7 +152,7 @@ function From({ types, action, createAccount }) {
   }, []);
 
   const onFinish = useCallback(async (values) => {
-    console.log("Success:", values);
+    // console.log("Success:", values);
     if (action === "login") await handleLogin(values.email, values.password);
     else await handleRegister(values);
   }, []);

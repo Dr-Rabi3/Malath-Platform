@@ -32,6 +32,7 @@ import AdminAddService from "./components/pages/AdminAddService";
 import AdminDashboard from "./components/pages/AdminDashboard";
 import Slider from "./components/pages/Slider";
 import AddQuestion from "./components/pages/AddQuestion";
+import { useEffect } from "react";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -148,6 +149,9 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  useEffect(() => {
+    console.log = function () {};
+  }, []);
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>

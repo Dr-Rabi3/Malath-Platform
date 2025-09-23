@@ -22,10 +22,10 @@ function RootLayout() {
   const navigate = useNavigate();
   const navigation = useNavigation();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const isNavigating = Boolean(navigation.location);
   const fetcher = useFetcher();
-  console.log(fetcher, navigation);
+  // console.log(fetcher, navigation);
   useEffect(() => {
     // console.log(user);
     if (user.token) {

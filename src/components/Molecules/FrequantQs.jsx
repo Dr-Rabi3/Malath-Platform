@@ -19,16 +19,6 @@ const fetchQuestions = async (lang = "en") => {
   return data.data; // This will be the array of questions
 };
 
-// Example usage:
-fetchQuestions("ar") // or "en"
-  .then((questions) => {
-    console.log(questions);
-    // Output: [{id: 1, question: "...", answer: "..."}, ...]
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
 function FrequentQs() {
   const { t, i18n } = useTranslation();
   const [faqs, setFaqs] = useState([]);
@@ -48,9 +38,9 @@ function FrequentQs() {
   const handleToggle = (key) => {
     setActiveKey(key === activeKey ? null : key);
   };
-  console.log(faqs);
+  // console.log(faqs);
   const renderFAQItem = (faq, index) => {
-    console.log(faq);
+    // console.log(faq);
     const isActive = activeKey === faq.id;
 
     return (

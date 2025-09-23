@@ -48,7 +48,7 @@ export const createBlog = async (token, blogData) => {
  */
 export const getBlogs = async (pageIndex, pageSize, token, language = "en") => {
   try {
-    console.log("API Request - pageIndex:", pageIndex, "pageSize:", pageSize);
+    // console.log("API Request - pageIndex:", pageIndex, "pageSize:", pageSize);
 
     const response = await axios.get(`${API_BASE_URL}api/Blogs/all`, {
       headers: {
@@ -64,15 +64,15 @@ export const getBlogs = async (pageIndex, pageSize, token, language = "en") => {
       timeout: 10000,
     });
 
-    console.log("API Response Headers:", response.headers);
-    console.log("API Response Data:", response.data);
+    // console.log("API Response Headers:", response.headers);
+    // console.log("API Response Data:", response.data);
 
     // Extract pagination info from x-pagination header
     let pagination = null;
     if (response.headers && response.headers["x-pagination"]) {
       try {
         pagination = JSON.parse(response.headers["x-pagination"]);
-        console.log("Parsed Pagination:", pagination);
+        // console.log("Parsed Pagination:", pagination);
       } catch (error) {
         console.warn("Failed to parse x-pagination header:", error);
       }
@@ -155,7 +155,7 @@ export const deleteUser = async (token, userId) => {
  */
 export const getAllSliders = async (language = "en") => {
   try {
-    console.log(language);
+    // console.log(language);
     const response = await axios.get(`${API_BASE_URL}api/Sliders/all`, {
       headers: {
         "Accept-Language": language,

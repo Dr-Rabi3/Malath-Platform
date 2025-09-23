@@ -29,8 +29,8 @@ function MetaData({ ...props }) {
     setLoading(true);
     getEntitySettings(i18n.language)
       .then((data) => {
-        console.log(data);
-        setSettingData(data);
+        // console.log(data);
+        setSettingData(data); 
       })
       .catch(() => {
         message.error("Failed to fetch settings");
@@ -123,9 +123,6 @@ function MetaData({ ...props }) {
                       </div>
                     </div>
                   }
-                  bodyStyle={{
-                    padding: "24px",
-                  }}
                 >
                   <Meta
                     description={

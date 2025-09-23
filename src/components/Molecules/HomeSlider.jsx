@@ -39,7 +39,6 @@ function HomeSlider({ className, slide, totalCount }) {
     }
   };
 
-  console.log(+slide.number);
   return (
     <div
       className={`bg-[#c3b6f347] backdrop-blur-sm rounded-lg p-6 ${className}`}
