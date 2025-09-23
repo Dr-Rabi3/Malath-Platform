@@ -9,7 +9,7 @@ import { message } from "antd";
 function Service() {
   const [messageApi, contextHelper] = message.useMessage();
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
 
   const {
@@ -18,7 +18,7 @@ function Service() {
     error: servicesError,
   } = useQuery({
     queryKey: ["services"],
-    queryFn: () => getAllServices(user?.token),
+    queryFn: () => getAllServices(user?.token, i18n.language),
     // enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -32,7 +32,7 @@ function Service() {
     error: categoriesError,
   } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => getAllCategories(user?.token),
+    queryFn: () => getAllCategories(user?.token, i18n.language),
     // enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

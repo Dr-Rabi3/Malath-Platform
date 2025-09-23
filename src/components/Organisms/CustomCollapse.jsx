@@ -90,14 +90,6 @@ function CustomCollapse({ services }) {
                     </div>
                   </div>
                   <ul className="max-h-[55%] sm:max-h-[60%] list-disc list-inside text-white/90 text-[16px] sm:text-[18px] md:text-[20px] mb-4 pr-2">
-                    {service?.services.map((s, idx) => (
-                      <li key={idx}>
-                        {s.name}
-                        <p className="text-[14px] sm:text-[15px] opacity-90">
-                          {s.description}
-                        </p>
-                      </li>
-                    ))}
                     {user.role !== Roles.Admin && (
                       <>
                         <Button
@@ -120,6 +112,14 @@ function CustomCollapse({ services }) {
                         </Button>
                       </>
                     )}
+                    {service?.services.map((s, idx) => (
+                      <li key={idx}>
+                        {s.name}
+                        <p className="text-[14px] sm:text-[15px] opacity-90">
+                          {s.description}
+                        </p>
+                      </li>
+                    ))}
                   </ul>
                 </motion.div>
               </div>
