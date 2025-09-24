@@ -1,10 +1,9 @@
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { message } from "antd";
-import connection from "../api/signalrConnection";
+import { buildConnection, HttpTransportType } from "../api/signalrConnection";
 import { useAuth } from "../store/AuthContext";
 import { useTranslation } from "react-i18next";
-import { createConnection } from "../api/signalrConnection";
 
 export const useNotification = () => {
   const queryClient = useQueryClient();
@@ -18,7 +17,10 @@ export const useNotification = () => {
       return;
     }
 
-    const connection = createConnection(user.token);
+    // Try LongPolling first (uses Authorization header rather than query)
+    let connection = buildConnection(user.token, {
+      transport: HttpTransportType.LongPolling,
+    });
 
     connection
       .start()
@@ -28,8 +30,7 @@ export const useNotification = () => {
         // Listen for notifications
         connection.on("notify", (message) => {
           try {
-            // const notificationData = JSON.parse(message);
-            console.log("Notification received:", data);
+            // Normalize payload
             const notification =
               typeof message === "string" ? JSON.parse(message) : message;
 
@@ -66,15 +67,29 @@ export const useNotification = () => {
           console.log("SignalR connection closed");
         });
       })
-      .catch((err) => {
+      .catch(async (err) => {
         console.error("SignalR Connection Error: ", err);
-        messageApi.error(t("notifications.connectionError"));
+        // Fallbacks: negotiation default, then WebSockets
+        try {
+          connection = buildConnection(user.token);
+          await connection.start();
+        } catch (e1) {
+          try {
+            connection = buildConnection(user.token, {
+              transport: HttpTransportType.WebSockets,
+            });
+            await connection.start();
+          } catch (e2) {
+            console.error("SignalR Fallbacks failed:", e1, e2);
+            messageApi.error(t("notifications.connectionError"));
+          }
+        }
       });
 
     return () => {
-      if (connection.state === "Connected") {
+      try {
         connection.stop();
-      }
+      } catch {}
     };
   }, [user?.token, user?.userId, queryClient, messageApi, t]);
 

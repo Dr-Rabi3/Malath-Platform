@@ -62,14 +62,14 @@ function AddService() {
   const requestServiceMutation = useMutation({
     mutationFn: (requestData) => requestService(user?.token, requestData),
     onSuccess: () => {
-      messageApi.success("Service request submitted successfully!");
+      messageApi.success(t("addService.submitSuccess"));
       form.resetFields();
       setSelectedServiceType(null);
       // Optionally invalidate and refetch user services if you have a query for them
       // queryClient.invalidateQueries({ queryKey: ["userServices"] });
     },
     onError: (error) => {
-      messageApi.error(`Failed to submit service request: ${error.message}`);
+      messageApi.error(t("addService.submitError", { error: error.message }));
     },
   });
 
@@ -201,7 +201,7 @@ function AddService() {
                   {(!servicesType || servicesType.length === 0) &&
                     !servicesTypeLoading && (
                       <Option value={null} disabled>
-                        No service types available
+                        {t("addService.noServiceTypes")}
                       </Option>
                     )}
                 </Select>
@@ -227,7 +227,7 @@ function AddService() {
                   placeholder={
                     selectedServiceType
                       ? t("addService.selectService")
-                      : "Please select a service type first"
+                      : t("addService.selectServiceTypeFirst")
                   }
                   onChange={onServiceChange}
                   loading={servicesLoading}
@@ -243,8 +243,8 @@ function AddService() {
                     !servicesLoading && (
                       <Option value={null} disabled>
                         {selectedServiceType
-                          ? "No services available for this type"
-                          : "Please select a service type first"}
+                          ? t("addService.noServicesForType")
+                          : t("addService.selectServiceTypeFirst")}
                       </Option>
                     )}
                 </Select>
@@ -254,14 +254,14 @@ function AddService() {
 
           <Form.Item
             name="description"
-            label="Description"
+            label={t("addService.description")}
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             className="w-full"
             rules={[
               {
                 required: true,
-                message: "Description is required",
+                message: t("addService.descriptionRequired"),
               },
             ]}
           >
@@ -279,7 +279,7 @@ function AddService() {
               loading={requestServiceMutation.isPending}
             >
               {requestServiceMutation.isPending
-                ? "Submitting..."
+                ? t("addService.submitting")
                 : t("addService.sendRequest")}
             </Button>
           </Form.Item>

@@ -87,7 +87,15 @@
     "pending": "قيد الانتظار",
     "approved": "مقبول",
     "rejected": "مرفوض",
-    "unknown": "غير معروف"
+    "unknown": "غير معروف",
+    "actions": "الإجراءات",
+    "delete": "حذف",
+    "confirmDeleteTitle": "حذف الطلب",
+    "confirmDeleteMessage": "هل أنت متأكد أنك تريد حذف هذا الطلب؟",
+    "confirmYes": "نعم، حذف",
+    "confirmNo": "إلغاء",
+    "deleteSuccess": "تم حذف الطلب بنجاح",
+    "deleteError": "فشل حذف الطلب: {{error}}"
   },
   "form": {
     "action": { "login": "تسجيل الدخول", "register": "انشاء حساب" },
@@ -319,7 +327,7 @@
   },
   "addService": {
     "title": "معلومات الخدمة",
-    "serviceTitle": "عنوان الخدمة",
+    "serviceTitle": "عنوان الطلب",
     "titleRequired": "يرجى إدخال عنوان الخدمة!",
     "selectType": "اختر النوع",
     "selectService": "اختر الخدمة",
@@ -330,12 +338,20 @@
     "websiteRequired": "يرجى إدخال رابط الموقع!",
     "sendRequest": "إرسال الطلب",
     "loginWarning": "يجب تسجيل الدخول أولاً!",
+    "submitSuccess": "تم إرسال طلب الخدمة بنجاح!",
+    "submitError": "فشل إرسال طلب الخدمة: {{error}}",
+    "noServiceTypes": "لا توجد أنواع خدمات متاحة",
+    "selectServiceTypeFirst": "يرجى اختيار نوع الخدمة أولاً",
+    "noServicesForType": "لا توجد خدمات متاحة لهذا النوع",
+    "descriptionRequired": "الوصف مطلوب",
+    "submitting": "جاري الإرسال...",
     "types": {
       "male": "ذكر",
       "female": "أنثى",
       "other": "آخر"
     },
-    "characters": "حروف"
+    "characters": "حروف",
+    "description": "الوصف"
   },
   "admin": {
     "setting": {

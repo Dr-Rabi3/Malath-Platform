@@ -87,7 +87,15 @@
     "pending": "Pending",
     "approved": "Approved",
     "rejected": "Rejected",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "actions": "Actions",
+    "delete": "Delete",
+    "confirmDeleteTitle": "Delete request",
+    "confirmDeleteMessage": "Are you sure you want to delete this request?",
+    "confirmYes": "Yes, delete",
+    "confirmNo": "Cancel",
+    "deleteSuccess": "Request deleted successfully",
+    "deleteError": "Failed to delete request: {{error}}"
   },
   "form": {
     "action": { "login": "Login", "register": "Sign up" },
@@ -336,12 +344,20 @@
     "websiteRequired": "Please input link for website!",
     "sendRequest": "Send Request",
     "loginWarning": "You must login first!",
+    "submitSuccess": "Service request submitted successfully!",
+    "submitError": "Failed to submit service request: {{error}}",
+    "noServiceTypes": "No service types available",
+    "selectServiceTypeFirst": "Please select a service type first",
+    "noServicesForType": "No services available for this type",
+    "descriptionRequired": "Description is required",
+    "submitting": "Submitting...",
     "types": {
       "male": "Male",
       "female": "Female",
       "other": "Other"
     },
-    "characters": "characters"
+    "characters": "characters",
+    "description": "Description"
   },
   "admin": {
     "setting": {

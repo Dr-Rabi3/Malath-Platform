@@ -727,6 +727,44 @@ export const rejectUserServiceRequest = async (token, requestId) => {
 };
 
 /**
+ * Delete a user service request by ID
+ * @param {string} token - Authorization token
+ * @param {number} requestId - The ID of the user service request to delete
+ * @returns {Promise<Object>} API response
+ */
+export const deleteUserService = async (token, requestId) => {
+  try {
+    const response = await axios.delete(
+      `${API_BASE_URL}api/UserService/DeleteUserService/${requestId}`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+          Accept: "application/json",
+        },
+        timeout: 10000, // 10-second timeout
+      }
+    );
+
+    const result = response.data;
+
+    if (!result.isSuccess) {
+      throw new Error(result.error?.description || "Failed to delete request");
+    }
+
+    return result.data;
+  } catch (error) {
+    const errorMsg =
+      error.response?.data?.error?.description ||
+      error.message ||
+      "Delete request error";
+
+    console.error("Delete user service error:", errorMsg);
+    throw new Error(errorMsg);
+  }
+};
+
+/**
  * Upload a file to a specific folder on the server
  * @param {string} token - Authorization token (optional if API doesn't require it)
  * @param {File} file - The file to upload (e.g., from an <input type="file" />)
@@ -736,7 +774,7 @@ export const rejectUserServiceRequest = async (token, requestId) => {
 
 export const uploadFile = async (token, file, folderName) => {
   try {
-    console.log(file);
+    
     const formData = new FormData();
     formData.append("file", file);
 
@@ -752,6 +790,7 @@ export const uploadFile = async (token, file, folderName) => {
       }
     );
 
+    
     const result = response.data;
 
     if (!result.isSuccess) {

@@ -150,7 +150,7 @@ const router = createBrowserRouter([
 
 function App() {
   useEffect(() => {
-    console.log = function () {};
+    // console.log = function () {};
   }, []);
   return (
     <QueryClientProvider client={queryClient}>

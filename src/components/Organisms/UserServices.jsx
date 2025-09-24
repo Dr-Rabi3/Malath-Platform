@@ -1,11 +1,18 @@
-import { useQuery } from "@tanstack/react-query";
-import { getUserServiceRequests, getAllServices } from "../../api/http";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  getUserServiceRequests,
+  getAllServices,
+  deleteUserService,
+} from "../../api/http";
 import { useAuth } from "../../store/AuthContext";
 import { useTranslation } from "react-i18next";
+import { message } from "antd";
 
 function UserServices() {
   const { user } = useAuth();
   const { t } = useTranslation();
+  const queryClient = useQueryClient();
+  const [messageApi, contextHolder] = message.useMessage();
 
   // Fetch user service requests using React Query
   const {
@@ -66,6 +73,26 @@ function UserServices() {
     }
   };
 
+  // Delete request mutation
+  const deleteMutation = useMutation({
+    mutationFn: (requestId) => deleteUserService(user?.token, requestId),
+    onSuccess: () => {
+      messageApi.success(t("userServices.deleteSuccess"));
+      queryClient.invalidateQueries({
+        queryKey: ["userServiceRequests", user?.userId],
+      });
+    },
+    onError: (error) => {
+      messageApi.error(t("userServices.deleteError", { error: error.message }));
+    },
+  });
+
+  const handleDelete = (id) => {
+    const confirmed = window.confirm(t("userServices.confirmDeleteMessage"));
+    if (!confirmed) return;
+    deleteMutation.mutate(id);
+  };
+
   if (isLoading || servicesLoading) {
     return (
       <div className="flex items-center justify-center min-h-[200px]">
@@ -103,6 +130,7 @@ function UserServices() {
 
   return (
     <div className="overflow-x-auto">
+      {contextHolder}
       <table className="min-w-full text-left border-collapse">
         <thead>
           <tr className="border-b">
@@ -114,6 +142,9 @@ function UserServices() {
             </th>
             <th className="py-2 px-4 font-medium text-gray-500">
               {t("userServices.status")}
+            </th>
+            <th className="py-2 px-4 font-medium text-gray-500">
+              {t("userServices.actions")}
             </th>
           </tr>
         </thead>
@@ -128,6 +159,32 @@ function UserServices() {
                 <span className={getStatusBadge(request.status)}>
                   {getStatusText(request.status)}
                 </span>
+              </td>
+              <td className="py-3 px-4">
+                <button
+                  onClick={() => handleDelete(request.id)}
+                  disabled={deleteMutation.isPending}
+                  className={`inline-flex items-center gap-1 border px-3 py-1 rounded transition-colors duration-200 ${
+                    deleteMutation.isPending
+                      ? "border-red-300 text-red-300 cursor-not-allowed"
+                      : "border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
+                  }`}
+                  aria-label={t("userServices.delete")}
+                  title={t("userServices.delete")}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                    className="w-4 h-4"
+                  >
+                    <path d="M9 3a1 1 0 0 0-1 1v1H5.5a1 1 0 1 0 0 2h13a1 1 0 1 0 0-2H16V4a1 1 0 0 0-1-1H9zm1 4a1 1 0 0 0-1 1v9a1 1 0 1 0 2 0V8a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v9a1 1 0 1 0 2 0V8a1 1 0 0 0-1-1z" />
+                    <path d="M6 8v10a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8H6z" />
+                  </svg>
+                  <span className="text-sm font-medium">
+                    {t("userServices.delete")}
+                  </span>
+                </button>
               </td>
             </tr>
           ))}

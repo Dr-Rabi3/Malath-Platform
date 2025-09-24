@@ -65,7 +65,7 @@ function Profile() {
 
   // Upload file mutation
   const uploadMutation = useMutation({
-    mutationFn: (file) => uploadFile(user?.token, file, "image"),
+    mutationFn: (file) => uploadFile(user?.token, file, "picture"),
     onSuccess: (uploadedPath) => {
       messageApi.success(t("profile.imageUploadSuccess"));
       // Update user data with new profile image path
@@ -80,7 +80,7 @@ function Profile() {
 
   // Update user mutation
   const updateUserMutation = useMutation({
-    mutationFn: (userData) => updateUser(userData),
+    mutationFn: (userData) => updateUser(user?.token, userData),
     onSuccess: () => {
       messageApi.success(t("profile.profileUpdateSuccess"));
       queryClient.invalidateQueries({ queryKey: ["user", user?.userId] });
@@ -132,12 +132,10 @@ function Profile() {
   };
 
   // Handle file upload
-  const handleUpload = () => {
-    if (selectedFile) {
-      uploadMutation.mutate(selectedFile);
-      return uploadMutation.data;
-    }
-    return null;
+  const handleUpload = async () => {
+    await uploadMutation.mutateAsync(selectedFile);
+    console.log(uploadMutation);
+    return uploadMutation.data;
   };
 
   // Handle form submission from UserData component
@@ -160,7 +158,7 @@ function Profile() {
       // If there's a new image selected, upload it first
       if (selectedFile) {
         messageApi.loading(t("profile.uploadingImage"));
-        const uploadedPath = handleUpload(); // await uploadFile(user?.token,selectedFile,"image");
+        const uploadedPath = await handleUpload(); // await uploadFile(user?.token,selectedFile,"image");
         console.log("Uploaded image path:", uploadedPath, typeof uploadedPath);
 
         // Ensure we have a string URL, not an object
@@ -174,12 +172,6 @@ function Profile() {
 
         setSelectedFile(null);
         setPreviewUrl(null);
-        messageApi.success("Image uploaded successfully!");
-      }
-
-      // Ensure profilePicture is a string
-      if (typeof profilePicturePath === "object" && profilePicturePath.url) {
-        profilePicturePath = profilePicturePath.url;
       }
 
       console.log(
@@ -188,47 +180,31 @@ function Profile() {
         typeof profilePicturePath
       );
 
-      // Prepare user data for update with correct API field names
+      // Prepare user data for update with only allowed fields
       const updateData = {
-        id: userData.id, // Include user ID
-        fullNameAr: formValues.name, // Map name to fullNameAr
-        fullNameEn: formValues.name, // Map name to fullNameEn (or you can have separate Arabic/English fields)
+        id: userData.id,
+        fullNameAr: formValues.name,
+        fullNameEn: formValues.name,
         mobileNumber: formValues.phone,
         whatsAppNumber: formValues.whatsapp,
-        profilePicture: profilePicturePath, // This should be a string URL
+        profilePicture: profilePicturePath,
         email: formValues.email,
         country: formValues.country,
         city: formValues.city,
-        // Keep other existing fields from userData that we're not updating
-        ...Object.fromEntries(
-          Object.entries(userData).filter(
-            ([key]) =>
-              ![
-                "id",
-                "fullNameAr",
-                "fullNameEn",
-                "mobileNumber",
-                "whatsAppNumber",
-                "profilePicture",
-                "email",
-                "country",
-                "city",
-              ].includes(key)
-          )
-        ),
       };
 
       console.log("Update data:", updateData);
       console.log("Profile picture type:", typeof updateData.profilePicture);
 
       messageApi.loading(t("profile.updatingProfile"));
-      await updateUser(user?.token, updateData);
-      messageApi.success("Profile updated successfully!");
+      await updateUserMutation.mutateAsync(updateData);
 
       // Invalidate queries to refresh data
       queryClient.invalidateQueries({ queryKey: ["user", user?.userId] });
     } catch (error) {
-      messageApi.error(`Failed to update profile: ${error.message}`);
+      messageApi.error(
+        t("profile.profileUpdateFail", { error: error.message })
+      );
     } finally {
       setIsSubmitting(false);
     }
