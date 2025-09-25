@@ -39,7 +39,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
   };
   console.log(userData);
   return (
-    <div className="flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full px-2">
+    <div className="flex flex-col items-center justify-center space-y-3 sm:space-y-5 w-full px-3 sm:px-2">
       <Form
         layout="vertical"
         name="basic"
@@ -61,8 +61,8 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
         validateMessages={validateMessages}
         disabled={!userData}
       >
-        <Row className="w-full" gutter={16}>
-          <Col span={12}>
+        <Row className="w-full" gutter={[12, 12]}>
+          <Col xs={24} sm={24} md={12}>
             <Form.Item
               name="name"
               label={t("userData.name")}
@@ -82,7 +82,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
               <Input />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={24} md={12}>
             <Form.Item
               label={t("userData.email")}
               layout="vertical"
@@ -103,8 +103,8 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
             </Form.Item>
           </Col>
         </Row>
-        <Row className="w-full" gutter={16}>
-          <Col span={12}>
+        <Row className="w-full" gutter={[12, 12]}>
+          <Col xs={24} sm={24} md={12}>
             <Form.Item
               label={t("userData.mobile")}
               layout="vertical"
@@ -135,7 +135,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
               <CustomPhoneInput />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col xs={24} sm={24} md={12}>
             <Form.Item
               label={t("userData.whatsapp")}
               layout="vertical"
@@ -175,7 +175,7 @@ function UserData({ userData, onSubmit, isSubmitting = false }) {
         >
           <Button
             type="submit"
-            className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-[30px] py-1 sm:py-1.5"
+            className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-3 sm:px-[30px] py-2 sm:py-2.5 text-sm"
             disabled={isSubmitting || !userData}
           >
             {isSubmitting ? t("userData.saving") : t("userData.save")}

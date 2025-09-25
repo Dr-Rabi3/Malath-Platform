@@ -135,8 +135,8 @@ function AddService() {
   return (
     <>
       {contextHelper}
-      <div className="bg-accent-25 shadow-custom-gray flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full p-12">
-        <div className="font-semibold text-[20px] sm:text-[25px] text-neutral-950 font-secondary">
+      <div className="bg-accent-25 shadow-custom-gray flex flex-col items-center justify-center space-y-4 sm:space-y-5 w-full p-4 sm:p-8 lg:p-12">
+        <div className="font-semibold text-[16px] sm:text-[18px] md:text-[20px] text-neutral-950 font-secondary text-center">
           {t("addService.title")}
         </div>
         <Form
@@ -145,7 +145,7 @@ function AddService() {
           name="basic"
           labelCol={{ span: 4 }}
           wrapperCol={{ span: 20 }}
-          style={{ width: "100%" }}
+          style={{ width: "100%", maxWidth: "800px" }}
           // initialValues={{ remember: true }}
           onFinish={onFinish}
           onFinishFailed={onFinishFailed}
@@ -172,10 +172,14 @@ function AddService() {
               },
             ]}
           >
-            <Input placeholder={t("addService.serviceTitle")} />
+            <Input
+              placeholder={t("addService.serviceTitle")}
+              size="large"
+              className="w-full"
+            />
           </Form.Item>
-          <Row className="w-full" justify="space-between">
-            <Col span={11}>
+          <Row className="w-full" gutter={[16, 16]} justify="space-between">
+            <Col xs={24} sm={24} md={11}>
               <Form.Item
                 label={t("addService.selectType")}
                 layout="vertical"
@@ -196,6 +200,8 @@ function AddService() {
                   onChange={onTypeChange}
                   loading={servicesTypeLoading}
                   allowClear
+                  size="large"
+                  className="w-full"
                 >
                   {servicesType?.map((serviceType) => (
                     <Option key={serviceType.id} value={serviceType.id}>
@@ -211,7 +217,7 @@ function AddService() {
                 </Select>
               </Form.Item>
             </Col>
-            <Col span={11}>
+            <Col xs={24} sm={24} md={11}>
               <Form.Item
                 label={t("addService.selectService")}
                 layout="vertical"
@@ -237,6 +243,8 @@ function AddService() {
                   loading={servicesLoading}
                   allowClear
                   disabled={!selectedServiceType}
+                  size="large"
+                  className="w-full"
                 >
                   {filteredServices?.map((service) => (
                     <Option key={service.id} value={service.id}>
@@ -269,17 +277,20 @@ function AddService() {
               },
             ]}
           >
-            <Editor />
+            <div className="w-full">
+              <Editor />
+            </div>
           </Form.Item>
 
           <Form.Item
             label={null}
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
+            className="w-full"
           >
             <Button
               type="submit"
-              className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-[30px] py-2 sm:py-2.5"
+              className="w-full bg-neutral-950 hover:bg-neutral-700 font-regular px-4 py-2 sm:px-[30px] sm:py-2.5 text-xs sm:text-sm"
               loading={requestServiceMutation.isPending}
             >
               {requestServiceMutation.isPending

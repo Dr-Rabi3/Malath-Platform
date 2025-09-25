@@ -237,11 +237,13 @@ function Profile() {
 
   if (userLoading) {
     return (
-      <div className="max-w-4xl mx-auto mt-10 p-6">
-        <div className="flex items-center justify-center min-h-[400px]">
+      <div className="max-w-4xl mx-auto mt-4 sm:mt-6 lg:mt-10 p-4 sm:p-6">
+        <div className="flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-800 mx-auto mb-4"></div>
-            <p className="text-gray-600">{t("profile.loading")}</p>
+            <div className="animate-spin rounded-full h-8 w-8 sm:h-12 sm:w-12 border-b-2 border-blue-800 mx-auto mb-4"></div>
+            <p className="text-gray-600 text-sm sm:text-base">
+              {t("profile.loading")}
+            </p>
           </div>
         </div>
       </div>
@@ -250,11 +252,15 @@ function Profile() {
 
   if (userError) {
     return (
-      <div className="max-w-4xl mx-auto mt-10 p-6">
-        <div className="flex items-center justify-center min-h-[400px]">
+      <div className="max-w-4xl mx-auto mt-4 sm:mt-6 lg:mt-10 p-4 sm:p-6">
+        <div className="flex items-center justify-center min-h-[300px] sm:min-h-[400px]">
           <div className="text-center">
-            <p className="text-red-600 mb-4">{t("profile.errorLoading")}</p>
-            <p className="text-gray-600 text-sm">{userError.message}</p>
+            <p className="text-red-600 mb-4 text-sm sm:text-base">
+              {t("profile.errorLoading")}
+            </p>
+            <p className="text-gray-600 text-xs sm:text-sm">
+              {userError.message}
+            </p>
           </div>
         </div>
       </div>
@@ -264,15 +270,16 @@ function Profile() {
   return (
     <>
       {contextHolder}
-      <div className="max-w-4xl mx-auto mt-10 p-6">
+      <div className="max-w-4xl mx-auto mt-4 sm:mt-6 lg:mt-10 p-4 sm:p-6">
         {/* Profile Section */}
-        <div className="flex items-center space-x-2 mb-8 gap-2">
+        <div className="flex flex-col sm:flex-row items-center sm:space-x-2 mb-6 sm:mb-8 gap-4 sm:gap-2">
           <Avatar
-            size={60}
+            size={{ xs: 50, sm: 60, md: 70 }}
             src={getProfileImageSrc()}
             icon={<UserOutlined />}
+            className="flex-shrink-0"
           />
-          <div className="flex justify-center items-center space-x-4">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-2 sm:gap-4 w-full sm:w-auto">
             <input
               id="image"
               type="file"
@@ -282,22 +289,22 @@ function Profile() {
             />
             <label
               htmlFor="image"
-              className="border border-neutral-950 text-[14px] text-neutral-950 px-2 py-1 rounded hover:bg-neutral-700/10 cursor-pointer"
+              className="border border-neutral-950 text-xs sm:text-[14px] text-neutral-950 px-3 py-2 rounded hover:bg-neutral-700/10 cursor-pointer text-center w-full sm:w-auto"
             >
               {t("profile.uploadPhoto")}
             </label>
             <button
               onClick={() => setPasswordModalVisible(true)}
-              className="border border-blue-600 text-[14px] text-blue-600 px-2 py-1 rounded hover:bg-blue-600 hover:text-white transition-colors duration-200"
+              className="border border-blue-600 text-xs sm:text-[14px] text-blue-600 px-3 py-2 rounded hover:bg-blue-600 hover:text-white transition-colors duration-200 w-full sm:w-auto"
             >
               {t("profile.changePassword")}
             </button>
           </div>
         </div>
         {/* Tabs */}
-        <div className="relative flex border-b mb-4 text-sm font-medium">
+        <div className="relative flex border-b mb-4 text-xs sm:text-sm font-medium">
           <button
-            className={`w-1/2 text-center pb-2 transition-colors duration-300 ${
+            className={`w-1/2 text-center pb-2 px-2 sm:px-4 transition-colors duration-300 ${
               activeTab === "data"
                 ? "text-blue-800 font-semibold"
                 : "text-gray-500"
@@ -307,7 +314,7 @@ function Profile() {
             {t("profile.dataTab")}
           </button>
           <button
-            className={`w-1/2 text-center pb-2 transition-colors duration-300 ${
+            className={`w-1/2 text-center pb-2 px-2 sm:px-4 transition-colors duration-300 ${
               activeTab === "service"
                 ? "text-yellow-700 font-semibold"
                 : "text-gray-500"
@@ -329,7 +336,7 @@ function Profile() {
             }}
           />
         </div>
-        <div className="relative min-h-[100px]">
+        <div className="relative min-h-[450px] sm:min-h-[200px]">
           <TabContent active={activeTab === "data"}>
             {/* Data tab content */}
             <UserData
@@ -362,10 +369,10 @@ function TabContent({ active, children }) {
       className={`absolute w-full transition-all duration-300 ${
         active
           ? "opacity-100 translate-x-0 pointer-events-auto"
-          : "opacity-0 translate-x-4 pointer-events-none"
+          : "opacity-0 translate-x-2 sm:translate-x-4 pointer-events-none"
       }`}
     >
-      {children}
+      <div className="p-2 sm:p-0">{children}</div>
     </div>
   );
 }

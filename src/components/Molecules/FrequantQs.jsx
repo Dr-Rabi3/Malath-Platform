@@ -90,7 +90,7 @@ function FrequentQs() {
 
   return (
     <div>
-      <div className="relative w-screen right-[-16px] sm:right-0 sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+      <div className="relative w-screen right-[16px] sm:right-0 sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
         <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}

@@ -95,10 +95,12 @@ function UserServices() {
 
   if (isLoading || servicesLoading) {
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
+      <div className="flex items-center justify-center min-h-[160px] sm:min-h-[200px]">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-800 mx-auto mb-2"></div>
-          <p className="text-gray-600 text-sm">{t("userServices.loading")}</p>
+          <div className="animate-spin rounded-full h-6 w-6 sm:h-8 sm:w-8 border-b-2 border-blue-800 mx-auto mb-2"></div>
+          <p className="text-gray-600 text-xs sm:text-sm">
+            {t("userServices.loading")}
+          </p>
         </div>
       </div>
     );
@@ -106,10 +108,12 @@ function UserServices() {
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
+      <div className="flex items-center justify-center min-h-[160px] sm:min-h-[200px]">
         <div className="text-center">
-          <p className="text-red-600 mb-2">{t("userServices.errorLoading")}</p>
-          <p className="text-gray-600 text-sm">{error.message}</p>
+          <p className="text-red-600 mb-2 text-sm sm:text-base">
+            {t("userServices.errorLoading")}
+          </p>
+          <p className="text-gray-600 text-xs sm:text-sm">{error.message}</p>
         </div>
       </div>
     );
@@ -117,10 +121,12 @@ function UserServices() {
 
   if (!serviceRequests || serviceRequests.length === 0) {
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
+      <div className="flex items-center justify-center min-h-[160px] sm:min-h-[200px]">
         <div className="text-center">
-          <p className="text-gray-600">{t("userServices.noRequests")}</p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-600 text-sm sm:text-base">
+            {t("userServices.noRequests")}
+          </p>
+          <p className="text-gray-500 text-xs sm:text-sm">
             {t("userServices.noRequestsHint")}
           </p>
         </div>
@@ -134,37 +140,40 @@ function UserServices() {
       <table className="min-w-full text-left border-collapse">
         <thead>
           <tr className="border-b">
-            <th className="py-2 px-4 font-medium text-gray-500">
+            <th className="py-2 px-2 sm:px-4 font-medium text-gray-500 text-xs sm:text-sm">
               {t("userServices.serviceName")}
             </th>
-            <th className="py-2 px-4 font-medium text-gray-500">
+            <th className="py-2 px-2 sm:px-4 font-medium text-gray-500 text-xs sm:text-sm">
               {t("userServices.service")}
             </th>
-            <th className="py-2 px-4 font-medium text-gray-500">
+            <th className="py-2 px-2 sm:px-4 font-medium text-gray-500 text-xs sm:text-sm">
               {t("userServices.status")}
             </th>
-            <th className="py-2 px-4 font-medium text-gray-500">
+            <th className="py-2 px-2 sm:px-4 font-medium text-gray-500 text-xs sm:text-sm">
               {t("userServices.actions")}
             </th>
           </tr>
         </thead>
         <tbody>
           {serviceRequests.map((request) => (
-            <tr key={request.id} className="border-b text-[13px]">
-              <td className="py-3 px-4">{request.title || "N/A"}</td>
-              <td className="py-3 px-4">
+            <tr
+              key={request.id}
+              className="border-b text-[12px] sm:text-[13px]"
+            >
+              <td className="py-3 px-2 sm:px-4">{request.title || "N/A"}</td>
+              <td className="py-3 px-2 sm:px-4">
                 {getServiceNameById(request.serviceID)}
               </td>
-              <td className="py-3 px-4">
+              <td className="py-3 px-2 sm:px-4">
                 <span className={getStatusBadge(request.status)}>
                   {getStatusText(request.status)}
                 </span>
               </td>
-              <td className="py-3 px-4">
+              <td className="py-3 px-2 sm:px-4">
                 <button
                   onClick={() => handleDelete(request.id)}
                   disabled={deleteMutation.isPending}
-                  className={`inline-flex items-center gap-1 border px-3 py-1 rounded transition-colors duration-200 ${
+                  className={`inline-flex items-center gap-1 border px-2 sm:px-3 py-1 rounded transition-colors duration-200 ${
                     deleteMutation.isPending
                       ? "border-red-300 text-red-300 cursor-not-allowed"
                       : "border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
@@ -176,12 +185,12 @@ function UserServices() {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24"
                     fill="currentColor"
-                    className="w-4 h-4"
+                    className="w-3.5 h-3.5 sm:w-4 sm:h-4"
                   >
                     <path d="M9 3a1 1 0 0 0-1 1v1H5.5a1 1 0 1 0 0 2h13a1 1 0 1 0 0-2H16V4a1 1 0 0 0-1-1H9zm1 4a1 1 0 0 0-1 1v9a1 1 0 1 0 2 0V8a1 1 0 0 0-1-1zm4 0a1 1 0 0 0-1 1v9a1 1 0 1 0 2 0V8a1 1 0 0 0-1-1z" />
                     <path d="M6 8v10a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V8H6z" />
                   </svg>
-                  <span className="text-sm font-medium">
+                  <span className="text-xs sm:text-sm font-medium">
                     {t("userServices.delete")}
                   </span>
                 </button>
