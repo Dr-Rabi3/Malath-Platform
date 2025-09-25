@@ -166,6 +166,10 @@ function AddService() {
                 message: t("addService.titleRequired"),
                 whitespace: true,
               },
+              {
+                max: 15,
+                message: t("addService.titleMaxLength"),
+              },
             ]}
           >
             <Input placeholder={t("addService.serviceTitle")} />

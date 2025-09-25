@@ -59,6 +59,51 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const updateUserProfile = (updatedData) => {
+    // Update cookies with new data
+    if (updatedData.email) {
+      Cookies.set("malath_email", updatedData.email, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      });
+    }
+    if (
+      updatedData.fullName ||
+      updatedData.fullNameAr ||
+      updatedData.fullNameEn
+    ) {
+      const name =
+        updatedData.fullName ||
+        updatedData.fullNameAr ||
+        updatedData.fullNameEn;
+      Cookies.set("malath_name", name, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      });
+    }
+    if (updatedData.profilePicture) {
+      Cookies.set("malath_profileImageUrl", updatedData.profilePicture, {
+        expires: 7,
+        secure: true,
+        sameSite: "Strict",
+      });
+    }
+
+    // Update context state
+    setUser((prev) => ({
+      ...prev,
+      email: updatedData.email || prev.email,
+      name:
+        updatedData.fullName ||
+        updatedData.fullNameAr ||
+        updatedData.fullNameEn ||
+        prev.name,
+      profileImageUrl: updatedData.profilePicture || prev.profileImageUrl,
+    }));
+  };
+
   const loginWithCredentials = async (email, password) => {
     setLoading(true);
     setError(null);
@@ -342,6 +387,7 @@ export const AuthProvider = ({ children }) => {
         login,
         logout,
         setUserData,
+        updateUserProfile,
         loginWithCredentials,
         registerWithCredentials,
         loading,

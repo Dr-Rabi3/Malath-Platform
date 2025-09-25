@@ -3,6 +3,7 @@ import * as signalR from "@microsoft/signalr";
 export const { HttpTransportType, LogLevel } = signalR;
 
 export function buildConnection(token, options = {}) {
+  console.log(token);
   const hubPath =
     options.path || import.meta.env.VITE_SIGNALR_HUB_PATH || "notificationhub";
   const url = `${import.meta.env.VITE_API_BASE_URL}${hubPath}`;

@@ -13,7 +13,7 @@ import { useAuth } from "../../store/AuthContext";
 import { useTranslation } from "react-i18next";
 
 function Profile() {
-  const { user } = useAuth();
+  const { user, updateUserProfile } = useAuth();
   const [activeTab, setActiveTab] = useState("data"); // "data" or "service"
   const [selectedFile, setSelectedFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState(null);
@@ -94,7 +94,7 @@ function Profile() {
 
   useEffect(() => {
     if (!user.token) {
-      console.log(user);
+      // console.log(user);
       navigate("/login", {
         state: {
           from: `/profile`,
@@ -133,9 +133,9 @@ function Profile() {
 
   // Handle file upload
   const handleUpload = async () => {
-    await uploadMutation.mutateAsync(selectedFile);
-    console.log(uploadMutation);
-    return uploadMutation.data;
+    const result = await uploadMutation.mutateAsync(selectedFile);
+    console.log("upload result", result);
+    return result;
   };
 
   // Handle form submission from UserData component
@@ -144,7 +144,11 @@ function Profile() {
       messageApi.error(t("profile.userDataUnavailable"));
       return;
     }
-
+    messageApi.open({
+      type: "loading",
+      key: "submitFrom",
+      content: t("profile.editingData"),
+    });
     setIsSubmitting(true);
     try {
       console.log(
@@ -157,7 +161,6 @@ function Profile() {
 
       // If there's a new image selected, upload it first
       if (selectedFile) {
-        messageApi.loading(t("profile.uploadingImage"));
         const uploadedPath = await handleUpload(); // await uploadFile(user?.token,selectedFile,"image");
         console.log("Uploaded image path:", uploadedPath, typeof uploadedPath);
 
@@ -196,11 +199,24 @@ function Profile() {
       console.log("Update data:", updateData);
       console.log("Profile picture type:", typeof updateData.profilePicture);
 
-      messageApi.loading(t("profile.updatingProfile"));
-      await updateUserMutation.mutateAsync(updateData);
+      const updatedUserData = await updateUserMutation.mutateAsync(updateData);
+
+      // Update AuthContext with new user data
+      updateUserProfile(updateData);
 
       // Invalidate queries to refresh data
       queryClient.invalidateQueries({ queryKey: ["user", user?.userId] });
+      queryClient.invalidateQueries({
+        queryKey: ["profileImage", user?.profileImageUrl],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ["profileImage", updateData.profilePicture],
+      });
+      // messageApi.open({
+      //   type: "success",
+      //   key: "submitFrom",
+      //   content: "Data is editing",
+      // });
     } catch (error) {
       messageApi.error(
         t("profile.profileUpdateFail", { error: error.message })

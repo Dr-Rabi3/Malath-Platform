@@ -789,7 +789,7 @@ export const uploadFile = async (token, file, folderName) => {
         timeout: 10000,
       }
     );
-
+    console.log("response", response);
     
     const result = response.data;
 

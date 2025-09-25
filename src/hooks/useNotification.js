@@ -18,9 +18,12 @@ export const useNotification = () => {
     }
 
     // Try LongPolling first (uses Authorization header rather than query)
-    let connection = buildConnection(user.token, {
-      transport: HttpTransportType.LongPolling,
-    });
+    let connection = buildConnection(
+      user.token || localStorage.getItem("malath_token"),
+      {
+        transport: HttpTransportType.LongPolling,
+      }
+    );
 
     connection
       .start()
@@ -63,9 +66,14 @@ export const useNotification = () => {
           console.log("SignalR reconnected");
         });
 
-        connection.onclose(() => {
-          console.log("SignalR connection closed");
-        });
+      connection.onclose(async () => {
+        try {
+          await connection.start();
+        } catch (err) {
+          console.error("Reconnect failed:", err);
+        }
+      });
+
       })
       .catch(async (err) => {
         console.error("SignalR Connection Error: ", err);
@@ -91,7 +99,7 @@ export const useNotification = () => {
         connection.stop();
       } catch {}
     };
-  }, [user?.token, user?.userId, queryClient, messageApi, t]);
+  }, [user, user?.token, user?.userId, queryClient, messageApi, t]);
 
   return { contextHolder };
 };
