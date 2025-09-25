@@ -17,7 +17,7 @@ function Service() {
     isLoading: servicesLoading,
     error: servicesError,
   } = useQuery({
-    queryKey: ["services"],
+    queryKey: ["services", i18n.language],
     queryFn: () => getAllServices(user?.token, i18n.language),
     // enabled: !!user?.token,
     refetchOnWindowFocus: false,

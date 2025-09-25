@@ -99,9 +99,7 @@ function CustomCollapse({ services }) {
                             if (!user?.token) {
                               messageApi.open({
                                 type: "warning",
-                                content:
-                                  t("please_login_first") ||
-                                  "You must login first.",
+                                content: t("please_login_first"),
                               });
                               return;
                             }

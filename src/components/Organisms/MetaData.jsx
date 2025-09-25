@@ -30,10 +30,12 @@ function MetaData({ ...props }) {
     getEntitySettings(i18n.language)
       .then((data) => {
         // console.log(data);
-        setSettingData(data); 
+        setSettingData(data);
       })
       .catch(() => {
-        message.error("Failed to fetch settings");
+        message.error(
+          t("admin.setting.fetchError", "Failed to fetch settings")
+        );
       })
       .finally(() => setLoading(false));
   }, [i18n.language]);

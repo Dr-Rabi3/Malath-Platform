@@ -10,7 +10,7 @@ import { useTranslation } from "react-i18next";
 
 
 function AdminDashboard() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
 
 const columns = [
@@ -42,8 +42,8 @@ const columns = [
     isLoading: servicesLoading,
     error: servicesError,
   } = useQuery({
-    queryKey: ["services"],
-    queryFn: () => getAllServices(user?.token),
+    queryKey: ["services", i18n.language],
+    queryFn: () => getAllServices(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -55,8 +55,8 @@ const columns = [
     isLoading: categoriesLoading,
     error: categoriesError,
   } = useQuery({
-    queryKey: ["categories"],
-    queryFn: () => getAllCategories(user?.token),
+    queryKey: ["categories", i18n.language],
+    queryFn: () => getAllCategories(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -71,7 +71,7 @@ const columns = [
     );
     return {
       key: service.id,
-      categoryName: category?.name || "Unknown Category",
+      categoryName: category?.name,
       name: service.name,
       description: service.description,
       price: service.price,

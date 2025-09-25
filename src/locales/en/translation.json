@@ -574,7 +574,9 @@
     "pending": "Pending",
     "contact": "Contact",
     "resolved": "Resolved",
-    "rejected": "Rejected"
+    "rejected": "Rejected",
+    "statusUpdated": "Status updated successfully",
+    "updateStatusFailed": "Failed to update status"
   },
   "topServices": {
     "title": "Top Services",
@@ -642,5 +644,17 @@
     "heroText1": "Need proven professional business solutions in your field?",
     "heroText2": "will provide you with the support you need to grow and thrive"
   },
-  "addQuestions": "Add questions"
+  "addQuestions": "Add questions",
+  "auth": {
+    "login": {
+      "loading": "Logging in...",
+      "success": "Logged in successfully",
+      "fail": "Login failed"
+    },
+    "register": {
+      "loading": "Signing up...",
+      "success": "Registered successfully",
+      "fail": "Registration failed"
+    }
+  }
 }

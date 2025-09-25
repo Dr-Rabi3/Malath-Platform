@@ -81,7 +81,7 @@ function From({ types, action, createAccount }) {
   const handleLogin = useCallback(async (email, password) => {
     messageApi.open({
       key: "login",
-      content: "Login...",
+      content: t("auth.login.loading"),
       type: "loading",
     });
     try {
@@ -91,19 +91,17 @@ function From({ types, action, createAccount }) {
         // Redirect or update UI as needed
         messageApi.open({
           key: "login",
-          content: "Login successfully",
+          content: t("auth.login.success"),
           type: "success",
         });
-        if (result.data.role === Roles.Admin)
-          navigate("/admin");
+        if (result.data.role === Roles.Admin) navigate("/admin");
         else if (result.data.role === Roles.CusomerService)
           navigate("/support");
-        else 
-          navigate("/");
+        else navigate("/");
       } else {
         messageApi.open({
           key: "login",
-          content: result.error || "Login failed",
+          content: t("auth.login.fail"),
           type: "error",
         });
         console.error("Login failed:", result.error);
@@ -111,7 +109,7 @@ function From({ types, action, createAccount }) {
     } catch (error) {
       messageApi.open({
         key: "login",
-        content: error.message || "Login failed",
+        content: t("auth.login.fail"),
         type: "error",
       });
     }
@@ -119,7 +117,7 @@ function From({ types, action, createAccount }) {
   const handleRegister = useCallback(async (values) => {
     messageApi.open({
       key: "register",
-      content: "Sign up...",
+      content: t("auth.register.loading"),
       type: "loading",
     });
     try {
@@ -129,7 +127,7 @@ function From({ types, action, createAccount }) {
         // Redirect to success page
         messageApi.open({
           key: "register",
-          content: "Register successfully",
+          content: t("auth.register.success"),
           type: "success",
         });
         navigate("/registration-success", { replace: true });
@@ -137,7 +135,7 @@ function From({ types, action, createAccount }) {
         console.log(result);
         messageApi.open({
           key: "register",
-          content: result.message || "Registration failed",
+          content: result.message || t("auth.register.fail"),
           type: "error",
         });
         console.error("register failed:", result.error);
@@ -145,7 +143,7 @@ function From({ types, action, createAccount }) {
     } catch (error) {
       messageApi.open({
         key: "register",
-        content: error.message || "Registration failed",
+        content: error.message || t("auth.register.fail"),
         type: "error",
       });
     }

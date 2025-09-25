@@ -568,7 +568,9 @@
     "pending": "قيد الانتظار",
     "contact": "تم التواصل",
     "resolved": "تم الحل",
-    "rejected": "مرفوض"
+    "rejected": "مرفوض",
+    "statusUpdated": "تم تحديث الحالة بنجاح",
+    "updateStatusFailed": "فشل في تحديث الحالة"
   },
   "topServices": {
     "title": "أفضل الخدمات",
@@ -669,5 +671,17 @@
     "apiArrayError": "لم تُرجع الواجهة البرمجية قائمة من الأسئلة.",
     "maxQuestions": "يمكنك إضافة حتى 10 أسئلة فقط."
   },
-  "addQuestions": "اضافة سؤال"
+  "addQuestions": "اضافة سؤال",
+  "auth": {
+    "login": {
+      "loading": "جاري تسجيل الدخول...",
+      "success": "تم تسجيل الدخول بنجاح",
+      "fail": "فشل تسجيل الدخول"
+    },
+    "register": {
+      "loading": "جاري إنشاء الحساب...",
+      "success": "تم التسجيل بنجاح",
+      "fail": "فشل التسجيل"
+    }
+  }
 }

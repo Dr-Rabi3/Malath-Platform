@@ -102,13 +102,18 @@ function ShowService() {
     mutationFn: ({ requestId, status }) =>
       updateUserServiceRequestStatus(user?.token, requestId, status),
     onSuccess: (data) => {
-      message.success("Status updated successfully");
+      message.success(
+        t("showService.statusUpdated", "Status updated successfully")
+      );
       // Invalidate and refetch the service request data
       queryClient.invalidateQueries(["serviceRequest", serviceId]);
       queryClient.invalidateQueries(["allUserServiceRequests"]);
     },
     onError: (error) => {
-      message.error(error.message || "Failed to update status");
+      message.error(
+        error.message ||
+          t("showService.updateStatusFailed", "Failed to update status")
+      );
     },
   });
 

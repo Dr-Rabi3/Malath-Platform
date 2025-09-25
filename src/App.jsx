@@ -33,6 +33,8 @@ import AdminDashboard from "./components/pages/AdminDashboard";
 import Slider from "./components/pages/Slider";
 import AddQuestion from "./components/pages/AddQuestion";
 import { useEffect } from "react";
+import ProtectedRoute from "./components/atoms/ProtectedRoute";
+import { Roles } from "./utils/roles";
 const queryClient = new QueryClient();
 const router = createBrowserRouter([
   {
@@ -61,17 +63,29 @@ const router = createBrowserRouter([
       },
       {
         path: "profile",
-        element: <Profile />,
+        element: (
+          <ProtectedRoute>
+            <Profile />
+          </ProtectedRoute>
+        ),
       },
       {
         path: "add-service",
-        element: <AddService />,
+        element: (
+          <ProtectedRoute>
+            <AddService />
+          </ProtectedRoute>
+        ),
       },
     ],
   },
   {
     path: "support",
-    element: <SupportLayout />,
+    element: (
+      <ProtectedRoute allowedRoles={[Roles.CusomerService, Roles.Admin]}>
+        <SupportLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
@@ -89,7 +103,11 @@ const router = createBrowserRouter([
   },
   {
     path: "admin",
-    element: <AdminLayout />,
+    element: (
+      <ProtectedRoute allowedRoles={[Roles.Admin]}>
+        <AdminLayout />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
