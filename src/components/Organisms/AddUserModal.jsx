@@ -1,5 +1,6 @@
 import { Modal, Form, Input, Select, message } from "antd";
 import { useTranslation } from "react-i18next";
+import { getLocalizedRole } from "../../utils/roles";
 import CustomPhoneInput from "../atoms/CustomPhoneInput";
 import { PhoneNumberUtil } from "google-libphonenumber";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -21,7 +22,7 @@ const isPhoneValid = (phone) => {
 
 const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
   const [form] = Form.useForm();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [messageApi, contextHelper] = message.useMessage();
   const { user } = useAuth();
   const token = user?.token;
@@ -314,7 +315,7 @@ const AddUserModal = ({ visible, onCancel, userToEdit, onSubmit, loading }) => {
             >
               {roles?.map((role) => (
                 <Option key={role.id} value={role.name}>
-                  {role.name}
+                  {getLocalizedRole(role.name, i18n.language)}
                 </Option>
               ))}
               {(!roles || roles.length === 0) && (

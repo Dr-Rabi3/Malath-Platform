@@ -30,7 +30,7 @@ const validateMessages = {
 function SupportDashboard() {
   const { user } = useAuth();
   const [form] = Form.useForm();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const isAdmin = location.pathname.includes("admin-service");
@@ -46,7 +46,7 @@ function SupportDashboard() {
   // Fetch type services using React Query
   const { data: servicesType, isLoading: servicesTypeLoading } = useQuery({
     queryKey: ["servicesType"],
-    queryFn: () => getAllCategories(user?.token),
+    queryFn: () => getAllCategories(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -57,9 +57,9 @@ function SupportDashboard() {
   // Fetch services using React Query
   const { data: services, isLoading: servicesLoading } = useQuery({
     queryKey: ["services"],
-    queryFn: () => getAllServices(user?.token),
+    queryFn: () => getAllServices(user?.token, i18n.language),
     enabled: !!user?.token,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: false,  
     refetchOnReconnect: false,
     staleTime: Infinity,
     cacheTime: Infinity,

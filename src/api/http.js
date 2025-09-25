@@ -53,7 +53,7 @@ export const submitContactForm = async (token, formData) => {
  * @returns {Promise<Array>} List of users
  */
 
-export const getAllUsers = async (token) => {
+export const getAllUsers = async (token, language = "en") => {
   try {
     const response = await axios.get(
       `${API_BASE_URL}api/ApplicationUsers/GetAll`,
@@ -62,6 +62,7 @@ export const getAllUsers = async (token) => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
           Accept: "application/json",
+          "Accept-Language": language,
         },
         timeout: 10000, // 10 second timeout
       }

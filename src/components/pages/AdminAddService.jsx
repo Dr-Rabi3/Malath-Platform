@@ -19,7 +19,7 @@ import { useRef } from "react";
 
 function AdminAddService() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const [openResponsive, setOpenResponsive] = useState(false);
   const [categoryNameEn, setCategoryNameEn] = useState("");
@@ -181,7 +181,7 @@ function AdminAddService() {
     error: servicesError,
   } = useQuery({
     queryKey: ["services"],
-    queryFn: () => getAllServices(user?.token),
+    queryFn: () => getAllServices(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -195,7 +195,7 @@ function AdminAddService() {
     error: categoriesError,
   } = useQuery({
     queryKey: ["categories"],
-    queryFn: () => getAllCategories(user?.token),
+    queryFn: () => getAllCategories(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

@@ -9,7 +9,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAllUsers } from "../../api/http";
 import { deleteUser } from "../../api/admin";
 import { updateUser, addUserWithRole, getUserForUpdate } from "../../api/http";
-import { Roles } from "../../utils/roles";
+import { Roles, getLocalizedRole } from "../../utils/roles";
 import { useTranslation } from "react-i18next";
 
 const UserTable = () => {
@@ -18,7 +18,7 @@ const UserTable = () => {
   const [editLoading, setEditLoading] = useState(false);
   const { user } = useAuth();
   const token = user?.token;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const queryClient = useQueryClient();
   const deleteMutation = useMutation({
@@ -104,7 +104,7 @@ const UserTable = () => {
     error,
   } = useQuery({
     queryKey: ["users"],
-    queryFn: () => getAllUsers(token),
+    queryFn: () => getAllUsers(token, i18n.language),
     enabled: !!token && user.role === Roles.Admin, // only run if token exists
   });
 
@@ -128,7 +128,7 @@ const UserTable = () => {
       responsive: ["lg"],
       render: (text) => (
         <span className="capitalize px-2 py-1 bg-gray-100 rounded-full text-sm">
-          {text}
+          {getLocalizedRole(text, i18n.language)}
         </span>
       ),
     },
@@ -270,7 +270,7 @@ const UserTable = () => {
                   {t("admin.userTable.mobile.role")}
                 </span>
                 <span className="ml-1 capitalize px-2 py-1 bg-gray-100 rounded-full text-xs">
-                  {item.role}
+                  {getLocalizedRole(item.role, i18n.language)}
                 </span>
               </div>
               <div>
