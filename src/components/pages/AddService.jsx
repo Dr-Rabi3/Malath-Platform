@@ -33,13 +33,13 @@ function AddService() {
   const [messageApi, contextHelper] = message.useMessage();
   const [autoCompleteResult, setAutoCompleteResult] = useState([]);
   const [selectedServiceType, setSelectedServiceType] = useState(null);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const queryClient = useQueryClient();
 
   // Fetch type services using React Query
   const { data: servicesType, isLoading: servicesTypeLoading } = useQuery({
     queryKey: ["servicesType"],
-    queryFn: () => getAllCategories(user?.token),
+    queryFn: () => getAllCategories(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,
@@ -50,7 +50,7 @@ function AddService() {
   // Fetch services using React Query
   const { data: services, isLoading: servicesLoading } = useQuery({
     queryKey: ["services"],
-    queryFn: () => getAllServices(user?.token),
+    queryFn: () => getAllServices(user?.token, i18n.language),
     enabled: !!user?.token,
     refetchOnWindowFocus: false,
     refetchOnReconnect: false,

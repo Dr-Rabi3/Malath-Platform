@@ -90,7 +90,7 @@ function FrequentQs() {
 
   return (
     <div>
-      <div className="relative w-screen right-[16px] sm:right-0 sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
+      <div className="relative max-w-screen sm:w-full overflow-hidden min-h-[260px] sm:min-h-[320px] md:min-h-[360px]">
         <div className="absolute inset-0 w-full h-full z-[-1] bg-gradient-to-r from-[#BA9258] to-[#C9BFB1]">
           <img
             src={serviceBg}
@@ -110,8 +110,8 @@ function FrequentQs() {
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap">
-        <div className="w-full grid grid-cols-1 md:grid-cols-2 my-8 sm:my-12 gap-3 sm:gap-4 md:gap-6 px-4 sm:px-6">
+      <div className="flex flex-wrap w-full">
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 my-8 sm:my-12 gap-3 sm:gap-4 md:gap-6 px-0 sm:px-6">
           <div className="w-full">
             {faqs
               .slice(0, faqs.length / 2)
