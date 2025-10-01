@@ -18,8 +18,7 @@ function AdminDashboard() {
       dataIndex: "categoryName",
       key: "categoryName",
       width: 220,
-      onCell: (__, index = 0) => ({
-        rowSpan: index % 2 === 0 ? 2 : 0,
+      onCell: () => ({
         style: { whiteSpace: "normal", wordBreak: "break-word" },
       }),
     },
