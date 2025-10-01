@@ -141,8 +141,8 @@ function Footer() {
                       alt=""
                       className="w-4 h-4 sm:w-5 sm:h-5"
                     />{" "}
-                    <p className="m-0 text-sm sm:text-[15px] flex items-center gap-2">
                       {t("footer.mobile")}
+                    <p className="m-0 text-sm sm:text-[15px] space-x-1">
                       <a
                         href="https://wa.me/01067661338"
                         target="_blank"
@@ -151,7 +151,7 @@ function Footer() {
                       >
                         01067661338
                       </a>
-                      -
+                      
                       <a
                         href="https://wa.me/01033056559"
                         target="_blank"
