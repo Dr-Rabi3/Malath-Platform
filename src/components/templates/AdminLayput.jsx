@@ -319,7 +319,7 @@ function AdminLayout() {
                 </p>
               </div>
             </div>
-            <div className="flex flex-col w-full md:w-auto">
+            {/* <div className="flex flex-col w-full md:w-auto">
               <p className="mb-1 font-medium text-[#fff]/50 text-[15px] md:text-[15px]">
                 {t("footer.contact")}
               </p>
@@ -362,7 +362,7 @@ function AdminLayout() {
                   </Link>
                 </li>
               </ul>
-            </div>
+            </div> */}
           </Footer>
         </Layout>
       </Layout>
