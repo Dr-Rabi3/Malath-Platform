@@ -135,21 +135,33 @@ function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="https://wa.me/966549909990"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-[#D3D4DC] flex items-center gap-2 sm:gap-3 hover:text-brand-600 transition-colors duration-200"
-                  >
+                  <div className="text-[#D3D4DC] flex items-center gap-2 sm:gap-3">
                     <img
                       src={mobile}
                       alt=""
                       className="w-4 h-4 sm:w-5 sm:h-5"
                     />{" "}
-                    <p className="m-0 text-sm sm:text-[15px]">
+                    <p className="m-0 text-sm sm:text-[15px] flex items-center gap-2">
                       {t("footer.mobile")}
+                      <a
+                        href="https://wa.me/01067661338"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-brand-600 transition-colors duration-200"
+                      >
+                        01067661338
+                      </a>
+                      -
+                      <a
+                        href="https://wa.me/01033056559"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-brand-600 transition-colors duration-200"
+                      >
+                        01033056559
+                      </a>
                     </p>
-                  </a>
+                  </div>
                 </li>
               </ul>
             </div>

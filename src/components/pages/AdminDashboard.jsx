@@ -8,35 +8,39 @@ import TopServices from "./TopServices";
 import "../../assets/styles/responsive-table.css";
 import { useTranslation } from "react-i18next";
 
-
 function AdminDashboard() {
   const { t, i18n } = useTranslation();
   const { user } = useAuth();
 
-const columns = [
-  {
-    title: t("adminDashboard.category", "Category"),
-    dataIndex: "categoryName",
-    key: "categoryName",
-    width: 120,
-    onCell: (__, index = 0) =>
-      index % 2 === 0 ? { rowSpan: 2 } : { rowSpan: 0 },
-    ellipsis: true,
-  },
-  {
-    title: t("adminDashboard.serviceName", "Service Name"),
-    dataIndex: "name",
-    key: "name",
-    width: 180,
-    ellipsis: true,
-  },
-  {
-    title: t("adminDashboard.description", "Description"),
-    dataIndex: "description",
-    key: "description",
-    ellipsis: true,
-  },
-];
+  const columns = [
+    {
+      title: t("adminDashboard.category", "Category"),
+      dataIndex: "categoryName",
+      key: "categoryName",
+      width: 220,
+      onCell: (__, index = 0) => ({
+        rowSpan: index % 2 === 0 ? 2 : 0,
+        style: { whiteSpace: "normal", wordBreak: "break-word" },
+      }),
+    },
+    {
+      title: t("adminDashboard.serviceName", "Service Name"),
+      dataIndex: "name",
+      key: "name",
+      width: 280,
+      onCell: () => ({
+        style: { whiteSpace: "normal", wordBreak: "break-word" },
+      }),
+    },
+    {
+      title: t("adminDashboard.description", "Description"),
+      dataIndex: "description",
+      key: "description",
+      onCell: () => ({
+        style: { whiteSpace: "normal", wordBreak: "break-word" },
+      }),
+    },
+  ];
   const {
     data: services,
     isLoading: servicesLoading,

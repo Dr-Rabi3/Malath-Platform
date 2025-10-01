@@ -99,7 +99,7 @@ function TopUser() {
                 accessibilityLayer
                 data={chartData}
                 layout="vertical"
-                margin={{ left: 0, right: 0, top: 10, bottom: 10 }}
+                // margin={{ left: 0, right: 0, top: 10, bottom: 10 }}
                 height={200}
                 width={undefined}
                 className="w-full"
@@ -110,7 +110,7 @@ function TopUser() {
                   tickLine={false}
                   tickMargin={8}
                   axisLine={false}
-                  fontSize={12}
+                  tick={{ fontSize: 12, dx: isRTL ? -50 : 0 }}
                   width={120}
                 />
                 <XAxis dataKey="requests" type="number" hide={false} />
