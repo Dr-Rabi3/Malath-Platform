@@ -12,6 +12,7 @@ import {
   faTiktok,
   faLinkedin,
   faLinkedinIn,
+  faXTwitter,
 } from "@fortawesome/free-brands-svg-icons";
 import { Tooltip } from "antd";
 
@@ -48,13 +49,13 @@ function Footer() {
             </div>
           </div>
 
-          <div className="w-full lg:flex-1 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
+          <div className="w-full lg:flex-1 flex gap-8 lg:gap-10">
             <div>
               <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.services")}
               </p>
 
-              <ul className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 text-sm">
+              <ul className="mt-4 space-y-3 text-sm">
                 <li>
                   <Link
                     to="/"
@@ -95,7 +96,7 @@ function Footer() {
                 {t("footer.contact")}
               </p>
 
-              <ul className="mt-4 sm:mt-6 space-y-3 sm:space-y-4 text-sm">
+              <ul className="mt-4 space-y-3 text-sm">
                 <li>
                   <Link
                     to="#"
@@ -140,9 +141,9 @@ function Footer() {
                       src={mobile}
                       alt=""
                       className="w-4 h-4 sm:w-5 sm:h-5"
-                    />{" "}
-                      {t("footer.mobile")}
-                    <p className="m-0 text-sm sm:text-[15px] space-x-1">
+                    />
+                    <p className="m-0 text-sm sm:text-[15px] flex space-x-1">
+                      <p className="m-0">{t("footer.mobile")}</p>
                       <a
                         href="https://wa.me/01067661338"
                         target="_blank"
@@ -151,7 +152,7 @@ function Footer() {
                       >
                         01067661338
                       </a>
-                      
+
                       <a
                         href="https://wa.me/01033056559"
                         target="_blank"
@@ -190,7 +191,7 @@ function Footer() {
               <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.social")}
               </p>
-              <ul className="mt-4 sm:mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 text-sm">
+              <ul className="mt-4 text-sm flex gap-5">
                 <li>
                   <a
                     href="https://www.facebook.com/Malath.Marketing"
@@ -198,8 +199,7 @@ function Footer() {
                     rel="noopener noreferrer"
                     className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <FontAwesomeIcon icon={faSquareFacebook} size="lg" />{" "}
-                    <span>{t("footer.facebook")}</span>
+                    <FontAwesomeIcon icon={faSquareFacebook} size="lg" />
                   </a>
                 </li>
                 <li>
@@ -209,8 +209,7 @@ function Footer() {
                     rel="noopener noreferrer"
                     className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <FontAwesomeIcon icon={faInstagram} size="lg" />{" "}
-                    <span>{t("footer.instagram")}</span>
+                    <FontAwesomeIcon icon={faInstagram} size="lg" />
                   </a>
                 </li>
                 <li>
@@ -220,8 +219,7 @@ function Footer() {
                     rel="noopener noreferrer"
                     className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
                   >
-                    <FontAwesomeIcon icon={faLinkedinIn} size="lg" />{" "}
-                    <span>{t("footer.linkedin")}</span>
+                    <FontAwesomeIcon icon={faLinkedinIn} size="lg" />
                   </a>
                 </li>
                 <li>
@@ -234,10 +232,19 @@ function Footer() {
                     > */}
                     <p className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200">
                       <FontAwesomeIcon icon={faTiktok} size="lg" />{" "}
-                      <span>{t("footer.tiktok")}</span>
                     </p>
                     {/* </a> */}
                   </Tooltip>
+                </li>
+                <li>
+                  <a
+                    href="https://x.com/MalathOutsource"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#D3D4DC] flex items-center gap-2 hover:text-brand-600 transition-colors duration-200"
+                  >
+                    <FontAwesomeIcon icon={faXTwitter} size="lg" />
+                  </a>
                 </li>
               </ul>
             </div>

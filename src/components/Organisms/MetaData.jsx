@@ -112,11 +112,11 @@ function MetaData({ ...props }) {
                       }`}
                     >
                       <div className="flex gap-3 items-center">
-                        <div className="p-3 rounded-full">
+                        <div className="p-3 rounded-full overflow-hidden">
                           <img
                             src={card.icon}
                             alt={card.alt}
-                            className="w-[32px] sm:w-[40px] h-auto"
+                            className="w-[32px] sm:w-[40px]  h-auto"
                           />
                         </div>
                         <div className="font-semibold text-xl font-main text-neutral-800">
@@ -129,7 +129,7 @@ function MetaData({ ...props }) {
                   <Meta
                     description={
                       <div
-                        className="text-neutral-600 font-regular text-sm sm:text-base font-main leading-relaxed flex-1"
+                        className="text-neutral-600 font-regular text-[17px] font-main leading-snug flex-1"
                         dangerouslySetInnerHTML={{
                           __html: card.content,
                         }}

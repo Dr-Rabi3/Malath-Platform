@@ -14,14 +14,15 @@
   box-sizing: border-box;
 }
 
-:root, html, body {
+:root,
+html,
+body {
   font-family: "DG Baysan", sans-serif !important;
 }
 
 img.transparent-bg {
   mix-blend-mode: multiply;
 }
-
 
 .react-international-phone-input-container .react-international-phone-input {
   width: 100%;
@@ -127,6 +128,39 @@ img.transparent-bg {
 
 .responsive-modal .ant-modal-body::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-400;
+}
+
+/* Custom scrollbar for CustomCollapse component */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  margin: 8px 0;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Firefox scrollbar styles */
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
 @layer base {

@@ -105,7 +105,7 @@ function FrequentQs() {
           <div className="font-barlow font-regular text-md sm:text-base md:text-lg max-w-[1000px] px-4 sm:px-8 mt-2 sm:mt-3">
             {t(
               "faq.subtitle",
-              "Still you have any questions? Contact our Team via hello@squareup.com"
+              "Still you have any questions? Contact our Team via khedaib@malathegypt.com"
             )}
           </div>
         </div>

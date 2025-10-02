@@ -14,7 +14,7 @@ function WhoAre({ ...props }) {
         </div>
       </div>
       <div className="flex">
-        <div className="text-[#646A69] font-tiny text-base sm:text-lg md:text-[16px] font-main w-full px-2 md:px-8">
+        <div className="text-[#646A69] font-tiny text-base sm:text-lg md:text-[18px] font-main w-full px-2 md:px-8">
           {t("whoare.description")}
         </div>
       </div>

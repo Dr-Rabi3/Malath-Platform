@@ -79,7 +79,7 @@ function CustomCollapse({ services }) {
                   }
                   whileHover={!isMobile ? { opacity: 1, y: 0 } : {}}
                   transition={{ duration: 0.6, ease: "easeInOut" }}
-                  className="absolute inset-0 w-full h-full bg-[#EAC482] rounded-2xl !p-4 !sm:p-5 shadow-lg overflow-auto"
+                  className="absolute inset-0 w-full h-full bg-[#EAC482] rounded-2xl !p-4 !sm:p-5 shadow-lg overflow-auto custom-scrollbar"
                 >
                   <div className="flex items-center gap-2 text-base sm:text-lg font-semibold text-white mb-2">
                     <div className="w-10 sm:w-12 p-2 aspect-square flex justify-center items-center rounded-full bg-[#F9F8F5]">
@@ -113,7 +113,7 @@ function CustomCollapse({ services }) {
                     {service?.services.map((s, idx) => (
                       <li key={idx}>
                         {s.name}
-                        <p className="text-[14px] sm:text-[15px] opacity-90">
+                        <p className="text-[14px] sm:text-[15px] opacity-90 leading-normal">
                           {s.description}
                         </p>
                       </li>

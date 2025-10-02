@@ -13,7 +13,7 @@ function About() {
         {/* <h1 className="font-barlow text-neutral-1000 text-xl sm:text-2xl md:text-3xl lg:text-4xl font-regular leading-tight mb-2 sm:mb-3">
           {t("about.title")}
         </h1> */}
-        <p className="text-sm sm:text-base font-regular leading-[1.5] text-neutral-700">
+        <p className="text-[18px] font-regular leading-[1.5] text-neutral-700">
           {t("about.supportMessage")} {" "}
           {t("about.supportHighlight")}
         </p>
