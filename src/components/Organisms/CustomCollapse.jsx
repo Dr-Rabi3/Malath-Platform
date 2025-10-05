@@ -81,35 +81,35 @@ function CustomCollapse({ services }) {
                   transition={{ duration: 0.6, ease: "easeInOut" }}
                   className="absolute inset-0 w-full h-full bg-[#EAC482] rounded-2xl !p-4 !sm:p-5 shadow-lg overflow-auto custom-scrollbar"
                 >
-                  <div className="flex items-center gap-2 text-base sm:text-lg font-semibold text-white mb-2">
+                  <div className="flex items-start gap-2 text-base sm:text-lg font-semibold text-white mb-2">
                     <div className="w-10 sm:w-12 p-2 aspect-square flex justify-center items-center rounded-full bg-[#F9F8F5]">
                       <img src={serviceIcon} alt="" className="w-full h-full" />
                     </div>
                     <div className="text-[18px] sm:text-[22px] md:text-[25px] m-0">
-                      {service.categoryName}
+                      <div>{service.categoryName}</div>
+                      {user.role !== Roles.Admin && (
+                        <>
+                          <Button
+                            className="bg-white !text-[#EAC482] px-4 py-2 mb-5 rounded-md font-medium hover:bg-gray-100 transition"
+                            onClick={(e) => {
+                              e.stopPropagation(); // prevent closing overlay
+                              if (!user?.token) {
+                                messageApi.open({
+                                  type: "warning",
+                                  content: t("please_login_first"),
+                                });
+                                return;
+                              }
+                              navigate("../add-service");
+                            }}
+                          >
+                            {t("service_request")}
+                          </Button>
+                        </>
+                      )}
                     </div>
                   </div>
                   <ul className="max-h-[55%] sm:max-h-[60%] list-disc list-inside text-white/90 text-[16px] sm:text-[18px] md:text-[20px] mb-4 pr-2">
-                    {user.role !== Roles.Admin && (
-                      <>
-                        <Button
-                          className="bg-white !text-[#EAC482] px-4 py-2 mb-5 rounded-md font-medium hover:bg-gray-100 transition"
-                          onClick={(e) => {
-                            e.stopPropagation(); // prevent closing overlay
-                            if (!user?.token) {
-                              messageApi.open({
-                                type: "warning",
-                                content: t("please_login_first"),
-                              });
-                              return;
-                            }
-                            navigate("../add-service");
-                          }}
-                        >
-                          {t("service_request")}
-                        </Button>
-                      </>
-                    )}
                     {service?.services.map((s, idx) => (
                       <li key={idx}>
                         {s.name}
