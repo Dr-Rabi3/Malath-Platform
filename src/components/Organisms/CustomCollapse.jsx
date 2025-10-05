@@ -109,11 +109,11 @@ function CustomCollapse({ services }) {
                       )}
                     </div>
                   </div>
-                  <ul className="max-h-[55%] sm:max-h-[60%] list-disc list-inside text-white/90 text-[16px] sm:text-[18px] md:text-[20px] mb-4 pr-2">
+                  <ul className="max-h-[55%] sm:max-h-[60%] list-disc text-white/90 text-[12px] sm:text-[16px] md:text-[18px] mb-4 px-6">
                     {service?.services.map((s, idx) => (
-                      <li key={idx}>
+                      <li key={idx} >
                         {s.name}
-                        <p className="text-[14px] sm:text-[15px] opacity-90 leading-normal">
+                        <p className="mt-1 text-[12px] sm:text-[13px] opacity-90 leading-normal">
                           {s.description}
                         </p>
                       </li>
