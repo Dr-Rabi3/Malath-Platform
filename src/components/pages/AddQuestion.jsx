@@ -31,7 +31,7 @@ function AddQuestion() {
     setLoading(true);
     setError("");
     try {
-      const res = await fetch("https://malathapi.runasp.net/api/Faqs/GetAll", {
+      const res = await fetch("https://malathegyptapi.runasp.net/api/Faqs/GetAll", {
         headers: getLangHeader(),
       });
       if (!res.ok)
@@ -85,7 +85,7 @@ function AddQuestion() {
     }
     setSubmitting(true);
     try {
-      const res = await fetch("https://malathapi.runasp.net/api/Faqs/Add", {
+      const res = await fetch("https://malathegyptapi.runasp.net/api/Faqs/Add", {
         method: "POST",
         headers: { "Content-Type": "application/json", ...getLangHeader() },
         body: JSON.stringify(form),
@@ -118,7 +118,7 @@ function AddQuestion() {
     setMessage("");
     try {
       const res = await fetch(
-        `https://malathapi.runasp.net/api/Faqs/Delete/${id}`,
+        `https://malathegyptapi.runasp.net/api/Faqs/Delete/${id}`,
         {
           method: "DELETE",
           headers: getLangHeader(),
