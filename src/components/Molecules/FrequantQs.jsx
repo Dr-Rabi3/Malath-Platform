@@ -9,7 +9,7 @@ import serviceBg from "../../assets/images/background.png";
 const { Panel } = Collapse;
 
 const fetchQuestions = async (lang = "en") => {
-  const response = await fetch("https://malathapi.runasp.net/api/Faqs/GetAll", {
+  const response = await fetch("https://malathegyptapi.runasp.net/api/Faqs/GetAll", {
     headers: {
       "Accept-Language": lang,
     },
