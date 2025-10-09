@@ -49,7 +49,7 @@ function Footer() {
             </div>
           </div>
 
-          <div className="w-full lg:flex-1 flex gap-8 lg:gap-10">
+          <div className="w-full lg:flex-1 flex flex-wrap gap-8 lg:gap-10">
             <div>
               <p className="font-medium text-[#fff] text-[14px] sm:text-[15px]">
                 {t("footer.services")}
