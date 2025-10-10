@@ -14,7 +14,7 @@ function ProtectedRoute({ children, allowedRoles }) {
   if (!isAuthenticated) {
     return (
       <Navigate
-        to="/login"
+        to="/"
         replace
         state={{ from: location.pathname, message: t("please_login_first") }}
       />

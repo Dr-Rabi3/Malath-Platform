@@ -71,10 +71,11 @@ function AdminLayout() {
     else setActiveKey("1");
   }, [location, location.pathname, location.state]);
 
-  const handleLogout = () => {
-    Logout();
+  const handleLogout = async () => {
+    await Logout(); // if it's async
     navigate("/");
   };
+
 
   // console.log(value);
   //             if (value.key === "3") {
