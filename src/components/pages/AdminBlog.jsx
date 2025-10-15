@@ -44,7 +44,7 @@ function AdminBlog() {
       });
 
       setUploadedImages([]); // Clear uploaded images
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      queryClient.invalidateQueries({ queryKey: ["blogs"], exact: false });
     },
     onError: (err) => {
       message.error(
@@ -61,7 +61,7 @@ function AdminBlog() {
     mutationFn: (blogId) => deleteBlog(user?.token, blogId),
     onSuccess: () => {
       message.success(t("adminBlog.deleteSuccess", "Blog deleted!"));
-      queryClient.invalidateQueries({ queryKey: ["blogs"] });
+      queryClient.invalidateQueries({ queryKey: ["blogs"], exact: false });
     },
     onError: (err) => {
       message.error(

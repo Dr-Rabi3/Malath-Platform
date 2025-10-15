@@ -65,7 +65,7 @@ function Home(props) {
           {slides.map((s, index) => {
             return (
               <CarouselItem key={index} className="">
-                <div className="relative w-full min-h-[600px] sm:min-h-[420px] md:min-h-[600px]">
+                <div className="relative w-full min-h-[358px] sm:min-h-[420px] md:min-h-[600px]">
                   <img
                     src={s.image}
                     alt=""

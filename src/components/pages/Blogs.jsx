@@ -117,27 +117,21 @@ function Blogs({ isAdmin, loading, onDelete }) {
 
     // All photos have the same dimensions - 2x2 grid with equal sizing
     const PhotoItem = ({ photo, alt, className = "" }) => (
-      <Image
+      <img
         src={photo}
         alt={alt}
-        className={`!w-full h-16 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity ${className}`}
-        preview={false}
+        className={`w-full h-48 sm:h-64 object-contain rounded-lg cursor-pointer hover:scale-[1.02] transition-transform ${className} border border-gray-100 shadow-sm rounded-xl`}
         onClick={() => handlePreview(photo)}
-        placeholder={
-          <div className="w-full h-16 bg-gray-200 rounded-lg flex items-center justify-center">
-            <Spin size="small" />
-          </div>
-        }
       />
     );
 
     if (photos.length === 1) {
       return (
-        <div className="grid grid-cols-2 gap-1 h-32">
+        <div className="w-full">
           <PhotoItem
             photo={photos[0]}
             alt="Blog photo"
-            className="col-span-2"
+            className="w-full h-64 sm:h-80"
           />
         </div>
       );
@@ -145,7 +139,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
 
     if (photos.length === 2) {
       return (
-        <div className="grid grid-cols-2 gap-1 h-32">
+        <div className="grid grid-cols-2 gap-1">
           <PhotoItem photo={photos[0]} alt="Blog photo 1" />
           <PhotoItem photo={photos[1]} alt="Blog photo 2" />
         </div>
@@ -154,7 +148,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
 
     if (photos.length === 3) {
       return (
-        <div className="grid grid-cols-2 gap-1 h-32">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-1 h-full">
           <PhotoItem photo={photos[0]} alt="Blog photo 1" />
           <PhotoItem photo={photos[1]} alt="Blog photo 2" />
           <PhotoItem
@@ -168,7 +162,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
 
     // 4 or more photos - show first 4 in 2x2 grid
     return (
-      <div className="grid grid-cols-2 gap-1 h-32">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-1 h-full">
         {photos.slice(0, 4).map((photo, index) => (
           <PhotoItem
             key={index}
@@ -178,7 +172,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
         ))}
         {photos.length > 4 && (
           <div
-            className="relative h-16 bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 transition-colors flex items-center justify-center col-span-2"
+            className="relative h-full bg-gray-200 rounded-lg cursor-pointer hover:bg-gray-300 transition-colors flex items-center justify-center col-span-2"
             onClick={() => handlePreview(photos[4])}
           >
             <div className="text-center">
@@ -202,7 +196,7 @@ function Blogs({ isAdmin, loading, onDelete }) {
       )}
       {blogs.map((blog, index) => (
         <div
-          key={index}
+          key={blog.id}
           className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl transition-shadow duration-300"
         >
           {/* Blog Header */}
@@ -239,27 +233,26 @@ function Blogs({ isAdmin, loading, onDelete }) {
 
           {/* Blog Content */}
           <div className="p-6">
-            <div className="flex flex-col lg:flex-row gap-6">
-              {/* Photos Section - Left Side */}
-              {photoUrls[blog.id] && (
-                <div className="lg:w-80 w-full flex-shrink-0">
+            {photoUrls[blog.id] && (
+              <div className="mb-4">
+                <div className="overflow-hidden">
                   <PhotoGallery photos={photoUrls[blog.id]} blogId={blog.id} />
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Content Section - Right Side */}
-              <div className="flex-1 min-w-0">
-                <div className="prose prose-sm max-w-none">
-                  <Editor
-                    content={
-                      (i18n.language === "ar"
-                        ? blog.contentAr
-                        : blog.contentEn) || blog.content
-                    }
-                    readOnly={true}
-                    field="content"
-                  />
-                </div>
+            {/* Content Section - Right Side */}
+            <div className="flex-1 min-w-0">
+              <div className="prose prose-sm max-w-none">
+                <Editor
+                  content={
+                    (i18n.language === "ar"
+                      ? blog.contentAr
+                      : blog.contentEn) || blog.content
+                  }
+                  readOnly={true}
+                  field="content"
+                />
               </div>
             </div>
           </div>
