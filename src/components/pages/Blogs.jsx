@@ -13,7 +13,7 @@ import i18n from "../../i18n";
 function Blogs({ isAdmin, loading, onDelete }) {
   const { user } = useAuth();
   const [pageIndex, setPageIndex] = useState(1);
-  const [pageSize, setPageSize] = useState(10);
+  const [pageSize, setPageSize] = useState(1);
   const [photoUrls, setPhotoUrls] = useState({}); // Store photo URLs for each blog
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
